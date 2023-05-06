@@ -4,15 +4,14 @@ import { handleMove, setSelected } from '../store/chessBoardSlice'
 import { PieceProps } from '../types/PieceProps'
 import gameField from '../store/gameField'
 import pieceStyle from '../helpers/pieceStyling'
+import { arrayIncludes } from '../store/helpers'
 
 const Piece = (initialState: PieceProps) => {
-    const { turn, gameField, lastMoves } = useAppSelector((store) => store.practice)
+    const { turn, gameField, nextMoves, lastMoves } = useAppSelector((store) => store.practice)
     const [pieceState, setPieceState] = useState<PieceProps | null>(initialState)
     const dispatch = useAppDispatch()
 
     const checkPieceState = () => {
-        console.log(lastMoves)
-
         lastMoves.forEach(({ from, to }) => {
             if (from.name === name && from.x === x && from.y === y) {
                 setPieceState(to)
@@ -32,8 +31,9 @@ const Piece = (initialState: PieceProps) => {
             src={`/${name}.png`}
             className={pieceStyle(name, x, y)}
             onClick={() => {
-                if (name[0] === turn) dispatch(setSelected({ x, y }))
-                else dispatch(handleMove({ x, y }))
+                if (arrayIncludes(nextMoves, [x, y])) {
+                    dispatch(handleMove({ x, y }))
+                } else if (turn === name[0]) dispatch(setSelected({ x, y }))
             }}
             alt='error'
         />

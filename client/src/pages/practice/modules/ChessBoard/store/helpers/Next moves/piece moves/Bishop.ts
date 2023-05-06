@@ -1,4 +1,7 @@
-export default function getBishopMoves([x, y]: number[], { gameField }: { gameField: string[][] }) {
+import { ChessBoard } from 'pages/practice/modules/ChessBoard/types/ChessBoard'
+
+export default function getBishopMoves([x, y]: number[], chessBoard: ChessBoard) {
+    const { gameField } = chessBoard
     const moves = []
 
     for (let i = 1; x + i < 8 && y + i < 8; i++) {
