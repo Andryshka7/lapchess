@@ -1,7 +1,7 @@
 import { ChessBoard } from '../../types/ChessBoard'
 
-const handleEnPassant = (chessBoard: ChessBoard, x2: number, y2: number) => {
-    const { selected, gameField } = chessBoard
+const handleEnPassant = (state: ChessBoard, x2: number, y2: number) => {
+    const { selected, gameField } = state
     if (selected) {
         const { x: x1, y: y1 } = selected
         const piece = gameField[y1][x1]
@@ -11,7 +11,7 @@ const handleEnPassant = (chessBoard: ChessBoard, x2: number, y2: number) => {
         gameField[y1][x2] = '0'
         gameField[y1][x1] = '0'
 
-        chessBoard.lastMoves = [
+        state.lastMoves = [
             { from: { name: piece, x: x1, y: y1 }, to: { name: piece, x: x2, y: y2 } },
             { from: { name: eatenPiece, x: x2, y: y1 }, to: null }
         ]

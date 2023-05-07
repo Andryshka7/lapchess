@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { useState, useEffect } from 'react'
 import { handleMove, selectPiece } from '../../store/chessBoardSlice'
-import { PieceProps } from '../../types/PieceProps'
+import { PieceProps } from '../../store/types/PieceProps'
 import { pieceStyle, objectsAreEqual } from './helpers'
 import { getNextMoves } from '../../store/helpers'
 import startDragging from './startDragging'

@@ -1,8 +1,11 @@
 import { useAppSelector } from 'redux/store'
 import { leftPos, topPos } from '../helpers/positionValues'
+import chessBoardStyles from 'styles/ChessBoardStyle'
 
-const bg1 = 'bg-[rgb(255,195,151)]'
-const bg2 = 'bg-[rgb(39,39,39)]'
+const bg1 = chessBoardStyles.cellColor1
+const bg2 = chessBoardStyles.cellColor2
+
+const dotBg = chessBoardStyles.dotColor
 
 const NextMoves = () => {
     const { globalNextMoves, gameField } = useAppSelector((store) => store.practice)
@@ -15,12 +18,14 @@ const NextMoves = () => {
             {globalNextMoves.map(([x, y]) =>
                 gameField[y][x] === '0' ? (
                     <div
-                        className={`${style(x, y)} rounded-full scale-[0.25] bg-blue-500`}
-                        key={`dot${x}${y}`}
+                        className={`${style(x, y)} rounded-full scale-[0.25] ${dotBg}`}
+                        key={`nextmove${x}${y}`}
                     />
                 ) : (
-                    <div className={`${style(x, y)}  bg-blue-500`}>
-                        <div className={`h-full w-full rounded-[40%] ${(x + y) % 2 ? bg2 : bg1}`}></div>
+                    <div className={`${style(x, y)} ${dotBg}`} key={`nextmove${x}${y}`}>
+                        <div
+                            className={`h-full w-full rounded-[40%] ${(x + y) % 2 ? bg1 : bg2}`}
+                        ></div>
                     </div>
                 )
             )}

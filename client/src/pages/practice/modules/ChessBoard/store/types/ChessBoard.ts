@@ -1,6 +1,6 @@
 import { PieceProps } from './PieceProps'
 
-type Castling = 'KQkq' | 'KQk' | 'Kkq' | 'Kk' | 'Qkq' | 'Qk' | 'kq' | 'k' | '-'
+export type Castling = 'KQkq' | 'KQk' | 'Kkq' | 'Kk' | 'Qkq' | 'Qk' | 'kq' | 'k' | '-'
 
 export type ChessPiece =
     | 'bR'
@@ -17,13 +17,16 @@ export type ChessPiece =
     | 'wP'
     | '0'
 
+type LastMoves = { from: PieceProps; to: PieceProps | null }[]
+
 export interface ChessBoard {
     gameField: ChessPiece[][]
     globalNextMoves: number[][]
     selected: { x: number; y: number } | null
     turn: 'w' | 'b'
-    coverMoves: number[][]
+    coverMoves: number[][] | string[]
     castling: Castling
     enpassing: null | { x: number; y: number }
-    lastMoves: { from: PieceProps; to: PieceProps | null }[]
+    checkStatus: number[] | null
+    lastMoves: LastMoves
 }

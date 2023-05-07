@@ -1,10 +1,11 @@
-import { useAppDispatch } from 'redux/store'
-import { handleMove } from '../store/chessBoardSlice'
+import { useAppDispatch, useAppSelector } from 'redux/store'
+import { clearField, handleMove } from '../store/chessBoardSlice'
+import chessBoardStyles from 'styles/ChessBoardStyle'
 
 const cellsArray: number[][] = []
 
-const bg1 = 'bg-[rgb(255,195,151)]'
-const bg2 = 'bg-[rgb(39,39,39)]'
+const bg1 = chessBoardStyles.cellColor1
+const bg2 = chessBoardStyles.cellColor2
 
 for (let i = 0; i < 64; i++) {
     cellsArray.push([i % 8, Math.floor(i / 8)])
@@ -12,12 +13,20 @@ for (let i = 0; i < 64; i++) {
 
 const Cells = () => {
     const dispatch = useAppDispatch()
+    const { globalNextMoves } = useAppSelector((store) => store.practice)
+
     return (
         <>
             {cellsArray.map(([x, y]) => (
                 <div
-                    className={`${(x + y) % 2 ? bg2 : bg1} w-[12.5%] h-[12.5%] float-left`}
-                    onClick={() => dispatch(handleMove({ x, y }))}
+                    className={`${(x + y) % 2 ? bg1 : bg2} w-[12.5%] h-[12.5%] float-left`}
+                    onClick={() => {
+                        if (globalNextMoves.includesDeeply([x, y])) {
+                            dispatch(handleMove({ x, y }))
+                        } else {
+                            dispatch(clearField())
+                        }
+                    }}
                     key={`cell${x}${y}`}
                 ></div>
             ))}

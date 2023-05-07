@@ -1,4 +1,4 @@
-import { ChessPiece } from '../../../types/ChessPiece'
+import { ChessPiece } from './../../../store/types/ChessBoard'
 import { leftPos, topPos } from '../../../helpers/positionValues'
 
 interface Helper {
@@ -12,10 +12,10 @@ const scaling: Helper = {
     K: 'scale-[0.8]'
 }
 const hoverScaling: Helper = {
-    P: 'hover:scale-[0.69]',
-    B: 'hover:scale-[0.92]',
-    Q: 'hover:scale-[0.9775]',
-    K: 'hover:scale-[0.9775]'
+    P: 'hover:scale-[0.66]',
+    B: 'hover:scale-[0.88]',
+    Q: 'hover:scale-[0.935]',
+    K: 'hover:scale-[0.88]'
 }
 
 const margins: Helper = {
@@ -30,7 +30,7 @@ const pieceStyle = (name: ChessPiece, x: number, y: number) => {
 
     const position = `absolute w-[12.5%] ${leftPos[x]} ${topPos[y]}`
     const scale = scaling[piece] || 'scale-[0.7]'
-    const hoverEffect = scaling[piece] ? hoverScaling[piece] : 'hover:scale-[0.84]'
+    const hoverEffect = scaling[piece] ? hoverScaling[piece] : 'hover:scale-[0.77]'
     const margin = margins[piece] || 'mt-0'
 
     return `z-[1] ${position} ${margin} ${scale} ${hoverEffect} transition-all duration-200`
