@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../types/ChessBoard'
+import { ChessBoard } from '../types/ChessBoard'
 
 const handlePawnPromotion = (chessBoard: ChessBoard) => {}
 

@@ -1,4 +1,4 @@
-import { ChessPiece } from '../../../../types/ChessPiece'
+import { ChessPiece } from '../../../types/ChessBoard'
 import { isInRange } from './helpers'
 
 export default function isUnderAttack([x, y]: number[], gameField: ChessPiece[][], color: string) {

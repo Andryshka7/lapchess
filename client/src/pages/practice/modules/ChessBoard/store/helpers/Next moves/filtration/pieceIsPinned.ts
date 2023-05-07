@@ -1,4 +1,4 @@
-import { ChessPiece } from '../../../../types/ChessPiece'
+import { ChessPiece } from '../../../types/ChessBoard'
 import { findPiece, isInRange } from './helpers'
 
 export default function pieceIsPinned(piece: number[], gameField: ChessPiece[][]) {

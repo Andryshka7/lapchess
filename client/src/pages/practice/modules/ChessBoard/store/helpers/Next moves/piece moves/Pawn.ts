@@ -1,4 +1,4 @@
-import { ChessBoard } from 'pages/practice/modules/ChessBoard/types/ChessBoard'
+import { ChessBoard } from '../../../types/ChessBoard'
 
 export default function getPawnMoves([x, y]: number[], { gameField, enpassing }: ChessBoard) {
     if (y === 0 || y === 7) return []

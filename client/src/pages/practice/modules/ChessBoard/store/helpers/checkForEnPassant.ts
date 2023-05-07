@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../types/ChessBoard'
+import { ChessBoard } from '../types/ChessBoard'
 
 const checkForEnPassant = (chessBoard: ChessBoard, x2: number, y2: number) => {
     const { turn, selected, gameField } = chessBoard

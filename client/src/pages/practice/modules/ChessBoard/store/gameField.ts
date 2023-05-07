@@ -1,4 +1,4 @@
-import { ChessPiece } from '../types/ChessPiece'
+import { ChessPiece } from './types/ChessBoard'
 
 const gameField: ChessPiece[][] = [
     ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],

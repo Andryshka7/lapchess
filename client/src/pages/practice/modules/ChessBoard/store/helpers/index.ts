@@ -1,5 +1,4 @@
 export { default as getNextMoves } from './Next moves/getNextMoves'
-export { default as arrayIncludes } from './Next moves/arrayIncludes'
 export { default as checkForEnPassant } from './checkForEnPassant'
 export { default as handleCasling } from './Handle Move/handleCastling'
 export { default as handleEnPassant } from './Handle Move/handleEnPassant'

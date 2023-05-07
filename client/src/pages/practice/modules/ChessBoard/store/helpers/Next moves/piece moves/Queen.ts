@@ -1,4 +1,4 @@
-import { ChessBoard } from 'pages/practice/modules/ChessBoard/types/ChessBoard'
+import { ChessBoard } from '../../../types/ChessBoard'
 import rookMoves from './Rook'
 import bishopMoves from './Bishop'
 

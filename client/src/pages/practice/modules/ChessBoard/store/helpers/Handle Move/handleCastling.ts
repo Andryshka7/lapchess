@@ -1,5 +1,4 @@
-import { ChessBoard } from '../../../types/ChessBoard'
-import { ChessPiece } from '../../../types/ChessPiece'
+import { ChessBoard, ChessPiece } from '../../types/ChessBoard'
 
 const handleCasling = (chessBoard: ChessBoard, x2: number, y2: number) => {
     const { turn, gameField, selected } = chessBoard

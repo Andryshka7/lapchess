@@ -1,4 +1,4 @@
-import { ChessPiece } from './ChessPiece'
+import { ChessPiece } from './ChessBoard'
 
 export interface PieceProps {
     name: ChessPiece

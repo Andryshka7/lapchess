@@ -1,4 +1,4 @@
-import { ChessBoard } from 'pages/practice/modules/ChessBoard/types/ChessBoard'
+import { ChessBoard } from '../../../types/ChessBoard'
 
 export default function getRookMoves([x, y]: number[], chessBoard: ChessBoard) {
     const { gameField } = chessBoard

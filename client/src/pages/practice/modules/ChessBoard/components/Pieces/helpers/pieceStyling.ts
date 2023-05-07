@@ -1,5 +1,5 @@
-import { ChessPiece } from '../types/ChessPiece'
-import { leftPos, topPos } from './positionValues'
+import { ChessPiece } from '../../../types/ChessPiece'
+import { leftPos, topPos } from '../../../helpers/positionValues'
 
 interface Helper {
     [key: number | string]: string
@@ -33,7 +33,7 @@ const pieceStyle = (name: ChessPiece, x: number, y: number) => {
     const hoverEffect = scaling[piece] ? hoverScaling[piece] : 'hover:scale-[0.84]'
     const margin = margins[piece] || 'mt-0'
 
-    return `${position} ${margin} ${scale} ${hoverEffect} transition-all duration-200`
+    return `z-[1] ${position} ${margin} ${scale} ${hoverEffect} transition-all duration-200`
 }
 
 export default pieceStyle

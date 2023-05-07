@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../types/ChessBoard'
+import { ChessBoard } from '../../types/ChessBoard'
 
 const handlePieceMove = (chessBoard: ChessBoard, x2: number, y2: number) => {
     const { selected, gameField } = chessBoard

@@ -1,4 +1,4 @@
-import { ChessPiece } from '../../../../../types/ChessPiece'
+import { ChessPiece } from '../../../../types/ChessBoard'
 
 const findPiece = (piece: ChessPiece, gameField: ChessPiece[][]) => {
     for (let y = 0; y < 8; y++) {
