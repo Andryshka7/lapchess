@@ -1,22 +1,27 @@
+import { checkForKingDanger } from '..'
 import { ChessBoard } from '../../types/ChessBoard'
 
 const handlePieceMove = (state: ChessBoard, x2: number, y2: number) => {
     const { selected, gameField } = state
-    if (selected) {
-        const { x: x1, y: y1 } = selected
-        const piece = gameField[y1][x1]
-        const eatenPiece = gameField[y2][x2]
-        
-        gameField[y2][x2] = gameField[y1][x1]
-        gameField[y1][x1] = '0'
+    const { x: x1, y: y1 } = selected as { x: number; y: number }
 
-        state.lastMoves = [
-            { from: { name: piece, x: x1, y: y1 }, to: { name: piece, x: x2, y: y2 } }
-        ]
-        if (eatenPiece !== '0') {
-            state.lastMoves.push({ from: { name: eatenPiece, x: x2, y: y2 }, to: null })
-        }
+    const name = gameField[y1][x1]
+    const eatenPiece = gameField[y2][x2]
+
+    gameField[y2][x2] = name
+    gameField[y1][x1] = '0'
+
+    state.rerenderQueue = [{ from: { x: x1, y: y1, name }, to: { x: x2, y: y2, name } }]
+
+    if (eatenPiece !== '0') {
+        state.rerenderQueue.push({
+            from: { x: x2, y: y2, name: eatenPiece },
+            to: { x: x2, y: y2, name: '0' }
+        })
     }
+
+    checkForKingDanger(state)
+    state.turn = state.turn === 'w' ? 'b' : 'w'
 }
 
 export default handlePieceMove

@@ -3,6 +3,7 @@ import CheckStatus from './components/CheckStatus'
 import NextMoves from './components/NextMoves'
 import Notation from './components/Notation'
 import Pieces from './components/Pieces/Pieces'
+import Promotion from './components/Promotion'
 
 const ChessBoard = () => {
     return (
@@ -12,6 +13,7 @@ const ChessBoard = () => {
             <NextMoves />
             <Notation />
             <CheckStatus />
+            <Promotion />
         </div>
     )
 }

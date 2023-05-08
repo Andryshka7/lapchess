@@ -7,7 +7,7 @@ const Pieces = () => {
     for (let y = 0; y < 8; y++) {
         for (let x = 0; x < 8; x++) {
             if (gameField[y][x] !== '0') {
-                pieces.push({ name: gameField[y][x], x, y })
+                pieces.push({ x, y, name: gameField[y][x] })
             }
         }
     }

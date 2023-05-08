@@ -1,31 +1,40 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { useState, useEffect } from 'react'
 import { handleMove, selectPiece } from '../../store/chessBoardSlice'
-import { PieceProps } from '../../store/types/PieceProps'
-import { pieceStyle, objectsAreEqual } from './helpers'
+import { pieceStyle } from './helpers'
 import { getNextMoves } from '../../store/helpers'
+import { ChessPiece } from '../../store/types/ChessBoard'
 import startDragging from './startDragging'
 
-export const Piece = (initialState: PieceProps) => {
+interface PieceState {
+    x: number
+    y: number
+    name: ChessPiece
+}
+
+export const Piece = (initialState: PieceState) => {
     const dispatch = useAppDispatch()
     const chessBoard = useAppSelector((store) => store.practice)
-    const [pieceState, setPieceState] = useState<PieceProps | null>(initialState)
+    const [pieceState, setPieceState] = useState<PieceState>(initialState)
 
-    const { turn, lastMoves, globalNextMoves, gameField } = chessBoard
+    const { turn, globalNextMoves, gameField, rerenderQueue } = chessBoard
+    const { x, y, name } = pieceState
 
     useEffect(() => {
-        lastMoves.forEach(({ from, to }) => {
-            if (pieceState && objectsAreEqual(pieceState, from)) {
+        rerenderQueue.forEach(({ from, to }) => {
+            if (JSON.stringify(pieceState) === JSON.stringify(from)) {
                 setPieceState(to)
             }
         })
     }, [gameField])
 
-    if (!pieceState) return <></>
-
-    const { name, x, y } = pieceState
+    if (name === '0') return null
 
     const nextMoves = getNextMoves([x, y], chessBoard)
+    const pointerEvents =
+        globalNextMoves.includesDeeply([x, y]) || name[0] === turn
+            ? 'pointer-events-all'
+            : 'pointer-events-none'
 
     const handleMouseClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         if (globalNextMoves.includesDeeply([x, y])) {
@@ -41,9 +50,8 @@ export const Piece = (initialState: PieceProps) => {
     return (
         <img
             src={`/${name}.png`}
-            className={pieceStyle(name, x, y)}
-            style={{ translate: '0 0' }}
-            onMouseDown={handleMouseClick}
+            className={`${pieceStyle(name, x, y)} ${pointerEvents}`}
+            onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
             alt='error'
         />
     )

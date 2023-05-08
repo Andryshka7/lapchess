@@ -7,13 +7,11 @@ const cellsArray: number[][] = []
 const bg1 = chessBoardStyles.cellColor1
 const bg2 = chessBoardStyles.cellColor2
 
-for (let i = 0; i < 64; i++) {
-    cellsArray.push([i % 8, Math.floor(i / 8)])
-}
+for (let i = 0; i < 64; i++) cellsArray.push([i % 8, Math.floor(i / 8)])
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const { globalNextMoves } = useAppSelector((store) => store.practice)
+    const { selected, globalNextMoves } = useAppSelector((store) => store.practice)
 
     return (
         <>
@@ -21,7 +19,7 @@ const Cells = () => {
                 <div
                     className={`${(x + y) % 2 ? bg1 : bg2} w-[12.5%] h-[12.5%] float-left`}
                     onClick={() => {
-                        if (globalNextMoves.includesDeeply([x, y])) {
+                        if (selected && globalNextMoves.includesDeeply([x, y])) {
                             dispatch(handleMove({ x, y }))
                         } else {
                             dispatch(clearField())

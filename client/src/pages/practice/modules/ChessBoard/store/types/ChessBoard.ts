@@ -1,5 +1,3 @@
-import { PieceProps } from './PieceProps'
-
 export type Castling = 'KQkq' | 'KQk' | 'Kkq' | 'Kk' | 'Qkq' | 'Qk' | 'kq' | 'k' | '-'
 
 export type ChessPiece =
@@ -17,7 +15,27 @@ export type ChessPiece =
     | 'wP'
     | '0'
 
-type LastMoves = { from: PieceProps; to: PieceProps | null }[]
+type RerenderQueue = {
+    from: {
+        x: number
+        y: number
+        name: ChessPiece
+    }
+    to: {
+        x: number
+        y: number
+        name: ChessPiece
+    }
+}[]
+
+export interface PromotedPawn {
+    x1: number
+    y1: number
+    x2: number
+    y2: number
+    name: ChessPiece
+    eaten: ChessPiece
+}
 
 export interface ChessBoard {
     gameField: ChessPiece[][]
@@ -27,6 +45,7 @@ export interface ChessBoard {
     coverMoves: number[][] | string[]
     castling: Castling
     enpassing: null | { x: number; y: number }
+    promoted: PromotedPawn | null
     checkStatus: number[] | null
-    lastMoves: LastMoves
+    rerenderQueue: RerenderQueue
 }
