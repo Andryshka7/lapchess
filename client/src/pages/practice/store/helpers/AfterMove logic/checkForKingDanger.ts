@@ -1,7 +1,7 @@
-import { ChessBoard } from '../types/ChessBoard'
-import getCoverMoves from './getCoverMoves'
-import { findPiece } from './Next moves/filtration/helpers'
-import isUnderAttack from './Next moves/filtration/isUnderAttack'
+import { ChessBoard } from '../../types/ChessBoard'
+import getCoverMoves from '../getCoverMoves'
+import findPiece from '../findPiece'
+import isUnderAttack from '../Next moves/filtration/isUnderAttack'
 
 const checkForKingDanger = (state: ChessBoard) => {
     const { turn, gameField } = state

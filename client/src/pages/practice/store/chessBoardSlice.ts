@@ -11,6 +11,7 @@ import {
 } from './helpers'
 
 import initialGameField from './gameField'
+import notateMove from './helpers/notateMove'
 
 const initialState: ChessBoard = {
     gameField: initialGameField,
@@ -21,7 +22,8 @@ const initialState: ChessBoard = {
     promoted: null,
     coverMoves: [],
     castling: 'KQkq',
-    enpassing: null
+    enpassing: null,
+    chessMoves: []
 }
 
 const chessBoardSlice = createSlice({
@@ -59,14 +61,23 @@ const chessBoardSlice = createSlice({
             state.globalNextMoves = []
         },
 
-        transFormPawn: (state, action: PayloadAction<string>) => {
-            const { name, x2, y2 } = state.promoted as PromotedPawn
-            state.promoted = null
+        transformPawn: (state, action: PayloadAction<string>) => {
+            const { name, eaten, x1, y1, x2, y2 } = state.promoted as PromotedPawn
+            const { turn, gameField } = state
 
-            state.gameField[y2][x2] = name[0] + action.payload + name.slice(1)
+            state.promoted = null
+            gameField[y2][x2] = name[0] + action.payload + name.slice(1)
 
             checkForKingDanger(state)
-            state.turn = state.turn === 'w' ? 'b' : 'w'
+
+            state.chessMoves.push(
+                notateMove(
+                    { name, eaten, gameField, transformation: action.payload },
+                    [x1, y1],
+                    [x2, y2]
+                )
+            )
+            state.turn = turn === 'w' ? 'b' : 'w'
         },
 
         cancelPromotion: (state) => {
@@ -83,6 +94,7 @@ const chessBoardSlice = createSlice({
     }
 })
 
-export const { selectPiece, clearField, handleMove, cancelPromotion, transFormPawn } =
+export const { selectPiece, clearField, handleMove, cancelPromotion, transformPawn } =
     chessBoardSlice.actions
+
 export default chessBoardSlice.reducer

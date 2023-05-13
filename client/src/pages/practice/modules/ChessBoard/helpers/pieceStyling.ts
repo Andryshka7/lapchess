@@ -1,4 +1,4 @@
-import { leftPos, topPos } from '../../../helpers/positionValues'
+import { leftPos, topPos } from './positionValues'
 
 interface Helper {
     [key: number | string]: string
@@ -24,9 +24,7 @@ const margins: Helper = {
     N: 'mt-[-3px]'
 }
 
-const pieceStyle = (name: string, x: number, y: number) => {
-    const piece = name[1]
-
+const pieceStyle = (piece: string, x: number, y: number) => {
     const position = `absolute w-[12.5%] ${leftPos[x]} ${topPos[y]}`
     const scale = scaling[piece] || 'scale-[0.7]'
     const hoverEffect = scaling[piece] ? hoverScaling[piece] : 'hover:scale-[0.77]'

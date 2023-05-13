@@ -1,4 +1,4 @@
-import { Castling, ChessBoard } from '../types/ChessBoard'
+import { Castling, ChessBoard } from '../../types/ChessBoard'
 
 const checkForCasling = (
     state: ChessBoard,

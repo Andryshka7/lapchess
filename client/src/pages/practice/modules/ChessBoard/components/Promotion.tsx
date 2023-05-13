@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { cancelPromotion, transFormPawn } from '../store/chessBoardSlice'
-import { pieceStyle } from './Pieces/helpers'
+import { cancelPromotion, transformPawn } from '../../../store/chessBoardSlice'
+import pieceStyle from '../helpers/pieceStyling'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {
@@ -31,14 +31,14 @@ const Promotion = () => {
                 <img
                     src={`/${turn + piece}.png`}
                     className={`z-[3] ${pieceStyle(
-                        turn + piece,
+                        piece,
                         x + (index % 2),
                         y + Math.floor(index / 2)
                     )}`}
                     key={`promotion${index}`}
                     onClick={(e) => {
                         e.stopPropagation()
-                        dispatch(transFormPawn(piece))
+                        dispatch(transformPawn(piece))
                     }}
                 />
             ))}

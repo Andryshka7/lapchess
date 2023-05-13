@@ -18,6 +18,8 @@ const handleCasling = (state: ChessBoard, x2: number, y2: number) => {
     state.castling = state.castling.replace(turn === 'w' ? 'Q' : 'q', '') as Castling
 
     checkForKingDanger(state)
+    
+    state.chessMoves.push(x2 > x1 ? '0-0' : '0-0-0')
     state.turn = state.turn === 'w' ? 'b' : 'w'
 }
 

@@ -16,7 +16,8 @@ export interface ChessBoard {
     turn: 'w' | 'b'
     coverMoves: number[][] | string[]
     castling: Castling
-    enpassing: null | { x: number; y: number }
+    enpassing: { x: number; y: number } | null
     promoted: PromotedPawn | null
     checkStatus: number[] | null
+    chessMoves: string[]
 }

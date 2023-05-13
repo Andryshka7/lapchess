@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { handleMove, selectPiece } from '../../store/chessBoardSlice'
-import { pieceStyle } from './helpers'
-import { getNextMoves } from '../../store/helpers'
-import findPiece from './helpers/findPiece'
-import startDragging from './startDragging'
+import { handleMove, selectPiece } from '../../../../store/chessBoardSlice'
+import pieceStyle from '../../helpers/pieceStyling'
+import findPiece from '../../../../store/helpers/Next moves/filtration/helpers/findPiece'
+import getNextMoves from '../../../../store/helpers/Next moves/getNextMoves'
+import startDragging from './helpers/startDragging'
 
 interface PieceProps {
     piece: string
@@ -42,7 +42,7 @@ export const Piece = ({ piece }: PieceProps) => {
     return (
         <img
             src={`/${name}.png`}
-            className={`${pieceStyle(name, x, y)} ${pointerEvents}`}
+            className={`${pieceStyle(name[1], x, y)} ${pointerEvents}`}
             onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
             alt='error'
         />

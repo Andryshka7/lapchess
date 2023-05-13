@@ -1,4 +1,4 @@
-import gameField from '../../store/gameField'
+import gameField from '../../../../store/gameField'
 import { Piece } from './Piece'
 
 const Pieces = () => {

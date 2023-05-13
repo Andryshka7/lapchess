@@ -7,7 +7,7 @@ import Promotion from './components/Promotion'
 
 const ChessBoard = () => {
     return (
-        <div className='relative w-[620px] h-[620px] m-auto mt-5 rounded-lg overflow-hidden'>
+        <div className='relative h-[620px] w-[620px] m-auto rounded-lg overflow-hidden'>
             <Cells />
             <Pieces />
             <NextMoves />
