@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { ChessBoard, ChessPiece, PromotedPawn } from './types/ChessBoard'
+import { ChessBoard, PromotedPawn } from './types/ChessBoard'
 import {
     checkForEnPassant,
     checkForCasling,
@@ -20,7 +20,6 @@ const initialState: ChessBoard = {
     checkStatus: null,
     promoted: null,
     coverMoves: [],
-    rerenderQueue: [],
     castling: 'KQkq',
     enpassing: null
 }
@@ -60,14 +59,12 @@ const chessBoardSlice = createSlice({
             state.globalNextMoves = []
         },
 
-        transFormPawn: (state, action: PayloadAction<ChessPiece>) => {
+        transFormPawn: (state, action: PayloadAction<string>) => {
             const { name, x2, y2 } = state.promoted as PromotedPawn
             state.promoted = null
 
-            state.gameField[y2][x2] = action.payload
-            state.rerenderQueue = [
-                { from: { x: x2, y: y2, name }, to: { x: x2, y: y2, name: action.payload } }
-            ]
+            state.gameField[y2][x2] = name[0] + action.payload + name.slice(1)
+
             checkForKingDanger(state)
             state.turn = state.turn === 'w' ? 'b' : 'w'
         },
@@ -78,14 +75,6 @@ const chessBoardSlice = createSlice({
             state.gameField[y1][x1] = name
             state.gameField[y2][x2] = eaten
             state.promoted = null
-
-            state.rerenderQueue = [
-                { from: { x: x2, y: y2, name }, to: { x: x1, y: y1, name } },
-                {
-                    from: { x: x2, y: y2, name: '0' },
-                    to: { x: x2, y: y2, name: eaten }
-                }
-            ]
         },
         clearField: (state) => {
             state.selected = null

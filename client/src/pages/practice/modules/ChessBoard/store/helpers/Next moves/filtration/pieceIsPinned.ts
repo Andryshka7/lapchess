@@ -1,10 +1,9 @@
-import { ChessPiece } from '../../../types/ChessBoard'
 import { findPiece, isInRange } from './helpers'
 
-export default function pieceIsPinned(piece: number[], gameField: ChessPiece[][]) {
+export default function pieceIsPinned(piece: number[], gameField: string[][]) {
     const [x1, y1] = piece
     const kingColor = gameField[y1][x1][0]
-    const [x2, y2] = findPiece((kingColor + 'K') as ChessPiece, gameField)
+    const [x2, y2] = findPiece(kingColor + 'K', gameField) as number[]
 
     const color = kingColor === 'w' ? 'b' : 'w'
 

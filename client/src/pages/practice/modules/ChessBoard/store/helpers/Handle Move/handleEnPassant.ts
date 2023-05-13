@@ -13,11 +13,6 @@ const handleEnPassant = (state: ChessBoard, x2: number, y2: number) => {
     gameField[y1][x1] = '0'
     gameField[y1][x2] = '0'
 
-    state.rerenderQueue = [
-        { from: { x: x1, y: y1, name }, to: { x: x2, y: y2, name } },
-        { from: { x: x2, y: y1, name: eaten }, to: { x: x2, y: y1, name: '0' } }
-    ]
-
     checkForKingDanger(state)
     state.turn = state.turn === 'w' ? 'b' : 'w'
 }

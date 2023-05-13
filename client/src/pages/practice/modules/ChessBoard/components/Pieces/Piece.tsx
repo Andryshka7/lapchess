@@ -1,34 +1,26 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { useState, useEffect } from 'react'
 import { handleMove, selectPiece } from '../../store/chessBoardSlice'
 import { pieceStyle } from './helpers'
 import { getNextMoves } from '../../store/helpers'
-import { ChessPiece } from '../../store/types/ChessBoard'
+import findPiece from './helpers/findPiece'
 import startDragging from './startDragging'
 
-interface PieceState {
-    x: number
-    y: number
-    name: ChessPiece
+interface PieceProps {
+    piece: string
 }
 
-export const Piece = (initialState: PieceState) => {
+export const Piece = ({ piece }: PieceProps) => {
     const dispatch = useAppDispatch()
     const chessBoard = useAppSelector((store) => store.practice)
-    const [pieceState, setPieceState] = useState<PieceState>(initialState)
 
-    const { turn, globalNextMoves, gameField, rerenderQueue } = chessBoard
-    const { x, y, name } = pieceState
+    const { turn, globalNextMoves, gameField } = chessBoard
 
-    useEffect(() => {
-        rerenderQueue.forEach(({ from, to }) => {
-            if (JSON.stringify(pieceState) === JSON.stringify(from)) {
-                setPieceState(to)
-            }
-        })
-    }, [gameField])
+    const coordinates = findPiece(piece, gameField)
 
-    if (name === '0') return null
+    if (!coordinates) return null
+
+    const [x, y] = coordinates
+    const name = gameField[y][x].slice(0, 2)
 
     const nextMoves = getNextMoves([x, y], chessBoard)
     const pointerEvents =

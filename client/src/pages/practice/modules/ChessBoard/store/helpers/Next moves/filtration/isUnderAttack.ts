@@ -1,11 +1,10 @@
-import { ChessPiece } from '../../../types/ChessBoard'
 import { isInRange } from './helpers'
 
-export default function isUnderAttack([x, y]: number[], gameField: ChessPiece[][], color: string) {
+export default function isUnderAttack([x, y]: number[], gameField: string[][], color: string) {
     const checks: number[][] = []
 
     function checkCell([x, y]: number[], piece: string, i: number) {
-        let name = gameField[y][x]
+        let name = gameField[y][x].slice(0, 2)
 
         if (name !== '0') {
             const kingCheck = name === color + 'K' && Math.abs(i) === 1

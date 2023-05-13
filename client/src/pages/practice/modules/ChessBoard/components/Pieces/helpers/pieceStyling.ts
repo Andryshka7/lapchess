@@ -1,4 +1,3 @@
-import { ChessPiece } from './../../../store/types/ChessBoard'
 import { leftPos, topPos } from '../../../helpers/positionValues'
 
 interface Helper {
@@ -25,7 +24,7 @@ const margins: Helper = {
     N: 'mt-[-3px]'
 }
 
-const pieceStyle = (name: ChessPiece, x: number, y: number) => {
+const pieceStyle = (name: string, x: number, y: number) => {
     const piece = name[1]
 
     const position = `absolute w-[12.5%] ${leftPos[x]} ${topPos[y]}`

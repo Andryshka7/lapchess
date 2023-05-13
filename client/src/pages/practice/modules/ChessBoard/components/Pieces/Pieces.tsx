@@ -7,7 +7,7 @@ const Pieces = () => {
     for (let y = 0; y < 8; y++) {
         for (let x = 0; x < 8; x++) {
             if (gameField[y][x] !== '0') {
-                pieces.push({ x, y, name: gameField[y][x] })
+                pieces.push(gameField[y][x])
             }
         }
     }
@@ -15,7 +15,7 @@ const Pieces = () => {
     return (
         <>
             {pieces.map((piece) => (
-                <Piece {...piece} key={`piece${piece.x}${piece.y}`} />
+                <Piece key={`piece${piece}`} piece={piece} />
             ))}
         </>
     )

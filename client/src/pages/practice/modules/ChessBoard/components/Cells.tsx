@@ -19,11 +19,9 @@ const Cells = () => {
                 <div
                     className={`${(x + y) % 2 ? bg1 : bg2} w-[12.5%] h-[12.5%] float-left`}
                     onClick={() => {
-                        if (selected && globalNextMoves.includesDeeply([x, y])) {
+                        if (selected && globalNextMoves.includesDeeply([x, y]))
                             dispatch(handleMove({ x, y }))
-                        } else {
-                            dispatch(clearField())
-                        }
+                        else dispatch(clearField())
                     }}
                     key={`cell${x}${y}`}
                 ></div>

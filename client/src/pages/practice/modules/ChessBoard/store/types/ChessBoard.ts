@@ -1,44 +1,16 @@
 export type Castling = 'KQkq' | 'KQk' | 'Kkq' | 'Kk' | 'Qkq' | 'Qk' | 'kq' | 'k' | '-'
 
-export type ChessPiece =
-    | 'bR'
-    | 'bN'
-    | 'bB'
-    | 'bQ'
-    | 'bK'
-    | 'bP'
-    | 'wR'
-    | 'wN'
-    | 'wB'
-    | 'wQ'
-    | 'wK'
-    | 'wP'
-    | '0'
-
-type RerenderQueue = {
-    from: {
-        x: number
-        y: number
-        name: ChessPiece
-    }
-    to: {
-        x: number
-        y: number
-        name: ChessPiece
-    }
-}[]
-
 export interface PromotedPawn {
     x1: number
     y1: number
     x2: number
     y2: number
-    name: ChessPiece
-    eaten: ChessPiece
+    name: string
+    eaten: string
 }
 
 export interface ChessBoard {
-    gameField: ChessPiece[][]
+    gameField: string[][]
     globalNextMoves: number[][]
     selected: { x: number; y: number } | null
     turn: 'w' | 'b'
@@ -47,5 +19,4 @@ export interface ChessBoard {
     enpassing: null | { x: number; y: number }
     promoted: PromotedPawn | null
     checkStatus: number[] | null
-    rerenderQueue: RerenderQueue
 }

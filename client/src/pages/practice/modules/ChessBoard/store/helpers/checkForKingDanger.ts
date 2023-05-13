@@ -1,4 +1,4 @@
-import { ChessBoard, ChessPiece } from '../types/ChessBoard'
+import { ChessBoard } from '../types/ChessBoard'
 import getCoverMoves from './getCoverMoves'
 import { findPiece } from './Next moves/filtration/helpers'
 import isUnderAttack from './Next moves/filtration/isUnderAttack'
@@ -8,7 +8,7 @@ const checkForKingDanger = (state: ChessBoard) => {
     state.checkStatus = null
     state.coverMoves = []
 
-    const king = findPiece(((turn === 'w' ? 'b' : 'w') + 'K') as ChessPiece, gameField)
+    const king = findPiece((turn === 'w' ? 'b' : 'w') + 'K', gameField) as number[]
     const checksArray = isUnderAttack(king, gameField, turn)
 
     if (checksArray.length) {

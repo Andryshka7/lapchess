@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { cancelPromotion, transFormPawn } from '../store/chessBoardSlice'
 import { pieceStyle } from './Pieces/helpers'
-import { ChessPiece } from '../store/types/ChessBoard'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {
@@ -18,7 +17,7 @@ const Promotion = () => {
     if (!promoted) return null
 
     const { x2, y2 } = promoted
-    const promotionPieces = getChoices([x2, y2])?.map((item) => turn + item) as ChessPiece[]
+    const promotionPieces = getChoices([x2, y2])
 
     const x = x2 < 7 ? x2 : x2 - 1
     const y = y2 < 7 ? y2 : y2 - 1
@@ -30,9 +29,9 @@ const Promotion = () => {
         >
             {promotionPieces?.map((piece, index) => (
                 <img
-                    src={`/${piece}.png`}
+                    src={`/${turn + piece}.png`}
                     className={`z-[3] ${pieceStyle(
-                        piece,
+                        turn + piece,
                         x + (index % 2),
                         y + Math.floor(index / 2)
                     )}`}

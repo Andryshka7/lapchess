@@ -1,13 +1,13 @@
 import pieceIsPinned from './pieceIsPinned'
 import isUnderAttack from './isUnderAttack'
 import castlingMoves from './getCastlingMoves'
-import { ChessBoard, ChessPiece } from '../../../types/ChessBoard'
+import { ChessBoard } from '../../../types/ChessBoard'
 import { findPiece, isInRange, pinFilter } from './helpers'
 
 export default function filter([x, y]: number[], nextMoves: number[][], chessBoard: ChessBoard) {
     const { gameField, turn, coverMoves } = chessBoard
 
-    const king = findPiece((turn + 'K') as ChessPiece, gameField)
+    const king = findPiece(turn + 'K', gameField) as number[]
 
     let [color, piece] = gameField[y][x]
 
@@ -23,8 +23,7 @@ export default function filter([x, y]: number[], nextMoves: number[][], chessBoa
     if (piece === 'P') newMoves = newMoves.filter(([a, b]) => !(a === x && gameField[b][a] !== '0'))
 
     if (coverMoves.length && piece !== 'K') {
-        let saves = coverMoves.map((elm) => elm.toString())
-        newMoves = newMoves.filter((move) => saves.includes(move.toString()))
+        newMoves = newMoves.filter((move) => coverMoves.includesDeeply(move))
     }
 
     if (pieceIsPinned([x, y], gameField))
