@@ -22,3 +22,13 @@
     -webkit-user-drag: none;
     user-select: none;
 }
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 5px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    border-radius: 3px;
+}

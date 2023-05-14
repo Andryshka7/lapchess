@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { cancelPromotion, transformPawn } from '../../../store/chessBoardSlice'
-import pieceStyle from '../helpers/pieceStyling'
+import pieceStyle from 'styles/pieceStyling'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {

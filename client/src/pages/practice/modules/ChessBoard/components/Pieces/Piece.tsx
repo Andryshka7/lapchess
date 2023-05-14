@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { handleMove, selectPiece } from '../../../../store/chessBoardSlice'
-import pieceStyle from '../../helpers/pieceStyling'
 import findPiece from '../../../../store/helpers/Next moves/filtration/helpers/findPiece'
 import getNextMoves from '../../../../store/helpers/Next moves/getNextMoves'
 import startDragging from './helpers/startDragging'
+import pieceStyle from 'styles/pieceStyling'
 
 interface PieceProps {
     piece: string

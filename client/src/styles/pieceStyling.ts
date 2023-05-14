@@ -1,4 +1,4 @@
-import { leftPos, topPos } from './positionValues'
+import { leftPos, topPos } from '../pages/practice/modules/ChessBoard/helpers/positionValues'
 
 interface Helper {
     [key: number | string]: string
