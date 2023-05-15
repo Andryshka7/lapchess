@@ -1,4 +1,4 @@
-import isUnderAttack from './Next moves/filtration/isUnderAttack'
+import isUnderAttack from '../Next moves/filtration/isUnderAttack'
 
 const letters = 'abcdefgh'
 const pieces: { [key: string]: string } = {

@@ -1,6 +1,6 @@
 import { checkForKingDanger } from '..'
 import { ChessBoard } from '../../types/ChessBoard'
-import notateMove from '../notateMove'
+import notateMove from '../Move cleanup/notateMove'
 
 const handleEnPassant = (state: ChessBoard, x2: number, y2: number) => {
     const { selected, gameField } = state
@@ -14,10 +14,10 @@ const handleEnPassant = (state: ChessBoard, x2: number, y2: number) => {
     gameField[y1][x1] = '0'
     gameField[y1][x2] = '0'
 
-    checkForKingDanger(state)
-
     state.chessMoves.push(notateMove({ name, eaten, gameField }, [x1, y1], [x2, y2]))
     state.turn = state.turn === 'w' ? 'b' : 'w'
+
+    checkForKingDanger(state)
 }
 
 export default handleEnPassant

@@ -15,14 +15,14 @@ const ChessMoves = () => {
 
     return (
         <div
-            className='scrollbar-thin w-[300px] h-[620px] overflow-hidden overflow-y-scroll ml-2 rounded-lg bg-black bg-opacity-10'
+            className='w-[300px] h-[620px] overflow-hidden ml-2 rounded-lg bg-black bg-opacity-10'
             ref={ref}
         >
-            <div className='flex items-center'>
-                <img src={practiceIcon} className='h-6 m-2 ml-3' alt='' />
+            <div className='flex h-[40px] items-center'>
+                <img src={practiceIcon} className='h-6 ml-3 mr-2' alt='' />
                 <h2 className='text-lg text font-semibold'>Practice</h2>
             </div>
-            <div className='flex'>
+            <div className='h-[580px] scrollbar-thin flex overflow-hidden overflow-y-scroll'>
                 <div className='mx-auto w-[40px] text-center'>
                     {Array.from({ length: pairCount }, (_, index) => (
                         <p className='block text-bold' key={`number ${index}`}>

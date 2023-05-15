@@ -11,7 +11,7 @@ import {
 } from './helpers'
 
 import initialGameField from './gameField'
-import notateMove from './helpers/notateMove'
+import notateMove from './helpers/Move cleanup/notateMove'
 
 const initialState: ChessBoard = {
     gameField: initialGameField,
@@ -62,22 +62,19 @@ const chessBoardSlice = createSlice({
         },
 
         transformPawn: (state, action: PayloadAction<string>) => {
+            const transformation = action.payload
+
             const { name, eaten, x1, y1, x2, y2 } = state.promoted as PromotedPawn
             const { turn, gameField } = state
 
             state.promoted = null
             gameField[y2][x2] = name[0] + action.payload + name.slice(1)
 
-            checkForKingDanger(state)
-
             state.chessMoves.push(
-                notateMove(
-                    { name, eaten, gameField, transformation: action.payload },
-                    [x1, y1],
-                    [x2, y2]
-                )
+                notateMove({ name, eaten, gameField, transformation }, [x1, y1], [x2, y2])
             )
             state.turn = turn === 'w' ? 'b' : 'w'
+            checkForKingDanger(state)
         },
 
         cancelPromotion: (state) => {
