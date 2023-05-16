@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { clearField, handleMove } from '../../../store/chessBoardSlice'
+import { clearField, handleMove } from '../../../store/practiceSlice'
 import chessBoardStyles from 'styles/ChessBoardStyle'
 
 const cellsArray: number[][] = []

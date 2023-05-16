@@ -8,9 +8,7 @@ const ChessMoves = () => {
     const ref = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (ref.current) 
-            ref.current.scrollTop = ref.current.scrollHeight
-        
+        if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
     }, [chessMoves])
 
     return (
@@ -36,6 +34,7 @@ const ChessMoves = () => {
                             className={`w-1/2 float-left text-center font-semibold bg-stone-500 ${
                                 index % 2 ? 'bg-opacity-5' : 'bg-opacity-10'
                             }`}
+                            key={`chessmove${index}`}
                         >
                             {move}
                         </p>

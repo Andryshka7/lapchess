@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { cancelPromotion, transformPawn } from '../../../store/chessBoardSlice'
+import { cancelPromotion, transformPawn } from '../../../store/practiceSlice'
 import pieceStyle from 'styles/pieceStyling'
 
 const getChoices = ([x, y]: number[]) => {

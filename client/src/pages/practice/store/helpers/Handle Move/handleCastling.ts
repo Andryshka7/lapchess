@@ -1,5 +1,5 @@
 import { checkForKingDanger } from '..'
-import { Castling, ChessBoard } from '../../types/ChessBoard'
+import { ChessBoard } from '../../types/ChessBoard'
 
 const handleCasling = (state: ChessBoard, x2: number, y2: number) => {
     const { turn, gameField, selected } = state
@@ -14,12 +14,12 @@ const handleCasling = (state: ChessBoard, x2: number, y2: number) => {
     gameField[y1][4] = '0'
     gameField[y1][k > 0 ? 7 : 0] = '0'
 
-    state.castling = state.castling.replace(turn === 'w' ? 'K' : 'k', '') as Castling
-    state.castling = state.castling.replace(turn === 'w' ? 'Q' : 'q', '') as Castling
+    state.castling = state.castling.replace(turn === 'w' ? 'K' : 'k', '')
+    state.castling = state.castling.replace(turn === 'w' ? 'Q' : 'q', '')
 
     state.chessMoves.push(x2 > x1 ? '0-0' : '0-0-0')
     state.turn = state.turn === 'w' ? 'b' : 'w'
-    
+
     checkForKingDanger(state)
 }
 

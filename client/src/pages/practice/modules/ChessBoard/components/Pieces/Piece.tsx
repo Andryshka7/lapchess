@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { handleMove, selectPiece } from '../../../../store/chessBoardSlice'
+import { handleMove, selectPiece } from '../../../../store/practiceSlice'
 import findPiece from '../../../../store/helpers/Next moves/filtration/helpers/findPiece'
 import getNextMoves from '../../../../store/helpers/Next moves/getNextMoves'
 import startDragging from './helpers/startDragging'

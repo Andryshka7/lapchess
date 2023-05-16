@@ -1,6 +1,7 @@
 import createGameField from './helpers/createGameField'
+import { ChessBoard } from './types/ChessBoard'
 
-const gameField = createGameField([
+export const gameField = createGameField([
     ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
     ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
     ['0', '0', '0', '0', '0', '0', '0', '0'],
@@ -11,5 +12,17 @@ const gameField = createGameField([
     ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
 ])
 
+const initialState: ChessBoard = {
+    gameField,
+    globalNextMoves: [],
+    selected: null,
+    turn: 'w',
+    checkStatus: null,
+    promoted: null,
+    coverMoves: [],
+    castling: 'KQkq',
+    enpassing: null,
+    chessMoves: []
+}
 
-export default gameField
+export default initialState
