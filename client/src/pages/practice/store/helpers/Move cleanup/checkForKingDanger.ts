@@ -1,24 +1,24 @@
-import { ChessBoard } from '../../types/ChessBoard'
-import getCoverMoves from './King security/King presence/getCoverMoves'
+import getCoverMoves from './King security/getCoverMoves'
 import findPiece from '../findPiece'
 import isUnderAttack from '../Next moves/filtration/isUnderAttack'
-import checkForMate from './King security/King presence/checkForMate'
+import checkForMate from './King security/checkForMate'
+import { ChessBoard } from '../../types/ChessBoard'
 
-const checkForKingDanger = (state: ChessBoard) => {
-    const { turn, gameField } = state
-    state.checkStatus = null
-    state.coverMoves = []
+const checkForKingDanger = (chessBoard: ChessBoard) => {
+    const { turn, gameField } = chessBoard
+    chessBoard.checkStatus = null
+    chessBoard.coverMoves = []
 
     const king = findPiece(turn + 'K', gameField) as number[]
     const checksArray = isUnderAttack(king, gameField, turn === 'w' ? 'b' : 'w')
 
     if (checksArray.length) {
-        state.checkStatus = king
-        state.chessMoves[state.chessMoves.length - 1] += '+'
-        state.coverMoves = getCoverMoves(state, checksArray)
+        chessBoard.checkStatus = king
+        chessBoard.chessMoves[chessBoard.chessMoves.length - 1] += '+'
+        chessBoard.coverMoves = getCoverMoves(chessBoard, checksArray)
 
-        if (checkForMate(state, checksArray)) {
-            state.chessMoves[state.chessMoves.length - 1] += '+'
+        if (checkForMate(chessBoard, checksArray)) {
+            chessBoard.chessMoves[chessBoard.chessMoves.length - 1] += '+'
         }
     }
 }

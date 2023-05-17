@@ -1,4 +1,4 @@
-import { gameField } from '../../../../store/initialState'
+import { gameField } from '../../../../store/initialState/chessBoard'
 import { Piece } from './Piece'
 
 const Pieces = () => {

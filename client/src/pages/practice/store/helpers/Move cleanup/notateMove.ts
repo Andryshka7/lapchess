@@ -24,8 +24,6 @@ export default function notateMove(
 ) {
     const [color, piece] = name
 
-    // if (piece === 'K' && Math.abs(x2 - x1) > 1) return x2 > x1 ? 'O-O' : 'O-O-O'
-
     const cell = letters[x2] + (8 - y2)
     const x = (piece === 'P' ? letters[x1] : '') + 'x'
     const tookPiece = eaten !== '0' ? x : ''

@@ -1,5 +1,5 @@
 import gameFielFromFEN from './gamefieldFromFEN'
-import initialState from '../../../../store/initialState'
+import chessBoard from '../../../../store/initialState/chessBoard'
 
 const letters = 'abcdefgh'
 
@@ -14,9 +14,7 @@ const convertFromFEN = (fen: string) => {
             letter === '-' ? null : { x: letters.indexOf(letter), y: 8 - (Number(digit) + k) }
         const castling = castlingOptions === '-' ? '' : castlingOptions
 
-        const chessBoard = { ...initialState, gameField, turn, castling, enpassing }
-
-        return chessBoard
+        return { ...chessBoard, gameField, turn, castling, enpassing }
     } catch (error) {
         return null
     }

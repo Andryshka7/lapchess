@@ -1,10 +1,12 @@
 import { checkForKingDanger } from '..'
-import { ChessBoard } from '../../types/ChessBoard'
+import { PracticeState } from '../../initialState/initialState'
 
-const handleCasling = (state: ChessBoard, x2: number, y2: number) => {
-    const { turn, gameField, selected } = state
+const handleCasling = (state: PracticeState, [x2, y2]: number[]) => {
+    const { chessBoard, chessBoardStates } = state
 
+    const { turn, gameField, selected, castling, chessMoves } = chessBoard
     const { x: x1, y: y1 } = selected as { x: number; y: number }
+
     const king = turn + 'K'
     const rook = turn + 'R'
 
@@ -14,13 +16,17 @@ const handleCasling = (state: ChessBoard, x2: number, y2: number) => {
     gameField[y1][4] = '0'
     gameField[y1][k > 0 ? 7 : 0] = '0'
 
-    state.castling = state.castling.replace(turn === 'w' ? 'K' : 'k', '')
-    state.castling = state.castling.replace(turn === 'w' ? 'Q' : 'q', '')
+    chessBoard.castling = castling.replace(turn === 'w' ? 'K' : 'k', '')
+    chessBoard.castling = castling.replace(turn === 'w' ? 'Q' : 'q', '')
 
-    state.chessMoves.push(x2 > x1 ? '0-0' : '0-0-0')
-    state.turn = state.turn === 'w' ? 'b' : 'w'
+    const notation = x2 > x1 ? '0-0' : '0-0-0'
 
-    checkForKingDanger(state)
+    state.current += 1
+    chessBoard.turn = turn === 'w' ? 'b' : 'w'
+
+    chessBoard.chessMoves = [...chessMoves.slice(0, state.current - 1), notation]
+    checkForKingDanger(chessBoard)
+    state.chessBoardStates = [...chessBoardStates.slice(0, state.current), chessBoard]
 }
 
 export default handleCasling

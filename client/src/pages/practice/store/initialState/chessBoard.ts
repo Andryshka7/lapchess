@@ -1,5 +1,5 @@
-import createGameField from './helpers/createGameField'
-import { ChessBoard } from './types/ChessBoard'
+import createGameField from './createGameField'
+import { ChessBoard } from '../types/ChessBoard'
 
 export const gameField = createGameField([
     ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
@@ -12,7 +12,7 @@ export const gameField = createGameField([
     ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
 ])
 
-const initialState: ChessBoard = {
+const chessBoard: ChessBoard = {
     gameField,
     globalNextMoves: [],
     selected: null,
@@ -25,4 +25,4 @@ const initialState: ChessBoard = {
     chessMoves: []
 }
 
-export default initialState
+export default chessBoard

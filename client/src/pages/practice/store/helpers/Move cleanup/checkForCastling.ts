@@ -1,33 +1,28 @@
-import { Castling, ChessBoard } from '../../types/ChessBoard'
+import { ChessBoard } from '../../types/ChessBoard'
 
-const checkForCasling = (
-    state: ChessBoard,
-    [x1, y1]: number[],
-    [x2, y2]: number[],
-    name: string
-) => {
-    const [color, piece] = name
+const checkForCasling = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, y2]: number[]) => {
+    const [color, piece] = chessBoard.gameField[y1][x1]
 
     const leftRookMoved = x1 === 0 && piece === 'R'
-    const leftRookDied = x2 === 0 && state.gameField[y2][x2][1] === 'R'
+    const leftRookDied = x2 === 0 && chessBoard.gameField[y2][x2][1] === 'R'
 
     const rightRookMoved = x1 === 7 && piece === 'R'
-    const rightRookDied = x2 === 7 && state.gameField[y2][x2][1] === 'R'
+    const rightRookDied = x2 === 7 && chessBoard.gameField[y2][x2][1] === 'R'
 
     if (piece === 'K') {
-        state.castling = state.castling.replace(color === 'w' ? 'K' : 'k', '') as Castling
-        state.castling = state.castling.replace(color === 'w' ? 'Q' : 'q', '') as Castling
+        chessBoard.castling = chessBoard.castling.replace(color === 'w' ? 'K' : 'k', '')
+        chessBoard.castling = chessBoard.castling.replace(color === 'w' ? 'Q' : 'q', '')
     }
 
     if (leftRookMoved)
-        state.castling = state.castling.replace(color === 'w' ? 'Q' : 'q', '') as Castling
+        chessBoard.castling = chessBoard.castling.replace(color === 'w' ? 'Q' : 'q', '')
     else if (rightRookMoved)
-        state.castling = state.castling.replace(color === 'w' ? 'K' : 'k', '') as Castling
+        chessBoard.castling = chessBoard.castling.replace(color === 'w' ? 'K' : 'k', '')
 
     if (leftRookDied)
-        state.castling = state.castling.replace(color === 'b' ? 'Q' : 'q', '') as Castling
+        chessBoard.castling = chessBoard.castling.replace(color === 'b' ? 'Q' : 'q', '')
     else if (rightRookDied)
-        state.castling = state.castling.replace(color === 'b' ? 'K' : 'k', '') as Castling
+        chessBoard.castling = chessBoard.castling.replace(color === 'b' ? 'K' : 'k', '')
 }
 
 export default checkForCasling

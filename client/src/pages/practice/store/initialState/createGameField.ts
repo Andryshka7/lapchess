@@ -1,5 +1,6 @@
 const createGameField = (array: string[][]) => {
     const gameField: string[][] = JSON.parse(JSON.stringify(array))
+
     const pieceCount: { [key: string]: number } = {
         wP: 0,
         wR: 0,

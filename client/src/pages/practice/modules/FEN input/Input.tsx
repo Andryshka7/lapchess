@@ -6,7 +6,7 @@ import { setChessBoard } from 'pages/practice/store/practiceSlice'
 
 const Input = () => {
     const dispatch = useAppDispatch()
-    const chessBoard = useAppSelector((store) => store.practice)
+    const { chessBoard } = useAppSelector((store) => store.practice)
 
     const [fen, setFen] = useState<string>('')
 

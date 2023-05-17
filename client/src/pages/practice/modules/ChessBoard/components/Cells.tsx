@@ -11,7 +11,7 @@ for (let i = 0; i < 64; i++) cellsArray.push([i % 8, Math.floor(i / 8)])
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const { selected, globalNextMoves } = useAppSelector((store) => store.practice)
+    const { selected, globalNextMoves } = useAppSelector((store) => store.practice.chessBoard)
 
     return (
         <>

@@ -1,7 +1,7 @@
-import { ChessBoard } from '../../../../types/ChessBoard'
+import { ChessBoard } from '../../../types/ChessBoard'
 
-const getCoverMoves = (state: ChessBoard, checksArray: number[][]) => {
-    const { gameField, checkStatus } = state
+const getCoverMoves = (chessBoard: ChessBoard, checksArray: number[][]) => {
+    const { gameField, checkStatus } = chessBoard
 
     if (!checkStatus) return []
 

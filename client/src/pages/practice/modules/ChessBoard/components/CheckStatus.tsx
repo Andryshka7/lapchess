@@ -2,7 +2,7 @@ import { useAppSelector } from 'redux/store'
 import { leftPos, topPos } from '../helpers/positionValues'
 
 const CheckStatus = () => {
-    const { checkStatus } = useAppSelector((store) => store.practice)
+    const { checkStatus } = useAppSelector((store) => store.practice.chessBoard)
     if (!checkStatus) return null
 
     const [x, y] = checkStatus

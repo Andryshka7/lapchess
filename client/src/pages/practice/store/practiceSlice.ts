@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit'
 import { ChessBoard, PromotedPawn } from './types/ChessBoard'
 import {
     checkForEnPassant,
@@ -7,75 +7,98 @@ import {
     handlePieceMove,
     handleCasling,
     checkForKingDanger,
-    handlePawnPromotion
+    handlePawnPromotion,
+    notateMove
 } from './helpers'
 
-import initialState from './initialState'
-import notateMove from './helpers/Move cleanup/notateMove'
+import initialState from './initialState/initialState'
 
-const chessBoardSlice = createSlice({
+const practiceSlice = createSlice({
     name: 'practice/chessboard',
     initialState,
     reducers: {
         selectPiece: (state, action: PayloadAction<SelectPiecePayload>) => {
             const { x, y, nextMoves } = action.payload
-            state.selected = { x, y }
-            state.globalNextMoves = nextMoves
+            state.chessBoard.selected = { x, y }
+            state.chessBoard.globalNextMoves = nextMoves
         },
         handleMove: (state, action: PayloadAction<HandleMovePayload>) => {
-            const { x: x2, y: y2 } = action.payload
-            const { x: x1, y: y1 } = state.selected as { x: number; y: number }
+            const { chessBoard } = state
+            const { selected, gameField, promoted } = chessBoard
 
-            const [color, piece] = state.gameField[y1][x1]
+            const { x: x1, y: y1 } = selected as { x: number; y: number }
+            const { x: x2, y: y2 } = action.payload
+
+            const [color, piece] = gameField[y1][x1]
 
             const castling = piece === 'K' && Math.abs(x2 - x1) > 1
-            const enPassant = piece === 'P' && x1 !== x2 && state.gameField[y2][x2] === '0'
-            const pawnPromoted = !state.promoted && piece === 'P' && (y2 === 7 || y2 === 0)
+            const enPassant = piece === 'P' && x1 !== x2 && gameField[y2][x2] === '0'
+            const pawnPromoted = !promoted && piece === 'P' && (y2 === 7 || y2 === 0)
 
             if (pawnPromoted) {
                 handlePawnPromotion(state, [x1, y1], [x2, y2])
             } else if (castling) {
-                handleCasling(state, x2, y2)
+                handleCasling(state, [x2, y2])
             } else if (enPassant) {
-                handleEnPassant(state, x2, y2)
+                handleEnPassant(state, [x2, y2])
             } else {
-                checkForEnPassant(state, x2, y2)
-                checkForCasling(state, [x1, y1], [x2, y2], color + piece)
-                handlePieceMove(state, x2, y2)
+                handlePieceMove(state, [x2, y2])
             }
 
-            state.selected = null
-            state.globalNextMoves = []
+            state.chessBoard.selected = null
+            state.chessBoard.globalNextMoves = []
         },
 
         transformPawn: (state, action: PayloadAction<string>) => {
+            const { chessBoard, chessBoardStates } = state
             const transformation = action.payload
 
-            const { name, eaten, x1, y1, x2, y2 } = state.promoted as PromotedPawn
-            const { turn, gameField } = state
+            const { name, eaten, x1, y1, x2, y2 } = chessBoard.promoted as PromotedPawn
+            const { turn, gameField, chessMoves } = chessBoard
 
-            state.promoted = null
+            chessBoard.promoted = null
             gameField[y2][x2] = name[0] + action.payload + name.slice(1)
 
-            state.chessMoves.push(
-                notateMove({ name, eaten, gameField, transformation }, [x1, y1], [x2, y2])
+            const notation = notateMove(
+                { name, eaten, gameField, transformation },
+                [x1, y1],
+                [x2, y2]
             )
-            state.turn = turn === 'w' ? 'b' : 'w'
-            checkForKingDanger(state)
+
+            state.current += 1
+            chessBoard.turn = turn === 'w' ? 'b' : 'w'
+
+            chessBoard.chessMoves = [...chessMoves.slice(0, state.current - 1), notation]
+            checkForKingDanger(chessBoard)
+            state.chessBoardStates = [...chessBoardStates.slice(0, state.current), chessBoard]
         },
 
         cancelPromotion: (state) => {
-            const { x1, y1, x2, y2, name, eaten } = state.promoted as PromotedPawn
+            const { chessBoard } = state
+            const { x1, y1, x2, y2, name, eaten } = chessBoard.promoted as PromotedPawn
 
-            state.gameField[y1][x1] = name
-            state.gameField[y2][x2] = eaten
-            state.promoted = null
+            chessBoard.gameField[y1][x1] = name
+            chessBoard.gameField[y2][x2] = eaten
+            chessBoard.promoted = null
         },
         clearField: (state) => {
-            state.selected = null
-            state.globalNextMoves = []
+            const { chessBoard } = state
+            chessBoard.selected = null
+            chessBoard.globalNextMoves = []
         },
-        setChessBoard: (_, action: PayloadAction<ChessBoard>) => action.payload
+        setChessBoard: (state, action: PayloadAction<ChessBoard>) => {
+            state.chessBoard = action.payload
+        },
+
+        switchCurrent: (state, action: PayloadAction<number>) => {
+            const { chessBoard, chessBoardStates } = state
+            const { chessMoves } = chessBoard
+
+            if (action.payload >= 0 && action.payload < chessBoardStates.length) {
+                state.current = action.payload
+                state.chessBoard = { ...chessBoardStates[state.current], chessMoves }
+            }
+        }
     }
 })
 
@@ -85,7 +108,8 @@ export const {
     handleMove,
     cancelPromotion,
     transformPawn,
-    setChessBoard
-} = chessBoardSlice.actions
+    setChessBoard,
+    switchCurrent
+} = practiceSlice.actions
 
-export default chessBoardSlice.reducer
+export default practiceSlice.reducer

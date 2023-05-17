@@ -1,15 +1,18 @@
-import { useAppSelector } from 'redux/store'
-import practiceIcon from 'assets/practice.png'
 import { useEffect, useRef } from 'react'
+import { useAppDispatch, useAppSelector } from 'redux/store'
+import practiceIcon from 'assets/practice.png'
+import { switchCurrent } from 'pages/practice/store/practiceSlice'
 
 const ChessMoves = () => {
-    const { chessMoves } = useAppSelector((store) => store.practice)
-    const pairCount = Math.ceil(chessMoves.length / 2)
+    const dispatch = useAppDispatch()
+    const { chessBoard } = useAppSelector((store) => store.practice)
+
+    const pairCount = Math.ceil(chessBoard.chessMoves.length / 2)
     const ref = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
-    }, [chessMoves])
+    }, [chessBoard.chessMoves])
 
     return (
         <div
@@ -29,12 +32,13 @@ const ChessMoves = () => {
                     ))}
                 </div>
                 <div className='w-[260px]'>
-                    {chessMoves.map((move, index) => (
+                    {chessBoard.chessMoves.map((move, index) => (
                         <p
                             className={`w-1/2 float-left text-center font-semibold bg-stone-500 ${
                                 index % 2 ? 'bg-opacity-5' : 'bg-opacity-10'
                             }`}
                             key={`chessmove${index}`}
+                            onClick={() => dispatch(switchCurrent(index + 1))}
                         >
                             {move}
                         </p>

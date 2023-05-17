@@ -11,7 +11,7 @@ interface PieceProps {
 
 export const Piece = ({ piece }: PieceProps) => {
     const dispatch = useAppDispatch()
-    const chessBoard = useAppSelector((store) => store.practice)
+    const chessBoard = useAppSelector((store) => store.practice.chessBoard)
 
     const { turn, globalNextMoves, gameField } = chessBoard
 

@@ -8,7 +8,7 @@ const bg2 = chessBoardStyles.cellColor2
 const dotBg = chessBoardStyles.dotColor
 
 const NextMoves = () => {
-    const { globalNextMoves, gameField } = useAppSelector((store) => store.practice)
+    const { globalNextMoves, gameField } = useAppSelector((store) => store.practice.chessBoard)
 
     const style = (x: number, y: number) =>
         `absolute ${leftPos[x]} ${topPos[y]} w-[12.5%] h-[12.5%] pointer-events-none`

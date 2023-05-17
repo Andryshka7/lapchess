@@ -1,12 +1,14 @@
-import { ChessBoard } from '../../types/ChessBoard'
+import { PracticeState } from '../../initialState/initialState'
 
-const handlePawnPromotion = (state: ChessBoard, [x1, y1]: number[], [x2, y2]: number[]) => {
-    const name = state.gameField[y1][x1]
-    const eaten = state.gameField[y2][x2]
+const handlePawnPromotion = (state: PracticeState, [x1, y1]: number[], [x2, y2]: number[]) => {
+    const { chessBoard } = state
 
-    state.promoted = { x1, y1, x2, y2, name, eaten }
-    state.gameField[y1][x1] = '0'
-    state.gameField[y2][x2] = name
+    const name = chessBoard.gameField[y1][x1]
+    const eaten = chessBoard.gameField[y2][x2]
+
+    chessBoard.promoted = { x1, y1, x2, y2, name, eaten }
+    chessBoard.gameField[y1][x1] = '0'
+    chessBoard.gameField[y2][x2] = name
 }
 
 export default handlePawnPromotion
