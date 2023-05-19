@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import practiceIcon from 'assets/practice.png'
 import { switchCurrent } from 'pages/practice/store/practiceSlice'
+import { indicatorColor } from 'pages/practice/styles/chessBoardStyle'
+import practiceIcon from 'assets/practice.png'
 
 const ChessMoves = () => {
     const dispatch = useAppDispatch()
-    const { chessBoard } = useAppSelector((store) => store.practice)
+    const { current, chessBoard } = useAppSelector((store) => store.practice)
 
     const pairCount = Math.ceil(chessBoard.chessMoves.length / 2)
     const ref = useRef<HTMLDivElement | null>(null)
@@ -13,6 +14,14 @@ const ChessMoves = () => {
     useEffect(() => {
         if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
     }, [chessBoard.chessMoves])
+
+    const getMoveBg = (index: number) => {
+        if (current - 1 === index) {
+            return `${indicatorColor} bg-opacity-80`
+        } else {
+            return `bg-stone-500 ${index % 2 ? 'bg-opacity-5' : 'bg-opacity-10'}`
+        }
+    }
 
     return (
         <div
@@ -34,9 +43,9 @@ const ChessMoves = () => {
                 <div className='w-[260px]'>
                     {chessBoard.chessMoves.map((move, index) => (
                         <p
-                            className={`w-1/2 float-left text-center font-semibold bg-stone-500 ${
-                                index % 2 ? 'bg-opacity-5' : 'bg-opacity-10'
-                            }`}
+                            className={`w-1/2 float-left 
+                                text-center font-semibold ${getMoveBg(index)}
+                            `}
                             key={`chessmove${index}`}
                             onClick={() => dispatch(switchCurrent(index + 1))}
                         >

@@ -1,8 +1,6 @@
-import { PayloadAction, createSlice, current } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ChessBoard, PromotedPawn } from './types/ChessBoard'
 import {
-    checkForEnPassant,
-    checkForCasling,
     handleEnPassant,
     handlePieceMove,
     handleCasling,

@@ -10,9 +10,9 @@ const Practice = () => {
     const { current } = useAppSelector((store) => store.practice)
 
     const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (e.key === 'ArrowRight') {
             dispatch(switchCurrent(current + 1))
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        } else if (e.key === 'ArrowLeft') {
             dispatch(switchCurrent(current - 1))
         }
     }
@@ -23,7 +23,7 @@ const Practice = () => {
     }, [current])
 
     return (
-        <div className='w-[928px] m-auto mt-5'>
+        <div className='w-[928px] my-5 mx-auto'>
             <div className='flex items-center justify-center'>
                 <ChessBoard />
                 <ChessMoves />

@@ -1,5 +1,6 @@
 import gameFielFromFEN from './gamefieldFromFEN'
 import chessBoard from '../../../../store/initialState/chessBoard'
+import { checkForKingDanger } from 'pages/practice/store/helpers'
 
 const letters = 'abcdefgh'
 
@@ -14,7 +15,9 @@ const convertFromFEN = (fen: string) => {
             letter === '-' ? null : { x: letters.indexOf(letter), y: 8 - (Number(digit) + k) }
         const castling = castlingOptions === '-' ? '' : castlingOptions
 
-        return { ...chessBoard, gameField, turn, castling, enpassing }
+        const converted = { ...chessBoard, gameField, turn, castling, enpassing }
+        checkForKingDanger(converted)
+        return converted
     } catch (error) {
         return null
     }

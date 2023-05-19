@@ -7,7 +7,7 @@ export interface PracticeState {
     chessBoardStates: ChessBoard[]
 }
 
-const initialState = {
+const initialState: PracticeState = {
     chessBoard,
     current: 0,
     chessBoardStates: [chessBoard]

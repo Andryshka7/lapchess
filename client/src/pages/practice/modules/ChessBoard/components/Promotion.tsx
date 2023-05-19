@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { cancelPromotion, transformPawn } from '../../../store/practiceSlice'
-import pieceStyle from 'styles/pieceStyling'
+import pieceStyle from 'pages/practice/styles/pieceStyling'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {

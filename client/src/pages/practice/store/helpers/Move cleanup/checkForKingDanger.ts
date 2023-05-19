@@ -6,6 +6,7 @@ import { ChessBoard } from '../../types/ChessBoard'
 
 const checkForKingDanger = (chessBoard: ChessBoard) => {
     const { turn, gameField } = chessBoard
+
     chessBoard.checkStatus = null
     chessBoard.coverMoves = []
 
@@ -14,11 +15,13 @@ const checkForKingDanger = (chessBoard: ChessBoard) => {
 
     if (checksArray.length) {
         chessBoard.checkStatus = king
-        chessBoard.chessMoves[chessBoard.chessMoves.length - 1] += '+'
         chessBoard.coverMoves = getCoverMoves(chessBoard, checksArray)
 
-        if (checkForMate(chessBoard, checksArray)) {
+        if (chessBoard.chessMoves.length) {
             chessBoard.chessMoves[chessBoard.chessMoves.length - 1] += '+'
+            if (checkForMate(chessBoard, checksArray)) {
+                chessBoard.chessMoves[chessBoard.chessMoves.length - 1] += '+'
+            }
         }
     }
 }
