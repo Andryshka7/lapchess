@@ -12,7 +12,7 @@ const Input = () => {
 
     useEffect(() => {
         setFen(convertToFEN(chessBoard))
-    }, [chessBoard.chessMoves])
+    }, [chessBoard.gameField])
 
     return (
         <form

@@ -13,6 +13,7 @@ function App() {
                     <NavBar />
                     <Routes>
                         <Route path='/' element={<Practice />} />
+                        <Route path='/mastery' element={<Practice />} />
                     </Routes>
                     <Footer />
                 </Router>
