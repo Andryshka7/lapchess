@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { TypedUseSelectorHook } from 'react-redux/es/types'
 import { configureStore } from '@reduxjs/toolkit'
-import { practice, } from 'pages/practice'
+import rooms from 'pages/universe/modules/rooms/store/roomsSlice'
+import { mastery } from 'pages/mastery'
 
 const store = configureStore({
     reducer: {
-        practice,   
+        rooms,
+        mastery
     }
 })
 

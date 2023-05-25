@@ -1,9 +1,10 @@
 import { Provider } from 'react-redux'
-import { Practice } from './pages/practice'
+import { Mastery } from './pages/mastery'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import NavBar from 'components/Navbar'
 import Footer from 'components/Footer'
 import store from 'redux/store'
+import Universe from 'pages/universe/Universe'
 
 function App() {
     return (
@@ -12,8 +13,8 @@ function App() {
                 <Router>
                     <NavBar />
                     <Routes>
-                        <Route path='/' element={<Practice />} />
-                        <Route path='/mastery' element={<Practice />} />
+                        <Route path='/' element={<Universe />} />
+                        <Route path='/mastery' element={<Mastery />} />
                     </Routes>
                     <Footer />
                 </Router>
