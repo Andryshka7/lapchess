@@ -5,4 +5,5 @@ export interface Room {
     }
     color: string
     time: string
+    id: string
 }

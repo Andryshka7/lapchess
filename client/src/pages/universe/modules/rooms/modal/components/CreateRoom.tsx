@@ -1,15 +1,34 @@
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons//io5'
+import { useAppDispatch, useAppSelector } from 'redux/store'
+import { v4 as uniqueID } from 'uuid'
+import { ModalControls } from '../types/modalControls'
+import { updateID } from 'pages/universe/modules/chess/store/chessSlice'
+import axios from 'axios'
 
-interface ModalProps {
-    closeModal: () => void
-}
+const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const timeControls = ['1 + 0', '3 + 0', '4 + 0', '10 + 0', '3 + 2', '5 + 3', '15 + 5', '∞']
 const colorControls = ['wK', 'halfK', 'bK']
 
-const Modal = ({ closeModal }: ModalProps) => {
-    const [controls, setControls] = useState({ time: '∞', color: 'halfK' })
+const ModalContent = ({ setLoading, setError, closeModal }: ModalControls) => {
+    const dispatch = useAppDispatch()
+    const user = useAppSelector((store) => store.auth)
+    const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
+
+    const createRoom = async () => {
+        const id = uniqueID()
+        const room = { user, ...settings, id }
+        setLoading(true)
+
+        try {
+            await axios.post(`${SERVER_URL}/rooms`, room)
+            dispatch(updateID(id))
+            closeModal()
+        } catch (e) {
+            setError(true)
+        }
+    }
 
     return (
         <div className='fixed h-full w-full bg-black bg-opacity-50' onClick={closeModal}>
@@ -20,7 +39,7 @@ const Modal = ({ closeModal }: ModalProps) => {
                 <IoCloseOutline
                     color={'red'}
                     size={30}
-                    className='absolute top-5 right-5'
+                    className='absolute top-5 right-5 cursor-pointer'
                     onClick={closeModal}
                 />
 
@@ -30,9 +49,9 @@ const Modal = ({ closeModal }: ModalProps) => {
                     {timeControls.map((item) => (
                         <div
                             className={`flex items-center justify-center w-[100px] h-[50px] mt-3 mx-2 text-2xl font-medium rounded-md float-left transition duration-200 hover:bg-[#474747] ${
-                                controls.time === item ? 'bg-[#474747]' : 'bg-black bg-opacity-20'
+                                settings.time === item ? 'bg-[#474747]' : 'bg-black bg-opacity-20'
                             }`}
-                            onClick={() => setControls((p) => ({ ...p, time: item }))}
+                            onClick={() => setSettings((p) => ({ ...p, time: item }))}
                             key={item}
                         >
                             {item}
@@ -45,9 +64,9 @@ const Modal = ({ closeModal }: ModalProps) => {
                         <img
                             src={`/${item}.png`}
                             className={`w-[85px] h-[85px] transition duration-200 hover:scale-105 ${
-                                controls.color !== item ? 'opacity-60' : 'opacity-100'
+                                settings.color !== item ? 'opacity-60' : 'opacity-100'
                             }`}
-                            onClick={() => setControls((p) => ({ ...p, color: item }))}
+                            onClick={() => setSettings((p) => ({ ...p, color: item }))}
                             key={item}
                             alt=''
                         />
@@ -56,9 +75,7 @@ const Modal = ({ closeModal }: ModalProps) => {
 
                 <button
                     className='block w-[220px] h-[50px] mt-10 mx-auto text-2xl font-bold bg-[#4AB561] rounded-lg transition duration-200 hover:bg-[#3FA255]'
-                    onClick={() => {
-                        console.log(controls)
-                    }}
+                    onClick={createRoom}
                 >
                     Create
                 </button>
@@ -67,4 +84,4 @@ const Modal = ({ closeModal }: ModalProps) => {
     )
 }
 
-export default Modal
+export default ModalContent
