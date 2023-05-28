@@ -1,34 +1,22 @@
+import { Room } from 'pages/universe/types/Room'
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons//io5'
-import { useAppDispatch, useAppSelector } from 'redux/store'
+import { useAppSelector } from 'redux/store'
 import { v4 as uniqueID } from 'uuid'
-import { ModalControls } from '../types/modalControls'
-import { updateID } from 'pages/universe/modules/chess/store/chessSlice'
-import axios from 'axios'
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const timeControls = ['1 + 0', '3 + 0', '4 + 0', '10 + 0', '3 + 2', '5 + 3', '15 + 5', '∞']
 const colorControls = ['wK', 'halfK', 'bK']
 
-const ModalContent = ({ setLoading, setError, closeModal }: ModalControls) => {
-    const dispatch = useAppDispatch()
+const initialState = { time: '∞', color: 'halfK' }
+
+interface FormProps {
+    createRoom: (room: Room) => void
+    closeModal: () => void
+}
+
+const Form = ({ createRoom, closeModal }: FormProps) => {
     const user = useAppSelector((store) => store.auth)
-    const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
-
-    const createRoom = async () => {
-        const id = uniqueID()
-        const room = { user, ...settings, id }
-        setLoading(true)
-
-        try {
-            await axios.post(`${SERVER_URL}/rooms`, room)
-            dispatch(updateID(id))
-            closeModal()
-        } catch (e) {
-            setError(true)
-        }
-    }
+    const [settings, setSettings] = useState(initialState)
 
     return (
         <div className='fixed h-full w-full bg-black bg-opacity-50' onClick={closeModal}>
@@ -75,7 +63,7 @@ const ModalContent = ({ setLoading, setError, closeModal }: ModalControls) => {
 
                 <button
                     className='block w-[220px] h-[50px] mt-10 mx-auto text-2xl font-bold bg-[#4AB561] rounded-lg transition duration-200 hover:bg-[#3FA255]'
-                    onClick={createRoom}
+                    onClick={() => createRoom({ user, ...settings, id: uniqueID() })}
                 >
                     Create
                 </button>
@@ -84,4 +72,4 @@ const ModalContent = ({ setLoading, setError, closeModal }: ModalControls) => {
     )
 }
 
-export default ModalContent
+export default Form

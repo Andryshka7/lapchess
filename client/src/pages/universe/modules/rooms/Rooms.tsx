@@ -1,33 +1,36 @@
 import { useAppSelector } from 'redux/store'
 import { useState } from 'react'
-import Room from './room/Room'
-import Modal from './modal/Modal'
+import Room from './components/room/Room'
+import Modal from './components/modal/Modal'
+import CreateRoomButton from './components/CreateRoomButton'
+import noResults from 'assets/no-results.png'
 
 const Rooms = () => {
     const { rooms } = useAppSelector((store) => store)
-    const { id } = useAppSelector((store) => store.chess)
-
     const [showModal, setShowModal] = useState(false)
+
     const closeModal = () => setShowModal(false)
+    const openModal = () => setShowModal(true)
 
     return (
         <>
             <div className='w-[1000px] h-[636px] mx-auto mt-3 p-2.5 rounded-lg bg-black bg-opacity-10'>
-                {rooms.map((room) => (
-                    <Room {...room} key={room.id} />
-                ))}
-            </div>
-            {!id && (
-                <div
-                    className='w-[260px] h-[65px] flex items-center justify-between mx-auto my-3 px-[30px] bg-black bg-opacity-10 rounded-lg transition duration-200 hover:scale-105'
-                    onClick={() => setShowModal(true)}
-                >
-                    <div className='w-10 h-10 text-5xl font-medium rounded-full bg-[#4AB561]'>
-                        <p className='relative text-[45px] font-normal top-[-8px] left-[5px]'>+</p>
+                {!rooms.length ? (
+                    <div className='w-full h-full m-auto flex items-center justify-center'>
+                        <img src={noResults} className='w-48 h-48 m-5' alt='' />
+                        <div>
+                            <h1 className='w-[540px] leading-tight m-5 text-5xl font-semibold'>
+                                Unfortunately, there
+                                <br />
+                                are no available games...
+                            </h1>
+                        </div>
                     </div>
-                    <h2 className='text-2xl font-medium'>Create game</h2>
-                </div>
-            )}
+                ) : (
+                    rooms.map((room) => <Room {...room} key={room.id} />)
+                )}
+            </div>
+            <CreateRoomButton openModal={openModal} />
             {showModal && <Modal closeModal={closeModal} />}
         </>
     )

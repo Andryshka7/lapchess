@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { cancelPromotion, transformPawn } from '../../../store/masterySlice'
-import pieceStyle from 'pages/mastery/styles/pieceStyling'
+import { getPieceStyle } from 'config'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {
@@ -30,7 +30,7 @@ const Promotion = () => {
             {promotionPieces?.map((piece, index) => (
                 <img
                     src={`/${turn + piece}.png`}
-                    className={`z-[3] ${pieceStyle(
+                    className={`z-[3] ${getPieceStyle(
                         piece,
                         x + (index % 2),
                         y + Math.floor(index / 2)

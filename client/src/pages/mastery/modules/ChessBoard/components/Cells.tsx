@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { clearField, handleMove } from '../../../store/masterySlice'
-import { cellColor1, cellColor2 } from 'pages/mastery/styles/chessBoardStyle'
+import { cellColor1, cellColor2 } from 'config'
 
 const cellsArray: number[][] = []
 for (let i = 0; i < 64; i++) cellsArray.push([i % 8, Math.floor(i / 8)])

@@ -3,7 +3,7 @@ import { handleMove, selectPiece } from '../../../../store/masterySlice'
 import findPiece from '../../../../store/helpers/Next moves/filtration/helpers/findPiece'
 import getNextMoves from '../../../../store/helpers/Next moves/getNextMoves'
 import startDragging from './helpers/startDragging'
-import pieceStyle from 'pages/mastery/styles/pieceStyling'
+import { getPieceStyle } from 'config'
 
 interface PieceProps {
     piece: string
@@ -42,7 +42,7 @@ export const Piece = ({ piece }: PieceProps) => {
     return (
         <img
             src={`/${name}.png`}
-            className={`${pieceStyle(name[1], x, y)} ${pointerEvents}`}
+            className={`${getPieceStyle(name[1], x, y)} ${pointerEvents}`}
             onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
             alt='error'
         />

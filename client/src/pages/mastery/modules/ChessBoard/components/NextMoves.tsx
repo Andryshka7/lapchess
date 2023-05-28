@@ -1,12 +1,12 @@
 import { useAppSelector } from 'redux/store'
-import { leftPos, topPos } from '../helpers/positionValues'
-import { cellColor1, cellColor2, indicatorColor } from 'pages/mastery/styles/chessBoardStyle'
+import { left, top } from 'config'
+import { cellColor1, cellColor2, indicatorColor } from 'config'
 
 const NextMoves = () => {
     const { globalNextMoves, gameField } = useAppSelector((store) => store.mastery.chessBoard)
 
     const style = (x: number, y: number) =>
-        `absolute ${leftPos[x]} ${topPos[y]} w-[12.5%] h-[12.5%] pointer-events-none`
+        `absolute ${left(x)} ${top(y)} w-[12.5%] h-[12.5%] pointer-events-none`
 
     return (
         <>

@@ -30,4 +30,5 @@ const roomsSlice = createSlice({
 })
 
 export default roomsSlice.reducer
+
 export const { newRoom, deleteRoom } = roomsSlice.actions

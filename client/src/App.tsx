@@ -8,10 +8,11 @@ import Mastery from './pages/mastery/Mastery'
 import Footer from 'components/Footer'
 import socket from 'socket/socket'
 import { Room } from 'pages/universe/types/Room'
+import Alert from 'components/alert/Alert'
 
 function App() {
     const dispatch = useAppDispatch()
-    
+
     useEffect(() => {
         socket.on('NEW_ROOM', (room: Room) => {
             dispatch(newRoom(room))
@@ -30,6 +31,7 @@ function App() {
                     <Route path='/' element={<Universe />} />
                     <Route path='/mastery' element={<Mastery />} />
                 </Routes>
+                <Alert />
                 <Footer />
             </div>
         </Router>
