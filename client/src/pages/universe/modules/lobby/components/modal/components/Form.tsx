@@ -7,16 +7,14 @@ import { v4 as uniqueID } from 'uuid'
 const timeControls = ['1 + 0', '3 + 0', '4 + 0', '10 + 0', '3 + 2', '5 + 3', '15 + 5', '∞']
 const colorControls = ['wK', 'halfK', 'bK']
 
-const initialState = { time: '∞', color: 'halfK' }
-
 interface FormProps {
     createRoom: (room: Room) => void
     closeModal: () => void
 }
 
-const Form = ({ createRoom, closeModal }: FormProps) => {
+const ModalForm = ({ createRoom, closeModal }: FormProps) => {
     const user = useAppSelector((store) => store.auth)
-    const [settings, setSettings] = useState(initialState)
+    const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
 
     return (
         <div
@@ -75,4 +73,4 @@ const Form = ({ createRoom, closeModal }: FormProps) => {
     )
 }
 
-export default Form
+export default ModalForm

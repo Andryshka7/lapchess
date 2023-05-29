@@ -1,14 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { Chess } from '../types/initialState'
-import socket from 'socket/socket'
-
-const initialState: Chess = {
-    id: null,
-    chessBoard: null,
-    chat: [],
-    color: null,
-    time: ''
-}
+import initialState from './initialState'
 
 const chessSlice = createSlice({
     name: 'chess',

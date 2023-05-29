@@ -5,7 +5,7 @@ import { showAlert } from 'layout/alert/store/alertSlice'
 import { Room } from 'pages/universe/modules/lobby/types/Room'
 import axios from 'axios'
 
-import Form from './components/Form'
+import ModalForm from './components/Form'
 import Loader from './components/Loader'
 import Error from './components/Error'
 
@@ -42,7 +42,7 @@ const Modal = ({ closeModal }: ModalProps) => {
     } else if (loading) {
         return <Loader />
     }
-    return <Form createRoom={createRoom} closeModal={closeModal} />
+    return <ModalForm createRoom={createRoom} closeModal={closeModal} />
 }
 
 export default Modal

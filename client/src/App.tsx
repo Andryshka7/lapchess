@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useAppDispatch } from 'redux/store'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { deleteRoom, fetchRooms, newRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { NavBar, Footer, Alert } from 'layout'
 import { Mastery, Universe } from 'pages'
