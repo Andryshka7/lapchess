@@ -2,7 +2,7 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import { useAppDispatch } from 'redux/store'
 import axios from 'axios'
 import { updateID } from 'pages/universe/modules/chess/store/chessSlice'
-import { showAlert } from 'components/alert/store/alertSlice'
+import { showAlert } from 'layout/alert/store/alertSlice'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 

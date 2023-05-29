@@ -1,14 +1,11 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useAppDispatch } from 'redux/store'
-import { deleteRoom, fetchRooms, newRoom } from 'pages/universe/modules/rooms/store/roomsSlice'
-import NavBar from 'components/Navbar'
-import Universe from 'pages/universe/Universe'
-import Mastery from './pages/mastery/Mastery'
-import Footer from 'components/Footer'
+import { deleteRoom, fetchRooms, newRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
+import { NavBar, Footer, Alert } from 'layout'
+import { Mastery, Universe } from 'pages'
+import { Room } from 'pages/universe/modules/lobby/types/Room'
 import socket from 'socket/socket'
-import { Room } from 'pages/universe/types/Room'
-import Alert from 'components/alert/Alert'
 
 function App() {
     const dispatch = useAppDispatch()

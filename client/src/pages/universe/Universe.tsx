@@ -1,7 +1,7 @@
-import Rooms from './modules/rooms/Rooms'
+import Lobby from './modules/lobby/Lobby'
 
 const Universe = () => {
-    return <Rooms />
+    return <Lobby />
 }
 
 export default Universe

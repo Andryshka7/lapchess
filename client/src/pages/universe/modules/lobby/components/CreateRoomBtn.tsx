@@ -1,10 +1,10 @@
 import { useAppSelector } from 'redux/store'
 
-interface CreateRoomButtonProps {
+interface CreateRoomBtnProps {
     openModal: () => void
 }
 
-const CreateRoomButton = ({ openModal }: CreateRoomButtonProps) => {
+const CreateRoomBtn = ({ openModal }: CreateRoomBtnProps) => {
     const { id } = useAppSelector((store) => store.chess)
 
     const disabledStyle = `${id ? 'pointer-events-none opacity-70' : ''}`
@@ -16,7 +16,7 @@ const CreateRoomButton = ({ openModal }: CreateRoomButtonProps) => {
             transition duration-200 hover:scale-105 ${disabledStyle}`}
             onClick={openModal}
         >
-            <div className='w-10 h-10 text-5xl font-medium rounded-full bg-[#4AB561]'>
+            <div className='w-10 h-10 text-5xl font-medium rounded-full bg-green-600'>
                 <p className='relative text-[45px] font-normal top-[-8px] left-[5px]'>+</p>
             </div>
             <h2 className='text-2xl font-medium'>Create game</h2>
@@ -24,4 +24,4 @@ const CreateRoomButton = ({ openModal }: CreateRoomButtonProps) => {
     )
 }
 
-export default CreateRoomButton
+export default CreateRoomBtn

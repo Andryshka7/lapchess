@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useAppDispatch } from 'redux/store'
 import { updateID } from '../../../chess/store/chessSlice'
-import { showAlert } from 'components/alert/store/alertSlice'
-import { Room } from 'pages/universe/types/Room'
+import { showAlert } from 'layout/alert/store/alertSlice'
+import { Room } from 'pages/universe/modules/lobby/types/Room'
 import axios from 'axios'
 
 import Form from './components/Form'
@@ -41,9 +41,8 @@ const Modal = ({ closeModal }: ModalProps) => {
         return <Error closeModal={closeModal} />
     } else if (loading) {
         return <Loader />
-    } else {
-        return <Form createRoom={createRoom} closeModal={closeModal} />
     }
+    return <Form createRoom={createRoom} closeModal={closeModal} />
 }
 
 export default Modal

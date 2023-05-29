@@ -1,4 +1,4 @@
-import { Room as IRoom } from 'pages/universe/types/Room'
+import { Room as IRoom } from 'pages/universe/modules/lobby/types/Room'
 import { useAppSelector } from 'redux/store'
 import DeleteIcon from './components/DeleteIcon'
 import PlayIcon from './components/PlayIcon'

@@ -1,4 +1,4 @@
-import { Room } from 'pages/universe/types/Room'
+import { Room } from 'pages/universe/modules/lobby/types/Room'
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons//io5'
 import { useAppSelector } from 'redux/store'
@@ -19,7 +19,10 @@ const Form = ({ createRoom, closeModal }: FormProps) => {
     const [settings, setSettings] = useState(initialState)
 
     return (
-        <div className='fixed h-full w-full bg-black bg-opacity-50' onClick={closeModal}>
+        <div
+            className='fixed top-0 left-0 h-full w-full bg-black bg-opacity-50'
+            onClick={closeModal}
+        >
             <div
                 className='absolute w-[850px] h-[500px] bg-[#282828] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg'
                 onClick={(e) => e.stopPropagation()}
@@ -62,7 +65,7 @@ const Form = ({ createRoom, closeModal }: FormProps) => {
                 </div>
 
                 <button
-                    className='block w-[220px] h-[50px] mt-10 mx-auto text-2xl font-bold bg-[#4AB561] rounded-lg transition duration-200 hover:bg-[#3FA255]'
+                    className='block w-[220px] h-[50px] mt-10 mx-auto text-2xl font-bold bg-green-600 rounded-lg transition duration-200 hover:bg-opacity-90'
                     onClick={() => createRoom({ user, ...settings, id: uniqueID() })}
                 >
                     Create
