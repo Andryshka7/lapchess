@@ -15,7 +15,7 @@ const Moves = () => {
         <div className='w-[260px]'>
             {chessBoard.chessMoves.map((move, index) => (
                 <p
-                    className={`${bgColor(index)} w-1/2 float-left text-center font-semibold`}
+                    className={`${bgColor(index)} float-left w-1/2 text-center font-semibold`}
                     key={`chessmove${index}`}
                     onClick={() => dispatch(switchCurrent(index + 1))}
                 >

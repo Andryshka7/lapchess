@@ -8,15 +8,15 @@ const Room = ({ user, color, time, id: roomID }: IRoom) => {
     const { id } = useAppSelector((store) => store.chess)
     return (
         <div
-            className='relative h-[52px] grid grid-cols-3 items-center mb-1.5 px-10 rounded-lg bg-white bg-opacity-5'
+            className='relative mb-1.5 grid h-[52px] grid-cols-3 items-center rounded-lg bg-white bg-opacity-5 px-10'
             key={roomID}
         >
             <div className='flex items-center'>
-                <img src={panda} className='w-[30px] h-[30px] rounded-full' alt='' />
+                <img src={panda} className='h-[30px] w-[30px] rounded-full' alt='' />
                 <h2 className='ml-3 text-base font-semibold'>{user.username}</h2>
             </div>
 
-            <img src={`${color}.png`} className='w-[30px] h-[30px]' alt='' />
+            <img src={`${color}.png`} className='h-[30px] w-[30px]' alt='' />
             <p className='text-base font-semibold'>{time}</p>
 
             {id === roomID ? <DeleteIcon id={roomID} /> : <PlayIcon id={roomID} />}

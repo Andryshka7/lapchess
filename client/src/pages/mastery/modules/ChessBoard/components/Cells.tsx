@@ -15,7 +15,7 @@ const Cells = () => {
                 <div
                     className={`${
                         (x + y) % 2 ? cellColor1 : cellColor2
-                    } w-[12.5%] h-[12.5%] float-left`}
+                    } float-left h-[12.5%] w-[12.5%]`}
                     onClick={() => {
                         if (selected && globalNextMoves.includesDeeply([x, y]))
                             dispatch(handleMove({ x, y }))

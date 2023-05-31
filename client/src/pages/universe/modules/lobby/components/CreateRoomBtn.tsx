@@ -11,13 +11,13 @@ const CreateRoomBtn = ({ openModal }: CreateRoomBtnProps) => {
 
     return (
         <div
-            className={`w-[260px] h-[65px] flex items-center justify-between 
-            mx-auto my-3 px-[30px] bg-black bg-opacity-10 rounded-lg
+            className={`mx-auto my-3 flex h-[65px] w-[260px] 
+            items-center justify-between rounded-lg bg-black bg-opacity-10 px-[30px]
             transition duration-200 hover:scale-105 ${disabledStyle}`}
             onClick={openModal}
         >
-            <div className='w-10 h-10 text-5xl font-medium rounded-full bg-green-600'>
-                <p className='relative text-[45px] font-normal top-[-8px] left-[5px]'>+</p>
+            <div className='h-10 w-10 rounded-full bg-green-600 text-5xl font-medium'>
+                <p className='relative left-[5px] top-[-8px] text-[45px] font-normal'>+</p>
             </div>
             <h2 className='text-2xl font-medium'>Create game</h2>
         </div>

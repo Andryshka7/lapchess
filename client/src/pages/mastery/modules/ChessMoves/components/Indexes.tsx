@@ -8,7 +8,7 @@ const Indexes = () => {
     return (
         <div className='mx-auto w-[40px] text-center'>
             {indexes.map((index) => (
-                <p className='block text-bold' key={`number ${index}`}>
+                <p className='text-bold block' key={`number ${index}`}>
                     {index + 1}
                 </p>
             ))}

@@ -10,7 +10,7 @@ const CheckStatus = () => {
     return (
         <div
             className={`absolute ${left(x)} ${top(y)} 
-                w-[12.5%] h-[12.5%] bg-red-600 shadow-md blur-md rounded-3xl scale-[0.8]`}
+                h-[12.5%] w-[12.5%] scale-[0.8] rounded-3xl bg-red-600 shadow-md blur-md`}
         ></div>
     )
 }

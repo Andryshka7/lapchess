@@ -14,14 +14,14 @@ const Rooms = () => {
     }
 
     return (
-        <div className='w-full h-[636px] p-2.5 rounded-lg bg-black bg-opacity-10'>
+        <div className='h-[636px] w-full rounded-lg bg-black bg-opacity-10 p-2.5'>
             {rooms.length ? (
                 rooms.map((room) => <Room {...room} key={room.id} />)
             ) : (
-                <div className='w-full h-full m-auto flex items-center justify-center'>
-                    <img src={noResults} className='w-48 h-48 m-5' alt='' />
+                <div className='m-auto flex h-full w-full items-center justify-center'>
+                    <img src={noResults} className='m-5 h-48 w-48' alt='' />
                     <div>
-                        <h1 className='w-fit leading-tight m-5 text-5xl font-semibold'>
+                        <h1 className='m-5 w-fit text-5xl font-semibold leading-tight'>
                             Unfortunately, there
                             <br />
                             are no available games...

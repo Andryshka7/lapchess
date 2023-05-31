@@ -23,7 +23,7 @@ const Mastery = () => {
     }, [current])
 
     return (
-        <div className='w-[928px] my-5 mx-auto'>
+        <div className='mx-auto my-5 w-[928px]'>
             <div className='flex items-center justify-center'>
                 <ChessBoard />
                 <ChessMoves />

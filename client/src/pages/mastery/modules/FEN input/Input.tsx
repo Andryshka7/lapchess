@@ -24,7 +24,7 @@ const Input = () => {
         >
             <input
                 type='text'
-                className='w-full mt-2 py-1 px-5 rounded-lg bg-black bg-opacity-10 focus:outline-none'
+                className='mt-2 w-full rounded-lg bg-black bg-opacity-10 px-5 py-1 focus:outline-none'
                 value={fen}
                 onChange={(e) => setFen(e.target.value)}
             />

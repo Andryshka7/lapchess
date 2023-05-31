@@ -14,15 +14,15 @@ const ChessMoves = () => {
 
     return (
         <div
-            className='w-[300px] h-[620px] overflow-hidden ml-2 rounded-lg bg-black bg-opacity-10'
+            className='ml-2 h-[620px] w-[300px] overflow-hidden rounded-lg bg-black bg-opacity-10'
             ref={ref}
         >
             <div className='flex h-[40px] items-center'>
-                <img src={masteryIcon} className='h-6 ml-3 mr-2' alt='' />
-                <h2 className='text-lg text font-semibold'>Practice</h2>
+                <img src={masteryIcon} className='ml-3 mr-2 h-6' alt='' />
+                <h2 className='text text-lg font-semibold'>Practice</h2>
             </div>
 
-            <div className='h-[580px] scrollbar-thin flex overflow-hidden overflow-y-scroll'>
+            <div className='scrollbar-thin flex h-[580px] overflow-hidden overflow-y-scroll'>
                 <Indexes />
                 <Moves />
             </div>

@@ -24,7 +24,7 @@ const Promotion = () => {
 
     return (
         <div
-            className='z-[2] absolute w-full h-full bg-black bg-opacity-70'
+            className='absolute z-[2] h-full w-full bg-black bg-opacity-70'
             onClick={() => dispatch(cancelPromotion())}
         >
             {promotionPieces?.map((piece, index) => (

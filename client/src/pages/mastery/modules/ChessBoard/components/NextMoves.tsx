@@ -13,7 +13,7 @@ const NextMoves = () => {
             {globalNextMoves.map(([x, y]) =>
                 gameField[y][x] === '0' ? (
                     <div
-                        className={`${style(x, y)} rounded-full scale-[0.25] ${indicatorColor}`}
+                        className={`${style(x, y)} scale-[0.25] rounded-full ${indicatorColor}`}
                         key={`nextmove${x}${y}`}
                     />
                 ) : (

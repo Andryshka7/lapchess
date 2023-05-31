@@ -10,7 +10,7 @@ const Lobby = () => {
     const openModal = () => setShowModal(true)
 
     return (
-        <div className='w-[1000px] my-3 mx-auto'>
+        <div className='mx-auto my-3 w-[1000px]'>
             <Rooms />
             <CreateRoomBtn openModal={openModal} />
             {showModal && <Modal closeModal={closeModal} />}
