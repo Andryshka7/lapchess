@@ -18,26 +18,26 @@ const ModalForm = ({ createRoom, closeModal }: FormProps) => {
 
     return (
         <div
-            className='fixed top-0 left-0 h-full w-full bg-black bg-opacity-50'
+            className='fixed left-0 top-0 h-full w-full bg-black bg-opacity-50'
             onClick={closeModal}
         >
             <div
-                className='absolute w-[850px] h-[500px] bg-[#282828] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg'
+                className='absolute left-1/2 top-1/2 h-[500px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-[#282828]'
                 onClick={(e) => e.stopPropagation()}
             >
                 <IoCloseOutline
                     color={'red'}
                     size={30}
-                    className='absolute top-5 right-5 cursor-pointer'
+                    className='absolute right-5 top-5 cursor-pointer'
                     onClick={closeModal}
                 />
 
-                <h1 className='w-fit mt-7 mx-auto font-bold text-5xl'>Create game</h1>
+                <h1 className='mx-auto mt-7 w-fit text-5xl font-bold'>Create game</h1>
 
-                <div className='w-[480px] h-[120px] mt-5 mx-auto'>
+                <div className='mx-auto mt-5 h-[120px] w-[480px]'>
                     {timeControls.map((item) => (
                         <div
-                            className={`flex items-center justify-center w-[100px] h-[50px] mt-3 mx-2 text-2xl font-medium rounded-md float-left transition duration-200 hover:bg-[#474747] ${
+                            className={`float-left mx-2 mt-3 flex h-[50px] w-[100px] cursor-pointer items-center justify-center rounded-md text-2xl font-medium transition duration-200 hover:bg-[#474747] ${
                                 settings.time === item ? 'bg-[#474747]' : 'bg-black bg-opacity-20'
                             }`}
                             onClick={() => setSettings((p) => ({ ...p, time: item }))}
@@ -48,11 +48,11 @@ const ModalForm = ({ createRoom, closeModal }: FormProps) => {
                     ))}
                 </div>
 
-                <div className='flex items-center justify-between w-[380px] h-[120px] mt-8 mx-auto px-10 bg-black bg-opacity-20 rounded-2xl'>
+                <div className='mx-auto mt-8 flex h-[120px] w-[380px] items-center justify-between rounded-2xl bg-black bg-opacity-20 px-10'>
                     {colorControls.map((item) => (
                         <img
                             src={`/${item}.png`}
-                            className={`w-[85px] h-[85px] transition duration-200 hover:scale-105 ${
+                            className={`h-[85px] w-[85px] cursor-pointer transition duration-200 hover:scale-105 ${
                                 settings.color !== item ? 'opacity-60' : 'opacity-100'
                             }`}
                             onClick={() => setSettings((p) => ({ ...p, color: item }))}
@@ -63,7 +63,7 @@ const ModalForm = ({ createRoom, closeModal }: FormProps) => {
                 </div>
 
                 <button
-                    className='block w-[220px] h-[50px] mt-10 mx-auto text-2xl font-bold bg-green-600 rounded-lg transition duration-200 hover:bg-opacity-90'
+                    className='mx-auto mt-10 block h-[50px] w-[220px] rounded-lg bg-green-600 text-2xl font-bold transition duration-200 hover:bg-opacity-90'
                     onClick={() => createRoom({ user, ...settings, id: uniqueID() })}
                 >
                     Create

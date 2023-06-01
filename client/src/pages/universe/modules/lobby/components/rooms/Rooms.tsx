@@ -14,7 +14,7 @@ const Rooms = () => {
     }
 
     return (
-        <div className='h-[636px] w-full rounded-lg bg-black bg-opacity-10 p-2.5'>
+        <div className='scrollbar-thin h-[636px] w-full overflow-hidden overflow-y-scroll rounded-lg bg-black bg-opacity-10 p-2.5 pb-1 will-change-scroll'>
             {rooms.length ? (
                 rooms.map((room) => <Room {...room} key={room.id} />)
             ) : (

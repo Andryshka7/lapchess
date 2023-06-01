@@ -1,13 +1,7 @@
-import { ChessBoard } from '../types/ChessBoard'
-import chessBoard from './chessBoard'
+import { Mastery } from '../types/Mastery'
+import chessBoard from './chessBoard/chessBoard'
 
-export interface IMastery {
-    chessBoard: ChessBoard
-    current: number
-    chessBoardStates: ChessBoard[]
-}
-
-const initialState: IMastery = {
+const initialState: Mastery = {
     chessBoard,
     current: 0,
     chessBoardStates: [chessBoard]

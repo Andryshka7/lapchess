@@ -1,7 +1,7 @@
 import { checkForCasling, checkForEnPassant, checkForKingDanger, notateMove } from '..'
-import { IMastery } from '../../initialState/initialState'
+import { Mastery } from '../../initialState/initialState'
 
-const handlePieceMove = (state: IMastery, [x2, y2]: number[]) => {
+const handlePieceMove = (state: Mastery, [x2, y2]: number[]) => {
     const { chessBoard, chessBoardStates } = state
 
     const { turn, selected, gameField, chessMoves } = chessBoard

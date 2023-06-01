@@ -12,7 +12,7 @@ const RoomsError = () => {
                     Error while fetching games <br /> Please try again later.
                 </h1>
                 <button
-                    className='mx-auto block rounded-md bg-green-600 px-10 py-2 text-xl font-semibold'
+                    className='mx-auto block rounded-md bg-green-600 px-10 py-2 text-xl font-semibold transition duration-200 hover:bg-opacity-90'
                     onClick={() => dispatch(fetchRooms())}
                 >
                     Retry

@@ -1,18 +1,20 @@
-import { checkForKingDanger, notateMove } from '..'
-import { IMastery } from '../../initialState/initialState'
+import { checkForCasling, checkForEnPassant, checkForKingDanger, notateMove } from '..'
+import { Mastery } from '../../initialState/initialState'
 
-const handleEnPassant = (state: IMastery, [x2, y2]: number[]) => {
+const handlePieceMove = (state: Mastery, [x2, y2]: number[]) => {
     const { chessBoard, chessBoardStates } = state
 
     const { turn, selected, gameField, chessMoves } = chessBoard
     const { x: x1, y: y1 } = selected as { x: number; y: number }
 
     const name = gameField[y1][x1]
-    const eaten = gameField[y1][x2]
+    const eaten = gameField[y2][x2]
+
+    checkForEnPassant(chessBoard, [x1, y1], [x2, y2])
+    checkForCasling(chessBoard, [x1, y1], [x2, y2])
 
     gameField[y2][x2] = name
     gameField[y1][x1] = '0'
-    gameField[y1][x2] = '0'
 
     const notation = notateMove({ name, eaten, gameField }, [x1, y1], [x2, y2])
 
@@ -24,4 +26,4 @@ const handleEnPassant = (state: IMastery, [x2, y2]: number[]) => {
     state.chessBoardStates = [...chessBoardStates.slice(0, state.current), chessBoard]
 }
 
-export default handleEnPassant
+export default handlePieceMove

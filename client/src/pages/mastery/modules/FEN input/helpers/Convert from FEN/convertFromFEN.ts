@@ -1,6 +1,6 @@
 import gameFielFromFEN from './gamefieldFromFEN'
-import chessBoard from '../../../../store/initialState/chessBoard'
-import { checkForKingDanger } from 'pages/mastery/store/helpers'
+import chessBoard from '../../../../store/initialState/chessBoard/chessBoard'
+import { checkForKingDanger } from 'pages/mastery/store/reducers/helpers'
 
 const letters = 'abcdefgh'
 
@@ -17,6 +17,7 @@ const convertFromFEN = (fen: string) => {
 
         const converted = { ...chessBoard, gameField, turn, castling, enpassing }
         checkForKingDanger(converted)
+
         return converted
     } catch (error) {
         return null

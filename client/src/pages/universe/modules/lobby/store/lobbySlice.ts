@@ -23,6 +23,9 @@ const lobbySlice = createSlice({
     },
     extraReducers: (build) =>
         build
+            .addCase(fetchRooms.pending, (state) => {
+                state.loading = true
+            })
             .addCase(fetchRooms.fulfilled, (state, action) => {
                 state.rooms = action.payload
                 state.loading = false

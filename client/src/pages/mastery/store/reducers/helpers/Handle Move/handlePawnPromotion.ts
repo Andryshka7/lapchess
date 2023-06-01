@@ -1,6 +1,6 @@
-import { IMastery } from '../../initialState/initialState'
+import { Mastery } from '../../initialState/initialState'
 
-const handlePawnPromotion = (state: IMastery, [x1, y1]: number[], [x2, y2]: number[]) => {
+const handlePawnPromotion = (state: Mastery, [x1, y1]: number[], [x2, y2]: number[]) => {
     const { chessBoard } = state
 
     const name = chessBoard.gameField[y1][x1]
