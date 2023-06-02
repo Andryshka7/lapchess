@@ -23,6 +23,11 @@
     user-select: none;
 }
 
+.with-fade {
+    background-image: url('/chess.png');
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 0%, transparent 100%);
+}
+
 .loader div {
     animation: bounce 1s ease-in-out infinite;
 }
@@ -51,13 +56,13 @@
 }
 
 @keyframes bounce {
-	0% {
-		transform: translateY(0px);
-	}
-	50% {
-		transform: translateY(-15px);
-	}
-	100% {
-		transform: translateY(0px);
-	}
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }

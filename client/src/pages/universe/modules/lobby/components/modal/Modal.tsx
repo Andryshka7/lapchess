@@ -30,7 +30,7 @@ const Modal = ({ closeModal }: ModalProps) => {
         try {
             await axios.post(`${SERVER_URL}/rooms`, room)
             dispatch(updateID(room.id))
-            dispatch(createGame({ owner: user, guest: user, color: room.color, time: room.time }))
+            // dispatch(createGame({ owner: user, guest: user, color: room.color, time: room.time }))
             alert('Successfully created new room!', 'success')
             closeModal()
         } catch (error) {

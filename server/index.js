@@ -1,10 +1,15 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+
 import { createServer } from 'http'
 import { Server } from 'socket.io'
+
 import roomsRouter from './routes/rooms.js'
+import usersRouter from './routes/users.js'
+import imagesRouter from './routes/images.js'
 
 dotenv.config()
 
@@ -15,10 +20,14 @@ const MONGO_DB = process.env.MONGO_DB
 const app = express()
 
 app.use(cors())
+app.use(cookieParser())
 app.use(express.json())
 
 app.use('/rooms', roomsRouter)
-app.get('/', (req, res) => res.send('<h1>Hello, world!</h1>'))
+app.use('/users', usersRouter)
+app.use('/images', imagesRouter)
+
+app.get('/', (_, res) => res.send('<h1>Hello, world!</h1>'))
 
 const server = createServer(app)
 
