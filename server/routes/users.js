@@ -1,7 +1,7 @@
 import { hash, compare } from 'bcrypt'
 import { Router } from 'express'
 import Users from '../models/Users.js'
-import createToken from './jwt/createToken.js'
+import createToken from '../helpers/jwt/createToken.js'
 
 const usersRouter = Router()
 

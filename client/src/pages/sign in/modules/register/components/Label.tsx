@@ -11,13 +11,12 @@ const Label = ({ htmlFor, file }: LabelProps) => {
         >
             {file ? (
                 <div className='mx-auto flex w-fit items-center p-3.5'>
-                    <h1 className='text-lg'>Selected avatar:</h1>
                     <img
                         src={URL.createObjectURL(file)}
-                        className='ml-5 mr-2 h-10 w-10 rounded-full object-cover'
+                        className='ml-5 mr-4 h-10 w-10 rounded-full object-cover'
                         alt=''
                     />
-                    <h1 className='text-lg'>{file.name}</h1>
+                    <h1 className='text-lg line-clamp-1'>{file.name}</h1>
                 </div>
             ) : (
                 <p className='p-5 text-lg'>Drop your avatar here or click to select</p>

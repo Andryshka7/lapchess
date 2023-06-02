@@ -38,6 +38,7 @@ const Registration = () => {
         <form
             className='mx-auto my-16 flex justify-between overflow-hidden rounded-lg bg-gray-500 bg-opacity-20'
             onSubmit={handleSubmit(onSubmit)}
+            autoComplete='off'
         >
             <div className='m-auto w-[500px] px-10'>
                 <h1 className='mb-10 text-center text-5xl font-semibold'>Create account</h1>
@@ -46,18 +47,21 @@ const Registration = () => {
                     placeholder='Username'
                     className={inputStyle}
                     {...register('username')}
+                    autoComplete='off'
                 />
                 <input
-                    type='text'
+                    type='password'
                     placeholder='Password'
                     className={inputStyle}
                     {...register('password')}
+                    autoComplete='off'
                 />
                 <input
-                    type='text'
+                    type='password'
                     placeholder='Confirm password'
                     className={inputStyle}
                     {...register('confirmPassword')}
+                    autoComplete='off'
                 />
                 <Label htmlFor='avatar-input' file={selectedFile}></Label>
                 <input
