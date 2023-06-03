@@ -2,7 +2,6 @@ import { Room as IRoom } from 'pages/universe/modules/lobby/types/Room'
 import { useAppSelector } from 'redux/store'
 import DeleteIcon from './components/DeleteIcon'
 import PlayIcon from './components/PlayIcon'
-import panda from 'assets/panda.png'
 
 const Room = ({ user, color, time, id: roomID }: IRoom) => {
     const { id } = useAppSelector((store) => store.chess)
@@ -12,7 +11,7 @@ const Room = ({ user, color, time, id: roomID }: IRoom) => {
             key={roomID}
         >
             <div className='flex items-center'>
-                <img src={panda} className='h-[30px] w-[30px] rounded-full' alt='' />
+                <img src={user.avatar} className='h-[30px] w-[30px] rounded-full' alt='' />
                 <h2 className='ml-3 text-base font-semibold'>{user.username}</h2>
             </div>
 

@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom'
-import panda from 'assets/panda.png'
+import Auth from './auth/Auth'
 
 const NavBar = () => {
     return (
-        <nav className='flex items-center justify-between w-full px-16 h-14 bg-blue-500'>
+        <nav className='flex h-14 w-full items-center justify-between bg-blue-500 px-16'>
             <h1 className='text-2xl font-semibold'>Lapchess</h1>
             <div>
                 <NavLink to='/' className='mx-3 text-xl font-medium'>
@@ -13,11 +13,7 @@ const NavBar = () => {
                     Mastery
                 </NavLink>
             </div>
-
-            <div className='flex items-center'>
-                <img src={panda} className='h-8 w-8 mr-3 rounded-full' alt='' />
-                <h2 className='text-lg font-semibold'>Andryshka16</h2>
-            </div>
+            <Auth />
         </nav>
     )
 }

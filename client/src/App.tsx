@@ -28,7 +28,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Universe />} />
                     <Route path='/mastery' element={<Mastery />} />
-                    <Route path='/register' element={<SignIn />} />
+                    <Route path='/sign-in' element={<SignIn />} />
                 </Routes>
                 <Alert />
                 <Footer />

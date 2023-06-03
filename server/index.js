@@ -3,13 +3,9 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-
 import { createServer } from 'http'
 import { Server } from 'socket.io'
-
-import roomsRouter from './routes/rooms.js'
-import usersRouter from './routes/users.js'
-import imagesRouter from './routes/images.js'
+import { usersRouter, roomsRouter, imagesRouter } from './routes/index.js'
 
 dotenv.config()
 

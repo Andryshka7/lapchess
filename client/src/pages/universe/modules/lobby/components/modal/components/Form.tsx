@@ -4,8 +4,11 @@ import { IoCloseOutline } from 'react-icons//io5'
 import { useAppSelector } from 'redux/store'
 import { v4 as uniqueID } from 'uuid'
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL
+
 const timeControls = ['1 + 0', '3 + 0', '4 + 0', '10 + 0', '3 + 2', '5 + 3', '15 + 5', '∞']
 const colorControls = ['wK', 'halfK', 'bK']
+const guest = { username: 'Guest', avatar: `${SERVER_URL}/images/Guest.png` }
 
 interface FormProps {
     createRoom: (room: Room) => void
@@ -13,7 +16,7 @@ interface FormProps {
 }
 
 const ModalForm = ({ createRoom, closeModal }: FormProps) => {
-    const user = useAppSelector((store) => store.auth)
+    const user = useAppSelector((store) => store.auth.user) || guest
     const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
 
     return (

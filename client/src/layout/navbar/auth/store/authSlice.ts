@@ -1,14 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { InitialState } from '../types/InitialState'
+import { User } from '../types/User'
 
-const initialState = {
-    avatar: 'some_avatar_url',
-    username: 'Andryshka16'
+const initialState: InitialState = {
+    user: null,
+    token: null
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {}
+    reducers: {
+        authenticate: (state, action: PayloadAction<User>) => {
+            state.user = action.payload
+        },
+        setToken: (state, action: PayloadAction<string>) => {
+            state.token = action.payload
+        }
+    }
 })
 
 export default authSlice.reducer
+export const { authenticate, setToken } = authSlice.actions
