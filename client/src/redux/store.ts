@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { TypedUseSelectorHook } from 'react-redux/es/types'
 import { configureStore } from '@reduxjs/toolkit'
 
-import auth from 'layout/navbar/auth/store/authSlice'
+import auth from 'pages/sign in/store/authSlice'
 import alert from 'layout/alert/store/alertSlice'
 import mastery from 'pages/mastery/store/masterySlice'
 import lobby from 'pages/universe/modules/lobby/store/lobbySlice'

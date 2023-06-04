@@ -5,12 +5,14 @@ import { Router } from 'express'
 import { fileURLToPath } from 'url'
 import { hash, compare } from 'bcrypt'
 import Users from '../models/Users.js'
-import createToken from '../helpers/jwt/createToken.js'
-import upload from '../helpers/multer.js'
+import Rooms from '../models/Rooms.js'
+import createToken from './helpers/createToken.js'
+import upload from './helpers/upload.js'
 
 dotenv.config()
 
 const SERVER_URL = process.env.SERVER_URL
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -30,33 +32,48 @@ usersRouter.post('/register', upload.single('file'), async (req, res) => {
             if (err) throw err
         })
 
-        const user = {
+        const hashed = await hash(password, 10)
+        const avatar = `${SERVER_URL}/images/${newFileName}`
+
+        const document = await new Users({
             username,
-            password: await hash(password, 10),
-            avatar: `${SERVER_URL}/images/${newFileName}`
-        }
-        const token = createToken(user)
+            password: hashed,
+            avatar
+        }).save()
 
-        await Users.create(user)
+        const token = createToken({
+            username,
+            avatar,
+            _id: document._id
+        })
 
-        res.status(200).json({ user, token })
+        res.status(200).json({ username, avatar, token })
     } catch (error) {
+        console.log(error)
         res.status(400).json('Error while registration.')
     }
 })
 
 usersRouter.post('/login', async (req, res) => {
-    const { username, password } = req.body
     try {
-        const user = await Users.findOne({ username })
-        const passwordMatches = await compare(password, user.password)
-        if (passwordMatches) {
-            const token = createToken({ username, password, avatar: user.avatar })
-            res.status(200).json({ user, token })
-        } else {
-            res.status(400).json('Wrong credentials!')
-        }
+        const { username, password } = req.body
+
+        const document = await Users.findOne({ username })
+        if (!document) return res.status(400).json('Wrong credentials!')
+
+        const passwordMatches = await compare(password, document.password)
+        if (!passwordMatches) return res.status(400).json('Wrong credentials!')
+
+        const { avatar, _id } = document
+
+        const room = (await Rooms.findOne({ user: _id }))?._id || null // gets owned room id
+
+        const token = createToken({ username, avatar, _id })
+        const user = { username, avatar, token }
+
+        res.status(200).json({ user, room })
     } catch (error) {
+        console.log(error)
         res.status(400).json('Wrong credentials!')
     }
 })

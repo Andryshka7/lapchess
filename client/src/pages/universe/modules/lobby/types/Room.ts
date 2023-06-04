@@ -1,9 +1,9 @@
 export interface Room {
-    user: {
+    user: null | {
         avatar: string
         username: string
     }
     color: string
     time: string
-    id: string
+    _id: string
 }

@@ -5,9 +5,9 @@ interface CreateRoomBtnProps {
 }
 
 const CreateRoomBtn = ({ openModal }: CreateRoomBtnProps) => {
-    const { id } = useAppSelector((store) => store.chess)
+    const { thisRoom } = useAppSelector((store) => store.lobby)
 
-    const disabledStyle = `${id ? 'pointer-events-none opacity-70' : ''}`
+    const disabledStyle = `${thisRoom ? 'pointer-events-none opacity-70' : ''}`
 
     return (
         <div

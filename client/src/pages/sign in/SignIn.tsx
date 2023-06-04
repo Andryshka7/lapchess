@@ -1,17 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useAppSelector } from 'redux/store'
-import { useNavigate } from 'react-router-dom'
 import SignUp from './modules/sign up/SignUp'
 import Login from './modules/login/Login'
 
 const SignIn = () => {
-    const { user } = useAppSelector((store) => store.auth)
+    const { username, token } = useAppSelector((store) => store.auth)
     const [showSignUp, setShowSigUp] = useState(false)
-    const navigate = useNavigate()
 
-    useEffect(() => {
-        if (user) navigate('/')
-    }, [user])
+    if (token) return <h1>Authorized as {username}</h1>
 
     return (
         <div className='mx-auto my-16 flex justify-between overflow-hidden rounded-lg bg-[#2F3640]'>

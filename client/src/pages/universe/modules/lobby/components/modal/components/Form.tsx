@@ -1,23 +1,19 @@
-import { Room } from 'pages/universe/modules/lobby/types/Room'
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons//io5'
-import { useAppSelector } from 'redux/store'
-import { v4 as uniqueID } from 'uuid'
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
+import { RoomSettings } from '../../../types/RoomSettings'
 
 const timeControls = ['1 + 0', '3 + 0', '4 + 0', '10 + 0', '3 + 2', '5 + 3', '15 + 5', '∞']
 const colorControls = ['wK', 'halfK', 'bK']
-const guest = { username: 'Guest', avatar: `${SERVER_URL}/images/Guest.png` }
+
+const initialSettings = { time: '∞', color: 'halfK' }
 
 interface FormProps {
-    createRoom: (room: Room) => void
+    createRoom: (room: RoomSettings) => void
     closeModal: () => void
 }
 
 const ModalForm = ({ createRoom, closeModal }: FormProps) => {
-    const user = useAppSelector((store) => store.auth.user) || guest
-    const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
+    const [settings, setSettings] = useState<RoomSettings>(initialSettings)
 
     return (
         <div
@@ -67,7 +63,7 @@ const ModalForm = ({ createRoom, closeModal }: FormProps) => {
 
                 <button
                     className='mx-auto mt-10 block h-[50px] w-[220px] rounded-lg bg-green-600 text-2xl font-bold transition duration-200 hover:bg-opacity-90'
-                    onClick={() => createRoom({ user, ...settings, id: uniqueID() })}
+                    onClick={() => createRoom(settings)}
                 >
                     Create
                 </button>

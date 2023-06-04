@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import Label from './components/Label'
-import axios from 'axios'
 import { useAppDispatch } from 'redux/store'
-import { authenticate, setToken } from 'layout/navbar/auth/store/authSlice'
-import { useNavigate } from 'react-router-dom'
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
+import { FormValues } from './types/FormValues'
+import { showAlert } from 'layout/alert/store/alertSlice'
+import useSignUp from './hooks/useSignUp'
 
 const initial =
     'mb-7 block h-12 w-full border-b-2 border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -14,50 +11,29 @@ const initial =
 const underlined =
     'mb-7 block h-12 w-full border-b-2 border-b-red-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
-type FieldValues = {
-    username: string
-    password: string
-    confirmPassword: string
-}
-
 interface SignUpProps {
     setShowSighUp: () => void
 }
 
 const SignUp = ({ setShowSighUp }: SignUpProps) => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    const signUp = useSignUp()
+
     const {
         register,
         handleSubmit,
         getValues,
         reset,
         formState: { errors }
-    } = useForm<FieldValues>({
+    } = useForm<FormValues>({
         mode: 'onChange'
     })
-    const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
-    const inputStyle = (name: keyof FieldValues) => (errors[name] ? underlined : initial)
+    const [file, setFile] = useState<File | null>(null)
 
-    const onSubmit = async (data: FieldValues) => {
-        if (!selectedFile) return
-
-        const formData = new FormData()
-        formData.append('file', selectedFile)
-        formData.append('username', data.username)
-        formData.append('password', data.password)
-
-        const response = await axios.post(`${SERVER_URL}/users/register`, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        })
-
-        dispatch(authenticate(response.data.user))
-        dispatch(setToken(response.data.token))
-        navigate('/')
-
+    const onSubmit = async (data: FormValues) => {
+        if (!file) return
+        await signUp(data, file)
         reset()
-        setSelectedFile(null)
     }
 
     return (
@@ -71,14 +47,14 @@ const SignUp = ({ setShowSighUp }: SignUpProps) => {
                 <input
                     type='text'
                     placeholder='Username'
-                    className={inputStyle('username')}
+                    className={errors['username'] ? underlined : initial}
                     {...register('username', { required: true })}
                 />
 
                 <input
                     type='password'
                     placeholder='Password'
-                    className={inputStyle('password')}
+                    className={errors['password'] ? underlined : initial}
                     {...register('password', {
                         required: true,
                         validate: (original) => {
@@ -91,7 +67,7 @@ const SignUp = ({ setShowSighUp }: SignUpProps) => {
                 <input
                     type='password'
                     placeholder='Confirm password'
-                    className={inputStyle('confirmPassword')}
+                    className={errors['confirmPassword'] ? underlined : initial}
                     {...register('confirmPassword', {
                         required: true,
                         validate: (confirmed) => {
@@ -101,7 +77,32 @@ const SignUp = ({ setShowSighUp }: SignUpProps) => {
                     })}
                 />
 
-                <Label htmlFor='avatar-input' file={selectedFile} setFile={setSelectedFile} />
+                <label
+                    htmlFor={'file-input'}
+                    className='mt-8 block rounded-lg border-2 border-dashed 
+                             border-gray-400 text-center font-medium text-gray-400'
+                >
+                    {file ? (
+                        <div className='mx-auto flex w-fit items-center p-3.5'>
+                            <img
+                                src={URL.createObjectURL(file)}
+                                className='ml-5 mr-4 h-10 w-10 rounded-full object-cover'
+                                alt=''
+                            />
+                            <h1 className='line-clamp-1 text-lg'>{file.name}</h1>
+                        </div>
+                    ) : (
+                        <p className='p-5 text-lg'>Drop your avatar here or click to select</p>
+                    )}
+
+                    <input
+                        type='file'
+                        id='file-input'
+                        accept='image/*'
+                        className='hidden'
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    />
+                </label>
 
                 <button
                     type='submit'

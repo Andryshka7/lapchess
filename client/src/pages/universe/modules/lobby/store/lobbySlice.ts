@@ -18,7 +18,10 @@ const lobbySlice = createSlice({
             state.rooms.push(action.payload)
         },
         deleteRoom: (state, action: PayloadAction<string>) => {
-            state.rooms = state.rooms.filter(({ id }) => id !== action.payload)
+            state.rooms = state.rooms.filter(({ _id }) => _id !== action.payload)
+        },
+        setThisRoom: (state, action: PayloadAction<null | string>) => {
+            state.thisRoom = action.payload
         }
     },
     extraReducers: (build) =>
@@ -37,4 +40,4 @@ const lobbySlice = createSlice({
 })
 
 export default lobbySlice.reducer
-export const { newRoom, deleteRoom } = lobbySlice.actions
+export const { newRoom, deleteRoom, setThisRoom } = lobbySlice.actions

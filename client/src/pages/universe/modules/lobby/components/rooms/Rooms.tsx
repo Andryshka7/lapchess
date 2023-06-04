@@ -16,7 +16,7 @@ const Rooms = () => {
     return (
         <div className='scrollbar-thin h-[636px] w-full overflow-hidden overflow-y-scroll rounded-lg bg-black bg-opacity-10 p-2.5 pb-1 will-change-scroll'>
             {rooms.length ? (
-                rooms.map((room) => <Room {...room} key={room.id} />)
+                rooms.map((room) => <Room {...room} key={room._id} />)
             ) : (
                 <div className='m-auto flex h-full w-full items-center justify-center'>
                     <img src={noResults} className='m-5 h-48 w-48' alt='' />

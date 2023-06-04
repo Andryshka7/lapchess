@@ -6,15 +6,15 @@ dotenv.config()
 const SECRET_KEY = process.env.JWT_SECRET_KEY
 
 const validateToken = (req, res, next) => {
-    const token = req.cookies['acess-token']
-    if (!token) return res.status(400).json('User not logged in!')
-
+    const token = req.headers.authorization
     try {
-        const isValid = jwt.verify(token, SECRET_KEY)
-        if (isValid) next()
+        const user = jwt.verify(token.replace('Bearer ', ''), SECRET_KEY)
+        req.user = user
     } catch (error) {
-        res.status(400).json(error)
+        console.log(error.message)
     }
+
+    next()
 }
 
 export default validateToken

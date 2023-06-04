@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { json } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
@@ -16,8 +16,8 @@ const MONGO_DB = process.env.MONGO_DB
 const app = express()
 
 app.use(cors())
+app.use(json())
 app.use(cookieParser())
-app.use(express.json())
 
 app.use('/rooms', roomsRouter)
 app.use('/users', usersRouter)

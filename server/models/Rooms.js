@@ -1,16 +1,11 @@
 import { model, Schema } from 'mongoose'
-
-const userSchema = new Schema({
-    avatar: { type: String, required: true },
-    username: { type: String, required: true }
-})
+import { ObjectId } from 'mongoose'
 
 const schema = new Schema(
     {
-        user: { type: userSchema, required: true },
+        user: { type: ObjectId, ref: 'USERS' },
         color: { type: String, required: true },
-        time: { type: String, required: true },
-        id: { type: String, required: true }
+        time: { type: String, required: true }
     },
     { timestamps: true }
 )
