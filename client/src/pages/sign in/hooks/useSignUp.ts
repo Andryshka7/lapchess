@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { FormValues } from '../types/FormValues'
+import axios, { AxiosError, isAxiosError } from 'axios'
+import { SignUpFormValues } from '../types/form fields/SignUpFormValues'
 import { useAppDispatch } from 'redux/store'
 import { authenticate } from 'pages/sign in/store/authSlice'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ const useSignUp = () => {
 
     const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
-    return async (data: FormValues, file: File) => {
+    return async (data: SignUpFormValues, file: File) => {
         try {
             const formData = new FormData()
 
@@ -31,12 +31,15 @@ const useSignUp = () => {
                 formData,
                 config
             )
+
             const user = response.data
 
             dispatch(authenticate(user))
             navigate('/')
         } catch (error) {
-            alert('An error occured while signing up', 'error')
+            if (isAxiosError(error)) {
+                alert(error.response?.data || 'An error occured while registration.', 'error')
+            }
         }
     }
 }

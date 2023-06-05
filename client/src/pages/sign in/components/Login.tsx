@@ -1,39 +1,49 @@
-import { useForm } from 'react-hook-form'
-import { showAlert } from 'layout/alert/store/alertSlice'
-import { FormValues } from './types/FormValues'
-import useLogin from './hooks/useLogin'
-import { useAppDispatch } from 'redux/store'
+import { FieldError, useForm } from 'react-hook-form'
+import { LoginFormValues } from '../types/form fields/LoginFormValues'
+import useLogin from '../hooks/useLogin'
+import { passwordValidation, usernameValidation } from './helpers/signUpValidation'
 
-const initial =
+const initialStyles =
     'mb-7 block h-12 w-full border-b-2  border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
-const underlined =
+const errorStyles =
     'mb-7 block h-12 w-full border-b-2  border-b-red-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
 interface LoginProps {
-    setShowSighUp: () => void
+    showSignUp: boolean
+    setShowSighUp: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Login = ({ setShowSighUp }: LoginProps) => {
+const InputError = ({ error }: { error?: FieldError }) => (
+    <p
+        className={`absolute w-[420px] -translate-y-6 text-center text-sm font-medium text-red-500 transition-all duration-200 ${
+            error ? 'opacity-1' : 'opacity-0'
+        }`}
+    >
+        {error?.message}
+    </p>
+)
+
+const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
     const login = useLogin()
 
     const {
         register,
         handleSubmit,
-        reset,
         formState: { errors }
-    } = useForm<FormValues>({ mode: 'onChange' })
+    } = useForm<LoginFormValues>({ mode: 'onSubmit' })
 
-    const onSubmit = async (data: FormValues) => {
+    const onSubmit = async (data: LoginFormValues) => {
         await login(data)
-        reset()
     }
+
+    const inputsTabIndex = showSignUp ? -1 : 0
 
     return (
         <form
             className='relative flex h-[700px] w-[500px] items-center'
             onSubmit={handleSubmit(onSubmit)}
-            autoComplete='off'
+            tabIndex={inputsTabIndex}
         >
             <div className='w-full px-10'>
                 <h1 className='mb-10 text-center text-5xl font-semibold'>Log in</h1>
@@ -41,16 +51,20 @@ const Login = ({ setShowSighUp }: LoginProps) => {
                 <input
                     type='text'
                     placeholder='Username'
-                    className={errors['username'] ? underlined : initial}
-                    {...register('username', { required: 'Please enter a username' })}
+                    className={errors['username'] ? errorStyles : initialStyles}
+                    tabIndex={inputsTabIndex}
+                    {...register('username', usernameValidation)}
                 />
+                <InputError error={errors['username']} />
 
                 <input
                     type='password'
                     placeholder='Password'
-                    className={errors['password'] ? underlined : initial}
-                    {...register('password', { required: 'Please enter password' })}
+                    className={errors['password'] ? errorStyles : initialStyles}
+                    tabIndex={inputsTabIndex}
+                    {...register('password', passwordValidation)}
                 />
+                <InputError error={errors['password']} />
 
                 <button
                     type='submit'
@@ -61,7 +75,7 @@ const Login = ({ setShowSighUp }: LoginProps) => {
             </div>
             <p
                 className='absolute bottom-0 mb-10 w-full cursor-pointer text-center text-lg font-medium text-gray-300'
-                onClick={setShowSighUp}
+                onClick={() => setShowSighUp(true)}
             >
                 Not a member? Sign in to become one.
             </p>

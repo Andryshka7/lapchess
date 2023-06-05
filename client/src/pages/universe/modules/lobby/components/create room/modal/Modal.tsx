@@ -1,24 +1,26 @@
 import { useState } from 'react'
-import { IoCloseOutline } from 'react-icons//io5'
-import { RoomSettings } from '../../../types/RoomSettings'
+import { IoCloseOutline } from 'react-icons/io5'
+import Loader from './components/Loader'
+import Error from './components/Error'
+import useCreateRoom from './hooks/useCreateRoom'
+import { timeControls, colorControls } from 'config'
 
-const timeControls = ['1 + 0', '3 + 0', '4 + 0', '10 + 0', '3 + 2', '5 + 3', '15 + 5', '∞']
-const colorControls = ['wK', 'halfK', 'bK']
-
-const initialSettings = { time: '∞', color: 'halfK' }
-
-interface FormProps {
-    createRoom: (room: RoomSettings) => void
-    closeModal: () => void
+interface ModalProps {
+    hideModal: () => void
 }
 
-const ModalForm = ({ createRoom, closeModal }: FormProps) => {
-    const [settings, setSettings] = useState<RoomSettings>(initialSettings)
+const Modal = ({ hideModal }: ModalProps) => {
+    const { loading, error, createRoom } = useCreateRoom(hideModal)
+    const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
+
+    if (loading) return <Loader />
+
+    if (error) return <Error hideModal={hideModal} />
 
     return (
         <div
             className='fixed left-0 top-0 h-full w-full bg-black bg-opacity-50'
-            onClick={closeModal}
+            onClick={hideModal}
         >
             <div
                 className='absolute left-1/2 top-1/2 h-[500px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-[#282828]'
@@ -28,7 +30,7 @@ const ModalForm = ({ createRoom, closeModal }: FormProps) => {
                     color={'red'}
                     size={30}
                     className='absolute right-5 top-5 cursor-pointer'
-                    onClick={closeModal}
+                    onClick={hideModal}
                 />
 
                 <h1 className='mx-auto mt-7 w-fit text-5xl font-bold'>Create game</h1>
@@ -72,4 +74,4 @@ const ModalForm = ({ createRoom, closeModal }: FormProps) => {
     )
 }
 
-export default ModalForm
+export default Modal

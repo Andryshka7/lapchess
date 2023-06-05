@@ -22,6 +22,10 @@ usersRouter.post('/register', upload.single('file'), async (req, res) => {
     try {
         const { username, password } = req.body
 
+        if (await Users.findOne({ username })) {
+            return res.status(400).json('Username already exists.')
+        }
+
         const fileName = req.file.filename
         const newFileName = username + fileName.slice(fileName.indexOf('.'))
 

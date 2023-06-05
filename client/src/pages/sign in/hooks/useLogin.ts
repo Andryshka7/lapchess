@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'redux/store'
-import { FormValues } from '../types/FormValues'
-import axios from 'axios'
+import { LoginFormValues } from '../types/form fields/LoginFormValues'
+import axios, { isAxiosError } from 'axios'
 import { authenticate } from 'pages/sign in/store/authSlice'
 import { setThisRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { User } from 'pages/sign in/types/User'
@@ -20,7 +20,7 @@ const useLogin = () => {
 
     const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
-    return async (data: FormValues) => {
+    return async (data: LoginFormValues) => {
         try {
             const response = await axios.post<Response>(`${SERVER_URL}/users/login`, data)
             const { user, room } = response.data
@@ -29,7 +29,9 @@ const useLogin = () => {
             dispatch(setThisRoom(room))
             navigate('/')
         } catch (error) {
-            alert('Wrong credentials!', 'error')
+            if (isAxiosError(error)) {
+                alert(error.response?.data || 'An error occured while trying to log in.', 'error')
+            }
         }
     }
 }
