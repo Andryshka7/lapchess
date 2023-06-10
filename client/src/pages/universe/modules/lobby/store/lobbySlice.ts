@@ -24,8 +24,8 @@ const lobbySlice = createSlice({
             state.thisRoom = action.payload
         }
     },
-    extraReducers: (build) =>
-        build
+    extraReducers: (builder) => {
+        builder
             .addCase(fetchRooms.pending, (state) => {
                 state.loading = true
             })
@@ -37,6 +37,7 @@ const lobbySlice = createSlice({
                 state.error = true
                 state.loading = false
             })
+    }
 })
 
 export default lobbySlice.reducer

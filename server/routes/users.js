@@ -51,7 +51,9 @@ usersRouter.post('/register', upload.single('file'), async (req, res) => {
             _id: document._id
         })
 
-        res.status(200).json({ username, avatar, token })
+        const user = { username, avatar, _id: document._id }
+
+        res.status(200).json({ user, token })
     } catch (error) {
         console.log(error)
         res.status(400).json('Error while registration.')
@@ -70,12 +72,11 @@ usersRouter.post('/login', async (req, res) => {
 
         const { avatar, _id } = document
 
-        const room = (await Rooms.findOne({ user: _id }))?._id || null // gets owned room id
-
         const token = createToken({ username, avatar, _id })
-        const user = { username, avatar, token }
+        const user = { username, avatar, _id }
+        const thisRoom = (await Rooms.findOne({ user: _id }))?._id
 
-        res.status(200).json({ user, room })
+        res.status(200).json({ user, token, thisRoom })
     } catch (error) {
         console.log(error)
         res.status(400).json('Wrong credentials!')

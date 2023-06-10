@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import { usersRouter, roomsRouter, imagesRouter } from './routes/index.js'
+import chessGamesRouter from './routes/chessGames.js'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.use(cookieParser())
 app.use('/rooms', roomsRouter)
 app.use('/users', usersRouter)
 app.use('/images', imagesRouter)
+app.use('/chessGames', chessGamesRouter)
 
 app.get('/', (_, res) => res.send('<h1>Hello, world!</h1>'))
 

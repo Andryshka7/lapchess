@@ -18,5 +18,5 @@ export const {
     cancelPromotion,
     transformPawn,
     setChessBoard,
-    switchCurrent
+    switchPosition
 } = masterySlice.actions

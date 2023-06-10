@@ -4,8 +4,8 @@ import chessBoard from './initialState/chessBoard/chessBoard'
 import chessBoardReducers from './reducers'
 
 interface CreateGamePayload {
-    owner: { avatar: string; username: string }
-    guest: { avatar: string; username: string }
+    white: null | { avatar: string; username: string; _id: string }
+    black: null | { avatar: string; username: string; _id: string }
     color: string
     time: string
 }
@@ -16,17 +16,10 @@ const chessSlice = createSlice({
     reducers: {
         ...chessBoardReducers,
 
-        updateID: (state, action: PayloadAction<string | null>) => {
-            state.id = action.payload
-            if (action.payload) {
-                // socket.join()
-            }
-        },
-        createGame: (state, action: PayloadAction<CreateGamePayload>) => {
-            const { color, time, owner, guest } = action.payload
-            state.initTime = new Date().getTime()
-            state.owner = owner
-            state.guest = guest
+        initializeGame: (state, action: PayloadAction<CreateGamePayload>) => {
+            const { color, white, black, time } = action.payload
+            state.white = white
+            state.black = black
             state.color = color
             state.time = time
             state.chessBoard = chessBoard
@@ -37,13 +30,12 @@ const chessSlice = createSlice({
 export default chessSlice.reducer
 
 export const {
-    updateID,
-    createGame,
+    initializeGame,
     selectPiece,
     clearField,
     handleMove,
     cancelPromotion,
     transformPawn,
     setChessBoard,
-    switchCurrent
+    switchPosition
 } = chessSlice.actions

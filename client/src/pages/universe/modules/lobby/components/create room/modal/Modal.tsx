@@ -11,7 +11,9 @@ interface ModalProps {
 
 const Modal = ({ hideModal }: ModalProps) => {
     const { loading, error, createRoom } = useCreateRoom(hideModal)
-    const [settings, setSettings] = useState({ time: '∞', color: 'halfK' })
+
+    const [time, setTime] = useState('∞')
+    const [color, setColor] = useState('random')
 
     if (loading) return <Loader />
 
@@ -39,9 +41,9 @@ const Modal = ({ hideModal }: ModalProps) => {
                     {timeControls.map((item) => (
                         <div
                             className={`float-left mx-2 mt-3 flex h-[50px] w-[100px] cursor-pointer items-center justify-center rounded-md text-2xl font-medium transition duration-200 hover:bg-[#474747] ${
-                                settings.time === item ? 'bg-[#474747]' : 'bg-black bg-opacity-20'
+                                time === item ? 'bg-[#474747]' : 'bg-black bg-opacity-20'
                             }`}
-                            onClick={() => setSettings((p) => ({ ...p, time: item }))}
+                            onClick={() => setTime(item)}
                             key={item}
                         >
                             {item}
@@ -54,9 +56,9 @@ const Modal = ({ hideModal }: ModalProps) => {
                         <img
                             src={`/${item}.png`}
                             className={`h-[85px] w-[85px] cursor-pointer transition duration-200 hover:scale-105 ${
-                                settings.color !== item ? 'opacity-60' : 'opacity-100'
+                                color !== item ? 'opacity-60' : 'opacity-100'
                             }`}
-                            onClick={() => setSettings((p) => ({ ...p, color: item }))}
+                            onClick={() => setColor(item)}
                             key={item}
                             alt=''
                         />
@@ -65,7 +67,7 @@ const Modal = ({ hideModal }: ModalProps) => {
 
                 <button
                     className='mx-auto mt-10 block h-[50px] w-[220px] rounded-lg bg-green-600 text-2xl font-bold transition duration-200 hover:bg-opacity-90'
-                    onClick={() => createRoom(settings)}
+                    onClick={() => createRoom(color, time)}
                 >
                     Create
                 </button>

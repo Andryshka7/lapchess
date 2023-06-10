@@ -15,11 +15,11 @@ roomsRouter.get('/', async (req, res) => {
     }
 })
 
-roomsRouter.post('/', validateToken, async (req, res) => {
+roomsRouter.post('/', async (req, res) => {
     try {
-        const { time, color } = req.body
+        const { user, color, time } = req.body
 
-        const document = await new Rooms({ time, color, user: req.user }).save()
+        const document = await new Rooms({ user, color, time }).save()
         const populated = await Rooms.populate(document, { path: 'user' })
 
         socket.emit('NEW_ROOM', populated)

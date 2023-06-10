@@ -6,28 +6,24 @@ import { useState } from 'react'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-interface RoomSettings {
-    time: string
-    color: string
-}
-
 const useCreateRoom = (hideModal: () => void) => {
     const dispatch = useAppDispatch()
-    const { token } = useAppSelector((store) => store.auth)
+    const { user } = useAppSelector((store) => store.auth)
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
     const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
-    const createRoom = async (settings: RoomSettings) => {
+    const createRoom = async (color: string, time: string) => {
         try {
             setLoading(true)
-            const response = await axios.post<string>(`${SERVER_URL}/rooms`, settings, {
-                headers: { Authorization: `Bearer ${token}` }
+            const response = await axios.post<string>(`${SERVER_URL}/rooms`, {
+                user: user?._id,
+                color,
+                time
             })
-            const id = response.data
-            dispatch(setThisRoom(id))
+            dispatch(setThisRoom(response.data))
             alert('Successfully created new room!', 'success')
             hideModal()
         } catch (error) {

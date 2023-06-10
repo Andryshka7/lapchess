@@ -1,5 +1,5 @@
 import createGameField from './createGameField'
-import { ChessBoard } from '../types/ChessBoard'
+import { ChessBoard } from '../../types/ChessBoard'
 
 export const gameField = createGameField([
     ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],

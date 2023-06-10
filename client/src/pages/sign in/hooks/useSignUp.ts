@@ -1,10 +1,19 @@
-import axios, { AxiosError, isAxiosError } from 'axios'
+import axios, { isAxiosError } from 'axios'
 import { SignUpFormValues } from '../types/form fields/SignUpFormValues'
 import { useAppDispatch } from 'redux/store'
 import { authenticate } from 'pages/sign in/store/authSlice'
 import { useNavigate } from 'react-router-dom'
-import { User } from 'pages/sign in/types/User'
 import { showAlert } from 'layout/alert/store/alertSlice'
+import { fetchMyRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
+
+interface Reponse {
+    user: {
+        username: string
+        avatar: string
+        _id: string
+    }
+    token: string
+}
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
@@ -26,15 +35,15 @@ const useSignUp = () => {
             formData.append('username', data.username)
             formData.append('password', data.password)
 
-            const response = await axios.post<User>(
+            const response = await axios.post<Reponse>(
                 `${SERVER_URL}/users/register`,
                 formData,
                 config
             )
+            const { user, token } = response.data
 
-            const user = response.data
+            dispatch(authenticate({ user, token }))
 
-            dispatch(authenticate(user))
             navigate('/')
         } catch (error) {
             if (isAxiosError(error)) {

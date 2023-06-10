@@ -6,13 +6,12 @@ interface User {
 }
 
 export interface Chess {
-    id: null | string
-    chessBoard: ChessBoard
+    fromRoom: null | string
     color: null | string
     time: null | string
-    owner: null | User
-    guest: null | User
-    current: number
-    chessBoardStates: ChessBoard[]
-    initTime: null | number
+    white: null | User
+    black: null | User
+    chessBoard: ChessBoard
+    position: number
+    positionHistory: ChessBoard[]
 }

@@ -1,10 +1,10 @@
+import { Chess } from './../../../types/InitialState'
 import { checkForCasling, checkForEnPassant, checkForKingDanger, notateMove } from '..'
-import { Mastery } from '../../initialState/initialState'
 
-const handlePieceMove = (state: Mastery, [x2, y2]: number[]) => {
-    const { chessBoard, chessBoardStates } = state
+const handlePieceMove = (state: Chess, [x2, y2]: number[]) => {
+    const { chessBoard } = state
 
-    const { turn, selected, gameField, chessMoves } = chessBoard
+    const { turn, selected, gameField } = chessBoard
     const { x: x1, y: y1 } = selected as { x: number; y: number }
 
     const name = gameField[y1][x1]
@@ -18,12 +18,12 @@ const handlePieceMove = (state: Mastery, [x2, y2]: number[]) => {
 
     const notation = notateMove({ name, eaten, gameField }, [x1, y1], [x2, y2])
 
-    state.current += 1
+    state.position += 1
     chessBoard.turn = turn === 'w' ? 'b' : 'w'
 
-    chessBoard.chessMoves = [...chessMoves.slice(0, state.current - 1), notation]
+    chessBoard.chessMoves.push(notation)
     checkForKingDanger(chessBoard)
-    state.chessBoardStates = [...chessBoardStates.slice(0, state.current), chessBoard]
+    state.positionHistory.push(chessBoard)
 }
 
 export default handlePieceMove

@@ -3,8 +3,8 @@ import chessBoard from './chessBoard/chessBoard'
 
 const initialState: Mastery = {
     chessBoard,
-    current: 0,
-    chessBoardStates: [chessBoard]
+    position: 0,
+    positionHistory: [chessBoard]
 }
 
 export default initialState

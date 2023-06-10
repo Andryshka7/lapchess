@@ -1,4 +1,4 @@
-import { ChessBoard } from 'pages/mastery/store/types/ChessBoard'
+import { ChessBoard } from '../../../../types/ChessBoard'
 import getNextMoves from '../../Next moves/getNextMoves'
 
 const checkForMate = (chessBoard: ChessBoard, checksArray: number[][]) => {

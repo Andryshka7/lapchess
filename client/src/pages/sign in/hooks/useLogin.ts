@@ -4,14 +4,18 @@ import { LoginFormValues } from '../types/form fields/LoginFormValues'
 import axios, { isAxiosError } from 'axios'
 import { authenticate } from 'pages/sign in/store/authSlice'
 import { setThisRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
-import { User } from 'pages/sign in/types/User'
 import { showAlert } from 'layout/alert/store/alertSlice'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 interface Response {
-    user: User
-    room: string
+    user: {
+        username: string
+        avatar: string
+        _id: string
+    }
+    token: string
+    thisRoom: string | null
 }
 
 const useLogin = () => {
@@ -23,10 +27,11 @@ const useLogin = () => {
     return async (data: LoginFormValues) => {
         try {
             const response = await axios.post<Response>(`${SERVER_URL}/users/login`, data)
-            const { user, room } = response.data
+            const { user, token, thisRoom } = response.data
 
-            dispatch(authenticate(user))
-            dispatch(setThisRoom(room))
+            dispatch(authenticate({ user, token }))
+            dispatch(setThisRoom(thisRoom))
+
             navigate('/')
         } catch (error) {
             if (isAxiosError(error)) {
