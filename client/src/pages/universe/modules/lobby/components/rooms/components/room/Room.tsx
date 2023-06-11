@@ -26,6 +26,8 @@ const Room = (room: RoomProps) => {
             <p className='text-base font-semibold'>{time}</p>
 
             {_id === thisRoom ? <DeleteIcon {...room} /> : <PlayIcon {...room} />}
+            {/* <DeleteIcon {...room} /> */}
+            {/* <PlayIcon {...room} /> */}
         </div>
     )
 }

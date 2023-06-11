@@ -1,32 +1,32 @@
-import axios from 'axios'
 import { useAppSelector } from 'redux/store'
-import chessBoard from '../../../../../../chess/store/initialState/chessBoard/chessBoard'
 import { Room } from 'pages/universe/modules/lobby/types/Room'
-import getPlayers from './helpers/getPlayers'
 import { useDispatch } from 'react-redux'
 import { initializeGame } from 'pages/universe/modules/chess/store/chessSlice'
+import getPlayers from './helpers/getPlayers'
 import getColor from './helpers/getColor'
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
+import createChessGame from 'api/chess games/createChessGame'
+import socket from 'socket/socket'
+import createDocument from './helpers/createDocument'
 
 const useStartGame = () => {
     const dispatch = useDispatch()
     const guest = useAppSelector((store) => store.auth.user)
 
     return async (room: Room) => {
-        const color = getColor(room.color)
         const time = room.time
+        const gameId = room._id
+
+        const color = getColor(room.color)
+        const oppositeColor = color === 'w' ? 'b' : 'w'
         const [white, black] = getPlayers(room.color, room.user, guest)
 
-        const payload = {
-            white,
-            black,
-            color,
-            fromRoom: room._id,
-            chessBoard: JSON.stringify(chessBoard)
-        }
-        // const gameID = await axios.post(`${SERVER_URL}/chessGames`, payload)
-        dispatch(initializeGame({ color, white, black, time }))
+        const document = createDocument(white, black, gameId)
+
+        await createChessGame(document)
+        dispatch(initializeGame({ white, black, gameId, color }))
+
+        socket.emit('GAME_INITIALIZED', gameId, { white, black, gameId, color: oppositeColor })
+        socket.emit('JOIN_ROOM', gameId)
     }
 }
 

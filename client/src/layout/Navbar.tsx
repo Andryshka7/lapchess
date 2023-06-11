@@ -32,14 +32,6 @@ const NavBar = () => {
                     Sign In
                 </NavLink>
             )}
-            <button
-                onClick={() => {
-                    localStorage.clear()
-                    location.reload()
-                }}
-            >
-                Logout
-            </button>
         </nav>
     )
 }

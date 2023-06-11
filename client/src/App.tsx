@@ -1,29 +1,21 @@
 import { useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { deleteRoom, fetchRooms, newRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
+import { fetchRooms } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { NavBar, Footer, Alert } from 'layout'
-import { Mastery, Universe } from 'pages'
-import { Room } from 'pages/universe/modules/lobby/types/Room'
-import socket from 'socket/socket'
-import SignIn from 'pages/sign in/SignIn'
+import { Mastery, Universe, SignIn } from 'pages'
+import SocketProvider from 'socket/Socket provider/SockerProvider'
 
 function App() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        socket.on('NEW_ROOM', (room: Room) => {
-            dispatch(newRoom(room))
-        })
-        socket.on('DELETE_ROOM', (id: string) => {
-            dispatch(deleteRoom(id))
-        })
         dispatch(fetchRooms())
     }, [])
 
     return (
-        <Router>
-            <div className='flex min-h-screen flex-col'>
+        <SocketProvider>
+            <Router>
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<Universe />} />
@@ -32,8 +24,8 @@ function App() {
                 </Routes>
                 <Alert />
                 <Footer />
-            </div>
-        </Router>
+            </Router>
+        </SocketProvider>
     )
 }
 

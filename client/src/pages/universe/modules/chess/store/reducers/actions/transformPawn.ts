@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { checkForKingDanger, notateMove } from '../helpers'
 import { PromotedPawn } from '../../types/ChessBoard'
 import { Chess } from '../../types/InitialState'
+import passToOpponent from '../helpers/passToOpponent'
 
 const transformPawn = (state: Chess, action: PayloadAction<string>) => {
     const { chessBoard, positionHistory } = state
@@ -21,6 +22,8 @@ const transformPawn = (state: Chess, action: PayloadAction<string>) => {
     chessBoard.chessMoves = [...chessMoves.slice(0, state.position - 1), notation]
     checkForKingDanger(chessBoard)
     state.positionHistory = [...positionHistory.slice(0, state.position), chessBoard]
+
+    passToOpponent(state)
 }
 
 export default transformPawn

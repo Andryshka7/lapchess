@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
+import { timeControls, colorControls } from 'config'
 import Loader from './components/Loader'
 import Error from './components/Error'
-import useCreateRoom from './hooks/useCreateRoom'
-import { timeControls, colorControls } from 'config'
+import useInitializeRoom from './hooks/useCreateRoom'
 
 interface ModalProps {
     hideModal: () => void
 }
 
 const Modal = ({ hideModal }: ModalProps) => {
-    const { loading, error, createRoom } = useCreateRoom(hideModal)
+    const { loading, error, initializeRoom } = useInitializeRoom(hideModal)
 
     const [time, setTime] = useState('∞')
     const [color, setColor] = useState('random')
@@ -67,7 +67,7 @@ const Modal = ({ hideModal }: ModalProps) => {
 
                 <button
                     className='mx-auto mt-10 block h-[50px] w-[220px] rounded-lg bg-green-600 text-2xl font-bold transition duration-200 hover:bg-opacity-90'
-                    onClick={() => createRoom(color, time)}
+                    onClick={() => initializeRoom(color, time)}
                 >
                     Create
                 </button>

@@ -2,12 +2,12 @@ import { Chess } from '../types/InitialState'
 import chessBoard from './chessBoard/chessBoard'
 
 const initialState: Chess = {
-    fromRoom: null,
-    chessBoard,
+    gameId: null,
     white: null,
     black: null,
     time: null,
     color: null,
+    chessBoard,
     position: 0,
     positionHistory: [chessBoard]
 }

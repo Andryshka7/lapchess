@@ -1,13 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import initialState from './initialState/initialState'
-import chessBoard from './initialState/chessBoard/chessBoard'
 import chessBoardReducers from './reducers'
 
 interface CreateGamePayload {
     white: null | { avatar: string; username: string; _id: string }
     black: null | { avatar: string; username: string; _id: string }
     color: string
-    time: string
+    gameId: string
 }
 
 const chessSlice = createSlice({
@@ -17,12 +16,11 @@ const chessSlice = createSlice({
         ...chessBoardReducers,
 
         initializeGame: (state, action: PayloadAction<CreateGamePayload>) => {
-            const { color, white, black, time } = action.payload
+            const { color, white, black, gameId } = action.payload
+            state.gameId = gameId
             state.white = white
             state.black = black
             state.color = color
-            state.time = time
-            state.chessBoard = chessBoard
         }
     }
 })
@@ -36,6 +34,6 @@ export const {
     handleMove,
     cancelPromotion,
     transformPawn,
-    setChessBoard,
+    updateChessBoard,
     switchPosition
 } = chessSlice.actions

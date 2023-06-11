@@ -7,6 +7,7 @@ import { createServer } from 'http'
 import { Server } from 'socket.io'
 import { usersRouter, roomsRouter, imagesRouter } from './routes/index.js'
 import chessGamesRouter from './routes/chessGames.js'
+import ChessGames from './models/ChessGames.js'
 
 dotenv.config()
 
@@ -37,7 +38,16 @@ const socket = new Server(server, {
 })
 
 socket.on('connection', (socket) => {
-    // console.log('User connected')
+    socket.on('JOIN_ROOM', (id) => socket.join(id))
+    socket.on('GAME_INITIALIZED', (id, payload) => {
+        socket.to(id).emit('GAME_INITIALIZED', payload)
+    })
+    socket.on('HANDLE_MOVE', async (id, chessBoard) => {
+        const document = await ChessGames.findOne({ gameId: id })
+        document.chessBoard = chessBoard
+        await document.save()
+        socket.to(id).emit('HANDLE_MOVE', chessBoard)
+    })
 })
 
 mongoose.connect(MONGO_DB).then(() => {

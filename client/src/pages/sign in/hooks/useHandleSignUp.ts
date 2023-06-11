@@ -1,27 +1,12 @@
-import axios, { isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 import { SignUpFormValues } from '../types/form fields/SignUpFormValues'
 import { useAppDispatch } from 'redux/store'
 import { authenticate } from 'pages/sign in/store/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { showAlert } from 'layout/alert/store/alertSlice'
-import { fetchMyRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
+import signUp from 'api/users/signUp'
 
-interface Reponse {
-    user: {
-        username: string
-        avatar: string
-        _id: string
-    }
-    token: string
-}
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-const config = {
-    headers: { 'Content-Type': 'multipart/form-data' }
-}
-
-const useSignUp = () => {
+const useHandleSignUp = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -35,12 +20,7 @@ const useSignUp = () => {
             formData.append('username', data.username)
             formData.append('password', data.password)
 
-            const response = await axios.post<Reponse>(
-                `${SERVER_URL}/users/register`,
-                formData,
-                config
-            )
-            const { user, token } = response.data
+            const { user, token } = await signUp(formData)
 
             dispatch(authenticate({ user, token }))
 
@@ -53,4 +33,4 @@ const useSignUp = () => {
     }
 }
 
-export default useSignUp
+export default useHandleSignUp

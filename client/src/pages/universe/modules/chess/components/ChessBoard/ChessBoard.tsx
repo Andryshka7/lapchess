@@ -15,7 +15,7 @@ const ChessBoard = () => {
     } = useAppSelector((store) => store.chess)
 
     const pointerEvents =
-        position + 1 !== positionHistory.length /*||  color !== turn */
+        position + 1 !== positionHistory.length || color !== turn
             ? 'pointer-events-none'
             : 'pointer-events-all'
 

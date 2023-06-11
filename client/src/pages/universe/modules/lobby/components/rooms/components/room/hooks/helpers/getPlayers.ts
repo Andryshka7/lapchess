@@ -1,10 +1,10 @@
-type User = {
+type Player = {
     username: string
     avatar: string
     _id: string
 } | null
 
-const getPlayers = (color: string, owner: User, guest: User) => {
+const getPlayers = (color: string, owner: Player, guest: Player) => {
     if (color === 'wK') {
         return [owner, guest]
     } else if (color === 'bK') {

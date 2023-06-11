@@ -1,18 +1,16 @@
-import axios from 'axios'
 import { showAlert } from 'layout/alert/store/alertSlice'
 import { setThisRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { useAppDispatch } from 'redux/store'
+import deleteRoom from 'api/rooms/deleteRoom'
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-const useDeleteRoom = () => {
+const useRemoveRoom = () => {
     const dispatch = useAppDispatch()
 
     const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
     return async (_id: string) => {
         try {
-            await axios.delete(`${SERVER_URL}/rooms/${_id}`)
+            await deleteRoom(_id)
             dispatch(setThisRoom(null))
             alert('Successfully deleted this room', 'success')
         } catch (error) {
@@ -21,4 +19,4 @@ const useDeleteRoom = () => {
     }
 }
 
-export default useDeleteRoom
+export default useRemoveRoom

@@ -1,14 +1,9 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
-import initialState from './initialState'
 import { Room } from 'pages/universe/modules/lobby/types/Room'
+import initialState from './initialState'
+import getRooms from 'api/rooms/getRooms'
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-export const fetchRooms = createAsyncThunk<Room[]>(
-    'rooms/fetchRooms',
-    async () => (await axios.get(`${SERVER_URL}/rooms`)).data
-)
+export const fetchRooms = createAsyncThunk<Room[]>('rooms/fetchRooms', getRooms)
 
 const lobbySlice = createSlice({
     name: 'lobby',

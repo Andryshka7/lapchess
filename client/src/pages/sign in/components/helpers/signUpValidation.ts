@@ -4,8 +4,8 @@ export const usernameValidation = {
         message: 'Username has to be longer than 3 symbols'
     },
     maxLength: {
-        value: 10,
-        message: 'Username has to be no longer than 10 symbols'
+        value: 15,
+        message: 'Username has to be no longer than 15 symbols'
     },
     required: 'This field is required'
 }

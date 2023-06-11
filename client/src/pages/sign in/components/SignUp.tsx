@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { FieldError, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { SignUpFormValues } from '../types/form fields/SignUpFormValues'
-import useSignUp from '../hooks/useSignUp'
 import { passwordValidation, usernameValidation } from './helpers/signUpValidation'
+import useHandleSignUp from '../hooks/useHandleSignUp'
+import InputError from './InputError'
 
 const initialStyles =
     'mb-7 block h-12 w-full border-b-2 border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -15,18 +16,9 @@ interface SignUpProps {
     setShowSighUp: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const InputError = ({ error }: { error?: FieldError }) => (
-    <p
-        className={`absolute w-[420px] -translate-y-6 text-center text-sm font-medium text-red-500 transition-all duration-200 ${
-            error ? 'opacity-1' : 'opacity-0'
-        }`}
-    >
-        {error?.message}
-    </p>
-)
 
 const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
-    const signUp = useSignUp()
+    const handleSignUp = useHandleSignUp()
     const [file, setFile] = useState<File | null>(null)
 
     const {
@@ -37,7 +29,7 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     } = useForm<SignUpFormValues>({ mode: 'onSubmit' })
 
     const onSubmit = async (data: SignUpFormValues) => {
-        await signUp(data, file as File)
+        await handleSignUp(data, file as File)
     }
 
     const inputsTabIndex = !showSignUp ? -1 : 0

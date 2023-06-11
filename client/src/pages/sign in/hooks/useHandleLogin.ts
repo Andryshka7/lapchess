@@ -1,24 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'redux/store'
 import { LoginFormValues } from '../types/form fields/LoginFormValues'
-import axios, { isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 import { authenticate } from 'pages/sign in/store/authSlice'
 import { setThisRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { showAlert } from 'layout/alert/store/alertSlice'
+import login from 'api/users/login'
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-interface Response {
-    user: {
-        username: string
-        avatar: string
-        _id: string
-    }
-    token: string
-    thisRoom: string | null
-}
-
-const useLogin = () => {
+const useHandleLogin = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -26,8 +15,7 @@ const useLogin = () => {
 
     return async (data: LoginFormValues) => {
         try {
-            const response = await axios.post<Response>(`${SERVER_URL}/users/login`, data)
-            const { user, token, thisRoom } = response.data
+            const { user, token, thisRoom } = await login(data)
 
             dispatch(authenticate({ user, token }))
             dispatch(setThisRoom(thisRoom))
@@ -41,4 +29,4 @@ const useLogin = () => {
     }
 }
 
-export default useLogin
+export default useHandleLogin

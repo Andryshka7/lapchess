@@ -1,5 +1,6 @@
 import { checkForKingDanger } from '..'
 import { Chess } from '../../../types/InitialState'
+import passToOpponent from '../passToOpponent'
 
 const handleCasling = (state: Chess, [x2, y2]: number[]) => {
     const { chessBoard, positionHistory } = state
@@ -27,6 +28,8 @@ const handleCasling = (state: Chess, [x2, y2]: number[]) => {
     chessBoard.chessMoves = [...chessMoves.slice(0, state.position - 1), notation]
     checkForKingDanger(chessBoard)
     state.positionHistory = [...positionHistory.slice(0, state.position), chessBoard]
+
+    passToOpponent(state)
 }
 
 export default handleCasling

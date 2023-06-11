@@ -1,15 +1,12 @@
 import { model, Schema } from 'mongoose'
-import { ObjectId } from 'mongoose'
+import { ObjectId, Mixed } from 'mongoose'
 
-const chessGameSchema = new Schema(
-    {
-        white: { type: ObjectId, ref: 'USERS' },
-        black: { type: ObjectId, ref: 'USERS' },
-        fromRoom: { type: String, required: true },
-        chessBoard: { type: String, required: true }
-        // positionHistory: { type: Array, required: true }
-    },
-    { timestamps: true }
-)
+const chessGameSchema = new Schema({
+    white: { type: ObjectId, ref: 'USERS' },
+    black: { type: ObjectId, ref: 'USERS' },
+    gameId: { type: String, required: true },
+    chessBoard: { type: Mixed, required: true },
+    positionHistory: { type: Array, required: true }
+})
 
 export default model('CHESSGAMES', chessGameSchema)

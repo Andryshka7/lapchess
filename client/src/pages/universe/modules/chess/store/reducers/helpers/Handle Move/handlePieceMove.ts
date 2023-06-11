@@ -1,5 +1,6 @@
 import { Chess } from './../../../types/InitialState'
 import { checkForCasling, checkForEnPassant, checkForKingDanger, notateMove } from '..'
+import passToOpponent from '../passToOpponent'
 
 const handlePieceMove = (state: Chess, [x2, y2]: number[]) => {
     const { chessBoard } = state
@@ -24,6 +25,8 @@ const handlePieceMove = (state: Chess, [x2, y2]: number[]) => {
     chessBoard.chessMoves.push(notation)
     checkForKingDanger(chessBoard)
     state.positionHistory.push(chessBoard)
+
+    passToOpponent(state)
 }
 
 export default handlePieceMove

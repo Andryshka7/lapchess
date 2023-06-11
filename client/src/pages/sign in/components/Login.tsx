@@ -1,7 +1,8 @@
-import { FieldError, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { LoginFormValues } from '../types/form fields/LoginFormValues'
-import useLogin from '../hooks/useLogin'
-import { passwordValidation, usernameValidation } from './helpers/signUpValidation'
+import { passwordValidation, usernameValidation } from './helpers/loginValidation'
+import useHandleLogin from '../hooks/useHandleLogin'
+import InputError from './InputError'
 
 const initialStyles =
     'mb-7 block h-12 w-full border-b-2  border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -14,18 +15,8 @@ interface LoginProps {
     setShowSighUp: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const InputError = ({ error }: { error?: FieldError }) => (
-    <p
-        className={`absolute w-[420px] -translate-y-6 text-center text-sm font-medium text-red-500 transition-all duration-200 ${
-            error ? 'opacity-1' : 'opacity-0'
-        }`}
-    >
-        {error?.message}
-    </p>
-)
-
 const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
-    const login = useLogin()
+    const handleLogin = useHandleLogin()
 
     const {
         register,
@@ -34,7 +25,7 @@ const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
     } = useForm<LoginFormValues>({ mode: 'onSubmit' })
 
     const onSubmit = async (data: LoginFormValues) => {
-        await login(data)
+        await handleLogin(data)
     }
 
     const inputsTabIndex = showSignUp ? -1 : 0

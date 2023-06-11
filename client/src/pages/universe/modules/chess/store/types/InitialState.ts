@@ -6,7 +6,7 @@ interface User {
 }
 
 export interface Chess {
-    fromRoom: null | string
+    gameId: null | string
     color: null | string
     time: null | string
     white: null | User
