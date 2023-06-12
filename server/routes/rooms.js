@@ -22,9 +22,7 @@ roomsRouter.post('/', async (req, res) => {
         const document = await new Rooms({ user, color, time }).save()
         const populated = await Rooms.populate(document, { path: 'user' })
 
-        socket.emit('NEW_ROOM', populated)
-
-        res.status(200).send(populated._id)
+        res.status(200).send(populated)
     } catch (error) {
         console.log(error.message)
         res.status(400).send('Error while creating room')
@@ -35,8 +33,6 @@ roomsRouter.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params
         await Rooms.findByIdAndDelete(id)
-
-        socket.emit('DELETE_ROOM', id)
         res.status(200).send('Room has been deleted')
     } catch (error) {
         console.log(error.message)

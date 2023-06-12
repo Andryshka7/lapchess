@@ -74,9 +74,9 @@ usersRouter.post('/login', async (req, res) => {
 
         const token = createToken({ username, avatar, _id })
         const user = { username, avatar, _id }
-        const thisRoom = (await Rooms.findOne({ user: _id }))?._id
+        const myRoomId = (await Rooms.findOne({ user: _id }))?._id
 
-        res.status(200).json({ user, token, thisRoom })
+        res.status(200).json({ user, token, myRoomId })
     } catch (error) {
         console.log(error)
         res.status(400).json('Wrong credentials!')

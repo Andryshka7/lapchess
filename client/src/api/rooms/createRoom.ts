@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { Room } from 'pages/universe/modules/lobby/types/Room'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const createRoom = async (user: string | null, color: string, time: string) => {
     try {
-        const response = await axios.post<string>(`${SERVER_URL}/rooms`, {
+        const response = await axios.post<Room>(`${SERVER_URL}/rooms`, {
             user,
             color,
             time

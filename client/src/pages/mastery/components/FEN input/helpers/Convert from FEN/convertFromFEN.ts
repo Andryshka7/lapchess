@@ -20,7 +20,7 @@ const convertFromFEN = (fen: string) => {
 
         return converted
     } catch (error) {
-        return null
+        throw error
     }
 }
 

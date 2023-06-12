@@ -1,6 +1,6 @@
 import { showAlert } from 'layout/alert/store/alertSlice'
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { setThisRoom } from '../../../../store/lobbySlice'
+import { newRoom, updateMyRoomId } from '../../../../store/lobbySlice'
 import { useState } from 'react'
 import createRoom from 'api/rooms/createRoom'
 import socket from 'socket/socket'
@@ -17,9 +17,13 @@ const useInitializeRoom = (hideModal: () => void) => {
     const initializeRoom = async (color: string, time: string) => {
         try {
             setLoading(true)
-            const roomID = await createRoom(user?._id || null, color, time)
-            dispatch(setThisRoom(roomID))
-            socket.emit('JOIN_ROOM', roomID)
+
+            const room = await createRoom(user?._id || null, color, time)
+
+            socket.emit('CREATE_ROOM', room)
+            dispatch(newRoom(room))
+            dispatch(updateMyRoomId(room._id))
+
             alert('Successfully created new room!', 'success')
             hideModal()
         } catch (error) {

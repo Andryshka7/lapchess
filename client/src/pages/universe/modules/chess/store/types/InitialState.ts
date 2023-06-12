@@ -13,5 +13,5 @@ export interface Chess {
     black: null | User
     chessBoard: ChessBoard
     position: number
-    positionHistory: ChessBoard[]
+    positionHistory: Partial<ChessBoard>[]
 }

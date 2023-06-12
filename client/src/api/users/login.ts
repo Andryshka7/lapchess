@@ -7,7 +7,7 @@ interface Response {
         _id: string
     }
     token: string
-    thisRoom: string | null
+    myRoomId: string | null
 }
 
 interface Data {

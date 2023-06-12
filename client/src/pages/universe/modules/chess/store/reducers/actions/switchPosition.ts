@@ -7,7 +7,7 @@ const switchPosition = (state: Chess, action: PayloadAction<number>) => {
 
     if (action.payload >= 0 && action.payload < positionHistory.length) {
         state.position = action.payload
-        state.chessBoard = { ...positionHistory[state.position], chessMoves }
+        state.chessBoard = { ...chessBoard, ...positionHistory[state.position], chessMoves }
     }
 }
 

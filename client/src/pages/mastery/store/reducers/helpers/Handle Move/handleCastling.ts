@@ -1,8 +1,9 @@
 import { checkForKingDanger } from '..'
 import { Mastery } from '../../../types/Mastery'
+import addToPositionHistory from '../Move cleanup/addToPositionHistory'
 
 const handleCasling = (state: Mastery, [x2, y2]: number[]) => {
-    const { chessBoard, positionHistory } = state
+    const { chessBoard } = state
 
     const { turn, gameField, selected, castling, chessMoves } = chessBoard
     const { x: x1, y: y1 } = selected as { x: number; y: number }
@@ -26,7 +27,7 @@ const handleCasling = (state: Mastery, [x2, y2]: number[]) => {
 
     chessBoard.chessMoves = [...chessMoves.slice(0, state.position - 1), notation]
     checkForKingDanger(chessBoard)
-    state.positionHistory = [...positionHistory.slice(0, state.position), chessBoard]
+    addToPositionHistory(state)
 }
 
 export default handleCasling

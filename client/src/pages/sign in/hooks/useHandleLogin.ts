@@ -3,7 +3,7 @@ import { useAppDispatch } from 'redux/store'
 import { LoginFormValues } from '../types/form fields/LoginFormValues'
 import { isAxiosError } from 'axios'
 import { authenticate } from 'pages/sign in/store/authSlice'
-import { setThisRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
+import { updateMyRoomId } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { showAlert } from 'layout/alert/store/alertSlice'
 import login from 'api/users/login'
 
@@ -15,10 +15,10 @@ const useHandleLogin = () => {
 
     return async (data: LoginFormValues) => {
         try {
-            const { user, token, thisRoom } = await login(data)
+            const { user, token, myRoomId } = await login(data)
 
             dispatch(authenticate({ user, token }))
-            dispatch(setThisRoom(thisRoom))
+            dispatch(updateMyRoomId(myRoomId))
 
             navigate('/')
         } catch (error) {

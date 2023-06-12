@@ -1,6 +1,7 @@
 import { checkForKingDanger } from '..'
 import { Chess } from '../../../types/InitialState'
-import passToOpponent from '../passToOpponent'
+import addToPositionHistory from '../Move cleanup/addToPositionHistory'
+import passToOpponent from '../Move cleanup/passToOpponent'
 
 const handleCasling = (state: Chess, [x2, y2]: number[]) => {
     const { chessBoard, positionHistory } = state
@@ -25,10 +26,10 @@ const handleCasling = (state: Chess, [x2, y2]: number[]) => {
     state.position += 1
     chessBoard.turn = turn === 'w' ? 'b' : 'w'
 
-    chessBoard.chessMoves = [...chessMoves.slice(0, state.position - 1), notation]
+    chessBoard.chessMoves.push(notation)
     checkForKingDanger(chessBoard)
-    state.positionHistory = [...positionHistory.slice(0, state.position), chessBoard]
 
+    addToPositionHistory(state)
     passToOpponent(state)
 }
 

@@ -2,9 +2,10 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { checkForKingDanger, notateMove } from '../helpers'
 import { Mastery } from '../../types/Mastery'
 import { PromotedPawn } from '../../types/ChessBoard'
+import addToPositionHistory from '../helpers/Move cleanup/addToPositionHistory'
 
 const transformPawn = (state: Mastery, action: PayloadAction<string>) => {
-    const { chessBoard, positionHistory } = state
+    const { chessBoard } = state
     const transformation = action.payload
 
     const { name, eaten, x1, y1, x2, y2 } = chessBoard.promoted as PromotedPawn
@@ -20,7 +21,7 @@ const transformPawn = (state: Mastery, action: PayloadAction<string>) => {
 
     chessBoard.chessMoves = [...chessMoves.slice(0, state.position - 1), notation]
     checkForKingDanger(chessBoard)
-    state.positionHistory = [...positionHistory.slice(0, state.position), chessBoard]
+    addToPositionHistory(state)
 }
 
 export default transformPawn

@@ -17,6 +17,6 @@ export const {
     handleMove,
     cancelPromotion,
     transformPawn,
-    setChessBoard,
+    updateChessBoard,
     switchPosition
 } = masterySlice.actions

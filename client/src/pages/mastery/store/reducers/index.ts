@@ -4,7 +4,7 @@ import handleMove from './actions//handleMove'
 import transformPawn from './actions//transformPawn'
 import switchPosition from './actions/switchPosition'
 import cancelPromotion from './actions/cancelPromotion'
-import setChessBoard from './actions/setChessBoard'
+import updateChessBoard from './actions/updateChessBoard'
 
 export default {
     selectPiece,
@@ -12,6 +12,6 @@ export default {
     handleMove,
     cancelPromotion,
     transformPawn,
-    setChessBoard,
+    updateChessBoard,
     switchPosition
 }

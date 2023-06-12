@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
-import { deleteRoom, newRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
+import { removeRoom, newRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
 import { initializeGame, updateChessBoard } from 'pages/universe/modules/chess/store/chessSlice'
 import { Room } from 'pages/universe/modules/lobby/types/Room'
 import socket from '../socket'
@@ -27,11 +27,11 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        socket.on('NEW_ROOM', (room: Room) => {
+        socket.on('ROOM_CREATED', (room: Room) => {
             dispatch(newRoom(room))
         })
-        socket.on('DELETE_ROOM', (id: string) => {
-            dispatch(deleteRoom(id))
+        socket.on('ROOM_DELETED', (id: string) => {
+            dispatch(removeRoom(id))
         })
         socket.on('GAME_INITIALIZED', (payload: ChessPayload) => {
             dispatch(initializeGame(payload))

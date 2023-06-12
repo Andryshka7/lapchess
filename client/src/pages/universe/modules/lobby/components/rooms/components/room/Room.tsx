@@ -5,7 +5,7 @@ import PlayIcon from './components/PlayIcon'
 import GuestAvatar from 'assets/Guest.png'
 
 const Room = (room: RoomProps) => {
-    const { thisRoom } = useAppSelector((store) => store.lobby)
+    const { myRoomId } = useAppSelector((store) => store.lobby)
 
     const { user, color, time, _id } = room
 
@@ -25,7 +25,7 @@ const Room = (room: RoomProps) => {
             <img src={`${color}.png`} className='h-[30px] w-[30px]' />
             <p className='text-base font-semibold'>{time}</p>
 
-            {_id === thisRoom ? <DeleteIcon {...room} /> : <PlayIcon {...room} />}
+            {_id === myRoomId ? <DeleteIcon {...room} /> : <PlayIcon {...room} />}
             {/* <DeleteIcon {...room} /> */}
             {/* <PlayIcon {...room} /> */}
         </div>

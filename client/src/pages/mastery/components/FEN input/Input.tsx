@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import convertToFEN from './helpers/Convert to FEN/convertToFEN'
 import convertFromFEN from './helpers/Convert from FEN/convertFromFEN'
-import { setChessBoard } from 'pages/mastery/store/masterySlice'
+import { updateChessBoard } from 'pages/mastery/store/masterySlice'
+import { showAlert } from 'layout/alert/store/alertSlice'
 
 const Input = () => {
     const dispatch = useAppDispatch()
     const { chessBoard } = useAppSelector((store) => store.mastery)
 
     const [fen, setFen] = useState<string>('')
+    const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
     useEffect(() => {
         setFen(convertToFEN(chessBoard))
@@ -18,8 +20,12 @@ const Input = () => {
         <form
             onSubmit={(e) => {
                 e.preventDefault()
-                const chessBoard = convertFromFEN(fen)
-                if (chessBoard) dispatch(setChessBoard(chessBoard))
+                try {
+                    const chessBoard = convertFromFEN(fen)
+                    dispatch(updateChessBoard(chessBoard))
+                } catch (error) {
+                    alert(`Provided FEN notation is invalid!`, 'error')
+                }
             }}
         >
             <input

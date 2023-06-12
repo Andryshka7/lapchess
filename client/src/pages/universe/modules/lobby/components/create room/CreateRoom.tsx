@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useAppSelector } from 'redux/store'
 
 const CreateRoom = () => {
-    const { thisRoom } = useAppSelector((store) => store.lobby)
+    const { myRoomId } = useAppSelector((store) => store.lobby)
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -20,7 +20,7 @@ const CreateRoom = () => {
             )}
             <div
                 className={`mx-auto my-3 flex h-[65px] w-[260px] items-center justify-between rounded-lg bg-black bg-opacity-10 px-[30px] transition duration-200 hover:scale-105 ${
-                    thisRoom ? 'pointer-events-none opacity-70' : ''
+                    myRoomId ? 'pointer-events-none opacity-70' : ''
                 }`}
                 onClick={openModal}
             >
