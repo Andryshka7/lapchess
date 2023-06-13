@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import convertToFEN from './helpers/Convert to FEN/convertToFEN'
 import convertFromFEN from './helpers/Convert from FEN/convertFromFEN'
-import { updateChessBoard } from 'pages/mastery/store/masterySlice'
+import { updateChessBoard } from 'pages/mastery/store/actions'
 import { showAlert } from 'layout/alert/store/alertSlice'
 
 const Input = () => {

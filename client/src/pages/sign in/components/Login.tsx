@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { LoginFormValues } from '../types/form fields/LoginFormValues'
+import { LoginFormValues } from '../types/LoginFormValues'
 import { passwordValidation, usernameValidation } from './helpers/loginValidation'
 import useHandleLogin from '../hooks/useHandleLogin'
 import InputError from './InputError'

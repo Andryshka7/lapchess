@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { clearField, handleMove } from '../../../store/masterySlice'
-import { cellColor1, cellColor2, left, top } from 'config'
+import { clearField, handleMove } from '../../../store/actions'
+import { cellColor1, cellColor2, left, top } from 'config/styles'
 
 const cellsArray: number[][] = []
 for (let i = 0; i < 64; i++) cellsArray.push([i % 8, Math.floor(i / 8)])

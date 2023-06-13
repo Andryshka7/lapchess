@@ -1,22 +1,22 @@
 import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
-import { removeRoom, newRoom } from 'pages/universe/modules/lobby/store/lobbySlice'
-import { initializeGame, updateChessBoard } from 'pages/universe/modules/chess/store/chessSlice'
-import { Room } from 'pages/universe/modules/lobby/types/Room'
 import socket from '../socket'
-import { ChessBoard } from 'pages/mastery/store/types/ChessBoard'
+import { ChessBoard } from 'pages/lobby/store/types/Chess/ChessBoard/ChessBoard'
+import { initializeGame, addRoom, removeRoom } from 'pages/lobby/store/actions'
+import { updateChessBoard } from 'pages/lobby/store/actions'
+import { Room } from 'types/Room'
 
 interface SocketProviderProps {
     children: ReactNode
 }
 
-type Player = {
-    username: string
+type Player = null | {
     avatar: string
+    username: string
     _id: string
-} | null
+}
 
-interface ChessPayload {
+interface CreateGamePayload {
     white: Player
     black: Player
     color: string
@@ -28,12 +28,12 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
 
     useEffect(() => {
         socket.on('ROOM_CREATED', (room: Room) => {
-            dispatch(newRoom(room))
+            dispatch(addRoom(room))
         })
         socket.on('ROOM_DELETED', (id: string) => {
             dispatch(removeRoom(id))
         })
-        socket.on('GAME_INITIALIZED', (payload: ChessPayload) => {
+        socket.on('GAME_INITIALIZED', (payload: CreateGamePayload) => {
             dispatch(initializeGame(payload))
         })
         socket.on('HANDLE_MOVE', (chessBoard: ChessBoard) => {

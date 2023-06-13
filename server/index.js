@@ -52,7 +52,6 @@ socket.on('connection', (socket) => {
 
     socket.on('HANDLE_MOVE', async (id, chessBoard) => {
         const document = await ChessGames.findOne({ gameId: id })
-        document.chessBoard = chessBoard
         document.positionHistory.push(chessBoard)
         await document.save()
         socket.to(id).emit('HANDLE_MOVE', chessBoard)
@@ -65,7 +64,7 @@ mongoose.connect(MONGO_DB).then(() => {
 
 server.listen(PORT, async () => {
     // await Rooms.deleteMany({})
-    // await ChessGames.deleteMany({}) 
+    // await ChessGames.deleteMany({})
     console.log('Server is live...')
 })
 

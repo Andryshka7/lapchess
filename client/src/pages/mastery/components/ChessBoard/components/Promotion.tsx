@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { cancelPromotion, transformPawn } from '../../../store/masterySlice'
-import { getPieceStyle } from 'config'
+import { cancelPromotion, transformPawn } from '../../../store/actions'
+import { getPieceStyle } from 'config/styles'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {
@@ -24,7 +24,7 @@ const Promotion = () => {
 
     return (
         <div
-            className='absolute top-0 left-0 z-[2] h-full w-full bg-black bg-opacity-70'
+            className='absolute left-0 top-0 z-[2] h-full w-full bg-black bg-opacity-70'
             onClick={() => dispatch(cancelPromotion())}
         >
             {promotionPieces?.map((piece, index) => (

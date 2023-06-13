@@ -5,7 +5,6 @@ const chessGameSchema = new Schema({
     white: { type: ObjectId, ref: 'USERS' },
     black: { type: ObjectId, ref: 'USERS' },
     gameId: { type: String, required: true },
-    chessBoard: { type: Mixed, required: true },
     positionHistory: { type: Array, required: true }
 })
 

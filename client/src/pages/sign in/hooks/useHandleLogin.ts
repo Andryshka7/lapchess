@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'redux/store'
-import { LoginFormValues } from '../types/form fields/LoginFormValues'
+import { LoginFormValues } from '../types/LoginFormValues'
 import { isAxiosError } from 'axios'
-import { authenticate } from 'pages/sign in/store/authSlice'
-import { updateMyRoomId } from 'pages/universe/modules/lobby/store/lobbySlice'
+import { authenticate } from 'pages/sign in/store/actions'
 import { showAlert } from 'layout/alert/store/alertSlice'
+import { updateGameId } from 'pages/lobby/store/actions'
 import login from 'api/users/login'
 
 const useHandleLogin = () => {
@@ -18,7 +18,7 @@ const useHandleLogin = () => {
             const { user, token, myRoomId } = await login(data)
 
             dispatch(authenticate({ user, token }))
-            dispatch(updateMyRoomId(myRoomId))
+            dispatch(updateGameId(myRoomId))
 
             navigate('/')
         } catch (error) {

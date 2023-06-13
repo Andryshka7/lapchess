@@ -1,30 +1,11 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { InitialState } from '../types/InitialState'
+import { createSlice } from '@reduxjs/toolkit'
+import initialState from './initialState/initialState'
+import reducers from './reducers'
 
-interface AuthPayload {
-    user: {
-        username: string
-        avatar: string
-        _id: string
-    }
-    token: string
-}
-
-const initialState: InitialState = {
-    user: null,
-    token: null
-}
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        authenticate: (state, action: PayloadAction<AuthPayload>) => {
-            state.user = action.payload.user
-            state.token = action.payload.token
-        },
-        logOut: () => initialState
-    }
+    reducers
 })
 
-export default authSlice.reducer
-export const { authenticate, logOut } = authSlice.actions
+export default authSlice

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { SignUpFormValues } from '../types/form fields/SignUpFormValues'
+import { SignUpFormValues } from '../types/SignUpFormValues'
 import { passwordValidation, usernameValidation } from './helpers/signUpValidation'
 import useHandleSignUp from '../hooks/useHandleSignUp'
 import InputError from './InputError'
@@ -15,7 +15,6 @@ interface SignUpProps {
     showSignUp: boolean
     setShowSighUp: React.Dispatch<React.SetStateAction<boolean>>
 }
-
 
 const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     const handleSignUp = useHandleSignUp()

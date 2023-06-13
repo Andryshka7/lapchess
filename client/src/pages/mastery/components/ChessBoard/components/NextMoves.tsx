@@ -1,6 +1,6 @@
 import { useAppSelector } from 'redux/store'
-import { left, top } from 'config'
-import { cellColor1, cellColor2, indicatorColor } from 'config'
+import { left, top } from 'config/styles'
+import { cellColor1, cellColor2, indicatorColor } from 'config/styles'
 
 const NextMoves = () => {
     const { globalNextMoves, gameField } = useAppSelector((store) => store.mastery.chessBoard)

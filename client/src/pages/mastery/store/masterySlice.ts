@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-import initialState from './initialState/initialState'
+import chessBoard from 'config/chessBoard/chessBoard'
 import reducers from './reducers'
+import { Mastery } from './types/Mastery'
+
+const initialState: Mastery = {
+    chessBoard,
+    position: 0,
+    positionHistory: [chessBoard]
+}
 
 const masterySlice = createSlice({
     name: 'mastery',
@@ -9,14 +15,4 @@ const masterySlice = createSlice({
     reducers
 })
 
-export default masterySlice.reducer
-
-export const {
-    selectPiece,
-    clearField,
-    handleMove,
-    cancelPromotion,
-    transformPawn,
-    updateChessBoard,
-    switchPosition
-} = masterySlice.actions
+export default masterySlice

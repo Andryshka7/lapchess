@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Room } from 'pages/universe/modules/lobby/types/Room'
+import { Room } from 'types/Room'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 

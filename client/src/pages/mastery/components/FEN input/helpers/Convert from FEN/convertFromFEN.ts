@@ -1,5 +1,5 @@
+import chessBoard from 'config/chessBoard/chessBoard'
 import gameFielFromFEN from './gamefieldFromFEN'
-import chessBoard from '../../../../store/initialState/chessBoard/chessBoard'
 import { checkForKingDanger } from 'pages/mastery/store/reducers/helpers'
 
 const letters = 'abcdefgh'

@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { Room } from 'types/Room'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const getRooms = async () => {
     try {
-        const response = await axios.get(`${SERVER_URL}/rooms`)
+        const response = await axios.get<Room[]>(`${SERVER_URL}/rooms`)
         return response.data
     } catch (error) {
         throw error
