@@ -7,7 +7,7 @@ import { Server } from 'socket.io'
 import { usersRouter, roomsRouter, imagesRouter } from './routes/index.js'
 import chessGamesRouter from './routes/chessGames.js'
 import ChessGames from './models/ChessGames.js'
-// import Rooms from './models/Rooms.js'
+import Rooms from './models/Rooms.js'
 
 dotenv.config()
 

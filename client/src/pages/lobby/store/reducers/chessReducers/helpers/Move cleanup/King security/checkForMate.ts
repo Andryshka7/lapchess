@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../../../types/Chess/ChessBoard/ChessBoard'
+import { ChessBoard } from 'types'
 import getNextMoves from '../../Next moves/getNextMoves'
 
 const checkForMate = (chessBoard: ChessBoard, checksArray: number[][]) => {

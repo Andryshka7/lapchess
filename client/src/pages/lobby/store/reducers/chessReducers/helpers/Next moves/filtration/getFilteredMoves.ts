@@ -1,7 +1,7 @@
 import pieceIsPinned from './pieceIsPinned'
 import isUnderAttack from './isUnderAttack'
 import castlingMoves from './getCastlingMoves'
-import { ChessBoard } from '../../../../../types/Chess/ChessBoard/ChessBoard'
+import { ChessBoard } from 'types'
 import { findPiece, isInRange, pinFilter } from './helpers'
 
 export default function filter([x, y]: number[], nextMoves: number[][], chessBoard: ChessBoard) {

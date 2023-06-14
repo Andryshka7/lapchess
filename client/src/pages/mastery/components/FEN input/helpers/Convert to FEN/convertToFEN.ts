@@ -1,4 +1,4 @@
-import { ChessBoard } from 'pages/mastery/store/types/ChessBoard'
+import { ChessBoard } from 'types'
 import gameFieldToFen from './convertGameField'
 
 const letters = 'abcdefgh'

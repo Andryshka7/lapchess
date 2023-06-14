@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../../types/Chess/ChessBoard/ChessBoard'
+import { ChessBoard } from 'types'
 import {
     bishopMoves,
     rookMoves,

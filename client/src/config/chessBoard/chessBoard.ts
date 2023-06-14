@@ -1,5 +1,5 @@
 import gameField from './gameField'
-import { ChessBoard } from 'types/ChessBoard'
+import { ChessBoard } from 'types'
 
 const chessBoard: ChessBoard = {
     gameField,

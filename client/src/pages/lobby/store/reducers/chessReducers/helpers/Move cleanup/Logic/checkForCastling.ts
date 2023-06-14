@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../../../types/Chess/ChessBoard/ChessBoard'
+import { ChessBoard } from 'types'
 
 const checkForCasling = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, y2]: number[]) => {
     const [color, piece] = chessBoard.gameField[y1][x1]

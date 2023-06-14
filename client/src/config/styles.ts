@@ -58,10 +58,10 @@ const margins: Helper = {
 }
 
 export const getPieceStyle = (piece: string, x: number, y: number) => {
-    const position = `absolute ${left(x)} ${top(y)} w-[12.5%]`
+    const position = `absolute ${left(x)} ${top(y)}`
     const scale = scaling[piece] || 'scale-[0.7]'
     const hoverEffect = scaling[piece] ? hoverScaling[piece] : 'hover:scale-[0.77]'
     const margin = margins[piece] || 'mt-0'
 
-    return `z-[1] ${position} ${margin} ${scale} ${hoverEffect} transition-all duration-200`
+    return `z-[1] w-[12.5%] ${position} ${margin} ${scale} ${hoverEffect} transition-all duration-200`
 }

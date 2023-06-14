@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { findPiece, getNextMoves } from './helpers'
+import { findPiece } from './helpers'
 import { getPieceStyle } from 'config/styles'
-import { handleMove, selectPiece } from 'pages/lobby/store/actions'
+import { handleMove } from 'pages/lobby/store/actions'
 import useStartDragging from './helpers/startDragging'
 
 interface PieceProps {
@@ -10,8 +10,8 @@ interface PieceProps {
 
 export const Piece = ({ piece }: PieceProps) => {
     const dispatch = useAppDispatch()
-
     const { color, chessBoard } = useAppSelector((store) => store.lobby.chess)
+
     const startDragging = useStartDragging()
 
     const { turn, globalNextMoves, gameField } = chessBoard
@@ -28,13 +28,13 @@ export const Piece = ({ piece }: PieceProps) => {
             ? 'pointer-events-all'
             : 'pointer-events-none'
     const isReversed = color === 'b' ? 'rotate-180' : ''
-    const k = color === 'b' ? -1 : 1
 
     const handleMouseClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         if (globalNextMoves.includesDeeply([x, y])) {
             dispatch(handleMove({ x, y }))
         } else if (turn === name[0]) {
-            startDragging(event, k, [x, y])
+            const startingPosition = [event.clientX, event.clientY]
+            startDragging(event.currentTarget, coordinates, startingPosition)
         }
     }
 
@@ -43,7 +43,6 @@ export const Piece = ({ piece }: PieceProps) => {
             src={`pieces/${name}.png`}
             className={`${getPieceStyle(name[1], x, y)} ${pointerEvents} ${isReversed}`}
             onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
-            alt='error'
         />
     )
 }

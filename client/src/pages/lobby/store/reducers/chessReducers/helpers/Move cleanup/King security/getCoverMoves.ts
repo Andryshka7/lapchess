@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../../../types/Chess/ChessBoard/ChessBoard'
+import { ChessBoard } from 'types'
 
 const getCoverMoves = (chessBoard: ChessBoard, checksArray: number[][]) => {
     const { gameField, checkStatus } = chessBoard

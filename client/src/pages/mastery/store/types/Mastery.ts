@@ -1,4 +1,4 @@
-import { ChessBoard } from './ChessBoard'
+import { ChessBoard } from 'types'
 
 export interface Mastery {
     chessBoard: ChessBoard

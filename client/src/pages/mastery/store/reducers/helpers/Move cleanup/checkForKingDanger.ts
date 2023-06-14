@@ -2,7 +2,7 @@ import getCoverMoves from './King security/getCoverMoves'
 import findPiece from '../findPiece'
 import isUnderAttack from '../Next moves/filtration/isUnderAttack'
 import checkForMate from './King security/checkForMate'
-import { ChessBoard } from '../../../types/ChessBoard'
+import { ChessBoard } from 'types'
 
 const checkForKingDanger = (chessBoard: ChessBoard) => {
     const { turn, gameField } = chessBoard

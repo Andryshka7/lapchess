@@ -1,16 +1,18 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Mastery } from '../../types/Mastery'
+import { getNextMoves } from '../helpers'
 
 interface SelectPiecePayload {
     x: number
     y: number
-    nextMoves: number[][]
 }
 
 const selectPiece = (state: Mastery, action: PayloadAction<SelectPiecePayload>) => {
-    const { x, y, nextMoves } = action.payload
-    state.chessBoard.selected = { x, y }
-    state.chessBoard.globalNextMoves = nextMoves
+    const { chessBoard } = state
+    const { x, y } = action.payload
+    
+    chessBoard.selected = { x, y }
+    chessBoard.globalNextMoves = getNextMoves([x, y], chessBoard)
 }
 
 export default selectPiece

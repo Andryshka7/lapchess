@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../../types/ChessBoard'
+import { ChessBoard } from 'types'
 import isUnderAttack from './isUnderAttack'
 
 export default function castlingMoves([x, y]: number[], chessBoard: ChessBoard) {

@@ -1,4 +1,4 @@
-import { ChessBoard } from '../../../../../types/Chess/ChessBoard/ChessBoard'
+import { ChessBoard } from 'types'
 
 export default function getBishopMoves([x, y]: number[], chessBoard: ChessBoard) {
     const { gameField } = chessBoard
