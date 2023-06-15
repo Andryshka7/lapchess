@@ -4,6 +4,17 @@ node_modules
 .env
 .prettierrc
 
-server/images/*
+server/images/*.jpg
+server/images/*.jpeg
+server/images/*.png
+server/images/*.gif
+server/images/*.bmp
+server/images/*.svg
+
+
+
+
+
+
 
 
