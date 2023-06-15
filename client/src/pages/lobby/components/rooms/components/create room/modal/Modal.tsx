@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { timeControls, colorControls } from 'config/styles'
-import Loader from './components/Loader'
-import Error from './components/Error'
+import { ModalError, ModalLoader} from './components'
 import useInitializeRoom from '../../../hooks/useInitializeRoom'
 
 interface ModalProps {
@@ -15,9 +14,8 @@ const Modal = ({ hideModal }: ModalProps) => {
     const [time, setTime] = useState('∞')
     const [color, setColor] = useState('random')
 
-    if (loading) return <Loader />
-
-    if (error) return <Error hideModal={hideModal} />
+    if (loading) return <ModalLoader />
+    if (error) return <ModalError hideModal={hideModal} />
 
     return (
         <div

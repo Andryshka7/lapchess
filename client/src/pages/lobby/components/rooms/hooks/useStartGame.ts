@@ -2,7 +2,7 @@ import { useAppSelector } from 'redux/store'
 import { useDispatch } from 'react-redux'
 import createChessGame from 'api/chess games/createChessGame'
 import socket from 'socket/socket'
-import { initializeGame } from 'pages/lobby/store/actions'
+import { initializeGame } from 'pages/lobby/redux/actions'
 import { getPlayers, getColor, createDocument } from './helpers'
 import { Room } from 'types'
 

@@ -1,6 +1,6 @@
-import { showAlert } from 'layout/alert/store/alertSlice'
+import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { addRoom, updateGameId } from 'pages/lobby/store/actions'
+import { addRoom, updateGameId } from 'pages/lobby/redux/actions'
 import { useState } from 'react'
 import createRoom from 'api/rooms/createRoom'
 import socket from 'socket/socket'

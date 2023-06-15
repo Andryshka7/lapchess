@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import convertToFEN from './helpers/Convert to FEN/convertToFEN'
-import convertFromFEN from './helpers/Convert from FEN/convertFromFEN'
-import { updateChessBoard } from 'pages/mastery/store/actions'
-import { showAlert } from 'layout/alert/store/alertSlice'
+import { convertToFEN, convertFromFEN } from './helpers'
+import { updateChessBoard } from 'pages/mastery/redux/actions'
+import { showAlert } from 'ui/components/alert/redux/alertSlice'
 
 const Input = () => {
     const dispatch = useAppDispatch()

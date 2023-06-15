@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { switchPosition } from 'pages/lobby/store/actions'
+import { switchPosition } from 'pages/lobby/redux/actions'
 
 const Moves = () => {
     const dispatch = useAppDispatch()

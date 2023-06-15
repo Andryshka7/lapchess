@@ -1,5 +1,5 @@
-import { showAlert } from 'layout/alert/store/alertSlice'
-import { removeRoom, updateGameId } from 'pages/lobby/store/actions'
+import { showAlert } from 'ui/components/alert/redux/alertSlice'
+import { removeRoom, updateGameId } from 'pages/lobby/redux/actions'
 import { useAppDispatch } from 'redux/store'
 import deleteRoom from 'api/rooms/deleteRoom'
 import socket from 'socket/socket'

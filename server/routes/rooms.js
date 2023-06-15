@@ -1,7 +1,5 @@
 import { Router } from 'express'
-import Rooms from '../models/Rooms.js'
-import socket from '../index.js'
-import validateToken from './helpers/validateToken.js'
+import { Rooms } from '../models/index.js'
 
 const roomsRouter = Router()
 

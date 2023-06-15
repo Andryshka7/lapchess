@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import ChessGames from '../models/ChessGames.js'
+import { ChessGames } from '../models/index.js'
 
 const chessGamesRouter = Router()
 

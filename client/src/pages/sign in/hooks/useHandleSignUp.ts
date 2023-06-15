@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios'
-import { SignUpFormValues } from '../types/SignUpFormValues'
+import { SignUpFormValues } from '../types/FormValues'
 import { useAppDispatch } from 'redux/store'
-import { authenticate } from 'pages/sign in/store/actions'
+import { authenticate } from 'pages/sign in/redux/actions'
 import { useNavigate } from 'react-router-dom'
-import { showAlert } from 'layout/alert/store/alertSlice'
+import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import signUp from 'api/users/signUp'
 
 const useHandleSignUp = () => {

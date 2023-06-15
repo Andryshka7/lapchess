@@ -1,4 +1,4 @@
-import Portal from 'layout/Portal'
+import Portal from 'ui/Portal'
 import Modal from './modal/Modal'
 import { useState } from 'react'
 import { useAppSelector } from 'redux/store'

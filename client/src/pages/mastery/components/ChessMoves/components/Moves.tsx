@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { switchPosition } from 'pages/mastery/store/actions'
+import { switchPosition } from 'pages/mastery/redux/actions'
 import { indicatorColor } from 'config/styles'
 
 const Moves = () => {
@@ -7,7 +7,7 @@ const Moves = () => {
     const { position, chessBoard } = useAppSelector((store) => store.mastery)
 
     const bgColor = (index: number) =>
-        position - 1 === index
+        position === index + 1
             ? indicatorColor
             : `bg-stone-500 ${index % 2 ? 'bg-opacity-5' : 'bg-opacity-10'}`
 

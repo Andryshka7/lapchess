@@ -1,0 +1,6 @@
+export { default as Cells } from './static/Cells'
+export { default as Pieces } from './dynamic/Pieces/Pieces'
+export { default as NextMoves } from './dynamic/NextMoves'
+export { default as CheckStatus } from './dynamic/CheckStatus'
+export { default as Notation } from './static/Notation'
+export { default as Promotion } from './dynamic/Promotion'

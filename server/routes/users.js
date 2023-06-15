@@ -4,10 +4,8 @@ import { rename } from 'fs'
 import { Router } from 'express'
 import { fileURLToPath } from 'url'
 import { hash, compare } from 'bcrypt'
-import Users from '../models/Users.js'
-import Rooms from '../models/Rooms.js'
-import createToken from './helpers/createToken.js'
-import upload from './helpers/upload.js'
+import { Users, Rooms } from '../models/index.js'
+import { createToken, upload } from './helpers/index.js'
 
 dotenv.config()
 

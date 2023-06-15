@@ -1,4 +1,4 @@
-import { switchPosition } from 'pages/mastery/store/actions'
+import { switchPosition } from 'pages/mastery/redux/actions'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 

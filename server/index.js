@@ -4,10 +4,8 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
-import { usersRouter, roomsRouter, imagesRouter } from './routes/index.js'
-import chessGamesRouter from './routes/chessGames.js'
-import ChessGames from './models/ChessGames.js'
-import Rooms from './models/Rooms.js'
+import { usersRouter, roomsRouter, imagesRouter, chessGamesRouter } from './routes/index.js'
+import { ChessGames, Users, Rooms } from './models/index.js'
 
 dotenv.config()
 
@@ -65,6 +63,7 @@ mongoose.connect(MONGO_DB).then(() => {
 server.listen(PORT, async () => {
     // await Rooms.deleteMany({})
     // await ChessGames.deleteMany({})
+    // await Users.deleteMany({})
     console.log('Server is live...')
 })
 

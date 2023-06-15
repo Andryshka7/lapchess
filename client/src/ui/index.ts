@@ -1,0 +1,5 @@
+export { default as NavBar } from './components/Navbar'
+export { default as Footer } from './components/Footer'
+export { default as Loader } from './components/Loader'
+export { default as Error } from './components/Error'
+export { default as Alert } from './components/alert/Alert'

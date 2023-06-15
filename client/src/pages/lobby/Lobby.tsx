@@ -1,8 +1,5 @@
 import { useAppSelector } from 'redux/store'
-import Rooms from './components/rooms/Rooms'
-import Chess from './components/chess/Chess'
-import LobbyError from './components/Error'
-import LobbyLoader from './components/Loader'
+import { Rooms, Chess, LobbyError, LobbyLoader } from './components'
 
 const Universe = () => {
     const {

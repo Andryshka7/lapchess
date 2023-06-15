@@ -1,11 +1,11 @@
-import LeftControllers from './components/LeftControllers'
-import RightControllers from './components/RightControllers'
+import GameControls from './components/GameControls'
+import PositionContols from './components/PositionContols'
 
 const Controls = () => {
     return (
         <div className='mt-2 flex h-12 w-full items-center justify-between rounded-lg bg-black bg-opacity-5 px-8'>
-            <LeftControllers />
-            <RightControllers />
+            <GameControls />
+            <PositionContols />
         </div>
     )
 }

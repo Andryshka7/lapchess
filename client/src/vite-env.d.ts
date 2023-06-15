@@ -14,3 +14,5 @@ Array.prototype.includesDeeply = function (element): boolean {
     }
     return false
 }
+
+export default global

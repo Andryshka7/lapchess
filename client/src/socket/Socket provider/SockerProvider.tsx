@@ -2,8 +2,8 @@ import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
 import socket from '../socket'
 import { ChessBoard } from 'types'
-import { initializeGame, addRoom, removeRoom } from 'pages/lobby/store/actions'
-import { updateChessBoard } from 'pages/lobby/store/actions'
+import { initializeGame, addRoom, removeRoom } from 'pages/lobby/redux/actions'
+import { updateChessBoard } from 'pages/lobby/redux/actions'
 import { Room } from 'types'
 
 interface SocketProviderProps {

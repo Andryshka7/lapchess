@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useAppSelector } from 'redux/store'
-import SignUp from './components/SignUp'
-import Login from './components/Login'
+import { SignUp, Login } from './components'
 
 const SignIn = () => {
     const { user } = useAppSelector((store) => store.auth)

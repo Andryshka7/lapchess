@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'redux/store'
-import { LoginFormValues } from '../types/LoginFormValues'
+import { LoginFormValues } from '../types/FormValues'
 import { isAxiosError } from 'axios'
-import { authenticate } from 'pages/sign in/store/actions'
-import { showAlert } from 'layout/alert/store/alertSlice'
-import { updateGameId } from 'pages/lobby/store/actions'
+import { authenticate } from 'pages/sign in/redux/actions'
+import { showAlert } from 'ui/components/alert/redux/alertSlice'
+import { updateGameId } from 'pages/lobby/redux/actions'
 import login from 'api/users/login'
 
 const useHandleLogin = () => {

@@ -1,9 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useAppSelector } from 'redux/store'
+import { Moves, Indexes } from './components'
 import useBindArrows from './hooks/useBindArrows'
 import masteryIcon from 'assets/mastery.png'
-import Moves from './components/Moves'
-import Indexes from './components/Indexes'
 
 const ChessMoves = () => {
     const { chessMoves } = useAppSelector((store) => store.mastery.chessBoard)
