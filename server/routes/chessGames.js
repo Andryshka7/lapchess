@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { ChessGames } from '../models/index.js'
+import { ChessGames, Rooms } from '../models/index.js'
 
 const chessGamesRouter = Router()
 
@@ -24,6 +24,14 @@ chessGamesRouter.post('/', async (req, res) => {
         console.log(error.message)
         res.status(400).json('Error while creating chess game')
     }
+})
+
+chessGamesRouter.delete('/:gameId', async (req, res) => {
+    try {
+        const { gameId } = req.params
+        await ChessGames.findOneAndDelete({ gameId })
+        res.status(200).json('Succesfully deleted chess game')
+    } catch (error) {}
 })
 
 export default chessGamesRouter

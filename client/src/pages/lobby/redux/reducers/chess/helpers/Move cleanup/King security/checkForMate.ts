@@ -2,11 +2,11 @@ import { ChessBoard } from 'types'
 import getNextMoves from '../../Next moves/getNextMoves'
 
 const checkForMate = (chessBoard: ChessBoard, checksArray: number[][]) => {
-    const { gameField, turn, checkStatus } = chessBoard
+    const { gameField, turn, gameStatus } = chessBoard
 
-    if (!checkStatus) return false
+    if (!gameStatus.check) return false
 
-    const kingEscape = getNextMoves(checkStatus, chessBoard)
+    const kingEscape = getNextMoves(gameStatus.check, chessBoard)
 
     if (checksArray.length > 1) return !kingEscape.length
 

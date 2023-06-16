@@ -2,15 +2,19 @@ import gameField from './gameField'
 import { ChessBoard } from 'types'
 
 const chessBoard: ChessBoard = {
-    gameField,
-    globalNextMoves: [],
-    selected: null,
     turn: 'w',
-    checkStatus: null,
-    promoted: null,
-    coverMoves: [],
+    gameField,
+    gameStatus: {
+        check: null,
+        mate: false,
+        draw: false
+    },
     castling: 'KQkq',
+    coverMoves: [],
+    selected: null,
+    promoted: null,
     enpassing: null,
+    nextMoves: [],
     chessMoves: []
 }
 

@@ -2,9 +2,10 @@ import { useAppSelector } from 'redux/store'
 import { useDispatch } from 'react-redux'
 import createChessGame from 'api/chess games/createChessGame'
 import socket from 'socket/socket'
-import { initializeGame } from 'pages/lobby/redux/actions'
+import { initializeGame, removeRoom } from 'pages/lobby/redux/actions'
 import { getPlayers, getColor, createDocument } from './helpers'
 import { Room } from 'types'
+import deleteRoom from 'api/rooms/deleteRoom'
 
 const useStartGame = () => {
     const dispatch = useDispatch()
@@ -21,9 +22,13 @@ const useStartGame = () => {
         const document = createDocument(white, black, gameId)
 
         await createChessGame(document)
+        await deleteRoom(gameId)
+
+        dispatch(removeRoom(gameId))
         dispatch(initializeGame({ white, black, gameId, color }))
 
         socket.emit('JOIN_ROOM', gameId)
+        socket.emit('DELETE_ROOM', gameId)
         socket.emit('GAME_INITIALIZED', gameId, { white, black, gameId, color: oppositeColor })
     }
 }

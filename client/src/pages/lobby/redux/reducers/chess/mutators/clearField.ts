@@ -3,7 +3,7 @@ import { Lobby } from '../../../types/Lobby'
 const clearField = (state: Lobby) => {
     const { chessBoard } = state.chess
     chessBoard.selected = null
-    chessBoard.globalNextMoves = []
+    chessBoard.nextMoves = []
 }
 
 export default clearField

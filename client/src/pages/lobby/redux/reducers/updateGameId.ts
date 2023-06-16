@@ -1,4 +1,4 @@
-import { Lobby } from '../../types/Lobby'
+import { Lobby } from '../types/Lobby'
 import { PayloadAction } from '@reduxjs/toolkit'
 import socket from 'socket/socket'
 

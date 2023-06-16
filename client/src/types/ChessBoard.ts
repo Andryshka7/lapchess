@@ -12,16 +12,22 @@ interface Position {
     y: number
 }
 
+interface GameStatus {
+    check: null | number[]
+    mate: boolean
+    draw: boolean
+}
+
 interface ChessBoard {
-    gameField: string[][]
-    globalNextMoves: number[][]
-    coverMoves: (number[] | string)[]
-    selected: null | Position
-    enpassing: null | Position
     turn: string
+    selected: null | Position
+    gameField: string[][]
+    nextMoves: number[][]
+    gameStatus: GameStatus
+    coverMoves: (number[] | string)[]
+    enpassing: null | Position
     castling: string
     promoted: null | PromotedPawn
-    checkStatus: null | number[]
     chessMoves: string[]
 }
 

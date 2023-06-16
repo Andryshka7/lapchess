@@ -1,9 +1,9 @@
 import { ChessBoard } from 'types'
 
 const getCoverMoves = (chessBoard: ChessBoard, checksArray: number[][]) => {
-    const { gameField, checkStatus } = chessBoard
+    const { gameField, gameStatus } = chessBoard
 
-    if (!checkStatus) return []
+    if (!gameStatus.check) return []
 
     const [check] = checksArray
 
@@ -11,7 +11,7 @@ const getCoverMoves = (chessBoard: ChessBoard, checksArray: number[][]) => {
 
     if (checksArray.length > 1) return ['No moves, but filter will work']
 
-    let [x1, y1] = checkStatus
+    let [x1, y1] = gameStatus.check
     let [x2, y2] = check
 
     const kX = x2 > x1 ? 1 : x2 < x1 ? -1 : 0

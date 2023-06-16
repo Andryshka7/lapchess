@@ -10,11 +10,13 @@ interface PieceProps {
 
 export const Piece = ({ piece }: PieceProps) => {
     const dispatch = useAppDispatch()
-    const { color, chessBoard } = useAppSelector((store) => store.lobby.chess)
+    const { color, chessBoard, position, positionHistory } = useAppSelector(
+        (store) => store.lobby.chess
+    )
 
     const startDragging = useStartDragging(color === 'w' ? 1 : -1)
 
-    const { turn, globalNextMoves, gameField } = chessBoard
+    const { turn, nextMoves, gameField } = chessBoard
 
     const coordinates = findPiece(piece, gameField)
 
@@ -23,14 +25,16 @@ export const Piece = ({ piece }: PieceProps) => {
     const [x, y] = coordinates
     const name = gameField[y][x].slice(0, 2)
 
-    const pointerEvents =
-        globalNextMoves.includesDeeply([x, y]) || name[0] === turn
-            ? 'pointer-events-all'
-            : 'pointer-events-none'
+    const allowPointerEvents =
+        position + 1 === positionHistory.length &&
+        color === turn &&
+        (name[0] === turn || nextMoves.includesDeeply([x, y]))
+
+    const pointerEvents = allowPointerEvents ? 'pointer-events-all' : 'pointer-events-none'
     const isReversed = color === 'b' ? 'rotate-180' : ''
 
     const handleMouseClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-        if (globalNextMoves.includesDeeply([x, y])) {
+        if (nextMoves.includesDeeply([x, y])) {
             dispatch(handleMove({ x, y }))
         } else if (turn === name[0]) {
             const startingPosition = [event.clientX, event.clientY]
@@ -41,7 +45,7 @@ export const Piece = ({ piece }: PieceProps) => {
     return (
         <img
             src={`pieces/${name}.png`}
-            className={`${getPieceStyle(name[1], x, y)} ${pointerEvents} ${isReversed}`}
+            className={`${getPieceStyle(name[1], x, y)} ${pointerEvents} ${isReversed} `}
             onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
         />
     )

@@ -2,10 +2,11 @@ import { left, top } from 'config/styles'
 import { useAppSelector } from 'redux/store'
 
 const CheckStatus = () => {
-    const { checkStatus } = useAppSelector((store) => store.mastery.chessBoard)
-    if (!checkStatus) return null
+    const { check } = useAppSelector((store) => store.mastery.chessBoard.gameStatus)
 
-    const [x, y] = checkStatus
+    if (!check) return null
+
+    const [x, y] = check
 
     return (
         <div

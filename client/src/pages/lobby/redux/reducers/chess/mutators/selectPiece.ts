@@ -12,7 +12,7 @@ const selectPiece = (state: Lobby, action: PayloadAction<SelectPiecePayload>) =>
     const { x, y } = action.payload
 
     chessBoard.selected = { x, y }
-    chessBoard.globalNextMoves = getNextMoves([x, y], chessBoard)
+    chessBoard.nextMoves = getNextMoves([x, y], chessBoard)
 }
 
 export default selectPiece

@@ -1,19 +1,19 @@
 import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
+import { ChessBoard, Player, Room } from 'types'
+import {
+    initializeGame,
+    addRoom,
+    removeRoom,
+    restartGame,
+    updateChessBoard,
+    setOpponentAgreed,
+    setOpponentLeft
+} from 'pages/lobby/redux/actions'
 import socket from '../socket'
-import { ChessBoard } from 'types'
-import { initializeGame, addRoom, removeRoom } from 'pages/lobby/redux/actions'
-import { updateChessBoard } from 'pages/lobby/redux/actions'
-import { Room } from 'types'
 
 interface SocketProviderProps {
     children: ReactNode
-}
-
-type Player = null | {
-    avatar: string
-    username: string
-    _id: string
 }
 
 interface CreateGamePayload {
@@ -38,6 +38,15 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
         })
         socket.on('HANDLE_MOVE', (chessBoard: ChessBoard) => {
             dispatch(updateChessBoard(chessBoard))
+        })
+        socket.on('UPDATE_READY_TO_RESTART', (payload: boolean) => {
+            dispatch(setOpponentAgreed(payload))
+        })
+        socket.on('OPPONENT_LEFT', () => {
+            dispatch(setOpponentLeft(true))
+        })
+        socket.on('RESTARTED_GAME', () => {
+            dispatch(restartGame())
         })
     }, [])
 

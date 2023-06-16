@@ -31,7 +31,7 @@ const handleMove = (state: Mastery, action: PayloadAction<HandleMovePayload>) =>
     }
 
     state.chessBoard.selected = null
-    state.chessBoard.globalNextMoves = []
+    state.chessBoard.nextMoves = []
 }
 
 export default handleMove

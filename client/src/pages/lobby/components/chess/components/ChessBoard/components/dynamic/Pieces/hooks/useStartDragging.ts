@@ -13,7 +13,7 @@ const useStartDragging = (k: number) => {
     const dispatch = useAppDispatch()
     const {
         position,
-        chessBoard: { globalNextMoves }
+        chessBoard: { nextMoves }
     } = useAppSelector((store) => store.lobby.chess)
 
     const [dragging, setDragging] = useState<null | Dragging>(null)
@@ -47,10 +47,7 @@ const useStartDragging = (k: number) => {
 
         unApplyDraggingStyle(element)
 
-        console.log(globalNextMoves)
-        console.log([x2, y2])
-
-        if (globalNextMoves.includesDeeply([x2, y2])) {
+        if (nextMoves.includesDeeply([x2, y2])) {
             dispatch(handleMove({ x: x2, y: y2 }))
         }
     }

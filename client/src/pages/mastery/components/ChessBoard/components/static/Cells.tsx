@@ -7,7 +7,7 @@ for (let i = 0; i < 64; i++) cellsArray.push([i % 8, Math.floor(i / 8)])
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const { selected, globalNextMoves } = useAppSelector((store) => store.mastery.chessBoard)
+    const { selected, nextMoves } = useAppSelector((store) => store.mastery.chessBoard)
 
     return (
         <>
@@ -17,7 +17,7 @@ const Cells = () => {
                     <div
                         className={`${bgColor} ${left(x)} ${top(y)} absolute h-[12.5%] w-[12.5%]`}
                         onClick={() => {
-                            if (selected && globalNextMoves.includesDeeply([x, y])) {
+                            if (selected && nextMoves.includesDeeply([x, y])) {
                                 dispatch(handleMove({ x, y }))
                             } else {
                                 dispatch(clearField())

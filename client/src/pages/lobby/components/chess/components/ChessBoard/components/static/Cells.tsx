@@ -12,7 +12,7 @@ for (let i = 0; i < 64; i++) {
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const { selected, globalNextMoves } = useAppSelector((store) => store.lobby.chess.chessBoard)
+    const { selected, nextMoves } = useAppSelector((store) => store.lobby.chess.chessBoard)
 
     return (
         <>
@@ -20,7 +20,7 @@ const Cells = () => {
                 const bgColor = (x + y) % 2 ? cellColor1 : cellColor2
 
                 const handleOnClick = () => {
-                    if (selected && globalNextMoves.includesDeeply([x, y])) {
+                    if (selected && nextMoves.includesDeeply([x, y])) {
                         dispatch(handleMove({ x, y }))
                     } else {
                         dispatch(clearField())

@@ -2,10 +2,10 @@ import { left, top } from 'config/styles'
 import { useAppSelector } from 'redux/store'
 
 const CheckStatus = () => {
-    const { checkStatus } = useAppSelector((store) => store.lobby.chess.chessBoard)
-    if (!checkStatus) return null
+    const { check } = useAppSelector((store) => store.lobby.chess.chessBoard.gameStatus)
+    if (!check) return null
 
-    const [x, y] = checkStatus
+    const [x, y] = check
 
     return (
         <div

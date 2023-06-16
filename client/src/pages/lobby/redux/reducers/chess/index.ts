@@ -13,5 +13,5 @@ export default {
     cancelPromotion,
     transformPawn,
     updateChessBoard,
-    switchPosition
+    switchPosition,
 }

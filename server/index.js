@@ -38,8 +38,8 @@ socket.on('connection', (socket) => {
     socket.on('CREATE_ROOM', (room) => {
         socket.broadcast.emit('ROOM_CREATED', room)
     })
-    socket.on('DELETE_ROOM', (room) => {
-        socket.broadcast.emit('ROOM_DELETED', room)
+    socket.on('DELETE_ROOM', (id) => {
+        socket.broadcast.emit('ROOM_DELETED', id)
     })
     socket.on('JOIN_ROOM', (id) => {
         socket.join(id)
@@ -49,10 +49,36 @@ socket.on('connection', (socket) => {
     })
 
     socket.on('HANDLE_MOVE', async (id, chessBoard) => {
-        const document = await ChessGames.findOne({ gameId: id })
-        document.positionHistory.push(chessBoard)
-        await document.save()
-        socket.to(id).emit('HANDLE_MOVE', chessBoard)
+        try {
+            const document = await ChessGames.findOne({ gameId: id })
+            document.positionHistory.push(chessBoard)
+            await document.save()
+            socket.to(id).emit('HANDLE_MOVE', chessBoard)
+        } catch (error) {
+            console.log(error.message)
+        }
+    })
+
+    socket.on('UPDATE_READY_TO_RESTART', (id, payload) => {
+        socket.to(id).emit('UPDATE_READY_TO_RESTART', payload)
+    })
+
+    socket.on('LEAVE_FROM_GAME', (id) => {
+        socket.to(id).emit('OPPONENT_LEFT')
+    })
+
+    socket.on('RESTART_GAME', async (id) => {
+        try {
+            const document = await ChessGames.findOne({ gameId: id })
+            const { white, black, positionHistory } = document
+            document.white = black
+            document.black = white
+            document.positionHistory = [positionHistory[0]]
+            await document.save()
+            socket.to(id).emit('RESTARTED_GAME')
+        } catch (error) {
+            console.log(error.message)
+        }
     })
 })
 

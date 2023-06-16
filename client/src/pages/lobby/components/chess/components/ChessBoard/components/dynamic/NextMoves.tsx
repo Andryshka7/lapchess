@@ -3,14 +3,14 @@ import { left, top } from 'config/styles'
 import { cellColor1, cellColor2, indicatorColor } from 'config/styles'
 
 const NextMoves = () => {
-    const { globalNextMoves, gameField } = useAppSelector((store) => store.lobby.chess.chessBoard)
+    const { nextMoves, gameField } = useAppSelector((store) => store.lobby.chess.chessBoard)
 
     const style = (x: number, y: number) =>
         `absolute ${left(x)} ${top(y)} w-[12.5%] h-[12.5%] pointer-events-none`
 
     return (
         <>
-            {globalNextMoves.map(([x, y]) =>
+            {nextMoves.map(([x, y]) =>
                 gameField[y][x] === '0' ? (
                     <div
                         className={`${style(x, y)} scale-[0.25] rounded-full ${indicatorColor}`}

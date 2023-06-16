@@ -1,8 +1,7 @@
 import axios from 'axios'
+import { Player } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-type Player = { username: string; avatar: string; _id: string } | null
 
 interface Payload {
     white: Player

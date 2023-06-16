@@ -7,8 +7,8 @@ type Player = {
 } | null
 
 const createDocument = (white: Player, black: Player, gameId: string) => {
-    const { gameField, enpassing, turn, castling, checkStatus, chessMoves } = chessBoard
-    const gameData = { gameField, enpassing, turn, castling, checkStatus, chessMoves }
+    const { gameField, enpassing, turn, castling, gameStatus, chessMoves } = chessBoard
+    const gameData = { gameField, enpassing, turn, castling, gameStatus, chessMoves }
 
     const document = {
         white,

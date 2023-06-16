@@ -13,7 +13,7 @@ const useStartDragging = () => {
     const dispatch = useAppDispatch()
     const {
         position,
-        chessBoard: { globalNextMoves }
+        chessBoard: { nextMoves }
     } = useAppSelector((store) => store.mastery)
 
     const [dragging, setDragging] = useState<null | Dragging>(null)
@@ -47,7 +47,7 @@ const useStartDragging = () => {
 
         unApplyDraggingStyle(element)
 
-        if (globalNextMoves.includesDeeply([x2, y2])) {
+        if (nextMoves.includesDeeply([x2, y2])) {
             dispatch(handleMove({ x: x2, y: y2 }))
         }
     }

@@ -10,9 +10,9 @@ interface SelectPiecePayload {
 const selectPiece = (state: Mastery, action: PayloadAction<SelectPiecePayload>) => {
     const { chessBoard } = state
     const { x, y } = action.payload
-    
+
     chessBoard.selected = { x, y }
-    chessBoard.globalNextMoves = getNextMoves([x, y], chessBoard)
+    chessBoard.nextMoves = getNextMoves([x, y], chessBoard)
 }
 
 export default selectPiece
