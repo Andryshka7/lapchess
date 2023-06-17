@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { handleCasling, handlePawnPromotion, handleEnPassant, handlePieceMove } from '../helpers'
-import { Lobby } from '../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 
 interface HandleMovePayload {
     x: number
@@ -14,7 +14,7 @@ const handleMove = (state: Lobby, action: PayloadAction<HandleMovePayload>) => {
     const { x: x1, y: y1 } = selected as { x: number; y: number }
     const { x: x2, y: y2 } = action.payload
 
-    const [color, piece] = gameField[y1][x1]
+    const [_, piece] = gameField[y1][x1]
 
     const castling = piece === 'K' && Math.abs(x2 - x1) > 1
     const enPassant = piece === 'P' && x1 !== x2 && gameField[y2][x2] === '0'

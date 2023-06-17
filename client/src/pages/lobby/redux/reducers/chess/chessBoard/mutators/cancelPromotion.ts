@@ -1,5 +1,5 @@
-import { PromotedPawn } from '../../../types/Chess/ChessBoard/PromotedPawn'
-import { Lobby } from '../../../types/Lobby'
+import { PromotedPawn } from 'types/ChessBoard'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 
 const cancelPromotion = (state: Lobby) => {
     const { chessBoard } = state.chess

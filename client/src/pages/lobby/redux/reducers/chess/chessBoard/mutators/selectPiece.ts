@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Lobby } from '../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import { getNextMoves } from '../helpers'
 
 interface SelectPiecePayload {

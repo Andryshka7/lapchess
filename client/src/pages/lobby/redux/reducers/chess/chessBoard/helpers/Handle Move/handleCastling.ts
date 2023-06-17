@@ -3,7 +3,7 @@ import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import addToPositionHistory from '../Move cleanup/addToPositionHistory'
 import passToOpponent from '../Move cleanup/passToOpponent'
 
-const handleCasling = (state: Lobby, [x2, y2]: number[]) => {
+const handleCasling = (state: Lobby, [x2, _]: number[]) => {
     const { chessBoard } = state.chess
 
     const { turn, gameField, selected, castling } = chessBoard

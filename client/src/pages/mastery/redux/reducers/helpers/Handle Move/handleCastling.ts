@@ -2,7 +2,7 @@ import { checkForKingDanger } from '..'
 import { Mastery } from 'pages/mastery/redux/types/Mastery'
 import addToPositionHistory from '../Move cleanup/addToPositionHistory'
 
-const handleCasling = (state: Mastery, [x2, y2]: number[]) => {
+const handleCasling = (state: Mastery, [x2, _]: number[]) => {
     const { chessBoard } = state
 
     const { turn, gameField, selected, castling, chessMoves } = chessBoard

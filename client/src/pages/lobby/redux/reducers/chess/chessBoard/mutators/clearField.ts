@@ -1,4 +1,4 @@
-import { Lobby } from '../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 
 const clearField = (state: Lobby) => {
     const { chessBoard } = state.chess

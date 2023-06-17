@@ -12,7 +12,7 @@ const useStartGame = () => {
     const guest = useAppSelector((store) => store.auth.user)
 
     return async (room: Room) => {
-        const time = room.time
+        // const time = room.time
         const gameId = room._id
 
         const color = getColor(room.color)

@@ -3,7 +3,7 @@ import { ChessBoard } from 'types'
 const checkForEnPassant = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, y2]: number[]) => {
     const { turn, gameField } = chessBoard
 
-    const [color, piece] = chessBoard.gameField[y1][x1]
+    const [_, piece] = chessBoard.gameField[y1][x1]
 
     const isPawn = piece === 'P'
     const madeTwoSteps = Math.abs(y2 - y1) === 2

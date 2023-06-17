@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { checkForKingDanger, notateMove } from '../helpers'
-import { PromotedPawn } from '../../../types/Chess/ChessBoard/PromotedPawn'
-import { Lobby } from '../../../types/Lobby'
+import { PromotedPawn } from 'types/ChessBoard'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import passToOpponent from '../helpers/Move cleanup/passToOpponent'
 import addToPositionHistory from '../helpers/Move cleanup/addToPositionHistory'
 
