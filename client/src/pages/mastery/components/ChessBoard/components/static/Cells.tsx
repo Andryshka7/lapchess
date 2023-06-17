@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { clearField, handleMove } from '../../../../redux/actions'
+import { clearField, handleMove } from 'pages/mastery/redux/actions'
 import { cellColor1, cellColor2, left, top } from 'config/styles'
 
 const cellsArray: number[][] = []

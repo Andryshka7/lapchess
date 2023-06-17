@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { cancelPromotion, transformPawn } from '../../../../redux/actions'
+import { cancelPromotion, transformPawn } from 'pages/mastery/redux/actions'
 import { getPieceStyle } from 'config/styles'
 
 const getChoices = ([x, y]: number[]) => {

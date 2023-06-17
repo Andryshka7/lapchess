@@ -17,6 +17,8 @@ const Promotion = () => {
         chessBoard: { turn, promoted }
     } = useAppSelector((store) => store.lobby.chess)
 
+    console.log(promoted)
+
     if (!promoted) return null
 
     const { x2, y2 } = promoted
@@ -29,7 +31,7 @@ const Promotion = () => {
 
     return (
         <div
-            className='absolute z-[2] h-full w-full bg-black bg-opacity-70'
+            className='absolute left-0 top-0 z-[2] h-full w-full bg-black bg-opacity-70'
             onClick={() => dispatch(cancelPromotion())}
         >
             {promotionPieces?.map((piece, index) => (
