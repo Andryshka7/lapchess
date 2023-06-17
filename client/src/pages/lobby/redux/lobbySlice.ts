@@ -19,7 +19,8 @@ const lobbySlice = createSlice({
                 const { chess } = state
                 const { rooms, chessGame } = action.payload
                 if (chessGame) {
-                    chess.position = chessGame.positionHistory.length - 1
+                    chess.positionHistory = chessGame.positionHistory
+                    chess.position = chess.positionHistory.length - 1
                     chess.chessBoard = {
                         ...chessBoard,
                         ...chessGame.positionHistory[chess.position]
