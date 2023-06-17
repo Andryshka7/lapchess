@@ -1,4 +1,4 @@
-import { Mastery } from '../../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 
 const handlePawnPromotion = (state: Mastery, [x1, y1]: number[], [x2, y2]: number[]) => {
     const { chessBoard } = state

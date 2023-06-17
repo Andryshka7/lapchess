@@ -1,8 +1,4 @@
-type Player = {
-    username: string
-    avatar: string
-    _id: string
-} | null
+import { Player } from 'types'
 
 const getPlayers = (color: string, owner: Player, guest: Player) => {
     if (color === 'wK') {

@@ -14,8 +14,8 @@ interface Position {
 
 interface GameStatus {
     check: null | number[]
-    mate: boolean
     draw: boolean
+    winner: null | string
 }
 
 interface ChessBoard {

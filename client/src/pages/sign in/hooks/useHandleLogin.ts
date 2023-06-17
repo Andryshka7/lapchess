@@ -5,7 +5,7 @@ import { isAxiosError } from 'axios'
 import { authenticate } from 'pages/sign in/redux/actions'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { updateGameId } from 'pages/lobby/redux/actions'
-import login from 'api/users/login'
+import { login } from 'api/users'
 
 const useHandleLogin = () => {
     const dispatch = useAppDispatch()
@@ -15,10 +15,10 @@ const useHandleLogin = () => {
 
     return async (data: LoginFormValues) => {
         try {
-            const { user, token, myRoomId } = await login(data)
+            const { user, token, gameId } = await login(data)
 
             dispatch(authenticate({ user, token }))
-            dispatch(updateGameId(myRoomId))
+            dispatch(updateGameId(gameId))
 
             navigate('/')
         } catch (error) {

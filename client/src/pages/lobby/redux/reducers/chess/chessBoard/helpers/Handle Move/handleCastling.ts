@@ -1,5 +1,5 @@
 import { checkForKingDanger } from '..'
-import { Lobby } from '../../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import addToPositionHistory from '../Move cleanup/addToPositionHistory'
 import passToOpponent from '../Move cleanup/passToOpponent'
 

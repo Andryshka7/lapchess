@@ -1,5 +1,5 @@
 import { PromotedPawn } from 'types/ChessBoard'
-import { Mastery } from '../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 
 const cancelPromotion = (state: Mastery) => {
     const { chessBoard } = state

@@ -1,4 +1,4 @@
-import { Lobby } from '../../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 
 const addToPositionHistory = (state: Lobby) => {
     const { chessBoard, positionHistory } = state.chess

@@ -1,6 +1,6 @@
 import { AiOutlineDelete } from 'react-icons/ai'
-import useRemoveRoom from '../../../hooks/useRemoveRoom'
 import { Room } from 'types'
+import useRemoveRoom from '../../../hooks/useRemoveRoom'
 
 const DeleteIcon = ({ _id }: Room) => {
     const removeRoom = useRemoveRoom()

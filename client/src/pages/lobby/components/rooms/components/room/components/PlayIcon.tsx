@@ -1,6 +1,6 @@
 import { FaPlay } from 'react-icons/fa'
-import useStartGame from '../../../hooks/useStartGame'
 import { Room } from 'types'
+import useStartGame from '../../../hooks/useStartGame'
 
 const PlayIcon = (room: Room) => {
     const startGame = useStartGame()

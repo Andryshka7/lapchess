@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { checkForKingDanger, notateMove } from '../helpers'
-import { Mastery } from '../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 import { PromotedPawn } from 'types/ChessBoard'
 import addToPositionHistory from '../helpers/Move cleanup/addToPositionHistory'
 

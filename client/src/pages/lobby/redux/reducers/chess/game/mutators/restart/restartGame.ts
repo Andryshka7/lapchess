@@ -1,5 +1,5 @@
-import { Lobby } from '../../../types/Lobby'
-import chess from '../../../initialState/chess/chess'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
+import chess from 'pages/lobby/redux/initialState/chess/chess'
 
 const restartGame = (state: Lobby) => {
     const { color, white, black } = state.chess
@@ -14,6 +14,8 @@ const restartGame = (state: Lobby) => {
         ownerAgreed: false,
         opponentAgreed: false
     }
+
+    state.chess.opponentLeft = false
 }
 
 export default restartGame

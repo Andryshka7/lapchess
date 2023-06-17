@@ -1,10 +1,5 @@
 import chessBoard from 'config/chessBoard/chessBoard'
-
-type Player = {
-    username: string
-    avatar: string
-    _id: string
-} | null
+import { Player } from 'types'
 
 const createDocument = (white: Player, black: Player, gameId: string) => {
     const { gameField, enpassing, turn, castling, gameStatus, chessMoves } = chessBoard
@@ -14,8 +9,7 @@ const createDocument = (white: Player, black: Player, gameId: string) => {
         white,
         black,
         gameId,
-        chessBoard: gameData,
-        positionHistory: [gameData]
+        chessBoard: gameData
     }
     return document
 }

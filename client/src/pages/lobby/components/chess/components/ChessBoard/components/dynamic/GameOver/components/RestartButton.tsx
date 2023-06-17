@@ -1,5 +1,5 @@
-import { restartGame, setOwnerAgreed } from 'pages/lobby/redux/actions'
 import { useAppDispatch, useAppSelector } from 'redux/store'
+import { restartGame, setOwnerAgreed } from 'pages/lobby/redux/actions'
 import socket from 'socket/socket'
 
 const RestartButton = () => {

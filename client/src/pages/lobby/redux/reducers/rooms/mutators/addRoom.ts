@@ -1,5 +1,5 @@
 import { Room } from 'types'
-import { Lobby } from '../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 const addRoom = (state: Lobby, action: PayloadAction<Room>) => {

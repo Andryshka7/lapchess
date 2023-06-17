@@ -1,5 +1,5 @@
-import { quitGame } from 'pages/lobby/redux/actions'
 import { useAppDispatch } from 'redux/store'
+import { quitGame } from 'pages/lobby/redux/actions'
 
 const QuitButton = () => {
     const dispatch = useAppDispatch()

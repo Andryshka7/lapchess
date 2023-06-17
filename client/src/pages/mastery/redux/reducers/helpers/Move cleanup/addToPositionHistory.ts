@@ -1,4 +1,4 @@
-import { Mastery } from '../../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 
 const addToPositionHistory = (state: Mastery) => {
     const { position, positionHistory, chessBoard } = state

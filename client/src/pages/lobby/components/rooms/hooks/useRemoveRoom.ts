@@ -1,7 +1,7 @@
+import { useAppDispatch } from 'redux/store'
+import { deleteRoom } from 'api/rooms'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { removeRoom, updateGameId } from 'pages/lobby/redux/actions'
-import { useAppDispatch } from 'redux/store'
-import deleteRoom from 'api/rooms/deleteRoom'
 import socket from 'socket/socket'
 
 const useRemoveRoom = () => {

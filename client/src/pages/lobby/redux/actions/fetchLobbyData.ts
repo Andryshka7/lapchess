@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
-import getRooms from 'api/rooms/getRooms'
-import getChessGame from 'api/chess games/getChessGame'
-import socket from 'socket/socket'
+import { getRooms } from 'api/rooms'
+import { getChessGame } from 'api/chess games'
 import { ChessBoard, Player, Room } from 'types'
+import socket from 'socket/socket'
 
 interface ReturnValue {
     rooms: Room[]

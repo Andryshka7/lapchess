@@ -1,11 +1,11 @@
 import { useAppSelector } from 'redux/store'
 import { useDispatch } from 'react-redux'
-import createChessGame from 'api/chess games/createChessGame'
-import socket from 'socket/socket'
+import { createChessGame } from 'api/chess games'
+import { deleteRoom } from 'api/rooms'
 import { initializeGame, removeRoom } from 'pages/lobby/redux/actions'
 import { getPlayers, getColor, createDocument } from './helpers'
 import { Room } from 'types'
-import deleteRoom from 'api/rooms/deleteRoom'
+import socket from 'socket/socket'
 
 const useStartGame = () => {
     const dispatch = useDispatch()

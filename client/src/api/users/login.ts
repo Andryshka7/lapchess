@@ -1,19 +1,17 @@
 import axios from 'axios'
+import { Player } from 'types'
 
 interface Response {
-    user: {
-        username: string
-        avatar: string
-        _id: string
-    }
+    user: Player
     token: string
-    myRoomId: string | null
+    gameId: string | null
 }
 
 interface Data {
     username: string
     password: string
 }
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const login = async (data: Data) => {

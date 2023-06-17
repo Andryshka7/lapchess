@@ -1,13 +1,7 @@
 import axios from 'axios'
-import { ChessBoard } from 'types'
+import { ChessBoard, Player } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-type Player = null | {
-    avatar: string
-    username: string
-    _id: string
-}
 
 interface Response {
     white: Player

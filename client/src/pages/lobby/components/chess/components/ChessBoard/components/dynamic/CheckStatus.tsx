@@ -1,5 +1,5 @@
-import { left, top } from 'config/styles'
 import { useAppSelector } from 'redux/store'
+import { left, top } from 'config/styles'
 
 const CheckStatus = () => {
     const { check } = useAppSelector((store) => store.lobby.chess.chessBoard.gameStatus)

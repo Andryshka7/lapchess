@@ -1,5 +1,4 @@
-import { model, Schema } from 'mongoose'
-import { ObjectId, Mixed } from 'mongoose'
+import { model, Schema, ObjectId } from 'mongoose'
 
 const chessGameSchema = new Schema({
     white: { type: ObjectId, ref: 'USERS' },

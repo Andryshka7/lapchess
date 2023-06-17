@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Auth } from '../../../types/Auth'
+import { Auth } from 'pages/sign in/redux/types/Auth'
 import { Player } from 'types'
 
 interface AuthPayload {

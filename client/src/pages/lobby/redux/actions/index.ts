@@ -19,6 +19,7 @@ export const {
     setOwnerAgreed,
     setOpponentLeft,
     restartGame,
+    playerResigned,
 
     addRoom,
     removeRoom

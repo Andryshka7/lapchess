@@ -1,17 +1,7 @@
-import selectPiece from './mutators/selectPiece'
-import clearField from './mutators/clearField'
-import handleMove from './mutators/handleMove'
-import transformPawn from './mutators/transformPawn'
-import switchPosition from './mutators/switchPosition'
-import cancelPromotion from './mutators/cancelPromotion'
-import updateChessBoard from './mutators/updateChessBoard'
+import chessBoardReducers from './chessBoard'
+import gameReducers from './game'
 
 export default {
-    selectPiece,
-    clearField,
-    handleMove,
-    cancelPromotion,
-    transformPawn,
-    updateChessBoard,
-    switchPosition,
+    ...chessBoardReducers,
+    ...gameReducers
 }

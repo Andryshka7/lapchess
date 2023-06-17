@@ -67,6 +67,20 @@ socket.on('connection', (socket) => {
         socket.to(id).emit('OPPONENT_LEFT')
     })
 
+    socket.on('PLAYER_RESIGNED', async (id, player) => {
+        try {
+            const document = await ChessGames.findOne({ gameId: id })
+            const lastPosition = document.positionHistory[document.positionHistory.length - 1]
+            lastPosition.gameStatus.winner = player === 'w' ? 'b' : 'w'
+            document.markModified('positionHistory')
+            await document.save()
+
+            socket.to(id).emit('PLAYER_RESIGNED', player)
+        } catch (error) {
+            console.log(error.message)
+        }
+    })
+
     socket.on('RESTART_GAME', async (id) => {
         try {
             const document = await ChessGames.findOne({ gameId: id })

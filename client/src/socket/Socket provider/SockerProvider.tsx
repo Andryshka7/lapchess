@@ -8,7 +8,8 @@ import {
     restartGame,
     updateChessBoard,
     setOpponentAgreed,
-    setOpponentLeft
+    setOpponentLeft,
+    playerResigned
 } from 'pages/lobby/redux/actions'
 import socket from '../socket'
 
@@ -44,6 +45,9 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
         })
         socket.on('OPPONENT_LEFT', () => {
             dispatch(setOpponentLeft(true))
+        })
+        socket.on('PLAYER_RESIGNED', (player: string) => {
+            dispatch(playerResigned(player))
         })
         socket.on('RESTARTED_GAME', () => {
             dispatch(restartGame())

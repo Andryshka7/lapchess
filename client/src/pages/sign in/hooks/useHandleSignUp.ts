@@ -4,7 +4,7 @@ import { useAppDispatch } from 'redux/store'
 import { authenticate } from 'pages/sign in/redux/actions'
 import { useNavigate } from 'react-router-dom'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
-import signUp from 'api/users/signUp'
+import { signUp } from 'api/users'
 
 const useHandleSignUp = () => {
     const dispatch = useAppDispatch()

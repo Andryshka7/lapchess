@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { findPiece } from 'pages/lobby/redux/reducers/chess/helpers'
+import { findPiece } from 'pages/lobby/redux/reducers/chess/chessBoard/helpers'
 import { getPieceStyle } from 'config/styles'
 import { handleMove } from 'pages/lobby/redux/actions'
 import useStartDragging from './hooks/useStartDragging'

@@ -20,7 +20,7 @@ const checkForKingDanger = (chessBoard: ChessBoard) => {
         chessMoves[chessBoard.chessMoves.length - 1] += '+'
 
         if (checkForMate(chessBoard, checksArray)) {
-            chessBoard.gameStatus.mate = true
+            chessBoard.gameStatus.winner = turn === 'w' ? 'b' : 'w'
             chessMoves[chessMoves.length - 1] += '+'
         }
     }

@@ -1,4 +1,4 @@
-import { Auth } from 'pages/sign in/types/Auth'
+import { Auth } from 'pages/sign in/redux/types/Auth'
 
 const initialState: Auth = {
     user: null,

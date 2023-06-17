@@ -1,5 +1,5 @@
 import socket from 'socket/socket'
-import { Lobby } from '../../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 
 const passToOpponent = (state: Lobby) => {
     const {

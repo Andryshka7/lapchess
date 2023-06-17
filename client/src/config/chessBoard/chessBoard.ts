@@ -6,8 +6,8 @@ const chessBoard: ChessBoard = {
     gameField,
     gameStatus: {
         check: null,
-        mate: false,
-        draw: false
+        draw: false,
+        winner: null,
     },
     castling: 'KQkq',
     coverMoves: [],

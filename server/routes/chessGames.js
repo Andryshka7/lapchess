@@ -16,8 +16,14 @@ chessGamesRouter.get('/:id', async (req, res) => {
 
 chessGamesRouter.post('/', async (req, res) => {
     try {
-        const { white, black, gameId, chessBoard, positionHistory } = req.body
-        const document = new ChessGames({ white, black, gameId, chessBoard, positionHistory })
+        const { white, black, gameId, chessBoard } = req.body
+        const document = new ChessGames({
+            white,
+            black,
+            gameId,
+            chessBoard,
+            positionHistory: [chessBoard]
+        })
         await document.save()
         res.status(200).send('Succesfully created a chess game')
     } catch (error) {

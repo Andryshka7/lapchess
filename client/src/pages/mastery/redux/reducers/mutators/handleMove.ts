@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { handleCasling, handlePawnPromotion, handleEnPassant, handlePieceMove } from '../helpers'
-import { Mastery } from '../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 
 interface HandleMovePayload {
     x: number

@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Mastery } from '../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 import chessBoard from 'config/chessBoard/chessBoard'
 
 const switchPosition = (state: Mastery, action: PayloadAction<number>) => {

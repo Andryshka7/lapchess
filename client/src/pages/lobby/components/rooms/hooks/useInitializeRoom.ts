@@ -1,8 +1,8 @@
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
-import { useAppDispatch, useAppSelector } from 'redux/store'
-import { addRoom, updateGameId } from 'pages/lobby/redux/actions'
 import { useState } from 'react'
-import createRoom from 'api/rooms/createRoom'
+import { useAppDispatch, useAppSelector } from 'redux/store'
+import { createRoom } from 'api/rooms'
+import { showAlert } from 'ui/components/alert/redux/alertSlice'
+import { addRoom, updateGameId } from 'pages/lobby/redux/actions'
 import socket from 'socket/socket'
 
 const useInitializeRoom = (hideModal: () => void) => {

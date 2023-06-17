@@ -1,4 +1,4 @@
-import { Lobby } from '../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 const removeRoom = (state: Lobby, action: PayloadAction<string>) => {

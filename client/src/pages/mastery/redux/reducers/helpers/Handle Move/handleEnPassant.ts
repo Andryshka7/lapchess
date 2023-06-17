@@ -1,5 +1,5 @@
 import { checkForKingDanger, notateMove } from '..'
-import { Mastery } from '../../../types/Mastery'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
 import addToPositionHistory from '../Move cleanup/addToPositionHistory'
 
 const handleEnPassant = (state: Mastery, [x2, y2]: number[]) => {

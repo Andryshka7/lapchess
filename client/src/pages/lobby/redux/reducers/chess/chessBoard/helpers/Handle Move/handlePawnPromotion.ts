@@ -1,4 +1,4 @@
-import { Lobby } from '../../../../types/Lobby'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
 
 const handlePawnPromotion = (state: Lobby, [x1, y1]: number[], [x2, y2]: number[]) => {
     const { chessBoard } = state.chess
