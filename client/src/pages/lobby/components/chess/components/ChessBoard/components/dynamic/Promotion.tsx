@@ -17,8 +17,6 @@ const Promotion = () => {
         chessBoard: { turn, promoted }
     } = useAppSelector((store) => store.lobby.chess)
 
-    console.log(promoted)
-
     if (!promoted) return null
 
     const { x2, y2 } = promoted
