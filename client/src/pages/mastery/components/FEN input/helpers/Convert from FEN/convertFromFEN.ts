@@ -1,6 +1,6 @@
+import { checkForKingCheck } from 'helpers/Checkers'
 import chessBoard from 'config/chessBoard/chessBoard'
-import gameFielFromFEN from './gamefieldFromFEN'
-import { checkForKingDanger } from 'pages/mastery/redux/reducers/helpers'
+import gameFieldFromFEN from './gamefieldFromFEN'
 
 const letters = 'abcdefgh'
 
@@ -8,15 +8,22 @@ const convertFromFEN = (fen: string) => {
     try {
         const [field, turn, castlingOptions, [letter, digit]] = fen.split(' ')
 
-        const gameField = gameFielFromFEN(field)
+        const gameField = gameFieldFromFEN(field)
 
         const k = turn === 'b' ? 1 : -1
         const enpassing =
             letter === '-' ? null : { x: letters.indexOf(letter), y: 8 - (Number(digit) + k) }
         const castling = castlingOptions === '-' ? '' : castlingOptions
 
-        const converted = { ...chessBoard, gameField, turn, castling, enpassing }
-        checkForKingDanger(converted)
+        let converted = {
+            ...JSON.parse(JSON.stringify(chessBoard)),
+            gameField,
+            turn,
+            castling,
+            enpassing
+        }
+
+        checkForKingCheck(converted)
 
         return converted
     } catch (error) {

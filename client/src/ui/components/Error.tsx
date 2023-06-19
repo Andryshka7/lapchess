@@ -1,4 +1,4 @@
-import notFound from 'assets/not-found.png'
+import notFound from 'assets/images/not-found.png'
 import { NavLink } from 'react-router-dom'
 
 const Error = () => (

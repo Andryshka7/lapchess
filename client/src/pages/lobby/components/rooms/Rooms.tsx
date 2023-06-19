@@ -1,7 +1,7 @@
 import { useAppSelector } from 'redux/store'
 import Room from './components/room/Room'
 import CreateRoom from './components/create room/CreateRoom'
-import noResults from 'assets/no-results.png'
+import noResults from 'assets/images/no-results.png'
 
 const Rooms = () => {
     const { rooms } = useAppSelector((store) => store.lobby)

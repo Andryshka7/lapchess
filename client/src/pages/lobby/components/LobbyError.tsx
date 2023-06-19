@@ -1,4 +1,4 @@
-import error from 'assets/error.png'
+import error from 'assets/images/error.png'
 import { useAppDispatch } from 'redux/store'
 import { fetchLobbyData } from '../redux/actions'
 

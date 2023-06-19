@@ -1,0 +1,6 @@
+export { default as pawnAttackets } from './pawnAttackets'
+export { default as kingAttackers } from './kingAttackers'
+export { default as knightAttackers } from './knightAttackers'
+export { default as rookAttackers } from './rookAttackers'
+export { default as bishopAttackers } from './bishopAttackers'
+export { default as queenAttackers } from './queenAttackers'

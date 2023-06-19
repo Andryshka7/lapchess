@@ -1,0 +1,5 @@
+export { default as checkForEnPassant } from './checkForEnPassant'
+export { default as checkForCasling } from './checkForCastling'
+export { default as checkForKingCheck } from './checkForKingCheck'
+export { default as checkForMate } from './Endgame/checkForMate'
+export { default as checkForDraw } from './Endgame/checkForDraw'

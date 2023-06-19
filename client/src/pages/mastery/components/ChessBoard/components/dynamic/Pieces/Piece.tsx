@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { getPieceStyle } from 'config/styles'
 import { handleMove } from 'pages/mastery/redux/actions'
-import { findPiece } from 'pages/mastery/redux/reducers/helpers'
 import useStartDragging from './hooks/useStartDragging'
+import { findPiece } from 'helpers'
 
 interface PieceProps {
     piece: string

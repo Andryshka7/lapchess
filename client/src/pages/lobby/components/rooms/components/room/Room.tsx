@@ -1,7 +1,7 @@
 import { useAppSelector } from 'redux/store'
 import { DeleteIcon, PlayIcon } from './components'
 import { Room as RoomType } from 'types'
-import GuestAvatar from 'assets/Guest.png'
+import GuestAvatar from 'assets/images/Guest.png'
 
 const Room = (room: RoomType) => {
     const { gameId } = useAppSelector((store) => store.lobby)

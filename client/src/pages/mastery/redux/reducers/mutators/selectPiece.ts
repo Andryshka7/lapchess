@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
+import getNextMoves from 'helpers/Next Moves'
 import { Mastery } from 'pages/mastery/redux/types/Mastery'
-import { getNextMoves } from '../helpers'
 
 interface SelectPiecePayload {
     x: number

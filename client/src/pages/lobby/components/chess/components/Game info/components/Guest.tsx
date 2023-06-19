@@ -1,4 +1,4 @@
-import GuestAvatar from 'assets/Guest.png'
+import GuestAvatar from 'assets/images/Guest.png'
 import { useAppSelector } from 'redux/store'
 
 const Guest = () => {

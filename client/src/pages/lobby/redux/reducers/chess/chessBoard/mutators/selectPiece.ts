@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
+import getNextMoves from 'helpers/Next Moves'
 import { Lobby } from 'pages/lobby/redux/types/Lobby'
-import { getNextMoves } from '../helpers'
 
 interface SelectPiecePayload {
     x: number
