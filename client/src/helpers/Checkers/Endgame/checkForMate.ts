@@ -1,6 +1,7 @@
 import { ChessBoard } from 'types'
 import getNextMoves from '../../Next Moves'
 import getCellAttackers from '../../Get Cell Attackers'
+import winSound from 'assets/sounds/ez4ence.mp3'
 
 const checkForMate = (chessBoard: ChessBoard) => {
     const { gameField, turn, gameStatus, chessMoves } = chessBoard
@@ -13,6 +14,10 @@ const checkForMate = (chessBoard: ChessBoard) => {
     if (checksArray.length > 1 && kingEscape.length === 0) {
         chessBoard.gameStatus.winner = turn === 'w' ? 'b' : 'w'
         chessMoves[chessMoves.length - 1] += '+'
+
+        const sound = new Audio(winSound)
+        sound.volume = 0.1
+        sound.play()
     }
 
     for (let y = 0; y < 8; y++)
@@ -24,6 +29,10 @@ const checkForMate = (chessBoard: ChessBoard) => {
 
     chessBoard.gameStatus.winner = turn === 'w' ? 'b' : 'w'
     chessMoves[chessMoves.length - 1] += '+'
+
+    const sound = new Audio(winSound)
+    sound.volume = 0.1
+    sound.play()
 }
 
 export default checkForMate

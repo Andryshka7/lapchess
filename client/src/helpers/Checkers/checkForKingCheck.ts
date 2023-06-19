@@ -2,6 +2,7 @@ import getCoverMoves from './helpers/getCoverMoves'
 import findPiece from '../findPiece'
 import getCellAttackers from '../Get Cell Attackers'
 import { ChessBoard } from 'types'
+import checkSound from 'assets/sounds/check.mp3'
 
 const checkForKingCheck = (chessBoard: ChessBoard) => {
     const { turn, gameField, chessMoves } = chessBoard
@@ -16,6 +17,9 @@ const checkForKingCheck = (chessBoard: ChessBoard) => {
         chessBoard.gameStatus.check = king
         chessBoard.coverMoves = getCoverMoves(chessBoard, checksArray)
         chessMoves[chessMoves.length - 1] += '+'
+        const sound = new Audio(checkSound)
+        sound.volume = 0.5
+        sound.play()
     }
 }
 
