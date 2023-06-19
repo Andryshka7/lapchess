@@ -16,8 +16,8 @@ const transformPawn = (state: Mastery, action: PayloadAction<string>) => {
     gameField[y2][x2] = name[0] + action.payload + name.slice(1)
 
     const notation = notateMove({ name, eaten, gameField, transformation }, [x1, y1], [x2, y2])
-    chessBoard.chessMoves = [...chessMoves.slice(0, state.position - 1), notation]
 
+    chessMoves.push(notation)
     chessBoard.turn = opposite(turn)
 
     if (eaten !== '0') chessBoard.sounds.capture = true

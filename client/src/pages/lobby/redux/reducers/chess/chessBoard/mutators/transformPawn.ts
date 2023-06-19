@@ -10,15 +10,15 @@ const transformPawn = (state: Lobby, action: PayloadAction<string>) => {
     const { chessBoard } = state.chess
     const transformation = action.payload
 
-    const { turn, gameField, promoted } = chessBoard
+    const { turn, gameField, promoted, chessMoves } = chessBoard
     const { name, eaten, x1, y1, x2, y2 } = promoted as PromotedPawn
 
     chessBoard.promoted = null
     gameField[y2][x2] = name[0] + action.payload + name.slice(1)
 
     const notation = notateMove({ name, eaten, gameField, transformation }, [x1, y1], [x2, y2])
-    chessBoard.chessMoves.push(notation)
-
+    
+    chessMoves.push(notation)
     chessBoard.turn = opposite(turn)
 
     if (eaten !== '0') chessBoard.sounds.capture = true
