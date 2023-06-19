@@ -7,7 +7,11 @@ import storage from 'redux-persist/lib/storage'
 
 import { auth, alert, lobby, mastery } from './features'
 
-const persistConfig = { key: 'root', storage }
+const persistConfig = {
+    key: 'root',
+    storage,
+    blacklist: ['mastery']
+}
 
 const rootReducer = combineReducers({
     auth,

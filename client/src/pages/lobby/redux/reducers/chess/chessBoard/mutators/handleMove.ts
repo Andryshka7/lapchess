@@ -10,12 +10,9 @@ import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import addToPositionHistory from '../helpers/addToPositionHistory'
 import passToOpponent from '../helpers/passToOpponent'
 import { checkForDraw, checkForKingCheck, checkForMate } from 'helpers/Checkers'
-import moveSound from 'assets/sounds/move.mp3'
+import { opposite, playSounds } from 'helpers'
+import { Coordinates } from 'types'
 
-interface Coordinates {
-    x: number
-    y: number
-}
 
 const handleMove = (state: Lobby, action: PayloadAction<Coordinates>) => {
     const { chessBoard } = state.chess
@@ -30,6 +27,9 @@ const handleMove = (state: Lobby, action: PayloadAction<Coordinates>) => {
     const enPassant = piece === 'P' && x1 !== x2 && gameField[y2][x2] === '0'
     const pawnPromoted = !promoted && piece === 'P' && (y2 === 7 || y2 === 0)
 
+    chessBoard.sounds.capture = false
+    chessBoard.sounds.move = false
+
     if (pawnPromoted) {
         handlePawnPromotion(chessBoard, [x1, y1], [x2, y2])
     } else if (castling) {
@@ -41,19 +41,19 @@ const handleMove = (state: Lobby, action: PayloadAction<Coordinates>) => {
     }
 
     if (!pawnPromoted) {
-        chessBoard.turn = turn === 'w' ? 'b' : 'w'
+        chessBoard.turn = opposite(turn)
 
         checkForKingCheck(chessBoard)
         checkForMate(chessBoard)
         checkForDraw(chessBoard)
-
+        
+        playSounds(chessBoard.sounds)
         addToPositionHistory(state)
         passToOpponent(state)
     }
 
     chessBoard.selected = null
     chessBoard.nextMoves = []
-    new Audio(moveSound).play()
 }
 
 export default handleMove

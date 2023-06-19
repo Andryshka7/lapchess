@@ -4,7 +4,7 @@ import { Cells, CheckStatus, GameOver, NextMoves, Notation, Pieces, Promotion } 
 const ChessBoard = () => {
     const { color } = useAppSelector((store) => store.lobby.chess)
 
-    const isReversed = color === 'b' ? 'rotate-180' : ''    
+    const isReversed = color === 'b' ? 'rotate-180' : ''
 
     return (
         <div

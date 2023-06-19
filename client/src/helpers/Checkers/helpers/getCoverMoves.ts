@@ -7,7 +7,7 @@ const getCoverMoves = (chessBoard: ChessBoard, checksArray: number[][]) => {
 
     const coverMoves = []
 
-    if (checksArray.length > 1) return ['No moves, but filter will work']
+    if (checksArray.length > 1) return []
 
     let [x1, y1] = gameStatus.check as number[]
     let [x2, y2] = check

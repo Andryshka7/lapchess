@@ -1,7 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import chessBoard from 'config/chessBoard/chessBoard'
-import moveSound from 'assets/sounds/move.mp3'
 
 const switchPosition = (state: Lobby, action: PayloadAction<number>) => {
     const { chess } = state
@@ -17,7 +16,6 @@ const switchPosition = (state: Lobby, action: PayloadAction<number>) => {
             ...positionHistory[chess.position],
             chessMoves
         }
-        new Audio(moveSound).play()
     }
 }
 

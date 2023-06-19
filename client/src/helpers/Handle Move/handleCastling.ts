@@ -1,8 +1,8 @@
-import { ChessBoard } from 'types'
+import { ChessBoard, Coordinates } from 'types'
 
 const handleCasling = (chessBoard: ChessBoard, [x2, _]: number[]) => {
-    const { turn, gameField, selected, castling } = chessBoard
-    const { x: x1, y: y1 } = selected as { x: number; y: number }
+    const { turn, gameField, selected, sounds, chessMoves } = chessBoard
+    const { x: x1, y: y1 } = selected as Coordinates
 
     const king = gameField[y1][4]
     const rook = gameField[y1][x2]
@@ -13,11 +13,13 @@ const handleCasling = (chessBoard: ChessBoard, [x2, _]: number[]) => {
     gameField[y1][4] = '0'
     gameField[y1][x2] = '0'
 
-    chessBoard.castling = castling.replace(turn === 'w' ? 'K' : 'k', '')
-    chessBoard.castling = castling.replace(turn === 'w' ? 'Q' : 'q', '')
+    chessBoard.castling = chessBoard.castling.replace(turn === 'w' ? 'K' : 'k', '')
+    chessBoard.castling = chessBoard.castling.replace(turn === 'w' ? 'Q' : 'q', '')
 
     const notation = x2 > x1 ? '0-0' : '0-0-0'
-    chessBoard.chessMoves.push(notation)
+    chessMoves.push(notation)
+
+    sounds.move = true
 }
 
 export default handleCasling

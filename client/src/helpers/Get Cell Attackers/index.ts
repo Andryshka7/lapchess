@@ -17,8 +17,6 @@ const getCellAttackers = ([x, y]: number[], gameField: string[][], color: string
     checksArray.push(...bishopAttackers([x, y], gameField, color))
     checksArray.push(...queenAttackers([x, y], gameField, color))
 
-    console.log([x, y], checksArray)
-
     return checksArray
 }
 

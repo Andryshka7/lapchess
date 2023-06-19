@@ -7,7 +7,7 @@ const chessBoard: ChessBoard = {
     gameStatus: {
         check: null,
         draw: false,
-        winner: null,
+        winner: null
     },
     castling: 'KQkq',
     coverMoves: [],
@@ -15,7 +15,13 @@ const chessBoard: ChessBoard = {
     promoted: null,
     enpassing: null,
     nextMoves: [],
-    chessMoves: []
+    chessMoves: [],
+    sounds: {
+        capture: false,
+        move: false,
+        mate: false,
+        draw: false
+    }
 }
 
 export default chessBoard

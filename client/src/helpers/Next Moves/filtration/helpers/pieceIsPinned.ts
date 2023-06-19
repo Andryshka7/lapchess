@@ -1,32 +1,55 @@
-import { findPiece, isInRange } from 'helpers'
+import { findPiece, isInRange, opposite } from 'helpers'
+import { ChessBoard } from 'types'
 
-const pieceIsPinned = (piece: number[], gameField: string[][]) => {
-    const [x1, y1] = piece
-    const kingColor = gameField[y1][x1][0]
-    const [x2, y2] = findPiece(kingColor + 'K', gameField) as number[]
+const pieceIsPinned = (piece: number[], chessBoard: ChessBoard) => {
+    const { turn, gameField } = chessBoard
 
-    const color = kingColor === 'w' ? 'b' : 'w'
+    const [pieceX, pieceY] = piece
+    const [kingX, kingY] = findPiece(turn + 'K', gameField) as number[]
 
-    const pieceIsKing = x1 === x2 && y1 === y2
-    const onOneLine = x1 === x2 || y1 === y2 || Math.abs((x2 - x1) / (y2 - y1)) === 1
+    const color = opposite(turn)
 
-    if (pieceIsKing || !onOneLine) return false
+    if (gameField[pieceY][pieceX][1] === 'K') {
+        return false
+    }
 
-    const kX = x1 > x2 ? -1 : x1 < x2 ? 1 : 0
-    const kY = y1 > y2 ? -1 : y1 < y2 ? 1 : 0
+    const theSameRow = pieceY === kingY
+    const theSameColumn = pieceX === kingX
+    const theSameDiagonal = Math.abs(pieceX - kingX) === Math.abs(pieceY - kingY)
 
-    for (let i = 1; x1 + kX * i !== x2 || y1 + kY * i !== y2; i++)
-        if (gameField[y1 + i * kY][x1 + i * kX] !== '0') return false
+    const areOnOneLine = theSameRow || theSameColumn || theSameDiagonal
 
-    for (let i = 1; isInRange(x1 - kX * i, y1 - kY * i); i++) {
-        let piece = gameField[y1 - kY * i][x1 - kX * i].slice(0, 2)
+    if (!areOnOneLine) {
+        return false
+    }
 
-        const Q = color + 'Q' === piece
-        const R = color + 'R' === piece && (kX === 0 || kY === 0)
-        const B = color + 'B' === piece && kX && kY
+    const kX = Math.sign(kingX - pieceX)
+    const kY = Math.sign(kingY - pieceY)
 
-        if (Q || R || B) return true
-        else if (piece !== '0') return false
+    for (let i = 1; pieceX + kX * i !== kingX || pieceY + kY * i !== kingY; i++) {
+        const x = pieceX + kX * i
+        const y = pieceY + kY * i
+
+        if (gameField[y][x] !== '0') {
+            return false
+        }
+    }
+    for (let i = 1; isInRange(pieceX - kX * i, pieceY - kY * i); i++) {
+        const x = pieceX - kX * i
+        const y = pieceY - kY * i
+
+        let piece = gameField[y][x].slice(0, 2)
+
+        const pinnedByQueen = color + 'Q' === piece
+        const pinnedByRook = color + 'R' === piece && (kX === 0 || kY === 0)
+        const pinnedByBishop = color + 'B' === piece && kX !== 0 && kY !== 0
+
+        if (pinnedByQueen || pinnedByRook || pinnedByBishop) {
+            return true
+        }
+        if (piece !== '0') {
+            return false
+        }
     }
 
     return false

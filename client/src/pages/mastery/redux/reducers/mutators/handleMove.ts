@@ -5,15 +5,11 @@ import {
     handleEnPassant,
     handlePieceMove
 } from 'helpers/Handle Move'
-import { Mastery } from 'pages/mastery/redux/types/Mastery'
 import { checkForDraw, checkForKingCheck, checkForMate } from 'helpers/Checkers'
 import addToPositionHistory from '../helpers/addToPositionHistory'
-import moveSound from 'assets/sounds/move.mp3'
-
-interface Coordinates {
-    x: number
-    y: number
-}
+import { opposite, playSounds } from 'helpers'
+import { Mastery } from 'pages/mastery/redux/types/Mastery'
+import { Coordinates } from 'types'
 
 const handleMove = (state: Mastery, action: PayloadAction<Coordinates>) => {
     const { chessBoard } = state
@@ -28,6 +24,9 @@ const handleMove = (state: Mastery, action: PayloadAction<Coordinates>) => {
     const enPassant = piece === 'P' && x1 !== x2 && gameField[y2][x2] === '0'
     const pawnPromoted = !promoted && piece === 'P' && (y2 === 7 || y2 === 0)
 
+    chessBoard.sounds.move = false
+    chessBoard.sounds.capture = false
+
     if (pawnPromoted) {
         handlePawnPromotion(chessBoard, [x1, y1], [x2, y2])
     } else if (castling) {
@@ -39,18 +38,18 @@ const handleMove = (state: Mastery, action: PayloadAction<Coordinates>) => {
     }
 
     if (!pawnPromoted) {
-        chessBoard.turn = turn === 'w' ? 'b' : 'w'
+        chessBoard.turn = opposite(turn)
 
         checkForKingCheck(chessBoard)
         checkForMate(chessBoard)
         checkForDraw(chessBoard)
 
+        playSounds(chessBoard.sounds)
         addToPositionHistory(state)
     }
 
     state.chessBoard.selected = null
     state.chessBoard.nextMoves = []
-    new Audio(moveSound).play()
 }
 
 export default handleMove

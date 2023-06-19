@@ -6,6 +6,7 @@ import { initializeGame, removeRoom } from 'pages/lobby/redux/actions'
 import { getPlayers, getColor, createDocument } from './helpers'
 import { Room } from 'types'
 import socket from 'socket/socket'
+import { opposite } from 'helpers'
 
 const useStartGame = () => {
     const dispatch = useDispatch()
@@ -16,7 +17,6 @@ const useStartGame = () => {
         const gameId = room._id
 
         const color = getColor(room.color)
-        const oppositeColor = color === 'w' ? 'b' : 'w'
         const [white, black] = getPlayers(room.color, room.user, guest)
 
         const document = createDocument(white, black, gameId)
@@ -29,7 +29,7 @@ const useStartGame = () => {
 
         socket.emit('JOIN_ROOM', gameId)
         socket.emit('DELETE_ROOM', gameId)
-        socket.emit('GAME_INITIALIZED', gameId, { white, black, gameId, color: oppositeColor })
+        socket.emit('GAME_INITIALIZED', gameId, { white, black, gameId, color: opposite(color) })
     }
 }
 

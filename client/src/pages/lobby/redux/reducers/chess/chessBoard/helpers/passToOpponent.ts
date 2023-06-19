@@ -7,8 +7,19 @@ const passToOpponent = (state: Lobby) => {
         chess: { chessBoard }
     } = state
 
-    const { gameField, turn, enpassing, castling, gameStatus, chessMoves, coverMoves } = chessBoard
-    const gameData = { gameField, turn, enpassing, castling, gameStatus, chessMoves, coverMoves }
+    const { gameField, turn, enpassing, castling, gameStatus, chessMoves, coverMoves, sounds } =
+        chessBoard
+
+    const gameData = {
+        gameField,
+        turn,
+        enpassing,
+        castling,
+        gameStatus,
+        chessMoves,
+        coverMoves,
+        sounds
+    }
 
     socket.emit('HANDLE_MOVE', gameId, gameData)
 }

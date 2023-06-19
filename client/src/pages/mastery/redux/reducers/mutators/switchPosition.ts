@@ -1,7 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Mastery } from 'pages/mastery/redux/types/Mastery'
 import chessBoard from 'config/chessBoard/chessBoard'
-import moveSound from 'assets/sounds/move.mp3'
 
 const switchPosition = (state: Mastery, action: PayloadAction<number>) => {
     const {
@@ -16,7 +15,6 @@ const switchPosition = (state: Mastery, action: PayloadAction<number>) => {
             ...positionHistory[state.position],
             chessMoves
         }
-        new Audio(moveSound).play()
     }
 }
 

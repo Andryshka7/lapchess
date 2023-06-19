@@ -14,6 +14,7 @@ const checkForDraw = (chessBoard: ChessBoard) => {
         }
 
     chessBoard.gameStatus.draw = true
+    chessBoard.sounds.draw = true
 }
 
 export default checkForDraw

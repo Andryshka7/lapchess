@@ -8,6 +8,7 @@ import {
     queenMoves
 } from './piece moves'
 import filter from './filtration'
+import castlingMoves from './castling'
 
 const getMovesFn = {
     K: kingMoves,
@@ -26,6 +27,10 @@ const getNextMoves = ([x, y]: number[], chessBoard: ChessBoard) => {
 
     const pieceMoves = getNextMoves([x, y], chessBoard)
     const filtered = filter([x, y], pieceMoves, chessBoard)
+
+    if (chessBoard.gameField[y][x][1] === 'K') {
+        filtered.push(...castlingMoves([x, y], chessBoard))
+    }
 
     return filtered
 }
