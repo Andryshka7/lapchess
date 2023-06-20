@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
-import { getRooms } from 'api/rooms'
-import { getChessGame } from 'api/chess games'
+import { fetchRooms } from 'api/rooms'
+import { fetchGame } from 'api/chess games'
 import { ChessBoard, Player, Room } from 'types'
-import socket from 'socket/socket'
+import socket from 'socket'
 
 interface ReturnValue {
     rooms: Room[]
@@ -11,7 +11,7 @@ interface ReturnValue {
         white: Player
         black: Player
         gameId: string
-        positionHistory: Partial<ChessBoard>[]
+        positionHistory: ChessBoard[]
     }
 }
 
@@ -23,8 +23,8 @@ const fetchLobbyData = createAsyncThunk<ReturnValue, void, { state: RootState }>
             socket.emit('JOIN_ROOM', gameId)
         }
 
-        const rooms = await getRooms()
-        const chessGame = await getChessGame(gameId)
+        const rooms = await fetchRooms()
+        const chessGame = await fetchGame(gameId)
 
         return { rooms, chessGame }
     }

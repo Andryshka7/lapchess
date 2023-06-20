@@ -1,52 +1,48 @@
 import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
-import { ChessBoard, Player, Room } from 'types'
 import {
     initializeGame,
     addRoom,
     removeRoom,
+    handleMove,
+    transformPawn,
     restartGame,
-    updateChessBoard,
     setOpponentAgreed,
     setOpponentLeft,
     playerResigned
 } from 'pages/lobby/redux/actions'
-import socket from '../socket'
+import socket from 'socket'
 
 interface SocketProviderProps {
     children: ReactNode
-}
-
-interface CreateGamePayload {
-    white: Player
-    black: Player
-    color: string
-    gameId: string
 }
 
 const SocketProvider = ({ children }: SocketProviderProps) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        socket.on('ROOM_CREATED', (room: Room) => {
+        socket.on('ROOM_CREATED', (room) => {
             dispatch(addRoom(room))
         })
-        socket.on('ROOM_DELETED', (id: string) => {
+        socket.on('ROOM_DELETED', (id) => {
             dispatch(removeRoom(id))
         })
-        socket.on('GAME_INITIALIZED', (payload: CreateGamePayload) => {
+        socket.on('GAME_INITIALIZED', (payload) => {
             dispatch(initializeGame(payload))
         })
-        socket.on('HANDLE_MOVE', (chessBoard: ChessBoard) => {
-            dispatch(updateChessBoard(chessBoard))
+        socket.on('HANDLE_MOVE', (payload) => {
+            dispatch(handleMove(payload))
         })
-        socket.on('UPDATE_READY_TO_RESTART', (payload: boolean) => {
+        socket.on('HANDLE_PROMOTED_PAWN', (payload) => {
+            dispatch(transformPawn(payload))
+        })
+        socket.on('UPDATE_READY_TO_RESTART', (payload) => {
             dispatch(setOpponentAgreed(payload))
         })
         socket.on('OPPONENT_LEFT', () => {
             dispatch(setOpponentLeft(true))
         })
-        socket.on('PLAYER_RESIGNED', (player: string) => {
+        socket.on('PLAYER_RESIGNED', (player) => {
             dispatch(playerResigned(player))
         })
         socket.on('RESTARTED_GAME', () => {

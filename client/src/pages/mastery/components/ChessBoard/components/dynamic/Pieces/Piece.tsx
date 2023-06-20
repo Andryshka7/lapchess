@@ -14,7 +14,7 @@ export const Piece = ({ piece }: PieceProps) => {
 
     const startDragging = useStartDragging()
 
-    const { turn, nextMoves, gameField } = chessBoard
+    const { turn, nextMoves, gameField, selected } = chessBoard
 
     const coordinates = findPiece(piece, gameField)
 
@@ -29,8 +29,13 @@ export const Piece = ({ piece }: PieceProps) => {
             : 'pointer-events-none'
 
     const handleMouseClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-        if (nextMoves.includesDeeply([x, y])) {
-            dispatch(handleMove({ x, y }))
+        if (selected && nextMoves.includesDeeply([x, y])) {
+            const { x: x1, y: y1 } = selected
+            const movePayload = [
+                [x1, y1],
+                [x, y]
+            ]
+            dispatch(handleMove(movePayload))
         } else if (turn === name[0]) {
             const startingPosition = [event.clientX, event.clientY]
             startDragging(event.currentTarget, coordinates, startingPosition)

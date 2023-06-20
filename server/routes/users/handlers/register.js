@@ -1,11 +1,10 @@
 import path, { dirname } from 'path'
-import dotenv from 'dotenv'
 import { rename } from 'fs'
-import { Router } from 'express'
 import { fileURLToPath } from 'url'
-import { hash, compare } from 'bcrypt'
-import { Users, Rooms } from '../models/index.js'
-import { createToken, upload } from './helpers/index.js'
+import { hash } from 'bcrypt'
+import { Users } from '../../../models/index.js'
+import { createToken } from '../../../helpers/index.js'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
@@ -14,9 +13,7 @@ const SERVER_URL = process.env.SERVER_URL
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const usersRouter = Router()
-
-usersRouter.post('/register', upload.single('file'), async (req, res) => {
+const registrationHandler = async (req, res) => {
     try {
         const { username, password } = req.body
 
@@ -56,29 +53,6 @@ usersRouter.post('/register', upload.single('file'), async (req, res) => {
         console.log(error)
         res.status(400).json('Error while registration.')
     }
-})
+}
 
-usersRouter.post('/login', async (req, res) => {
-    try {
-        const { username, password } = req.body
-
-        const document = await Users.findOne({ username })
-        if (!document) return res.status(400).json('Wrong credentials!')
-
-        const passwordMatches = await compare(password, document.password)
-        if (!passwordMatches) return res.status(400).json('Wrong credentials!')
-
-        const { avatar, _id } = document
-
-        const token = createToken({ username, avatar, _id })
-        const user = { username, avatar, _id }
-        const gameId = (await Rooms.findOne({ user: _id }))?._id
-
-        res.status(200).json({ user, token, gameId })
-    } catch (error) {
-        console.log(error)
-        res.status(400).json('Wrong credentials!')
-    }
-})
-
-export default usersRouter
+export default registrationHandler

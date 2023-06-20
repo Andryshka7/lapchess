@@ -8,7 +8,7 @@ const ChessBoard = () => {
 
     return (
         <div
-            className={`relative m-auto h-[620px] w-[620px] overflow-hidden rounded-lg ${isReversed}`}
+            className={`relative m-auto h-[620px] w-[620px] overflow-hidden rounded-lg transition duration-200 ${isReversed}`}
         >
             <Cells />
             <Pieces />

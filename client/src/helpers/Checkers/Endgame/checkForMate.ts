@@ -2,6 +2,7 @@ import { ChessBoard } from 'types'
 import getNextMoves from '../../Next Moves'
 import getCellAttackers from '../../Get Cell Attackers'
 import { opposite } from 'helpers'
+import { playWinSound } from 'helpers/tools/Play sounds'
 
 const checkForMate = (chessBoard: ChessBoard) => {
     const { gameField, turn, gameStatus, chessMoves } = chessBoard
@@ -13,8 +14,8 @@ const checkForMate = (chessBoard: ChessBoard) => {
 
     if (checksArray.length > 1 && kingEscape.length === 0) {
         chessBoard.gameStatus.winner = opposite(turn)
-        chessBoard.sounds.mate = true
         chessMoves[chessMoves.length - 1] += '+'
+        return playWinSound()
     }
 
     for (let y = 0; y < 8; y++)
@@ -25,8 +26,8 @@ const checkForMate = (chessBoard: ChessBoard) => {
         }
 
     chessBoard.gameStatus.winner = opposite(turn)
-    chessBoard.sounds.mate = true
     chessMoves[chessMoves.length - 1] += '+'
+    playWinSound()
 }
 
 export default checkForMate

@@ -6,7 +6,7 @@ export interface Chess {
     black: Player
     chessBoard: ChessBoard
     position: number
-    positionHistory: Partial<ChessBoard>[]
+    positionHistory: ChessBoard[]
     restartStatus: {
         ownerAgreed: boolean
         opponentAgreed: boolean

@@ -3,8 +3,7 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 import { createRoom } from 'api/rooms'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { addRoom, updateGameId } from 'pages/lobby/redux/actions'
-import socket from 'socket/socket'
-
+import socket from 'socket'
 const useInitializeRoom = (hideModal: () => void) => {
     const dispatch = useAppDispatch()
     const { user } = useAppSelector((store) => store.auth)

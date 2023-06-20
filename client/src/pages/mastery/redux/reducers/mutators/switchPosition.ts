@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Mastery } from 'pages/mastery/redux/types/Mastery'
-import chessBoard from 'config/chessBoard/chessBoard'
+import initialChessBoard from 'config/chessBoard/chessBoard'
 
 const switchPosition = (state: Mastery, action: PayloadAction<number>) => {
     const {
@@ -11,7 +11,7 @@ const switchPosition = (state: Mastery, action: PayloadAction<number>) => {
     if (action.payload >= 0 && action.payload < positionHistory.length) {
         state.position = action.payload
         state.chessBoard = {
-            ...chessBoard,
+            ...initialChessBoard,
             ...positionHistory[state.position],
             chessMoves
         }

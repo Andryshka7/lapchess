@@ -3,20 +3,20 @@ import { ChessBoard, Player } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-interface Response {
+interface Payload {
     white: Player
     black: Player
     gameId: string
-    positionHistory: Partial<ChessBoard>[]
+    chessBoard: ChessBoard
 }
 
-const getChessGame = async (gameId: string | null) => {
+const createGame = async (document: Payload) => {
     try {
-        const response = await axios.get<Response>(`${SERVER_URL}/chessGames/${gameId}`)
+        const response = await axios.put<string>(`${SERVER_URL}/chessGames`, document)
         return response.data
     } catch (error) {
         throw error
     }
 }
 
-export default getChessGame
+export default createGame

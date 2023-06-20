@@ -6,8 +6,8 @@ const addToPositionHistory = (state: Lobby) => {
     const { gameField, turn, enpassing, castling, gameStatus, chessMoves, coverMoves } = chessBoard
 
     const gameData = {
-        gameField,
         turn,
+        gameField,
         enpassing,
         castling,
         gameStatus,

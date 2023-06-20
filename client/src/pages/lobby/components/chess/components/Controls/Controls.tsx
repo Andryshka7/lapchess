@@ -1,4 +1,4 @@
-import GameControls from './components/GameControls'
+import GameControls from './components/Game controls/GameControls'
 import PositionContols from './components/PositionContols'
 
 const Controls = () => {

@@ -38,7 +38,7 @@ const Promotion = () => {
                     key={`promotion${index}`}
                     onClick={(e) => {
                         e.stopPropagation()
-                        dispatch(transformPawn(piece))
+                        dispatch(transformPawn({ promoted, transformation: piece }))
                     }}
                 />
             ))}

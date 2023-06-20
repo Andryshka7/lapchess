@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const deleteChessGame = async (gameId: string) => {
+const deleteGame = async (gameId: string) => {
     try {
         await axios.delete(`${SERVER_URL}/chessGames/${gameId}`)
     } catch (error) {
@@ -10,4 +10,4 @@ const deleteChessGame = async (gameId: string) => {
     }
 }
 
-export default deleteChessGame
+export default deleteGame

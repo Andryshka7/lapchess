@@ -1,36 +1,51 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { checkForKingCheck, checkForDraw, checkForMate } from 'helpers/Checkers'
-import { notateMove, opposite, playSounds } from 'helpers'
+import { notateMove, opposite } from 'helpers'
 import { PromotedPawn } from 'types/ChessBoard'
 import { Lobby } from 'pages/lobby/redux/types/Lobby'
-import passToOpponent from '../helpers/passToOpponent'
+import { playCaptureSound, playMoveSound } from 'helpers/tools/Play sounds'
 import addToPositionHistory from '../helpers/addToPositionHistory'
+import socket from 'socket'
+import updateGame from '../helpers/updateGame'
+import setCurrentPosition from '../helpers/setCurrentPosition'
 
-const transformPawn = (state: Lobby, action: PayloadAction<string>) => {
+interface PayloadType {
+    promoted: PromotedPawn
+    transformation: string
+}
+
+const transformPawn = (state: Lobby, action: PayloadAction<PayloadType>) => {
+    setCurrentPosition(state)
+
     const { chessBoard } = state.chess
-    const transformation = action.payload
+    const { turn, gameField, chessMoves } = chessBoard
 
-    const { turn, gameField, promoted, chessMoves } = chessBoard
-    const { name, eaten, x1, y1, x2, y2 } = promoted as PromotedPawn
+    const { promoted, transformation } = action.payload
+    const { name, eaten, x1, y1, x2, y2 } = promoted
 
     chessBoard.promoted = null
-    gameField[y2][x2] = name[0] + action.payload + name.slice(1)
+
+    gameField[y1][x1] = '0'
+    gameField[y2][x2] = name[0] + transformation + name.slice(1)
 
     const notation = notateMove({ name, eaten, gameField, transformation }, [x1, y1], [x2, y2])
-    
+
     chessMoves.push(notation)
     chessBoard.turn = opposite(turn)
-
-    if (eaten !== '0') chessBoard.sounds.capture = true
-    else chessBoard.sounds.move = true
 
     checkForKingCheck(chessBoard)
     checkForMate(chessBoard)
     checkForDraw(chessBoard)
-    
-    playSounds(chessBoard.sounds)
+
     addToPositionHistory(state)
-    passToOpponent(state)
+
+    if (chessBoard.turn !== state.chess.color) {
+        const payload = { promoted, transformation }
+        socket.emit('HANDLE_PROMOTED_PAWN', state.gameId, payload)
+        updateGame(state)
+    } else {
+        eaten !== '0' ? playCaptureSound() : playMoveSound()
+    }
 }
 
 export default transformPawn

@@ -3,7 +3,7 @@ import { Room } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const getRooms = async () => {
+const fecthRooms = async () => {
     try {
         const response = await axios.get<Room[]>(`${SERVER_URL}/rooms`)
         return response.data
@@ -12,4 +12,4 @@ const getRooms = async () => {
     }
 }
 
-export default getRooms
+export default fecthRooms

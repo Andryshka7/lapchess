@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { handleMove, selectPiece } from 'pages/lobby/redux/actions'
 import { applyDraggingStyle, unApplyDraggingStyle } from './helpers'
+import { Coordinates } from 'types'
 
 interface Dragging {
     element: HTMLElement
@@ -13,7 +14,7 @@ const useStartDragging = (k: number) => {
     const dispatch = useAppDispatch()
     const {
         position,
-        chessBoard: { nextMoves }
+        chessBoard: { nextMoves, selected }
     } = useAppSelector((store) => store.lobby.chess)
 
     const [dragging, setDragging] = useState<null | Dragging>(null)
@@ -48,7 +49,12 @@ const useStartDragging = (k: number) => {
         unApplyDraggingStyle(element)
 
         if (nextMoves.includesDeeply([x2, y2])) {
-            dispatch(handleMove({ x: x2, y: y2 }))
+            const { x: x1, y: y1 } = selected as Coordinates
+            const movePayload = [
+                [x1, y1],
+                [x2, y2]
+            ]
+            dispatch(handleMove(movePayload))
         }
     }
 

@@ -16,16 +16,16 @@ const ChessMoves = () => {
     }, [chessMoves])
 
     return (
-        <div
-            className='ml-2 h-[620px] w-[300px] overflow-hidden rounded-lg bg-black bg-opacity-5'
-            ref={ref}
-        >
+        <div className='ml-2 h-[620px] w-[300px] overflow-hidden rounded-lg bg-black bg-opacity-5'>
             <div className='flex h-[40px] items-center'>
                 <img src={masteryIcon} className='ml-3 mr-2 h-6' alt='' />
                 <h2 className='text text-lg font-semibold'>Practice</h2>
             </div>
 
-            <div className='scrollbar-thin flex h-[580px] overflow-hidden overflow-y-scroll'>
+            <div
+                className='scrollbar-thin flex h-[580px] overflow-hidden overflow-y-scroll'
+                ref={ref}
+            >
                 <Indexes />
                 <Moves />
             </div>

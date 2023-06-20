@@ -1,5 +1,3 @@
-import { ChessGames } from '../models/index.js'
-
 const handleSocketEvents = (socket) => {
     socket.on('CREATE_ROOM', (room) => {
         socket.broadcast.emit('ROOM_CREATED', room)
@@ -14,15 +12,11 @@ const handleSocketEvents = (socket) => {
         socket.to(id).emit('GAME_INITIALIZED', payload)
     })
 
-    socket.on('HANDLE_MOVE', async (id, chessBoard) => {
-        try {
-            const document = await ChessGames.findOne({ gameId: id })
-            document.positionHistory.push(chessBoard)
-            await document.save()
-            socket.to(id).emit('HANDLE_MOVE', chessBoard)
-        } catch (error) {
-            console.log(error.message)
-        }
+    socket.on('HANDLE_MOVE', (id, payload) => {
+        socket.to(id).emit('HANDLE_MOVE', payload)
+    })
+    socket.on('HANDLE_PROMOTED_PAWN', (gameId, payload) => {
+        socket.to(gameId).emit('HANDLE_PROMOTED_PAWN', payload)
     })
 
     socket.on('UPDATE_READY_TO_RESTART', (id, payload) => {
@@ -34,31 +28,11 @@ const handleSocketEvents = (socket) => {
     })
 
     socket.on('PLAYER_RESIGNED', async (id, player) => {
-        try {
-            const document = await ChessGames.findOne({ gameId: id })
-            const lastPosition = document.positionHistory[document.positionHistory.length - 1]
-            lastPosition.gameStatus.winner = player === 'w' ? 'b' : 'w'
-            document.markModified('positionHistory')
-            await document.save()
-
-            socket.to(id).emit('PLAYER_RESIGNED', player)
-        } catch (error) {
-            console.log(error.message)
-        }
+        socket.to(id).emit('PLAYER_RESIGNED', player)
     })
 
     socket.on('RESTART_GAME', async (id) => {
-        try {
-            const document = await ChessGames.findOne({ gameId: id })
-            const { white, black, positionHistory } = document
-            document.white = black
-            document.black = white
-            document.positionHistory = [positionHistory[0]]
-            await document.save()
-            socket.to(id).emit('RESTARTED_GAME')
-        } catch (error) {
-            console.log(error.message)
-        }
+        socket.to(id).emit('RESTARTED_GAME')
     })
 }
 

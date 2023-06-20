@@ -1,4 +1,4 @@
-import lobbySlice from '../lobbySlice'
+import lobbySlice from '../lobbySlice.ts'
 
 export { default as fetchLobbyData } from './fetchLobbyData'
 
@@ -13,7 +13,6 @@ export const {
     transformPawn,
     switchPosition,
 
-    updateChessBoard,
     updateGameId,
     setOpponentAgreed,
     setOwnerAgreed,

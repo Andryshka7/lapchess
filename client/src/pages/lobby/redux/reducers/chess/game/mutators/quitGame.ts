@@ -1,12 +1,11 @@
 import { Lobby } from 'pages/lobby/redux/types/Lobby'
 import chess from 'pages/lobby/redux/initialState/chess/chess'
-import socket from 'socket/socket'
-import { deleteChessGame } from 'api/chess games'
-
+import { deleteGame } from 'api/chess games'
+import socket from 'socket'
 const quitGame = (state: Lobby) => {
     const { opponentLeft } = state.chess
-    
-    if (opponentLeft) deleteChessGame(state.gameId as string)
+
+    if (opponentLeft) deleteGame(state.gameId as string)
     else socket.emit('LEAVE_FROM_GAME', state.gameId)
 
     state.gameId = null

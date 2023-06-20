@@ -1,9 +1,10 @@
 import { notateMove } from '..'
-import { ChessBoard, Coordinates } from 'types'
+import { ChessBoard } from 'types'
+import { playCaptureSound } from 'helpers/tools/Play sounds'
 
-const handleEnPassant = (chessBoard: ChessBoard, [x2, y2]: number[]) => {
-    const { selected, gameField } = chessBoard
-    const { x: x1, y: y1 } = selected as Coordinates
+const handleEnPassant = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, y2]: number[]) => {
+    const { gameField } = chessBoard
+
     const name = gameField[y1][x1]
     const eaten = gameField[y1][x2]
 
@@ -14,7 +15,7 @@ const handleEnPassant = (chessBoard: ChessBoard, [x2, y2]: number[]) => {
     const notation = notateMove({ name, eaten, gameField }, [x1, y1], [x2, y2])
     chessBoard.chessMoves.push(notation)
 
-    chessBoard.sounds.capture = true
+    playCaptureSound()
 }
 
 export default handleEnPassant

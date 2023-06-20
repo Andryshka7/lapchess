@@ -5,14 +5,14 @@ import Indexes from './components/Indexes'
 import useBindArrows from './hooks/useBindArrows'
 
 const ChessMoves = () => {
-    const { chessBoard } = useAppSelector((store) => store.lobby.chess)
+    const { chessMoves } = useAppSelector((store) => store.lobby.chess.chessBoard)
     const ref = useRef<HTMLDivElement | null>(null)
 
     useBindArrows()
 
     useEffect(() => {
         if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
-    }, [chessBoard.chessMoves])
+    }, [chessMoves])
 
     return (
         <div

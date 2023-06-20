@@ -1,14 +1,10 @@
+import { playCaptureSound, playMoveSound } from 'helpers/tools/Play sounds'
 import { notateMove } from '..'
 import { checkForCasling, checkForEnPassant } from '../Checkers'
-import { ChessBoard, Coordinates } from 'types'
+import { ChessBoard } from 'types'
 
-const handlePieceMove = (chessBoard: ChessBoard, [x2, y2]: number[]) => {
-    const { selected, gameField } = chessBoard
-    const { x: x1, y: y1 } = selected as Coordinates
-
-    chessBoard.sounds.capture = false
-    chessBoard.sounds.move = false
-    chessBoard.sounds.mate = false
+const handlePieceMove = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, y2]: number[]) => {
+    const { gameField } = chessBoard
 
     const name = gameField[y1][x1]
     const eaten = gameField[y2][x2]
@@ -22,8 +18,7 @@ const handlePieceMove = (chessBoard: ChessBoard, [x2, y2]: number[]) => {
     const notation = notateMove({ name, eaten, gameField }, [x1, y1], [x2, y2])
     chessBoard.chessMoves.push(notation)
 
-    if (eaten !== '0') chessBoard.sounds.capture = true
-    else chessBoard.sounds.move = true
+    eaten !== '0' ? playCaptureSound() : playMoveSound()
 }
 
 export default handlePieceMove

@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { restartGame, setOwnerAgreed } from 'pages/lobby/redux/actions'
-import socket from 'socket/socket'
+import { resetGame } from 'api/chess games'
+import socket from 'socket'
 
 const RestartButton = () => {
     const dispatch = useAppDispatch()
@@ -14,6 +15,7 @@ const RestartButton = () => {
     const handleOnClick = () => {
         if (!ownerAgreed && opponentAgreed) {
             socket.emit('RESTART_GAME', gameId)
+            resetGame(gameId as string)
             dispatch(restartGame())
         } else {
             socket.emit('UPDATE_READY_TO_RESTART', gameId, !ownerAgreed)

@@ -16,12 +16,6 @@ const chessBoard: ChessBoard = {
     enpassing: null,
     nextMoves: [],
     chessMoves: [],
-    sounds: {
-        capture: false,
-        move: false,
-        mate: false,
-        draw: false
-    }
 }
 
 export default chessBoard

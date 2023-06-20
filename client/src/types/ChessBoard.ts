@@ -1,4 +1,4 @@
-import { Coordinates, Sounds } from '.'
+import { Coordinates } from '.'
 
 export interface PromotedPawn {
     x1: number
@@ -17,16 +17,15 @@ interface GameStatus {
 
 interface ChessBoard {
     turn: string
-    selected: null | Coordinates
     gameField: string[][]
-    nextMoves: number[][]
     gameStatus: GameStatus
-    coverMoves: (number[] | string)[]
     enpassing: null | Coordinates
     castling: string
-    promoted: null | PromotedPawn
     chessMoves: string[]
-    sounds: Sounds
+    selected?: null | Coordinates
+    nextMoves?: number[][]
+    coverMoves?: (number[] | string)[]
+    promoted?: null | PromotedPawn
 }
 
 export default ChessBoard

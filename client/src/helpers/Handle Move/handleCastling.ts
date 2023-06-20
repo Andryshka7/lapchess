@@ -1,8 +1,8 @@
-import { ChessBoard, Coordinates } from 'types'
+import { ChessBoard } from 'types'
+import { playMoveSound } from 'helpers/tools/Play sounds'
 
-const handleCasling = (chessBoard: ChessBoard, [x2, _]: number[]) => {
-    const { turn, gameField, selected, sounds, chessMoves } = chessBoard
-    const { x: x1, y: y1 } = selected as Coordinates
+const handleCasling = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, _]: number[]) => {
+    const { turn, gameField, chessMoves } = chessBoard
 
     const king = gameField[y1][4]
     const rook = gameField[y1][x2]
@@ -19,7 +19,7 @@ const handleCasling = (chessBoard: ChessBoard, [x2, _]: number[]) => {
     const notation = x2 > x1 ? '0-0' : '0-0-0'
     chessMoves.push(notation)
 
-    sounds.move = true
+    playMoveSound()
 }
 
 export default handleCasling

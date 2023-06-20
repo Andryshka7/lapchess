@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { NavBar, Footer, Alert, Error } from 'ui'
 import { Mastery, Universe, SignIn } from 'pages'
 import { fetchLobbyData } from 'pages/lobby/redux/actions'
-import SocketProvider from 'socket/Socket provider/SockerProvider'
+import SocketProvider from 'socket/Socket provider/SocketProvider'
 
 function App() {
     const dispatch = useAppDispatch()

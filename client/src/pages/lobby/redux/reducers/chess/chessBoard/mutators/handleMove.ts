@@ -5,21 +5,23 @@ import {
     handleEnPassant,
     handlePieceMove
 } from 'helpers/Handle Move'
-import { Lobby } from 'pages/lobby/redux/types/Lobby'
-
-import addToPositionHistory from '../helpers/addToPositionHistory'
-import passToOpponent from '../helpers/passToOpponent'
 import { checkForDraw, checkForKingCheck, checkForMate } from 'helpers/Checkers'
-import { opposite, playSounds } from 'helpers'
-import { Coordinates } from 'types'
+import { opposite } from 'helpers'
+import { Lobby } from 'pages/lobby/redux/types/Lobby'
+import addToPositionHistory from '../helpers/addToPositionHistory'
+import socket from 'socket'
+import updateGame from '../helpers/updateGame'
+import setCurrentPosition from '../helpers/setCurrentPosition'
 
+type MovePayload = number[][]
 
-const handleMove = (state: Lobby, action: PayloadAction<Coordinates>) => {
+const handleMove = (state: Lobby, action: PayloadAction<MovePayload>) => {
+    setCurrentPosition(state)
+
     const { chessBoard } = state.chess
-    const { turn, selected, gameField, promoted } = chessBoard
+    const { turn, gameField, promoted } = chessBoard
 
-    const { x: x1, y: y1 } = selected as Coordinates
-    const { x: x2, y: y2 } = action.payload
+    const [[x1, y1], [x2, y2]] = action.payload
 
     const [_, piece] = gameField[y1][x1]
 
@@ -27,17 +29,14 @@ const handleMove = (state: Lobby, action: PayloadAction<Coordinates>) => {
     const enPassant = piece === 'P' && x1 !== x2 && gameField[y2][x2] === '0'
     const pawnPromoted = !promoted && piece === 'P' && (y2 === 7 || y2 === 0)
 
-    chessBoard.sounds.capture = false
-    chessBoard.sounds.move = false
-
     if (pawnPromoted) {
         handlePawnPromotion(chessBoard, [x1, y1], [x2, y2])
     } else if (castling) {
-        handleCasling(chessBoard, [x2, y2])
+        handleCasling(chessBoard, [x1, y1], [x2, y2])
     } else if (enPassant) {
-        handleEnPassant(chessBoard, [x2, y2])
+        handleEnPassant(chessBoard, [x1, y1], [x2, y2])
     } else {
-        handlePieceMove(chessBoard, [x2, y2])
+        handlePieceMove(chessBoard, [x1, y1], [x2, y2])
     }
 
     if (!pawnPromoted) {
@@ -46,10 +45,17 @@ const handleMove = (state: Lobby, action: PayloadAction<Coordinates>) => {
         checkForKingCheck(chessBoard)
         checkForMate(chessBoard)
         checkForDraw(chessBoard)
-        
-        playSounds(chessBoard.sounds)
+
         addToPositionHistory(state)
-        passToOpponent(state)
+    }
+
+    if (chessBoard.turn !== state.chess.color) {
+        const payload = [
+            [x1, y1],
+            [x2, y2]
+        ]
+        socket.emit('HANDLE_MOVE', state.gameId, payload)
+        updateGame(state)
     }
 
     chessBoard.selected = null

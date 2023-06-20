@@ -1,5 +1,6 @@
 import { ChessBoard } from 'types'
 import getNextMoves from '../../Next Moves'
+import { playDrawSound } from 'helpers/tools/Play sounds'
 
 const checkForDraw = (chessBoard: ChessBoard) => {
     const { gameField, turn, gameStatus } = chessBoard
@@ -14,7 +15,7 @@ const checkForDraw = (chessBoard: ChessBoard) => {
         }
 
     chessBoard.gameStatus.draw = true
-    chessBoard.sounds.draw = true
+    playDrawSound()
 }
 
 export default checkForDraw

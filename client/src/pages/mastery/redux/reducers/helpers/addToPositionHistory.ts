@@ -17,6 +17,7 @@ const addToPositionHistory = (state: Mastery) => {
 
     state.position += 1
     state.positionHistory = [...positionHistory.slice(0, state.position), gameData]
+
     chessBoard.chessMoves = [
         ...chessMoves.splice(0, state.position - 1),
         chessMoves[chessMoves.length - 1]

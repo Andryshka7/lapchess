@@ -18,7 +18,12 @@ const Cells = () => {
                         className={`${bgColor} ${left(x)} ${top(y)} absolute h-[12.5%] w-[12.5%]`}
                         onClick={() => {
                             if (selected && nextMoves.includesDeeply([x, y])) {
-                                dispatch(handleMove({ x, y }))
+                                const { x: x1, y: y1 } = selected
+                                const movePayload = [
+                                    [x1, y1],
+                                    [x, y]
+                                ]
+                                dispatch(handleMove(movePayload))
                             } else {
                                 dispatch(clearField())
                             }

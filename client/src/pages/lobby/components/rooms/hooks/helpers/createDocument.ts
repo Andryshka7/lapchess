@@ -1,8 +1,8 @@
-import chessBoard from 'config/chessBoard/chessBoard'
+import initialChessBoard from 'config/chessBoard/chessBoard'
 import { Player } from 'types'
 
 const createDocument = (white: Player, black: Player, gameId: string) => {
-    const { gameField, enpassing, turn, castling, gameStatus, chessMoves } = chessBoard
+    const { gameField, enpassing, turn, castling, gameStatus, chessMoves } = initialChessBoard
     const gameData = { gameField, enpassing, turn, castling, gameStatus, chessMoves }
 
     const document = {
