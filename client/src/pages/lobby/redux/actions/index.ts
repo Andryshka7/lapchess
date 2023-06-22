@@ -19,6 +19,10 @@ export const {
     setOpponentLeft,
     restartGame,
     playerResigned,
+    
+    setOpponentSent,
+    setOwnerSent,
+    acceptDraw,
 
     addRoom,
     removeRoom

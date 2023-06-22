@@ -1,4 +1,4 @@
-import { ChessBoard, Player } from 'types'
+import { ChessBoard, GameData, Player } from 'types'
 
 export interface Chess {
     color: null | string
@@ -6,10 +6,14 @@ export interface Chess {
     black: Player
     chessBoard: ChessBoard
     position: number
-    positionHistory: ChessBoard[]
+    positionHistory: GameData[]
     restartStatus: {
         ownerAgreed: boolean
         opponentAgreed: boolean
+    }
+    drawStatus: {
+        ownerSent: boolean
+        opponentSent: boolean
     }
     opponentLeft: boolean
 }

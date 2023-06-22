@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { switchPosition } from 'pages/mastery/redux/actions'
-import { indicatorColor } from 'config/styles'
+import { indicatorColor } from 'config/styles/chessBoard'
 
 const Moves = () => {
     const dispatch = useAppDispatch()

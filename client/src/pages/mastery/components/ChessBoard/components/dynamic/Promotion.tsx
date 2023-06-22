@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { cancelPromotion, transformPawn } from 'pages/mastery/redux/actions'
-import { getPieceStyle } from 'config/styles'
+import { hoverEffect, left, margin, scale, top } from 'config/styles/piece'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {
@@ -27,21 +27,24 @@ const Promotion = () => {
             className='absolute left-0 top-0 z-[2] h-full w-full bg-black bg-opacity-70'
             onClick={() => dispatch(cancelPromotion())}
         >
-            {promotionPieces?.map((piece, index) => (
-                <img
-                    src={`pieces/${turn + piece}.png`}
-                    className={`z-[3] ${getPieceStyle(
-                        piece,
-                        x + (index % 2),
-                        y + Math.floor(index / 2)
-                    )}`}
-                    key={`promotion${index}`}
-                    onClick={(e) => {
-                        e.stopPropagation()
-                        dispatch(transformPawn({ promoted, transformation: piece }))
-                    }}
-                />
-            ))}
+            {promotionPieces?.map((piece, index) => {
+                const piecePos = `${left(x + (index % 2))} ${top(y + Math.floor(index / 2))}`
+                const pieceScale = scale(piece[1])
+                const pieceMargin = margin(piece[1])
+                const pieceHover = hoverEffect(piece[1])
+
+                return (
+                    <img
+                        src={`pieces/${turn + piece}.png`}
+                        className={`absolute z-[3] w-[12.5%] transition-all duration-200 ${piecePos} ${pieceScale} ${pieceMargin} ${pieceHover}`}
+                        key={`promotion${index}`}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            dispatch(transformPawn({ promoted, transformation: piece }))
+                        }}
+                    />
+                )
+            })}
         </div>
     )
 }

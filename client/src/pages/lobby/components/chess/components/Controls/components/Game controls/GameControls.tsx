@@ -1,6 +1,6 @@
 import { useAppSelector } from 'redux/store'
-import DrawButton from './Buttons/DrawButton'
-import ResignButton from './Buttons/ResignButton'
+import Draw from './Buttons/Draw'
+import Resign from './Buttons/Resign'
 
 const GameControls = () => {
     const { position, positionHistory, chessBoard } = useAppSelector((store) => store.lobby.chess)
@@ -14,8 +14,8 @@ const GameControls = () => {
 
     return (
         <div className={`flex items-center gap-2 ${pointerEvents}`}>
-            <DrawButton />
-            <ResignButton />
+            <Resign />
+            <Draw />
         </div>
     )
 }

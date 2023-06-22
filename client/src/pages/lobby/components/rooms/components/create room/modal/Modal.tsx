@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import { timeControls, colorControls } from 'config/styles'
-import { ModalError, ModalLoader} from './components'
+import { timeControls, colorControls } from 'config/styles/chessBoard'
+import { ModalError, ModalLoader } from './components'
 import useInitializeRoom from '../../../hooks/useInitializeRoom'
 
 interface ModalProps {

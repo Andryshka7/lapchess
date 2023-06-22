@@ -10,10 +10,11 @@ interface Dragging {
     startingPosition: number[]
 }
 
-const useStartDragging = (k: number) => {
+const useStartDragging = () => {
     const dispatch = useAppDispatch()
     const {
         position,
+        color,
         chessBoard: { nextMoves, selected }
     } = useAppSelector((store) => store.lobby.chess)
 
@@ -25,11 +26,14 @@ const useStartDragging = (k: number) => {
         const [x1, y1] = coordinates
         const [startingX, startingY] = startingPosition
 
-        const difX = k * (event.clientX - startingX)
-        const difY = k * (event.clientY - startingY)
+        const difX = event.clientX - startingX
+        const difY = event.clientY - startingY
 
-        element.style.left = `${element.clientWidth * x1 + difX}px`
-        element.style.top = `${element.clientWidth * y1 + difY}px`
+        const x = color === 'b' ? 7 - x1 : x1
+        const y = color === 'b' ? 7 - y1 : y1
+
+        element.style.left = `${element.clientWidth * x + difX}px`
+        element.style.top = `${element.clientWidth * y + difY}px`
     }
 
     const unFollow = (event: MouseEvent) => {
@@ -39,6 +43,8 @@ const useStartDragging = (k: number) => {
 
         const [x1, y1] = coordinates
         const [startingX, startingY] = startingPosition
+
+        const k = color === 'w' ? 1 : -1
 
         const difX = k * (event.clientX - startingX)
         const difY = k * (event.clientY - startingY)

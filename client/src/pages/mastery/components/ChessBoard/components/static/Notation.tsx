@@ -1,4 +1,4 @@
-import { left, top } from 'config/styles'
+import { left, top } from 'config/styles/piece'
 
 const letters = 'abcdefgh'
 const digits = '87654321'

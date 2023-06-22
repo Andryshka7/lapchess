@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { clearField, handleMove } from 'pages/lobby/redux/actions'
-import { cellColor1, cellColor2 } from 'config/styles'
+import { cellColor1, cellColor2 } from 'config/styles/chessBoard'
 
 const cellsArray: number[][] = []
 
@@ -12,12 +12,18 @@ for (let i = 0; i < 64; i++) {
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const { selected, nextMoves } = useAppSelector((store) => store.lobby.chess.chessBoard)
+    const {
+        color,
+        chessBoard: { selected, nextMoves }
+    } = useAppSelector((store) => store.lobby.chess)
 
     return (
         <>
             {cellsArray.map(([x, y]) => {
-                const bgColor = (x + y) % 2 ? cellColor1 : cellColor2
+                const bgColor = (x + y) % 2 ? cellColor2 : cellColor1
+
+                x = color === 'b' ? 7 - x : x
+                y = color === 'b' ? 7 - y : y
 
                 const handleOnClick = () => {
                     if (selected && nextMoves.includesDeeply([x, y])) {

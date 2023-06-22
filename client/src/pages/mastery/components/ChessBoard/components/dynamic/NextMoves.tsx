@@ -1,6 +1,6 @@
 import { useAppSelector } from 'redux/store'
-import { left, top } from 'config/styles'
-import { cellColor1, cellColor2, indicatorColor } from 'config/styles'
+import { left, top } from 'config/styles/piece'
+import { cellColor1, cellColor2, indicatorColor } from 'config/styles/chessBoard'
 
 const NextMoves = () => {
     const { nextMoves, gameField } = useAppSelector((store) => store.mastery.chessBoard)
@@ -20,7 +20,7 @@ const NextMoves = () => {
                     <div className={`${style(x, y)} ${indicatorColor}`} key={`nextmove${x}${y}`}>
                         <div
                             className={`h-full w-full rounded-[40%] ${
-                                (x + y) % 2 ? cellColor1 : cellColor2
+                                (x + y) % 2 ? cellColor2 : cellColor1
                             }`}
                         ></div>
                     </div>

@@ -1,7 +1,7 @@
-import { ChessBoard } from 'types'
+import { ChessBoard, GameData } from 'types'
 
 export interface Mastery {
     chessBoard: ChessBoard
     position: number
-    positionHistory: ChessBoard[]
+    positionHistory: GameData[]
 }

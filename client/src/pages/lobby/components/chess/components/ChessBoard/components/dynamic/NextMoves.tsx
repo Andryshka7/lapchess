@@ -1,17 +1,25 @@
 import { useAppSelector } from 'redux/store'
-import { left, top } from 'config/styles'
-import { cellColor1, cellColor2, indicatorColor } from 'config/styles'
+import { left, top } from 'config/styles/piece'
+import { cellColor1, cellColor2, indicatorColor } from 'config/styles/chessBoard'
 
 const NextMoves = () => {
-    const { nextMoves, gameField } = useAppSelector((store) => store.lobby.chess.chessBoard)
+    const {
+        color,
+        chessBoard: { nextMoves, gameField }
+    } = useAppSelector((store) => store.lobby.chess)
 
     const style = (x: number, y: number) =>
         `absolute ${left(x)} ${top(y)} w-[12.5%] h-[12.5%] pointer-events-none`
 
     return (
         <>
-            {nextMoves.map(([x, y]) =>
-                gameField[y][x] === '0' ? (
+            {nextMoves.map(([x, y]) => {
+                const target = gameField[y][x]
+
+                x = color === 'b' ? 7 - x : x
+                y = color === 'b' ? 7 - y : y
+
+                return target === '0' ? (
                     <div
                         className={`${style(x, y)} scale-[0.25] rounded-full ${indicatorColor}`}
                         key={`nextmove${x}${y}`}
@@ -20,12 +28,12 @@ const NextMoves = () => {
                     <div className={`${style(x, y)} ${indicatorColor}`} key={`nextmove${x}${y}`}>
                         <div
                             className={`h-full w-full rounded-[40%] ${
-                                (x + y) % 2 ? cellColor1 : cellColor2
+                                (x + y) % 2 ? cellColor2 : cellColor1
                             }`}
                         />
                     </div>
                 )
-            )}
+            })}
         </>
     )
 }

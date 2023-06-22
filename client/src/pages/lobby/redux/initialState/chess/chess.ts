@@ -12,6 +12,10 @@ const chess: Chess = {
         ownerAgreed: false,
         opponentAgreed: false
     },
+    drawStatus: {
+        ownerSent: false,
+        opponentSent: false
+    },
     opponentLeft: false
 }
 

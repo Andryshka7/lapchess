@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ChessBoard, Player } from 'types'
+import { GameData, Player } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
@@ -7,7 +7,7 @@ interface Response {
     white: Player
     black: Player
     gameId: string
-    positionHistory: ChessBoard[]
+    positionHistory: GameData[]
 }
 
 const fetchGame = async (gameId: string | null) => {

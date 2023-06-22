@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { ChessBoard } from 'types'
+import { GameData } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const updateChessGame = async (gameId: string, chessBoard: ChessBoard) => {
+const updateChessGame = async (gameId: string, chessBoard: GameData) => {
     try {
         await axios.post(`${SERVER_URL}/chessGames/updateChessBoard/${gameId}`, chessBoard)
     } catch (error) {

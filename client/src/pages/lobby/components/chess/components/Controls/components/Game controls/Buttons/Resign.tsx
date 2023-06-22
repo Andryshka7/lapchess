@@ -5,7 +5,7 @@ import { playerResigned } from 'pages/lobby/redux/actions'
 import { resignGame } from 'api/chess games'
 import socket from 'socket'
 
-const ResignButton = () => {
+const Resign = () => {
     const dispatch = useAppDispatch()
     const {
         gameId,
@@ -41,4 +41,4 @@ const ResignButton = () => {
     )
 }
 
-export default ResignButton
+export default Resign

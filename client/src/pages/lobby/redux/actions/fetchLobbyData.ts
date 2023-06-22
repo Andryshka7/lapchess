@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
 import { fetchRooms } from 'api/rooms'
 import { fetchGame } from 'api/chess games'
-import { ChessBoard, Player, Room } from 'types'
+import { GameData, Player, Room } from 'types'
 import socket from 'socket'
 
 interface ReturnValue {
@@ -11,7 +11,7 @@ interface ReturnValue {
         white: Player
         black: Player
         gameId: string
-        positionHistory: ChessBoard[]
+        positionHistory: GameData[]
     }
 }
 

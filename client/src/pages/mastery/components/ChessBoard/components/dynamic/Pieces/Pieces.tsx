@@ -1,5 +1,5 @@
 import gameField from 'config/chessBoard/gameField'
-import { Piece } from './Piece'
+import Piece from './Piece'
 
 const Pieces = () => {
     const pieces = []

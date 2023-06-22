@@ -22,10 +22,10 @@ interface ChessBoard {
     enpassing: null | Coordinates
     castling: string
     chessMoves: string[]
-    selected?: null | Coordinates
-    nextMoves?: number[][]
-    coverMoves?: (number[] | string)[]
-    promoted?: null | PromotedPawn
+    selected: null | Coordinates
+    nextMoves: number[][]
+    coverMoves: number[][]
+    promoted: null | PromotedPawn
 }
 
 export default ChessBoard

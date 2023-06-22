@@ -1,4 +1,4 @@
-import { left, top } from 'config/styles'
+import { left, top } from 'config/styles/piece'
 import { useAppSelector } from 'redux/store'
 
 const CheckStatus = () => {

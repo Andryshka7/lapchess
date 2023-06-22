@@ -1,14 +1,14 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { getPieceStyle } from 'config/styles'
 import { handleMove } from 'pages/mastery/redux/actions'
 import useStartDragging from './hooks/useStartDragging'
 import { findPiece } from 'helpers'
+import { hoverEffect, left, margin, scale, top } from 'config/styles/piece'
 
 interface PieceProps {
     piece: string
 }
 
-export const Piece = ({ piece }: PieceProps) => {
+const Piece = ({ piece }: PieceProps) => {
     const dispatch = useAppDispatch()
     const { chessBoard } = useAppSelector((store) => store.mastery)
 
@@ -41,12 +41,18 @@ export const Piece = ({ piece }: PieceProps) => {
             startDragging(event.currentTarget, coordinates, startingPosition)
         }
     }
+    const piecePos = `${left(x)} ${top(y)}`
+    const pieceScale = scale(name[1])
+    const pieceMargin = margin(name[1])
+    const pieceHover = hoverEffect(name[1])
 
     return (
         <img
             src={`pieces/${name}.png`}
-            className={`${getPieceStyle(name[1], x, y)} ${pointerEvents}`}
+            className={`absolute z-[1] w-[12.5%] transition-all duration-200 ${piecePos} ${pieceScale} ${pieceMargin} ${pointerEvents} ${pieceHover}`}
             onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
         />
     )
 }
+
+export default Piece

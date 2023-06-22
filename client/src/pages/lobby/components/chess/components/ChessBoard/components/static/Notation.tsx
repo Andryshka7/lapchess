@@ -1,16 +1,14 @@
-import { left, top } from 'config/styles'
+import { left, top } from 'config/styles/piece'
 import { useAppSelector } from 'redux/store'
 
 const Notation = () => {
     const { color } = useAppSelector((store) => store.lobby.chess)
 
-    const isReversed = color === 'b' ? 'rotate-180' : ''
-
     const letters = color === 'b' ? 'hgfedcba' : 'abcdefgh'
     const digits = color === 'b' ? '12345678' : '87654321'
 
     return (
-        <div className={`pointer-events-none relative h-full w-full ${isReversed}`}>
+        <div className={`pointer-events-none relative h-full w-full`}>
             {letters.split('').map((letter, index) => (
                 <div
                     className={`absolute top-[96.2%] h-[12.5%] w-[12.5%] ${left(index)} `}

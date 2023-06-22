@@ -1,9 +1,14 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { clearField, handleMove } from 'pages/mastery/redux/actions'
-import { cellColor1, cellColor2, left, top } from 'config/styles'
+import { cellColor1, cellColor2 } from 'config/styles/chessBoard'
 
 const cellsArray: number[][] = []
-for (let i = 0; i < 64; i++) cellsArray.push([i % 8, Math.floor(i / 8)])
+
+for (let i = 0; i < 64; i++) {
+    const x = i % 8
+    const y = Math.floor(i / 8)
+    cellsArray.push([x, y])
+}
 
 const Cells = () => {
     const dispatch = useAppDispatch()
@@ -12,24 +17,28 @@ const Cells = () => {
     return (
         <>
             {cellsArray.map(([x, y]) => {
-                const bgColor = (x + y) % 2 ? cellColor1 : cellColor2
+                const bgColor = (x + y) % 2 ? cellColor2 : cellColor1
+
+                const handleOnClick = () => {
+                    console.log(selected, nextMoves)
+
+                    if (selected && nextMoves.includesDeeply([x, y])) {
+                        const { x: x1, y: y1 } = selected
+                        const movePayload = [
+                            [x1, y1],
+                            [x, y]
+                        ]
+                        dispatch(handleMove(movePayload))
+                    } else {
+                        dispatch(clearField())
+                    }
+                }
                 return (
                     <div
-                        className={`${bgColor} ${left(x)} ${top(y)} absolute h-[12.5%] w-[12.5%]`}
-                        onClick={() => {
-                            if (selected && nextMoves.includesDeeply([x, y])) {
-                                const { x: x1, y: y1 } = selected
-                                const movePayload = [
-                                    [x1, y1],
-                                    [x, y]
-                                ]
-                                dispatch(handleMove(movePayload))
-                            } else {
-                                dispatch(clearField())
-                            }
-                        }}
+                        className={`float-left h-[12.5%] w-[12.5%] ${bgColor}`}
+                        onClick={handleOnClick}
                         key={`cell${x}${y}`}
-                    ></div>
+                    />
                 )
             })}
         </>
