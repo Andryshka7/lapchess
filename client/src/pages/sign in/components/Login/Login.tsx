@@ -16,7 +16,7 @@ interface LoginProps {
 }
 
 const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
-    const { loading, handleLogin } = useHandleLogin()
+    const { handleLogin } = useHandleLogin()
 
     const {
         register,
