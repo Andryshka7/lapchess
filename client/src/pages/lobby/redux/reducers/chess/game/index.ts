@@ -5,6 +5,7 @@ import initializeGame from './mutators/initializeGame'
 import quitGame from './mutators/quitGame'
 import updateGameId from './mutators/updateGameId'
 import playerResigned from './mutators/playerResigned'
+import resetChess from './mutators/resetChess'
 
 export default {
     ...restartReducers,
@@ -12,5 +13,6 @@ export default {
     initializeGame,
     quitGame,
     playerResigned,
-    updateGameId
+    updateGameId,
+    resetChess
 }

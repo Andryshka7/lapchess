@@ -12,6 +12,8 @@ const handleEnPassant = (chessBoard: ChessBoard, [x1, y1]: number[], [x2, y2]: n
     gameField[y1][x1] = '0'
     gameField[y1][x2] = '0'
 
+    chessBoard.enpassing = null
+
     const notation = notateMove({ name, eaten, gameField }, [x1, y1], [x2, y2])
     chessBoard.chessMoves.push(notation)
 

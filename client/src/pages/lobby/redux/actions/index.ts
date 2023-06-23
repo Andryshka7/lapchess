@@ -19,7 +19,8 @@ export const {
     setOpponentLeft,
     restartGame,
     playerResigned,
-    
+    resetChess,
+
     setOpponentSent,
     setOwnerSent,
     acceptDraw,

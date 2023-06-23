@@ -19,7 +19,7 @@ const CreateRoom = () => {
                 </Portal>
             )}
             <div
-                className={`mx-auto my-3 flex h-[65px] w-[260px] items-center justify-between rounded-lg bg-black bg-opacity-10 px-[30px] transition duration-200 hover:scale-105 ${
+                className={`mx-auto my-3 flex h-[65px] w-[260px] cursor-pointer items-center justify-between rounded-lg bg-black bg-opacity-10 px-[30px] transition duration-200 hover:scale-105 ${
                     gameId ? 'pointer-events-none opacity-70' : ''
                 }`}
                 onClick={openModal}

@@ -23,6 +23,8 @@ const useHandleLogin = () => {
             dispatch(authenticate({ user, token }))
             dispatch(updateGameId(gameId))
 
+            // GET CHESS GAME BY GAME ID
+
             navigate('/')
         } catch (error) {
             setLoading(false)

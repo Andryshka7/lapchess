@@ -3,6 +3,7 @@ import { LoginFormValues } from '../../types/FormValues'
 import { passwordValidation, usernameValidation } from './Validation'
 import useHandleLogin from '../../hooks/useHandleLogin'
 import InputError from '../shared/InputError'
+import { Loader } from 'ui'
 
 const initialStyles =
     'mb-7 block h-12 w-full border-b-2  border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -16,7 +17,7 @@ interface LoginProps {
 }
 
 const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
-    const { handleLogin } = useHandleLogin()
+    const { loading, handleLogin } = useHandleLogin()
 
     const {
         register,
@@ -30,7 +31,11 @@ const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
 
     const inputsTabIndex = showSignUp ? -1 : 0
 
-    return (
+    return loading ? (
+        <div className='flex h-[700px] w-[500px] items-center'>
+            <Loader />
+        </div>
+    ) : (
         <form
             className='relative flex h-[700px] w-[500px] items-center'
             onSubmit={handleSubmit(onSubmit)}

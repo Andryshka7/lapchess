@@ -1,6 +1,6 @@
 import ChessBoard from './components/ChessBoard/ChessBoard'
 import ChessMoves from './components/ChessMoves/ChessMoves'
-import Input from './components/FEN input/Input'
+import Input from './components/Fen Input/FenInput'
 
 const Mastery = () => (
     <div className='mx-auto my-5 w-[928px]'>

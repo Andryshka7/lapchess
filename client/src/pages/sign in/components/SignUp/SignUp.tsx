@@ -4,6 +4,7 @@ import { SignUpFormValues } from '../../types/FormValues'
 import { passwordValidation, usernameValidation } from './validation'
 import useHandleSignUp from '../../hooks/useHandleSignUp'
 import InputError from '../shared/InputError'
+import { Loader } from 'ui'
 
 const initialStyles =
     'mb-7 block h-12 w-full border-b-2 border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -17,7 +18,7 @@ interface SignUpProps {
 }
 
 const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
-    const handleSignUp = useHandleSignUp()
+    const { loading, handleSignUp } = useHandleSignUp()
     const [file, setFile] = useState<File | null>(null)
 
     const {
@@ -36,7 +37,11 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     const password = watch('password')
     const confirmPassword = watch('confirmPassword')
 
-    return (
+    return loading ? (
+        <div className='flex h-[700px] w-[500px] items-center'>
+            <Loader />
+        </div>
+    ) : (
         <form
             className='relative flex h-[700px] w-[500px] items-center'
             onSubmit={handleSubmit(onSubmit)}

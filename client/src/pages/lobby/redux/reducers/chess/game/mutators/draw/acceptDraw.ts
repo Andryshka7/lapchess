@@ -4,9 +4,13 @@ import setCurrentPosition from '../../../chessBoard/helpers/setCurrentPosition'
 const acceptDraw = (state: Lobby) => {
     setCurrentPosition(state)
 
-    state.chess.drawStatus.opponentSent = false
-    state.chess.drawStatus.ownerSent = false
-    state.chess.chessBoard.gameStatus.draw = true
+    const { chessBoard, position, positionHistory, drawStatus } = state.chess
+
+    drawStatus.opponentSent = false
+    drawStatus.ownerSent = false
+    chessBoard.gameStatus.draw = true
+
+    positionHistory[position].gameStatus.draw = true
 }
 
 export default acceptDraw

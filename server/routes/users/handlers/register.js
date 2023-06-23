@@ -24,8 +24,8 @@ const registrationHandler = async (req, res) => {
         const fileName = req.file.filename
         const newFileName = username + fileName.slice(fileName.indexOf('.'))
 
-        const filePath = path.join(__dirname, '..', 'images', fileName)
-        const newPath = path.join(__dirname, '..', 'images', newFileName)
+        const filePath = path.join(__dirname, '..', '..', '..', 'images', fileName)
+        const newPath = path.join(__dirname, '..', '..', '..', 'images', newFileName)
 
         await rename(filePath, newPath, (err) => {
             if (err) throw err

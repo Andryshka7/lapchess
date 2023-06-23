@@ -9,12 +9,15 @@ const Resign = () => {
     const dispatch = useAppDispatch()
     const {
         gameId,
-        chess: { color }
+        chess: {
+            color,
+            position,
+            positionHistory,
+            chessBoard: { gameStatus }
+        }
     } = useAppSelector((store) => store.lobby)
 
     const [active, setActive] = useState(false)
-
-    const styles = 'cursor-pointer transition duration-200 hover:scale-110'
 
     useEffect(() => {
         if (active) {
@@ -25,10 +28,19 @@ const Resign = () => {
         }
     }, [active])
 
+    const styles = 'cursor-pointer transition duration-200 hover:scale-110'
+
+    const { winner, draw } = gameStatus
+
+    const pointerEvents =
+        winner || draw || position !== positionHistory.length - 1
+            ? 'pointer-events-none'
+            : 'pointer-events-all'
+
     return (
         <BsFlagFill
             size={20}
-            className={`${styles} ${active ? 'text-amber-400' : ''}`}
+            className={`${styles} ${pointerEvents} ${active ? 'text-amber-400' : ''}`}
             onClick={() => {
                 if (active) {
                     dispatch(playerResigned(color as string))

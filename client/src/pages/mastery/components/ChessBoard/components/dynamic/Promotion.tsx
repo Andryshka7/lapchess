@@ -29,9 +29,9 @@ const Promotion = () => {
         >
             {promotionPieces?.map((piece, index) => {
                 const piecePos = `${left(x + (index % 2))} ${top(y + Math.floor(index / 2))}`
-                const pieceScale = scale(piece[1])
-                const pieceMargin = margin(piece[1])
-                const pieceHover = hoverEffect(piece[1])
+                const pieceScale = scale(piece)
+                const pieceMargin = margin(piece)
+                const pieceHover = hoverEffect(piece)
 
                 return (
                     <img

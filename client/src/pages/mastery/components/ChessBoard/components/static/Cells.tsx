@@ -20,8 +20,6 @@ const Cells = () => {
                 const bgColor = (x + y) % 2 ? cellColor2 : cellColor1
 
                 const handleOnClick = () => {
-                    console.log(selected, nextMoves)
-
                     if (selected && nextMoves.includesDeeply([x, y])) {
                         const { x: x1, y: y1 } = selected
                         const movePayload = [

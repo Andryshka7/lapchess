@@ -5,6 +5,8 @@ import { ChessBoard } from 'types'
 
 const updateChessBoard = (state: Mastery, action: PayloadAction<ChessBoard>) => {
     state.chessBoard = { ...chessBoard, ...action.payload }
+    state.position = 0
+    state.positionHistory = [state.chessBoard]
 }
 
 export default updateChessBoard
