@@ -10,7 +10,6 @@ interface ReturnValue {
     chessGame: {
         white: Player
         black: Player
-        gameId: string
         positionHistory: GameData[]
     }
 }

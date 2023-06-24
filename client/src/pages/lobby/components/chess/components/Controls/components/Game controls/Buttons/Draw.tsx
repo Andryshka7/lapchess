@@ -14,7 +14,9 @@ const Draw = () => {
             position,
             positionHistory,
             chessBoard: { gameStatus },
-            drawStatus: { ownerSent, opponentSent }
+            status: {
+                drawState: { ownerSent, opponentSent }
+            }
         }
     } = useAppSelector((store) => store.lobby)
 
@@ -31,7 +33,7 @@ const Draw = () => {
     const { winner, draw } = gameStatus
 
     const styles = 'cursor-pointer transition duration-200 hover:scale-110'
-    
+
     const pointerEvents =
         opponentSent || winner || draw || position !== positionHistory.length - 1
             ? 'pointer-events-none'

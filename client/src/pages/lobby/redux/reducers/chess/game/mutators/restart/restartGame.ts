@@ -8,15 +8,12 @@ const restartGame = (state: Lobby) => {
         ...chess,
         color: opposite(color as string),
         white: black,
-        black: white
+        black: white,
+        status: {
+            ...chess.status,
+            isActive: true
+        }
     }
-
-    state.chess.restartStatus = {
-        ownerAgreed: false,
-        opponentAgreed: false
-    }
-
-    state.chess.opponentLeft = false
 }
 
 export default restartGame

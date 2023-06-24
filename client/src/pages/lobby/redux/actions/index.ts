@@ -13,7 +13,7 @@ export const {
     transformPawn,
     switchPosition,
 
-    updateGameId,
+    updateGameConfig,
     setOpponentAgreed,
     setOwnerAgreed,
     setOpponentLeft,

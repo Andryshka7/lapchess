@@ -7,13 +7,16 @@ export interface Chess {
     chessBoard: ChessBoard
     position: number
     positionHistory: GameData[]
-    restartStatus: {
-        ownerAgreed: boolean
-        opponentAgreed: boolean
+    status: {
+        isActive: boolean
+        restartState: {
+            ownerAgreed: boolean
+            opponentAgreed: boolean
+        }
+        drawState: {
+            ownerSent: boolean
+            opponentSent: boolean
+        }
+        opponentLeft: boolean
     }
-    drawStatus: {
-        ownerSent: boolean
-        opponentSent: boolean
-    }
-    opponentLeft: boolean
 }

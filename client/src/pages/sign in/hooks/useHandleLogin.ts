@@ -5,7 +5,7 @@ import { LoginFormValues } from '../types/FormValues'
 import { isAxiosError } from 'axios'
 import { authenticate } from 'pages/sign in/redux/actions'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
-import { updateGameId } from 'pages/lobby/redux/actions'
+// import { updateGameConfig } from 'pages/lobby/redux/actions'
 import { login } from 'api/users'
 
 const useHandleLogin = () => {
@@ -18,10 +18,11 @@ const useHandleLogin = () => {
     const handleLogin = async (data: LoginFormValues) => {
         try {
             setLoading(true)
-            const { user, token, gameId } = await login(data)
+            // const { user, token, gameId } = await login(data)
+            const { user, token } = await login(data)
 
             dispatch(authenticate({ user, token }))
-            dispatch(updateGameId(gameId))
+            // dispatch(updateGameConfig({ gameId,  }))
 
             // GET CHESS GAME BY GAME ID
 

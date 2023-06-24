@@ -1,8 +1,9 @@
 import { useAppDispatch } from 'redux/store'
 import { deleteRoom } from 'api/rooms'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
-import { removeRoom, updateGameId } from 'pages/lobby/redux/actions'
+import { removeRoom, updateGameConfig } from 'pages/lobby/redux/actions'
 import socket from 'socket'
+
 const useRemoveRoom = () => {
     const dispatch = useAppDispatch()
 
@@ -13,8 +14,8 @@ const useRemoveRoom = () => {
             await deleteRoom(_id)
             socket.emit('DELETE_ROOM', _id)
 
-            dispatch(updateGameId(null))
             dispatch(removeRoom(_id))
+            dispatch(updateGameConfig(null))
 
             alert('Successfully deleted this room', 'success')
         } catch (error) {

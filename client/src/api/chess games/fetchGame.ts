@@ -6,7 +6,6 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL
 interface Response {
     white: Player
     black: Player
-    gameId: string
     positionHistory: GameData[]
 }
 

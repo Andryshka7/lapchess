@@ -3,7 +3,7 @@ import drawReducers from './mutators/draw'
 
 import initializeGame from './mutators/initializeGame'
 import quitGame from './mutators/quitGame'
-import updateGameId from './mutators/updateGameId'
+import updateGameConfig from './mutators/updateGameConfig'
 import playerResigned from './mutators/playerResigned'
 import resetChess from './mutators/resetChess'
 
@@ -13,6 +13,6 @@ export default {
     initializeGame,
     quitGame,
     playerResigned,
-    updateGameId,
+    updateGameConfig,
     resetChess
 }

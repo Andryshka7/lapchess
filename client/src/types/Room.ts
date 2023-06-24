@@ -2,7 +2,8 @@ import { Player } from 'types'
 
 interface Room {
     user: Player
-    color: string
+    selectedColor: string
+    actualColor: string
     time: string
     _id: string
 }

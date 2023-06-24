@@ -6,7 +6,7 @@ import GuestAvatar from 'assets/images/Guest.png'
 const Room = (room: RoomType) => {
     const { gameId } = useAppSelector((store) => store.lobby)
 
-    const { user, color, time, _id } = room
+    const { user, selectedColor, time, _id } = room
 
     const username = user?.username || 'Guest'
     const avatar = user?.avatar || GuestAvatar
@@ -21,12 +21,10 @@ const Room = (room: RoomType) => {
                 <h2 className='ml-3 text-base font-semibold'>{username}</h2>
             </div>
 
-            <img src={`${color}.png`} className='h-[30px] w-[30px]' />
+            <img src={`${selectedColor}.png`} className='h-[30px] w-[30px]' />
             <p className='text-base font-semibold'>{time}</p>
 
             {_id === gameId ? <DeleteIcon {...room} /> : <PlayIcon {...room} />}
-            {/* <DeleteIcon {...room} /> */}
-            {/* <PlayIcon {...room} /> */}
         </div>
     )
 }

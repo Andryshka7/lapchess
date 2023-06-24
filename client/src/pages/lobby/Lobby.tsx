@@ -5,13 +5,15 @@ const Lobby = () => {
     const {
         loading,
         error,
-        chess: { color }
+        chess: {
+            status: { isActive }
+        }
     } = useAppSelector((store) => store.lobby)
 
     if (loading) return <LobbyLoader />
     if (error) return <LobbyError />
 
-    return color ? <Chess /> : <Rooms />
+    return isActive ? <Chess /> : <Rooms />
 }
 
 export default Lobby

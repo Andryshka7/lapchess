@@ -7,10 +7,13 @@ const RestartButton = () => {
     const dispatch = useAppDispatch()
     const { gameId, chess } = useAppSelector((store) => store.lobby)
 
-    const { ownerAgreed, opponentAgreed } = chess.restartStatus
+    const {
+        opponentLeft,
+        restartState: { ownerAgreed, opponentAgreed }
+    } = chess.status
 
     const buttonBg = ownerAgreed ? 'bg-green-600' : 'bg-gray-600'
-    const disabled = chess.opponentLeft ? 'pointer-events-none opacity-70' : ''
+    const disabled = opponentLeft ? 'pointer-events-none opacity-70' : ''
 
     const handleOnClick = () => {
         if (!ownerAgreed && opponentAgreed) {

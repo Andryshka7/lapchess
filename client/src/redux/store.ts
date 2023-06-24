@@ -10,7 +10,7 @@ import { auth, alert, lobby, mastery } from './features'
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['mastery']
+    blacklist: ['mastery', 'alert']
 }
 
 const rootReducer = combineReducers({

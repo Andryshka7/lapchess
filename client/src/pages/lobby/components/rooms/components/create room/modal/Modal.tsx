@@ -3,6 +3,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { timeControls, colorControls } from 'config/styles/chessBoard'
 import { ModalError, ModalLoader } from './components'
 import useInitializeRoom from '../../../hooks/useInitializeRoom'
+import getColor from './helpers/getColor'
 
 interface ModalProps {
     hideModal: () => void
@@ -12,7 +13,7 @@ const Modal = ({ hideModal }: ModalProps) => {
     const { loading, error, initializeRoom } = useInitializeRoom(hideModal)
 
     const [time, setTime] = useState('∞')
-    const [color, setColor] = useState('random')
+    const [selectedColor, setSelected] = useState('random')
 
     if (loading) return <ModalLoader />
     if (error) return <ModalError hideModal={hideModal} />
@@ -54,9 +55,9 @@ const Modal = ({ hideModal }: ModalProps) => {
                         <img
                             src={`/${item}.png`}
                             className={`h-[85px] w-[85px] cursor-pointer transition duration-200 hover:scale-105 ${
-                                color !== item ? 'opacity-60' : 'opacity-100'
+                                selectedColor !== item ? 'opacity-60' : 'opacity-100'
                             }`}
-                            onClick={() => setColor(item)}
+                            onClick={() => setSelected(item)}
                             key={item}
                             alt=''
                         />
@@ -65,7 +66,10 @@ const Modal = ({ hideModal }: ModalProps) => {
 
                 <button
                     className='mx-auto mt-10 block h-[50px] w-[220px] rounded-lg bg-green-600 text-2xl font-bold transition duration-200 hover:bg-opacity-90'
-                    onClick={() => initializeRoom(color, time)}
+                    onClick={() => {
+                        const actualColor = getColor(selectedColor)
+                        initializeRoom(selectedColor, actualColor, time)
+                    }}
                 >
                     Create
                 </button>

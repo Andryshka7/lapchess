@@ -3,13 +3,15 @@ import { Room } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const createRoom = async (user: string | null, color: string, time: string) => {
+const createRoom = async (
+    user: string | null,
+    selectedColor: string,
+    actualColor: string,
+    time: string
+) => {
     try {
-        const response = await axios.post<Room>(`${SERVER_URL}/rooms`, {
-            user,
-            color,
-            time
-        })
+        const payload = { user, selectedColor, actualColor, time }
+        const response = await axios.post<Room>(`${SERVER_URL}/rooms`, payload)
         return response.data
     } catch (error) {
         throw error

@@ -2,8 +2,8 @@ import { useAppSelector } from 'redux/store'
 import { useDispatch } from 'react-redux'
 import { createGame } from 'api/chess games'
 import { deleteRoom } from 'api/rooms'
-import { initializeGame, removeRoom } from 'pages/lobby/redux/actions'
-import { getColor, createDocument } from './helpers'
+import { initializeGame, removeRoom, updateGameConfig } from 'pages/lobby/redux/actions'
+import createDocument from './helpers/createDocument'
 import { Room } from 'types'
 import socket from 'socket'
 import { opposite } from 'helpers'
@@ -15,8 +15,10 @@ const useStartGame = () => {
     return async (room: Room) => {
         // const time = room.time
         const gameId = room._id
+        const roomColor = room.actualColor
 
-        const color = getColor(room.color)
+        const color = opposite(roomColor)
+
         const [white, black] = color === 'w' ? [guest, room.user] : [room.user, guest]
 
         const document = createDocument(white, black, gameId)
@@ -25,11 +27,13 @@ const useStartGame = () => {
         await deleteRoom(gameId)
 
         dispatch(removeRoom(gameId))
-        dispatch(initializeGame({ white, black, gameId, color }))
+
+        dispatch(updateGameConfig({ gameId, color }))
+        dispatch(initializeGame({ white, black }))
 
         socket.emit('JOIN_ROOM', gameId)
         socket.emit('DELETE_ROOM', gameId)
-        socket.emit('GAME_INITIALIZED', gameId, { white, black, gameId, color: opposite(color) })
+        socket.emit('GAME_INITIALIZED', gameId, { white, black })
     }
 }
 

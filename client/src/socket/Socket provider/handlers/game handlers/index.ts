@@ -4,7 +4,7 @@ import {
     handleMove,
     initializeGame,
     playerResigned,
-    transformPawn
+    transformPawn,
 } from 'pages/lobby/redux/actions'
 import useDrawHandlers from './drawHandlers'
 import useRestartHandlers from './restartHandlers'

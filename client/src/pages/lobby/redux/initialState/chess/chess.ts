@@ -8,15 +8,18 @@ const chess: Chess = {
     chessBoard,
     position: 0,
     positionHistory: [chessBoard],
-    restartStatus: {
-        ownerAgreed: false,
-        opponentAgreed: false
-    },
-    drawStatus: {
-        ownerSent: false,
-        opponentSent: false
-    },
-    opponentLeft: false
+    status: {
+        isActive: false,
+        restartState: {
+            ownerAgreed: false,
+            opponentAgreed: false
+        },
+        drawState: {
+            ownerSent: false,
+            opponentSent: false
+        },
+        opponentLeft: false
+    }
 }
 
 export default chess
