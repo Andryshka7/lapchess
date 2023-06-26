@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
-import { addRoom, removeRoom } from 'pages/lobby/redux/actions'
+import { addRoom, removeRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import socket from 'socket'
 
 const useRoomHandlers = () => {

@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { SignUpFormValues } from '../../types/FormValues'
 import { passwordValidation, usernameValidation } from './validation'
-import useHandleSignUp from '../../hooks/useHandleSignUp'
+// import useHandleSignUp from '../../hooks/useHandleSignUp'
 import InputError from '../shared/InputError'
 import { Loader } from 'ui'
+import { useAppDispatch, useAppSelector } from 'redux/store'
+import { signUp } from 'pages/sign in/redux/actions'
 
 const initialStyles =
     'mb-7 block h-12 w-full border-b-2 border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -18,7 +20,8 @@ interface SignUpProps {
 }
 
 const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
-    const { loading, handleSignUp } = useHandleSignUp()
+    const dispatch = useAppDispatch()
+    const { loading } = useAppSelector((store) => store.auth)
     const [file, setFile] = useState<File | null>(null)
 
     const {
@@ -29,7 +32,13 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     } = useForm<SignUpFormValues>({ mode: 'onSubmit' })
 
     const onSubmit = async (data: SignUpFormValues) => {
-        await handleSignUp(data, file as File)
+        const formData = new FormData()
+
+        formData.append('file', file as File)
+        formData.append('username', data.username)
+        formData.append('password', data.password)
+
+        dispatch(signUp(formData))
     }
 
     const inputsTabIndex = !showSignUp ? -1 : 0

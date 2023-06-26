@@ -1,19 +1,19 @@
 import { useAppSelector } from 'redux/store'
-import { Rooms, Chess, LobbyError, LobbyLoader } from './components'
+import { Rooms, Chess } from './modules/index'
+
+import Error from './ui/Error'
+import Loader from './ui/Loader'
 
 const Lobby = () => {
-    const {
-        loading,
-        error,
-        chess: {
-            status: { isActive }
-        }
-    } = useAppSelector((store) => store.lobby)
+    const { rooms, chess } = useAppSelector((store) => store)
 
-    if (loading) return <LobbyLoader />
-    if (error) return <LobbyError />
+    const loading = rooms.loading || chess.status.loading
+    const error = rooms.error || chess.status.error
+    
+    if (loading) return <Loader />
+    if (error) return <Error />
 
-    return isActive ? <Chess /> : <Rooms />
+    return chess.status.isActive ? <Chess /> : <Rooms />
 }
 
 export default Lobby

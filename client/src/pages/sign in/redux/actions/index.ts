@@ -1,3 +1,6 @@
 import authSlice from '../authSlice'
 
-export const { authenticate, logout } = authSlice.actions
+export { default as login } from './login'
+export { default as signUp } from './signUp'
+
+export const { logout } = authSlice.actions

@@ -1,6 +1,7 @@
 import { checkForKingCheck } from 'helpers/Checkers'
 import chessBoard from 'config/chessBoard/chessBoard'
 import gameFieldFromFEN from './gamefieldFromFEN'
+import { createCopy } from 'helpers'
 
 const letters = 'abcdefgh'
 
@@ -16,7 +17,7 @@ const convertFromFEN = (fen: string) => {
         const castling = castlingOptions === '-' ? '' : castlingOptions
 
         let converted = {
-            ...JSON.parse(JSON.stringify(chessBoard)),
+            ...createCopy(chessBoard),
             gameField,
             turn,
             castling,

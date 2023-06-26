@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { useAppDispatch } from 'redux/store'
 import {
     handleMove,
-    initializeGame,
+    updateGame,
     playerResigned,
-    transformPawn,
-} from 'pages/lobby/redux/actions'
+    transformPawn
+} from 'pages/lobby/modules/chess/redux/actions'
 import useDrawHandlers from './drawHandlers'
 import useRestartHandlers from './restartHandlers'
 import socket from 'socket'
@@ -18,7 +18,7 @@ const useGameHandlers = () => {
 
     useEffect(() => {
         socket.on('GAME_INITIALIZED', (payload) => {
-            dispatch(initializeGame(payload))
+            dispatch(updateGame(payload))
         })
         socket.on('HANDLE_MOVE', (payload) => {
             dispatch(handleMove(payload))

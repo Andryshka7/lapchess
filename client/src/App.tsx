@@ -3,14 +3,16 @@ import { useAppDispatch } from 'redux/store'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { NavBar, Footer, Alert, Error } from 'ui'
 import { Mastery, Lobby, SignIn } from 'pages'
-import { fetchLobbyData } from 'pages/lobby/redux/actions'
+import { fetchRooms } from 'pages/lobby/modules/rooms/redux/actions'
+import { fetchGame } from 'pages/lobby/modules/chess/redux/actions'
 import SocketProvider from 'socket/Socket provider/SocketProvider'
 
 function App() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchLobbyData())
+        dispatch(fetchGame())
+        dispatch(fetchRooms())
     }, [])
 
     return (

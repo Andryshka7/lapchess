@@ -5,7 +5,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import { auth, alert, lobby, mastery } from './features'
+import { auth, alert, rooms, chess, mastery } from './features'
 
 const persistConfig = {
     key: 'root',
@@ -16,7 +16,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth,
     alert,
-    lobby,
+    rooms,
+    chess,
     mastery
 })
 

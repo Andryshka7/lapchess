@@ -5,6 +5,9 @@ const handleSocketEvents = (socket) => {
     socket.on('JOIN_ROOM', (id) => {
         socket.join(id)
     })
+    socket.on('LEAVE_ROOM', (id) => {
+        socket.leave(id)
+    })
 
     gameHandlers(socket)
     roomHandlers(socket)

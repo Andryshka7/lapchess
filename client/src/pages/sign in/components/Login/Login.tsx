@@ -1,9 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { LoginFormValues } from '../../types/FormValues'
 import { passwordValidation, usernameValidation } from './Validation'
-import useHandleLogin from '../../hooks/useHandleLogin'
+// import useHandleLogin from '../../hooks/useHandleLogin'
 import InputError from '../shared/InputError'
 import { Loader } from 'ui'
+import { useAppDispatch, useAppSelector } from 'redux/store'
+import { login } from 'pages/sign in/redux/actions'
 
 const initialStyles =
     'mb-7 block h-12 w-full border-b-2  border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
@@ -17,7 +19,8 @@ interface LoginProps {
 }
 
 const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
-    const { loading, handleLogin } = useHandleLogin()
+    const dispatch = useAppDispatch()
+    const { loading } = useAppSelector((store) => store.auth)
 
     const {
         register,
@@ -26,7 +29,7 @@ const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
     } = useForm<LoginFormValues>({ mode: 'onSubmit' })
 
     const onSubmit = async (data: LoginFormValues) => {
-        await handleLogin(data)
+        dispatch(login(data))
     }
 
     const inputsTabIndex = showSignUp ? -1 : 0

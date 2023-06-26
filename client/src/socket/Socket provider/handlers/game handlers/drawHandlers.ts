@@ -4,7 +4,7 @@ import {
     acceptDraw,
     setOpponentSent,
     setOwnerSent
-} from 'pages/lobby/redux/actions'
+} from 'pages/lobby/modules/chess/redux/actions'
 import socket from 'socket'
 
 const useDrawHandlers = () => {
