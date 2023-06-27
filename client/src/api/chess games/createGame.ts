@@ -7,6 +7,7 @@ interface Payload {
     white: Player
     black: Player
     gameId: string
+    time: string
     chessBoard: GameData
 }
 

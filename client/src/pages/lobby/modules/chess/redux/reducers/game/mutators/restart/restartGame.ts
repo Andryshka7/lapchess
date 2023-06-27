@@ -10,6 +10,11 @@ const restartGame = (state: Chess) => {
         gameId,
         white: black,
         black: white,
+        time: {
+            ...initialState.time,
+            limit: state.time.limit,
+            addition: state.time.addition
+        },
         status: {
             ...initialState.status,
             isActive: true

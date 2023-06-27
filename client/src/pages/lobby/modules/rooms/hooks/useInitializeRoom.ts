@@ -21,7 +21,7 @@ const useInitializeRoom = (hideModal: () => void) => {
 
             const room = await API.createRoom(user?._id || null, selectedColor, actualColor, time)
 
-            const config = { gameId: room._id, color: actualColor }
+            const config = { gameId: room._id, color: actualColor, time: room.time }
 
             socket.emit('CREATE_ROOM', room)
 

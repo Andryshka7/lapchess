@@ -6,6 +6,7 @@ interface Response {
     token: string
     chessGame: null | {
         gameId: string
+        time: string
         white: Player
         black: Player
         positionHistory: GameData[]

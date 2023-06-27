@@ -22,9 +22,9 @@ const login = createAsyncThunk<ResponseType, LoginFormValues>(
 
             if (chessGame) {
                 const color = chessGame?.white?.username === user?.username ? 'w' : 'b'
-                const { white, black, gameId, positionHistory } = chessGame
+                const { white, black, gameId, time, positionHistory } = chessGame
 
-                dispatch(updateGameConfig({ color, gameId }))
+                dispatch(updateGameConfig({ color, gameId, time }))
                 dispatch(
                     updateGame({
                         white,

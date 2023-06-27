@@ -2,11 +2,12 @@ import { ChessGames } from '../../../models/index.js'
 
 const createGame = async (req, res) => {
     try {
-        const { white, black, gameId, chessBoard } = req.body
+        const { white, black, gameId, time, chessBoard } = req.body
         const document = new ChessGames({
             white,
             black,
             gameId,
+            time,
             chessBoard,
             positionHistory: [chessBoard]
         })

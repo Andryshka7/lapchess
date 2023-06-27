@@ -5,13 +5,16 @@ import {
     handleEnPassant,
     handlePieceMove
 } from 'helpers/Handle Move'
+import {
+    addToPositionHistory,
+    updateGame,
+    setCurrentPosition,
+    handleTimeControls
+} from '../helpers'
 import { checkForDraw, checkForKingCheck, checkForMate } from 'helpers/Checkers'
 import { opposite } from 'helpers'
 import { Chess } from '../../../types/Chess'
-import addToPositionHistory from '../helpers/addToPositionHistory'
 import socket from 'socket'
-import updateGame from '../helpers/updateGame'
-import setCurrentPosition from '../helpers/setCurrentPosition'
 
 type MovePayload = number[][]
 
@@ -60,6 +63,8 @@ const handleMove = (state: Chess, action: PayloadAction<MovePayload>) => {
 
     chessBoard.selected = null
     chessBoard.nextMoves = []
+
+    handleTimeControls(state)
 }
 
 export default handleMove

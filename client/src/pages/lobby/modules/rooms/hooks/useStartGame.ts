@@ -19,17 +19,18 @@ const useStartGame = () => {
         const roomColor = room.actualColor
 
         const color = opposite(roomColor)
+        const time = room.time
 
         const [white, black] = color === 'w' ? [guest, room.user] : [room.user, guest]
 
-        const document = createDocument(white, black, gameId)
+        const document = createDocument(white, black, time, gameId)
 
         await API.createGame(document)
         await API.deleteRoom(gameId)
 
         dispatch(removeRoom(gameId))
 
-        dispatch(updateGameConfig({ gameId, color }))
+        dispatch(updateGameConfig({ gameId, color, time }))
         dispatch(updateGame({ white, black }))
 
         socket.emit('JOIN_ROOM', gameId)
