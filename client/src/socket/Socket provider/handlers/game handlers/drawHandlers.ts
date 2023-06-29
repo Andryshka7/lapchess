@@ -20,8 +20,8 @@ const useDrawHandlers = () => {
         socket.on('OPPONENT_DECLINED_DRAW', () => {
             dispatch(setOwnerSent(false))
         })
-        socket.on('OPPONENT_ACCEPTED_DRAW', () => {
-            dispatch(acceptDraw())
+        socket.on('OPPONENT_ACCEPTED_DRAW', (drawTime) => {
+            dispatch(acceptDraw(drawTime))
         })
     }, [])
 }

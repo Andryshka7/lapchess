@@ -26,8 +26,8 @@ const useGameHandlers = () => {
         socket.on('HANDLE_PROMOTED_PAWN', (payload) => {
             dispatch(transformPawn(payload))
         })
-        socket.on('PLAYER_RESIGNED', (player) => {
-            dispatch(playerResigned(player))
+        socket.on('PLAYER_RESIGNED', (payload) => {
+            dispatch(playerResigned(payload))
         })
     }, [])
 }

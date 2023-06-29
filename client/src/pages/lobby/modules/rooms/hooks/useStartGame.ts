@@ -8,18 +8,18 @@ import { opposite } from 'helpers'
 
 import API from 'api'
 import socket from 'socket'
+import createTime from './helpers/createTime'
 
 const useStartGame = () => {
     const dispatch = useDispatch()
     const guest = useAppSelector((store) => store.auth.user)
 
     return async (room: Room) => {
-        // const time = room.time
         const gameId = room._id
         const roomColor = room.actualColor
 
         const color = opposite(roomColor)
-        const time = room.time
+        const time = createTime(room.time)
 
         const [white, black] = color === 'w' ? [guest, room.user] : [room.user, guest]
 

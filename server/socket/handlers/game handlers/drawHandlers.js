@@ -11,8 +11,8 @@ const drawHandlers = (socket) => {
         socket.to(id).emit('OPPONENT_DECLINED_DRAW')
     })
 
-    socket.on('ACCEPT_DRAW', (id) => {
-        socket.to(id).emit('OPPONENT_ACCEPTED_DRAW')
+    socket.on('ACCEPT_DRAW', (id, drawTime) => {
+        socket.to(id).emit('OPPONENT_ACCEPTED_DRAW', drawTime)
     })
 }
 

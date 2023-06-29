@@ -33,11 +33,12 @@ const Piece = ({ piece }: PieceProps) => {
     const handleMouseClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         if (selected && nextMoves.includesDeeply([x, y])) {
             const { x: x1, y: y1 } = selected
-            const movePayload = [
+            const coordinates = [
                 [x1, y1],
                 [x, y]
             ]
-            dispatch(handleMove(movePayload))
+            const time = Date.now()
+            dispatch(handleMove({ coordinates, time }))
         } else if (turn === name[0]) {
             const startingPosition = [event.clientX, event.clientY]
             startDragging(event.currentTarget, coordinates, startingPosition)

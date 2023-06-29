@@ -5,7 +5,7 @@ import {
     resetGame,
     resignGame,
     fetchGame,
-    updateChessBoard
+    updateGame
 } from './chess games'
 
 import { createRoom, deleteRoom, fetchRooms } from './rooms'
@@ -15,7 +15,7 @@ const API = {
     createGame,
     deleteGame,
     fetchGame,
-    updateChessBoard,
+    updateGame,
     drawGame,
     resignGame,
     resetGame,

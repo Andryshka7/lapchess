@@ -14,8 +14,8 @@ const gameHandlers = (socket) => {
         socket.to(id).emit('HANDLE_PROMOTED_PAWN', payload)
     })
 
-    socket.on('PLAYER_RESIGNED', (id, player) => {
-        socket.to(id).emit('PLAYER_RESIGNED', player)
+    socket.on('PLAYER_RESIGNED', (id, payload) => {
+        socket.to(id).emit('PLAYER_RESIGNED', payload)
     })
 
     drawHandlers(socket)

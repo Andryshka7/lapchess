@@ -2,9 +2,14 @@ import axios from 'axios'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const resignGame = async (gameId: string, player: string) => {
+interface Payload {
+    color: string | null
+    resignTime: number
+}
+
+const resignGame = async (gameId: string | null, payload: Payload) => {
     try {
-        await axios.post(`${SERVER_URL}/chessGames/resignGame/${gameId}`, player)
+        await axios.post(`${SERVER_URL}/chessGames/resignGame/${gameId}`, payload)
     } catch (error) {
         throw error
     }

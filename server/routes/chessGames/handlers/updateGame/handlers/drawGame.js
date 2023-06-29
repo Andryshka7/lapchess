@@ -3,10 +3,22 @@ import { ChessGames } from '../../../../../models/index.js'
 const drawGame = async (req, res) => {
     try {
         const { gameId } = req.params
+        const { drawTime } = req.body
 
         const document = await ChessGames.findOne({ gameId })
         const lastPosition = document.positionHistory[document.positionHistory.length - 1]
         lastPosition.gameStatus.draw = true
+
+        const { time } = document
+        const { lastMove } = time
+
+        if (lastPosition.turn === 'w' && lastMove) {
+            time.whiteElapsedTime += drawTime - lastMove
+        } else if (lastPosition.turn === 'b' && lastMove) {
+            time.blackElapsedTime += drawTime - lastMove
+        }
+
+        document.markModified('time')
         document.markModified('positionHistory')
         await document.save()
 

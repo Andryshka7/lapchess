@@ -3,7 +3,13 @@ import initialState from '../../../../initialState/initialState'
 import { opposite } from 'helpers'
 
 const restartGame = (state: Chess) => {
-    const { gameId, color, white, black } = state
+    const {
+        gameId,
+        color,
+        white,
+        black,
+        time: { limit, addition }
+    } = state
     return {
         ...initialState,
         color: opposite(color as string),
@@ -12,8 +18,8 @@ const restartGame = (state: Chess) => {
         black: white,
         time: {
             ...initialState.time,
-            limit: state.time.limit,
-            addition: state.time.addition
+            limit,
+            addition
         },
         status: {
             ...initialState.status,

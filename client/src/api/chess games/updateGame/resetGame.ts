@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const restartGame = async (gameId: string) => {
+const resetGame = async (gameId: string) => {
     try {
         await axios.post(`${SERVER_URL}/chessGames/restartGame/${gameId}`)
     } catch (error) {
@@ -10,4 +10,4 @@ const restartGame = async (gameId: string) => {
     }
 }
 
-export default restartGame
+export default resetGame

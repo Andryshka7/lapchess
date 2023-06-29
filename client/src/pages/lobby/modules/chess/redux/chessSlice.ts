@@ -16,12 +16,13 @@ const chessSlice = createSlice({
             })
             .addCase(fetchGame.fulfilled, (state, action) => {
                 if (action.payload) {
-                    const { white, black, positionHistory } = action.payload
+                    const { white, black, time, positionHistory } = action.payload
 
                     state.status.isActive = true
 
                     state.white = white
                     state.black = black
+                    state.time = time
 
                     state.positionHistory = positionHistory
                     state.position = state.positionHistory.length - 1

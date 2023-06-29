@@ -10,11 +10,15 @@ import addToPositionHistory from '../helpers/addToPositionHistory'
 import { opposite } from 'helpers'
 import { Mastery } from 'pages/mastery/redux/types/Mastery'
 
-const handleMove = (state: Mastery, action: PayloadAction<number[][]>) => {
+interface MovePayload {
+    coordinates: number[][]
+}
+
+const handleMove = (state: Mastery, action: PayloadAction<MovePayload>) => {
     const { chessBoard } = state
     const { turn, gameField, promoted } = chessBoard
 
-    const [[x1, y1], [x2, y2]] = action.payload
+    const [[x1, y1], [x2, y2]] = action.payload.coordinates
 
     const [_, piece] = gameField[y1][x1]
 

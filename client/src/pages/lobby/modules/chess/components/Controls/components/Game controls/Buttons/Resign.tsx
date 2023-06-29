@@ -41,9 +41,10 @@ const Resign = () => {
             className={`${styles} ${pointerEvents} ${active ? 'text-amber-400' : ''}`}
             onClick={() => {
                 if (active) {
-                    dispatch(playerResigned(color as string))
-                    API.resignGame(gameId as string, color as string)
-                    socket.emit('PLAYER_RESIGNED', gameId, color)
+                    const resignTime = Date.now()
+                    dispatch(playerResigned({ color, resignTime }))
+                    API.resignGame(gameId, { color, resignTime })
+                    socket.emit('PLAYER_RESIGNED', gameId, { color, resignTime })
                 }
                 setActive((prev) => !prev)
             }}

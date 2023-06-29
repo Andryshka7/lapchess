@@ -1,11 +1,12 @@
 import { Chess } from '../../../types/Chess'
 import { PayloadAction } from '@reduxjs/toolkit'
 import socket from 'socket'
+import { Time } from 'types'
 
 type PayloadType = null | {
     gameId: string
     color: string
-    time: string
+    time: Time
 }
 
 const updateGameConfig = (state: Chess, action: PayloadAction<PayloadType>) => {
@@ -16,11 +17,8 @@ const updateGameConfig = (state: Chess, action: PayloadAction<PayloadType>) => {
 
         state.gameId = gameId
         state.color = color
+        state.time = time
 
-        const [limit, addition] = time.split(' + ')
-
-        state.time.addition = Number(addition) * 1000
-        state.time.limit = Number(limit) * 60 * 1000
     } else {
         socket.emit('LEAVE_ROOM', state.gameId)
         state.gameId = null

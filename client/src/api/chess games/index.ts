@@ -1,7 +1,7 @@
 export { default as createGame } from './createGame'
 export { default as deleteGame } from './deleteGame'
 export { default as fetchGame } from './fetchGame'
-export { default as updateChessBoard } from './updateGame/updateChessBoard'
+export { default as updateGame } from './updateGame/updateGame'
 export { default as resignGame } from './updateGame/resignGame'
 export { default as resetGame } from './updateGame/resetGame'
 export { default as drawGame } from './updateGame/drawGame'

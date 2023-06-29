@@ -16,15 +16,20 @@ import { opposite } from 'helpers'
 import { Chess } from '../../../types/Chess'
 import socket from 'socket'
 
-type MovePayload = number[][]
+type MovePayload = {
+    coordinates: number[][]
+    time: number
+}
 
 const handleMove = (state: Chess, action: PayloadAction<MovePayload>) => {
     setCurrentPosition(state)
 
+    const { coordinates, time } = action.payload
+
     const { chessBoard } = state
     const { turn, gameField, promoted } = chessBoard
 
-    const [[x1, y1], [x2, y2]] = action.payload
+    const [[x1, y1], [x2, y2]] = coordinates
 
     const [_, piece] = gameField[y1][x1]
 
@@ -50,21 +55,16 @@ const handleMove = (state: Chess, action: PayloadAction<MovePayload>) => {
         checkForDraw(chessBoard)
 
         addToPositionHistory(state)
+        handleTimeControls(state, time)
     }
 
     if (chessBoard.turn !== state.color) {
-        const payload = [
-            [x1, y1],
-            [x2, y2]
-        ]
-        socket.emit('HANDLE_MOVE', state.gameId, payload)
         updateGame(state)
+        socket.emit('HANDLE_MOVE', state.gameId, action.payload)
     }
 
     chessBoard.selected = null
     chessBoard.nextMoves = []
-
-    handleTimeControls(state)
 }
 
 export default handleMove

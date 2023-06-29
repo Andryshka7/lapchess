@@ -8,10 +8,12 @@ import socket from 'socket'
 import updateGame from '../helpers/updateGame'
 import setCurrentPosition from '../helpers/setCurrentPosition'
 import { Chess } from '../../../types/Chess'
+import { handleTimeControls } from '../helpers'
 
 interface PayloadType {
     promoted: PromotedPawn
     transformation: string
+    time: number
 }
 
 const transformPawn = (state: Chess, action: PayloadAction<PayloadType>) => {
@@ -20,7 +22,7 @@ const transformPawn = (state: Chess, action: PayloadAction<PayloadType>) => {
     const { chessBoard } = state
     const { turn, gameField, chessMoves } = chessBoard
 
-    const { promoted, transformation } = action.payload
+    const { promoted, transformation, time } = action.payload
     const { name, eaten, x1, y1, x2, y2 } = promoted
 
     chessBoard.promoted = null
@@ -38,10 +40,10 @@ const transformPawn = (state: Chess, action: PayloadAction<PayloadType>) => {
     checkForDraw(chessBoard)
 
     addToPositionHistory(state)
+    handleTimeControls(state, time)
 
     if (chessBoard.turn !== state.color) {
-        const payload = { promoted, transformation }
-        socket.emit('HANDLE_PROMOTED_PAWN', state.gameId, payload)
+        socket.emit('HANDLE_PROMOTED_PAWN', state.gameId, action.payload)
         updateGame(state)
     } else {
         eaten !== '0' ? playCaptureSound() : playMoveSound()

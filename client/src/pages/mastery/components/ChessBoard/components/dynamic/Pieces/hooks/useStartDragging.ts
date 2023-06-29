@@ -49,11 +49,11 @@ const useStartDragging = () => {
 
         if (selected && nextMoves.includesDeeply([x2, y2])) {
             const { x: x1, y: y1 } = selected
-            const movePayload = [
+            const coordinates = [
                 [x1, y1],
                 [x2, y2]
             ]
-            dispatch(handleMove(movePayload))
+            dispatch(handleMove({ coordinates }))
         }
     }
 

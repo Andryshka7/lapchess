@@ -1,11 +1,12 @@
 import { ChessGames } from '../../../../../models/index.js'
 
-const updateChessBoard = async (req, res) => {
+const updateGame = async (req, res) => {
     try {
         const { gameId } = req.params
-        const gameData = req.body
+        const { time, gameData } = req.body
 
         const document = await ChessGames.findOne({ gameId })
+        document.time = time
         document.positionHistory.push(gameData)
         await document.save()
 
@@ -16,4 +17,4 @@ const updateChessBoard = async (req, res) => {
     }
 }
 
-export default updateChessBoard
+export default updateGame

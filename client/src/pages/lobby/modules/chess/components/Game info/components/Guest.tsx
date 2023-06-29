@@ -1,7 +1,7 @@
 import GuestAvatar from 'assets/images/Guest.png'
 import { useAppSelector } from 'redux/store'
-import WhiteTimer from './Time/WhiteTimer'
-import BlackTimer from './Time/BlackTimer'
+import { opposite } from 'helpers'
+import Timer from './Time/Timer'
 
 const Guest = () => {
     const { white, black, color } = useAppSelector((store) => store.chess)
@@ -17,7 +17,7 @@ const Guest = () => {
                 <img src={avatar} className='h-8 w-8 rounded-full object-cover' alt='' />
                 <h3 className='ml-3 text-lg font-medium'>{username}</h3>
             </div>
-            {color === 'w' ? <BlackTimer /> : <WhiteTimer />}
+            <Timer color={opposite(color as 'w' | 'b')} />
         </div>
     )
 }

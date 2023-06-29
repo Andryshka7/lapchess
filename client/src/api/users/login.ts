@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { GameData, Player } from 'types'
+import { GameData, Player, Time } from 'types'
 
 interface Response {
     user: Player
     token: string
     chessGame: null | {
         gameId: string
-        time: string
+        time: Time
         white: Player
         black: Player
         positionHistory: GameData[]

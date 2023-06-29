@@ -55,9 +55,10 @@ const Draw = () => {
                 <BiCheckCircle
                     className='text-green-500 transition duration-200 hover:scale-105'
                     onClick={() => {
-                        dispatch(acceptDraw())
-                        API.drawGame(gameId as string)
-                        socket.emit('ACCEPT_DRAW', gameId)
+                        const drawTime = Date.now()
+                        dispatch(acceptDraw(drawTime))
+                        API.drawGame(gameId, drawTime)
+                        socket.emit('ACCEPT_DRAW', gameId, drawTime)
                     }}
                     size={24}
                 />

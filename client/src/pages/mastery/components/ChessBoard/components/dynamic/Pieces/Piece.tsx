@@ -16,11 +16,11 @@ const Piece = ({ piece }: PieceProps) => {
 
     const { turn, nextMoves, gameField, selected } = chessBoard
 
-    const coordinates = findPiece(piece, gameField)
+    const position = findPiece(piece, gameField)
 
-    if (!coordinates) return null
+    if (!position) return null
 
-    const [x, y] = coordinates
+    const [x, y] = position
     const name = gameField[y][x].slice(0, 2)
 
     const pointerEvents =
@@ -31,14 +31,14 @@ const Piece = ({ piece }: PieceProps) => {
     const handleMouseClick = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
         if (selected && nextMoves.includesDeeply([x, y])) {
             const { x: x1, y: y1 } = selected
-            const movePayload = [
+            const coordinates = [
                 [x1, y1],
                 [x, y]
             ]
-            dispatch(handleMove(movePayload))
+            dispatch(handleMove({ coordinates }))
         } else if (turn === name[0]) {
             const startingPosition = [event.clientX, event.clientY]
-            startDragging(event.currentTarget, coordinates, startingPosition)
+            startDragging(event.currentTarget, position, startingPosition)
         }
     }
     const piecePos = `${left(x)} ${top(y)}`

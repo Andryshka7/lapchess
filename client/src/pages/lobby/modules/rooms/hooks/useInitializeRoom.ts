@@ -5,6 +5,7 @@ import { addRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import { updateGameConfig } from 'pages/lobby/modules/chess/redux/actions'
 import API from 'api'
 import socket from 'socket'
+import createTime from './helpers/createTime'
 
 const useInitializeRoom = (hideModal: () => void) => {
     const dispatch = useAppDispatch()
@@ -21,7 +22,7 @@ const useInitializeRoom = (hideModal: () => void) => {
 
             const room = await API.createRoom(user?._id || null, selectedColor, actualColor, time)
 
-            const config = { gameId: room._id, color: actualColor, time: room.time }
+            const config = { gameId: room._id, color: actualColor, time: createTime(room.time) }
 
             socket.emit('CREATE_ROOM', room)
 

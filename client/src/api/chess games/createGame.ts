@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GameData, Player } from 'types'
+import { GameData, Player, Time } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
@@ -7,7 +7,7 @@ interface Payload {
     white: Player
     black: Player
     gameId: string
-    time: string
+    time: Time
     chessBoard: GameData
 }
 

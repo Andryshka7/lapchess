@@ -22,11 +22,11 @@ const Cells = () => {
                 const handleOnClick = () => {
                     if (selected && nextMoves.includesDeeply([x, y])) {
                         const { x: x1, y: y1 } = selected
-                        const movePayload = [
+                        const coordinates = [
                             [x1, y1],
                             [x, y]
                         ]
-                        dispatch(handleMove(movePayload))
+                        dispatch(handleMove({ coordinates }))
                     } else {
                         dispatch(clearField())
                     }
