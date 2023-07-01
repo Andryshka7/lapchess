@@ -5,6 +5,7 @@ export { default as fetchGame } from './fecthGame'
 export const {
     updateGame,
     quitGame,
+    cancelGame,
 
     selectPiece,
     clearField,
@@ -13,7 +14,7 @@ export const {
     transformPawn,
     switchPosition,
 
-    updateGameConfig,
+    updateGameId,
     setOpponentAgreed,
     setOwnerAgreed,
     setOpponentLeft,

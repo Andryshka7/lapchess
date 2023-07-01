@@ -4,7 +4,8 @@ import {
     handleMove,
     updateGame,
     playerResigned,
-    transformPawn
+    transformPawn,
+    cancelGame
 } from 'pages/lobby/modules/chess/redux/actions'
 import useDrawHandlers from './drawHandlers'
 import useRestartHandlers from './restartHandlers'
@@ -28,6 +29,9 @@ const useGameHandlers = () => {
         })
         socket.on('PLAYER_RESIGNED', (payload) => {
             dispatch(playerResigned(payload))
+        })
+        socket.on('CANCEL_GAME', () => {
+            dispatch(cancelGame())
         })
     }, [])
 }

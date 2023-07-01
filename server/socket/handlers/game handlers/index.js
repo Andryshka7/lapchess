@@ -17,6 +17,9 @@ const gameHandlers = (socket) => {
     socket.on('PLAYER_RESIGNED', (id, payload) => {
         socket.to(id).emit('PLAYER_RESIGNED', payload)
     })
+    socket.on('CANCEL_GAME', (id) => {
+        socket.to(id).emit('CANCEL_GAME')
+    })
 
     drawHandlers(socket)
     restartHandlers(socket)

@@ -4,32 +4,40 @@ import formatTime from './helpers/formatTime'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { playerResigned } from 'pages/lobby/modules/chess/redux/actions'
 import API from 'api'
-import socket from 'socket'
 
 const useTimer = (color: 'w' | 'b') => {
     const dispatch = useAppDispatch()
-    const { color: myColor, gameId } = useAppSelector((store) => store.chess)
+    const {
+        gameId,
+        chessBoard: {
+            chessMoves,
+            gameStatus: { winner, draw }
+        }
+    } = useAppSelector((store) => store.chess)
 
-    const [time, setTime] = useState<number | null>(null)
-    const { isActive, timeLeft, currentTime } = useCalculateTime(color)
+    const calculateTime = useCalculateTime(color)
+
+    const [timerState, setTimerState] = useState(calculateTime())
+
+    const turn = chessMoves.length % 2 === 0 ? 'w' : 'b'
+    const isActive = turn === color && !(winner || draw)
+
+    const { time, currentTime } = timerState
 
     useEffect(() => {
-        if (timeLeft !== null && isActive) {
-            if (timeLeft > 1) {
-                const interval = setInterval(() => setTime(timeLeft), 1)
+        if (time !== null && isActive) {
+            if (time > 1) {
+                const interval = setInterval(() => setTimerState(calculateTime()), 1)
                 return () => clearInterval(interval)
-            } else if (color === myColor) {
+            } else {
                 const resignTime = currentTime
                 dispatch(playerResigned({ color, resignTime }))
                 API.resignGame(gameId, { color, resignTime })
-                socket.emit('PLAYER_RESIGNED', gameId, { color, resignTime })
             }
         } else {
-            setTime(timeLeft)
+            setTimerState(calculateTime())
         }
-    }, [timeLeft, isActive])
-
-    if (color === 'w') console.log(time)
+    }, [time, isActive])
 
     return formatTime(time)
 }

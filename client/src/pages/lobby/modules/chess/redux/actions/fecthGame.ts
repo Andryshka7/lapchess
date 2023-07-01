@@ -1,16 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
-import { GameData, Player, Time } from 'types'
+import { ChessGame } from 'types'
 import socket from 'socket'
 import API from 'api'
-
-interface ChessGame {
-    gameId: string
-    white: Player
-    black: Player
-    time: Time
-    positionHistory: GameData[]
-}
 
 const fetchGame = createAsyncThunk<ChessGame | null, void, { state: RootState }>(
     'chess/fetchGame',

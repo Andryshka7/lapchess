@@ -1,14 +1,12 @@
 import { useAppSelector } from 'redux/store'
 import { useDispatch } from 'react-redux'
-import { updateGame, updateGameConfig } from 'pages/lobby/modules/chess/redux/actions'
+import { updateGame, updateGameId } from 'pages/lobby/modules/chess/redux/actions'
 import { removeRoom } from 'pages/lobby/modules/rooms/redux/actions'
-import createDocument from './helpers/createDocument'
+import { createTime, createDocument } from './helpers'
 import { Room } from 'types'
 import { opposite } from 'helpers'
-
 import API from 'api'
 import socket from 'socket'
-import createTime from './helpers/createTime'
 
 const useStartGame = () => {
     const dispatch = useDispatch()
@@ -30,12 +28,12 @@ const useStartGame = () => {
 
         dispatch(removeRoom(gameId))
 
-        dispatch(updateGameConfig({ gameId, color, time }))
-        dispatch(updateGame({ white, black }))
+        dispatch(updateGameId(gameId))
+        dispatch(updateGame({ white, black, time, color }))
 
         socket.emit('JOIN_ROOM', gameId)
         socket.emit('DELETE_ROOM', gameId)
-        socket.emit('GAME_INITIALIZED', gameId, { white, black })
+        socket.emit('GAME_INITIALIZED', gameId, { white, black, time, color: roomColor })
     }
 }
 

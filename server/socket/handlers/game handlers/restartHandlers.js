@@ -7,8 +7,8 @@ const restartHandlers = (socket) => {
         socket.to(id).emit('OPPONENT_LEFT')
     })
 
-    socket.on('RESTART_GAME', (id) => {
-        socket.to(id).emit('RESTARTED_GAME')
+    socket.on('RESTART_GAME', (id, restartTime) => {
+        socket.to(id).emit('RESTARTED_GAME', restartTime)
     })
 }
 

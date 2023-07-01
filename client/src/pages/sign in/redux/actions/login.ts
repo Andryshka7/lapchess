@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { LoginFormValues } from 'pages/sign in/types/FormValues'
 import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { isAxiosError } from 'axios'
-import { updateGame, updateGameConfig } from 'pages/lobby/modules/chess/redux/actions'
+import { updateGame, updateGameId } from 'pages/lobby/modules/chess/redux/actions'
 import { Player } from 'types'
 import API from 'api'
 
@@ -22,14 +22,16 @@ const login = createAsyncThunk<ResponseType, LoginFormValues>(
 
             if (chessGame) {
                 const color = chessGame?.white?.username === user?.username ? 'w' : 'b'
-                const { white, black, gameId, time, positionHistory } = chessGame
+                const { white, black, gameId, time, positionHistory, cancelled } = chessGame
 
-                dispatch(updateGameConfig({ color, gameId, time }))
+                dispatch(updateGameId(gameId))
                 dispatch(
                     updateGame({
                         white,
                         black,
-                        chessBoard: positionHistory[positionHistory.length - 1],
+                        cancelled,
+                        time,
+                        color,
                         positionHistory
                     })
                 )

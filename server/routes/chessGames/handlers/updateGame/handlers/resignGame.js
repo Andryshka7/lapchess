@@ -13,9 +13,9 @@ const resignGame = async (req, res) => {
         const { lastMove } = time
 
         if (lastPosition.turn === 'w' && lastMove) {
-            time.whiteElapsedTime += resignTime - lastMove
+            time.white.elapsedTime += resignTime - lastMove
         } else if (lastPosition.turn === 'b' && lastMove) {
-            time.blackElapsedTime += resignTime - lastMove
+            time.black.elapsedTime += resignTime - lastMove
         }
 
         document.markModified('time')

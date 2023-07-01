@@ -13,9 +13,9 @@ const drawGame = async (req, res) => {
         const { lastMove } = time
 
         if (lastPosition.turn === 'w' && lastMove) {
-            time.whiteElapsedTime += drawTime - lastMove
+            time.white.elapsedTime += drawTime - lastMove
         } else if (lastPosition.turn === 'b' && lastMove) {
-            time.blackElapsedTime += drawTime - lastMove
+            time.black.elapsedTime += drawTime - lastMove
         }
 
         document.markModified('time')

@@ -15,7 +15,7 @@ const chessBoard: ChessBoard = {
     promoted: null,
     enpassing: null,
     nextMoves: [],
-    chessMoves: [],
+    chessMoves: []
 }
 
 export default chessBoard

@@ -1,8 +1,11 @@
 import { Chess } from '../../../../types/Chess'
 import initialState from '../../../../initialState/initialState'
 import { opposite } from 'helpers'
+import { PayloadAction } from '@reduxjs/toolkit'
 
-const restartGame = (state: Chess) => {
+const restartGame = (state: Chess, action: PayloadAction<number>) => {
+    const restartTime = action.payload
+
     const {
         gameId,
         color,
@@ -10,6 +13,7 @@ const restartGame = (state: Chess) => {
         black,
         time: { limit, addition }
     } = state
+
     return {
         ...initialState,
         color: opposite(color as string),
@@ -18,6 +22,7 @@ const restartGame = (state: Chess) => {
         black: white,
         time: {
             ...initialState.time,
+            initTime: restartTime,
             limit,
             addition
         },

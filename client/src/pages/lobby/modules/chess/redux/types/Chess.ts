@@ -8,7 +8,7 @@ export interface Chess {
     time: Time
     chessBoard: ChessBoard
     position: number
-    positionHistory: GameData[],
+    positionHistory: GameData[]
     status: {
         isActive: boolean
         loading: boolean
@@ -21,6 +21,7 @@ export interface Chess {
             ownerSent: boolean
             opponentSent: boolean
         }
+        cancelled: boolean
         opponentLeft: boolean
     }
 }

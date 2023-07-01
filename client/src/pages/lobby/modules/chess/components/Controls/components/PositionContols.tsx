@@ -11,7 +11,7 @@ const PositionContols = () => {
     const dispatch = useAppDispatch()
     const { position, positionHistory } = useAppSelector((store) => store.chess)
     return (
-        <div className='ml-auto flex'>
+        <div className='flex'>
             <BsFillSkipBackwardFill
                 className='mr-2 cursor-pointer transition duration-200 hover:scale-110'
                 onClick={() => dispatch(switchPosition(0))}
@@ -23,12 +23,12 @@ const PositionContols = () => {
                 size={25}
             />
             <BsSkipEndFill
-                className='cursor-pointer transition duration-200 hover:scale-110'
+                className='mr-2 cursor-pointer transition duration-200 hover:scale-110'
                 onClick={() => dispatch(switchPosition(position + 1))}
                 size={25}
             />
             <BsFillSkipForwardFill
-                className='ml-2 cursor-pointer transition duration-200 hover:scale-110'
+                className='mr-2 cursor-pointer transition duration-200 hover:scale-110'
                 onClick={() => dispatch(switchPosition(positionHistory.length - 1))}
                 size={25}
             />

@@ -2,11 +2,17 @@ import chessBoard from 'config/chessBoard/chessBoard'
 import { Chess } from '../types/Chess'
 
 const time = {
-    whiteElapsedTime: 0,
-    blackElapsedTime: 0,
-
-    startingPoint: null,
+    initTime: null,
     lastMove: null,
+
+    white: {
+        firstMoveTime: 0,
+        elapsedTime: 0
+    },
+    black: {
+        firstMoveTime: 0,
+        elapsedTime: 0
+    },
 
     limit: null,
     addition: 0
@@ -24,6 +30,7 @@ const status = {
         ownerSent: false,
         opponentSent: false
     },
+    cancelled: false,
     opponentLeft: false
 }
 

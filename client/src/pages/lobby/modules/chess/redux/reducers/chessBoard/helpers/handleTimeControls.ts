@@ -6,21 +6,24 @@ const handleTimeControls = (state: Chess, currentTime: number) => {
         chessBoard: { turn, chessMoves }
     } = state
 
-    if (chessMoves.length === 2) {
-        time.startingPoint = currentTime
-        time.lastMove = currentTime
-    }
+    const { white, black, lastMove, initTime } = time
 
-    if (chessMoves.length > 2 && time.lastMove) {
-        const timePassed = currentTime - time.lastMove
-        
+    if (chessMoves.length === 1 && initTime) {
+        white.firstMoveTime = currentTime - initTime
+    } else if (chessMoves.length === 2 && lastMove) {
+        black.firstMoveTime = currentTime - lastMove
+    } else if (chessMoves.length > 2 && lastMove) {
+        const timePassed = currentTime - lastMove
+
         if (turn === 'b') {
-            time.whiteElapsedTime += timePassed
+            white.elapsedTime += timePassed
         } else {
-            time.blackElapsedTime += timePassed
+            black.elapsedTime += timePassed
         }
         time.lastMove = currentTime
     }
+
+    time.lastMove = currentTime
 }
 
 export default handleTimeControls

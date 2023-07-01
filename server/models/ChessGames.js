@@ -5,7 +5,8 @@ const chessGameSchema = new Schema({
     black: { type: ObjectId, ref: 'USERS' },
     gameId: { type: String, required: true },
     time: { type: Object, required: true },
-    positionHistory: { type: [Object], required: true }
+    positionHistory: { type: [Object], required: true },
+    cancelled: { type: Boolean }
 })
 
 export default model('CHESSGAMES', chessGameSchema)

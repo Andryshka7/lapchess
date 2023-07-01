@@ -17,9 +17,10 @@ const RestartButton = () => {
 
     const handleOnClick = () => {
         if (!ownerAgreed && opponentAgreed) {
-            socket.emit('RESTART_GAME', gameId)
-            API.resetGame(gameId as string)
-            dispatch(restartGame())
+            const restartTime = Date.now()
+            socket.emit('RESTART_GAME', gameId, restartTime)
+            API.restartGame(gameId as string, restartTime)
+            dispatch(restartGame(restartTime))
         } else {
             socket.emit('UPDATE_READY_TO_RESTART', gameId, !ownerAgreed)
             dispatch(setOwnerAgreed(!ownerAgreed))

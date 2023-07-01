@@ -9,9 +9,9 @@ const stopTimer = (state: Chess, currentTime: number) => {
     const { lastMove } = time
 
     if (turn === 'w' && lastMove) {
-        time.whiteElapsedTime += currentTime - lastMove
+        time.white.elapsedTime += currentTime - lastMove
     } else if (turn === 'b' && lastMove) {
-        time.blackElapsedTime += currentTime - lastMove
+        time.black.elapsedTime += currentTime - lastMove
     }
 }
 

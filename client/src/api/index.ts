@@ -2,9 +2,10 @@ import {
     createGame,
     deleteGame,
     drawGame,
-    resetGame,
+    restartGame,
     resignGame,
     fetchGame,
+    cancelGame,
     updateGame
 } from './chess games'
 
@@ -18,7 +19,8 @@ const API = {
     updateGame,
     drawGame,
     resignGame,
-    resetGame,
+    restartGame,
+    cancelGame,
 
     createRoom,
     deleteRoom,

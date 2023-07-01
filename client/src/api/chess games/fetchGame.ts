@@ -1,15 +1,7 @@
 import axios from 'axios'
-import { GameData, Player, Time } from 'types'
+import { ChessGame } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
-
-interface ChessGame {
-    gameId: string
-    white: Player
-    black: Player
-    time: Time
-    positionHistory: GameData[]
-}
 
 const fetchGame = async (gameId: string | null) => {
     try {

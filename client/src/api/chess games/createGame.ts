@@ -1,15 +1,9 @@
 import axios from 'axios'
-import { GameData, Player, Time } from 'types'
+import { ChessGame, GameData} from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-interface Payload {
-    white: Player
-    black: Player
-    gameId: string
-    time: Time
-    chessBoard: GameData
-}
+type Payload = Omit<ChessGame, 'positionHistory' | 'cancelled'> & { chessBoard: GameData }
 
 const createGame = async (document: Payload) => {
     try {

@@ -1,9 +1,15 @@
 interface Time {
-    whiteElapsedTime: number
-    blackElapsedTime: number
-
-    startingPoint: null | number
+    initTime: null | number
     lastMove: null | number
+
+    white: {
+        firstMoveTime: number
+        elapsedTime: number
+    }
+    black: {
+        firstMoveTime: number
+        elapsedTime: number
+    }
 
     limit: null | number
     addition: number

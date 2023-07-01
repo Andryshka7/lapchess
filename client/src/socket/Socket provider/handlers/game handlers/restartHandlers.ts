@@ -17,8 +17,8 @@ const useRestartHandlers = () => {
         socket.on('OPPONENT_LEFT', () => {
             dispatch(setOpponentLeft(true))
         })
-        socket.on('RESTARTED_GAME', () => {
-            dispatch(restartGame())
+        socket.on('RESTARTED_GAME', (restartTime) => {
+            dispatch(restartGame(restartTime))
         })
     }, [])
 }

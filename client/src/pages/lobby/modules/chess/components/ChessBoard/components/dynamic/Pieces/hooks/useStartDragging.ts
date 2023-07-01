@@ -15,7 +15,12 @@ const useStartDragging = () => {
     const {
         position,
         color,
-        chessBoard: { nextMoves, selected }
+        status: { cancelled },
+        chessBoard: {
+            nextMoves,
+            selected,
+            gameStatus: { winner, draw }
+        }
     } = useAppSelector((store) => store.chess)
 
     const [dragging, setDragging] = useState<null | Dragging>(null)
@@ -87,7 +92,7 @@ const useStartDragging = () => {
 
     useEffect(() => {
         setDragging(null)
-    }, [position])
+    }, [position, winner, draw, cancelled])
 
     return (element: HTMLElement, coordinates: number[], startingPosition: number[]) => {
         const [x1, y1] = coordinates
