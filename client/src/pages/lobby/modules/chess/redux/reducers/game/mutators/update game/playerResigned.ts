@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Chess } from '../../../types/Chess'
-import setCurrentPosition from '../../chessBoard/helpers/setCurrentPosition'
-import stopTimer from '../helpers/stopTimer'
+import { Chess } from '../../../../types/Chess'
+import setCurrentPosition from '../../../chessBoard/helpers/setCurrentPosition'
+import stopTimer from '../../helpers/stopTimer'
 
 interface ResignPayload {
     color: string | null

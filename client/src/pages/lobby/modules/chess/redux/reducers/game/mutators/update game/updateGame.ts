@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { GameData, Player, Time } from 'types'
-import { Chess } from '../../../types/Chess'
+import { Chess } from '../../../../types/Chess'
 import initialChessBoard from 'config/chessBoard/chessBoard'
 
 interface updateGamePayload {

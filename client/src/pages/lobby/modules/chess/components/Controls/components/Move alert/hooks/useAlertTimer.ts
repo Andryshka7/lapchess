@@ -10,32 +10,25 @@ const useAlertTimer = () => {
     const {
         gameId,
         status: { cancelled },
-        chessBoard: {
-            chessMoves,
-            gameStatus: { winner, draw }
-        }
+        chessBoard: { turn }
     } = useAppSelector((store) => store.chess)
 
     const calculateTime = useCalculateAlertTime()
     const [time, setTime] = useState(calculateTime())
 
-    const showAlert =
-        !(winner || draw || cancelled) && (chessMoves.length === 0 || chessMoves.length === 1)
-
     useEffect(() => {
-        if (time !== null && showAlert) {
+        setTime(calculateTime())
+        if (time !== null) {
             if (time > 0) {
-                const interval = setInterval(() => setTime(calculateTime()), 1)
+                const interval = setInterval(() => setTime(calculateTime()), 1000)
                 return () => clearInterval(interval)
-            } else {
+            } else if (!cancelled) {
                 dispatch(cancelGame())
                 API.cancelGame(gameId)
                 socket.emit('CANCEL_GAME', gameId)
             }
-        } else {
-            setTime(calculateTime())
         }
-    }, [time, chessMoves, showAlert])
+    }, [turn, time])
 
     return time
 }

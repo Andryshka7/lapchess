@@ -16,9 +16,9 @@ const useCalculateAlertTime = () => {
         if (winner || draw || cancelled) return null
 
         if (chessMoves.length === 0 && initTime) {
-            return Math.floor(15 - (currentTime - initTime) / 1000)
+            return Math.floor(20 - (currentTime - initTime) / 1000)
         } else if (chessMoves.length === 1 && lastMove) {
-            return Math.floor(15 - (currentTime - lastMove) / 1000)
+            return Math.floor(20 - (currentTime - lastMove) / 1000)
         } else {
             return null
         }

@@ -22,7 +22,6 @@ const restartGame = async (req, res) => {
 
         document.time.initTime = restartTime
         document.time.lastMove = null
-        document.cancelled = false
 
         const initialPosition = positionHistory[0]
         initialPosition.gameStatus.winner = null

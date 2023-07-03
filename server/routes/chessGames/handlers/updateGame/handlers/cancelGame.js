@@ -6,7 +6,6 @@ const cancelGame = async (req, res) => {
 
         const document = await ChessGames.findOne({ gameId })
         document.cancelled = true
-
         await document.save()
 
         res.status(200).send('Succesfully cancelled a chess game')

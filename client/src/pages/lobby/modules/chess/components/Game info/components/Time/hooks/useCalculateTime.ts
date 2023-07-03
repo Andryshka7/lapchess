@@ -4,19 +4,20 @@ const useCalculateTime = (color: 'w' | 'b') => {
     const {
         time: { white, black, limit, addition, initTime },
         positionHistory,
+        status: { cancelled },
         chessBoard: { chessMoves }
     } = useAppSelector((store) => store.chess)
 
     const { winner, draw } = positionHistory[positionHistory.length - 1].gameStatus
 
     const turn = chessMoves.length % 2 === 0 ? 'w' : 'b'
-    const isActive = turn === color && !(winner || draw)
+    const isActive = turn === color && !(winner || draw || cancelled) && chessMoves.length >= 2
 
     const calculateTime = () => {
         const currentTime = Date.now()
 
         if (chessMoves.length < 2 || !initTime || !limit) {
-            return { time: limit, currentTime }
+            return { time: limit, isActive, currentTime }
         }
 
         const startingPoint = initTime + white.firstMoveTime + black.firstMoveTime
@@ -34,7 +35,7 @@ const useCalculateTime = (color: 'w' | 'b') => {
         const timeElapsed = currentTime - startingPoint - opponentElapsedTime
         const time = limit - (isActive ? timeElapsed : playerElapsedTime) + extraTime
 
-        return { time, currentTime }
+        return { time, isActive, currentTime }
     }
 
     return calculateTime

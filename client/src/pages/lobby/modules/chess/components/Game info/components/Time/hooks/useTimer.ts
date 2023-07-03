@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import useCalculateTime from './useCalculateTime'
-import formatTime from './helpers/formatTime'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { playerResigned } from 'pages/lobby/modules/chess/redux/actions'
+import useCalculateTime from './useCalculateTime'
+import formatTime from './helpers/formatTime'
 import API from 'api'
 
 const useTimer = (color: 'w' | 'b') => {
@@ -10,8 +10,8 @@ const useTimer = (color: 'w' | 'b') => {
     const {
         gameId,
         chessBoard: {
-            chessMoves,
-            gameStatus: { winner, draw }
+            turn,
+            gameStatus: { winner }
         }
     } = useAppSelector((store) => store.chess)
 
@@ -19,25 +19,21 @@ const useTimer = (color: 'w' | 'b') => {
 
     const [timerState, setTimerState] = useState(calculateTime())
 
-    const turn = chessMoves.length % 2 === 0 ? 'w' : 'b'
-    const isActive = turn === color && !(winner || draw)
-
-    const { time, currentTime } = timerState
+    const { time, isActive, currentTime } = timerState
 
     useEffect(() => {
+        setTimerState(calculateTime())
         if (time !== null && isActive) {
-            if (time > 1) {
-                const interval = setInterval(() => setTimerState(calculateTime()), 1)
+            if (time > 1000) {
+                const interval = setInterval(() => setTimerState(calculateTime()), 1000)
                 return () => clearInterval(interval)
-            } else {
+            } else if (!winner) {
                 const resignTime = currentTime
                 dispatch(playerResigned({ color, resignTime }))
                 API.resignGame(gameId, { color, resignTime })
             }
-        } else {
-            setTimerState(calculateTime())
         }
-    }, [time, isActive])
+    }, [time, turn, winner])
 
     return formatTime(time)
 }
