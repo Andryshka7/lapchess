@@ -2,9 +2,10 @@ import Portal from 'ui/Portal'
 import Modal from './modal/Modal'
 import { useState } from 'react'
 import { useAppSelector } from 'redux/store'
+import { BiMessageSquareAdd } from 'react-icons/bi'
 
 const CreateRoom = () => {
-    const { gameId } = useAppSelector((store) => store.chess)
+    const gameId = useAppSelector((store) => store.chess.gameId)
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -24,9 +25,7 @@ const CreateRoom = () => {
                 }`}
                 onClick={openModal}
             >
-                <div className='h-10 w-10 rounded-full bg-green-600 text-5xl font-medium'>
-                    <p className='relative -top-2 left-[5px] text-[45px] font-normal'>+</p>
-                </div>
+                <BiMessageSquareAdd className='text-green-600' size={45} />
                 <h2 className='text-2xl font-medium'>Create game</h2>
             </div>
         </>

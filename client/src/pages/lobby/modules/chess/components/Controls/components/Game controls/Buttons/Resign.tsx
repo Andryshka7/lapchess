@@ -1,19 +1,26 @@
 import { useEffect, useState } from 'react'
+import { createSelector } from '@reduxjs/toolkit'
+import { RootState, useAppDispatch, useAppSelector } from 'redux/store'
 import { BsFlagFill } from 'react-icons/bs'
-import { useAppDispatch, useAppSelector } from 'redux/store'
+import { resignGameQuery } from 'api/chess games'
 import { playerResigned } from 'pages/lobby/modules/chess/redux/actions'
-import API from 'api'
 import socket from 'socket'
+
+const chessDataSelector = createSelector(
+    [
+        (store: RootState) => store.chess.gameId,
+        (store: RootState) => store.chess.color,
+        (store: RootState) => store.chess.position,
+        (store: RootState) => store.chess.positionHistory
+    ],
+    (gameId, color, position, positionHistory) => ({ gameId, color, position, positionHistory })
+)
 
 const Resign = () => {
     const dispatch = useAppDispatch()
-    const {
-        gameId,
-        color,
-        position,
-        positionHistory,
-        chessBoard: { gameStatus }
-    } = useAppSelector((store) => store.chess)
+
+    const { gameId, color, position, positionHistory } = useAppSelector(chessDataSelector)
+    const { winner, draw } = useAppSelector((store) => store.chess.chessBoard.gameStatus)
 
     const [active, setActive] = useState(false)
 
@@ -28,8 +35,6 @@ const Resign = () => {
 
     const styles = 'cursor-pointer transition duration-200 hover:scale-110'
 
-    const { winner, draw } = gameStatus
-
     const pointerEvents =
         winner || draw || position !== positionHistory.length - 1
             ? 'pointer-events-none'
@@ -43,7 +48,7 @@ const Resign = () => {
                 if (active) {
                     const resignTime = Date.now()
                     dispatch(playerResigned({ color, resignTime }))
-                    API.resignGame(gameId, { color, resignTime })
+                    resignGameQuery(gameId, { color, resignTime })
                     socket.emit('PLAYER_RESIGNED', gameId, { color, resignTime })
                 }
                 setActive((prev) => !prev)

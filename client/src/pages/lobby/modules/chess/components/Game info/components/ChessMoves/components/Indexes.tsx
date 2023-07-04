@@ -1,8 +1,7 @@
 import { useAppSelector } from 'redux/store'
 
 const Indexes = () => {
-    const { chessMoves } = useAppSelector((store) => store.chess.chessBoard)
-
+    const chessMoves = useAppSelector((store) => store.chess.chessBoard.chessMoves)
     const indexes = Array.from({ length: Math.ceil(chessMoves.length / 2) }, (_, i) => i)
 
     return (

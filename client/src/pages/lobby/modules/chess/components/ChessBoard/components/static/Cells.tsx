@@ -12,10 +12,9 @@ for (let i = 0; i < 64; i++) {
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const {
-        color,
-        chessBoard: { selected, nextMoves }
-    } = useAppSelector((store) => store.chess)
+    const color = useAppSelector((store) => store.chess.color)
+    const selected = useAppSelector((store) => store.chess.chessBoard.selected)
+    const nextMoves = useAppSelector((store) => store.chess.chessBoard.nextMoves)
 
     return (
         <>

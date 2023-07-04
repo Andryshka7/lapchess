@@ -1,10 +1,10 @@
 import { useAppSelector } from 'redux/store'
-import Room from './components/room/Room'
-import CreateRoom from './components/create room/CreateRoom'
+import { selectAllRooms } from './redux/roomsSlice'
+import { Room, CreateRoom } from './components'
 import noResults from 'assets/images/no-results.png'
 
 const Rooms = () => {
-    const { rooms } = useAppSelector((store) => store.rooms)
+    const rooms = useAppSelector(selectAllRooms)
     return (
         <div className='mx-auto my-3 w-[1000px]'>
             <div className='scrollbar-thin h-[636px] w-full overflow-hidden overflow-y-scroll rounded-lg bg-black bg-opacity-10 p-2.5 pb-1 will-change-scroll'>
@@ -23,7 +23,6 @@ const Rooms = () => {
                     </div>
                 )}
             </div>
-
             <CreateRoom />
         </div>
     )

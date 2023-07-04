@@ -5,7 +5,8 @@ import { removeRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import { createTime, createDocument } from './helpers'
 import { Room } from 'types'
 import { opposite } from 'helpers'
-import API from 'api'
+import { createGameQuery } from 'api/chess games'
+import { deleteRoomQuery } from 'api/rooms'
 import socket from 'socket'
 
 const useStartGame = () => {
@@ -23,8 +24,8 @@ const useStartGame = () => {
 
         const document = createDocument(white, black, time, gameId)
 
-        await API.createGame(document)
-        await API.deleteRoom(gameId)
+        await createGameQuery(document)
+        await deleteRoomQuery(gameId)
 
         dispatch(removeRoom(gameId))
 

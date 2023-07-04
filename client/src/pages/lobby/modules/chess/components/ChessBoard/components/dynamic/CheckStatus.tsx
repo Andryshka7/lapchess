@@ -2,12 +2,8 @@ import { useAppSelector } from 'redux/store'
 import { left, top } from 'config/styles/piece'
 
 const CheckStatus = () => {
-    const {
-        color,
-        chessBoard: {
-            gameStatus: { check }
-        }
-    } = useAppSelector((store) => store.chess)
+    const color = useAppSelector((store) => store.chess.color)
+    const check = useAppSelector((store) => store.chess.chessBoard.gameStatus.check)
 
     if (!check) return null
 

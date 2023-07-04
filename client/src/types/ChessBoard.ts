@@ -1,5 +1,3 @@
-import { Coordinates } from '.'
-
 export interface PromotedPawn {
     x1: number
     y1: number
@@ -7,6 +5,11 @@ export interface PromotedPawn {
     y2: number
     name: string
     eaten: string
+}
+
+export interface Coordinates {
+    x: number
+    y: number
 }
 
 interface GameStatus {

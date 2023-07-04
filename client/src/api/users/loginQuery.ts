@@ -14,7 +14,7 @@ interface Data {
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const login = async (data: Data) => {
+const loginQuery = async (data: Data) => {
     try {
         const response = await axios.post<Response>(`${SERVER_URL}/users/login`, data)
         return response.data
@@ -23,4 +23,4 @@ const login = async (data: Data) => {
     }
 }
 
-export default login
+export default loginQuery

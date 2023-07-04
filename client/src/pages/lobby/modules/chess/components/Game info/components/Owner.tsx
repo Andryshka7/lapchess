@@ -3,7 +3,9 @@ import { useAppSelector } from 'redux/store'
 import Timer from './Time/Timer'
 
 const Owner = () => {
-    const { white, black, color } = useAppSelector((store) => store.chess)
+    const white = useAppSelector((store) => store.chess.white)
+    const black = useAppSelector((store) => store.chess.black)
+    const color = useAppSelector((store) => store.chess.color)
 
     const user = color === 'w' ? white : black
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { handleMove, selectPiece } from 'pages/lobby/modules/chess/redux/actions'
 import { applyDraggingStyle, unApplyDraggingStyle } from './helpers'
-import { Coordinates } from 'types'
+import { Coordinates } from 'types/ChessBoard'
 
 interface Dragging {
     element: HTMLElement
@@ -12,16 +12,12 @@ interface Dragging {
 
 const useStartDragging = () => {
     const dispatch = useAppDispatch()
+    const { position, color, status } = useAppSelector((store) => store.chess)
     const {
-        position,
-        color,
-        status: { cancelled },
-        chessBoard: {
-            nextMoves,
-            selected,
-            gameStatus: { winner, draw }
-        }
-    } = useAppSelector((store) => store.chess)
+        nextMoves,
+        selected,
+        gameStatus: { winner, draw }
+    } = useAppSelector((store) => store.chess.chessBoard)
 
     const [dragging, setDragging] = useState<null | Dragging>(null)
 
@@ -92,7 +88,7 @@ const useStartDragging = () => {
 
     useEffect(() => {
         setDragging(null)
-    }, [position, winner, draw, cancelled])
+    }, [position, winner, draw, status])
 
     return (element: HTMLElement, coordinates: number[], startingPosition: number[]) => {
         const [x1, y1] = coordinates

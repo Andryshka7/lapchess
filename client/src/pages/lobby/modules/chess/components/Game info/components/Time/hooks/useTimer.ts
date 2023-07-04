@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { playerResigned } from 'pages/lobby/modules/chess/redux/actions'
+import { resignGameQuery } from 'api/chess games'
 import useCalculateTime from './useCalculateTime'
 import formatTime from './helpers/formatTime'
-import API from 'api'
 
 const useTimer = (color: 'w' | 'b') => {
     const dispatch = useAppDispatch()
-    const {
-        gameId,
-        chessBoard: {
-            turn,
-            gameStatus: { winner }
-        }
-    } = useAppSelector((store) => store.chess)
+
+    const gameId = useAppSelector((store) => store.chess.gameId)
+    const turn = useAppSelector((store) => store.chess.chessBoard.turn)
+    const { winner } = useAppSelector((store) => store.chess.chessBoard.gameStatus)
 
     const calculateTime = useCalculateTime(color)
 
@@ -30,7 +27,7 @@ const useTimer = (color: 'w' | 'b') => {
             } else if (!winner) {
                 const resignTime = currentTime
                 dispatch(playerResigned({ color, resignTime }))
-                API.resignGame(gameId, { color, resignTime })
+                resignGameQuery(gameId, { color, resignTime })
             }
         }
     }, [time, turn, winner])

@@ -3,7 +3,7 @@ import { switchPosition } from 'pages/lobby/modules/chess/redux/actions'
 
 const Moves = () => {
     const dispatch = useAppDispatch()
-    const { chessMoves } = useAppSelector((store) => store.chess.chessBoard)
+    const chessMoves = useAppSelector((store) => store.chess.chessBoard.chessMoves)
 
     return (
         <div className='w-[260px]'>

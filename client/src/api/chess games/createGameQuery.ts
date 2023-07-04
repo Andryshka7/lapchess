@@ -5,7 +5,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 type Payload = Omit<ChessGame, 'positionHistory' | 'cancelled'> & { chessBoard: GameData }
 
-const createGame = async (document: Payload) => {
+const createGameQuery = async (document: Payload) => {
     try {
         const response = await axios.put<string>(`${SERVER_URL}/chessGames`, document)
         return response.data
@@ -14,4 +14,4 @@ const createGame = async (document: Payload) => {
     }
 }
 
-export default createGame
+export default createGameQuery

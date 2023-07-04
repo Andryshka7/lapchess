@@ -1,16 +1,15 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { restartGame, setOwnerAgreed } from 'pages/lobby/modules/chess/redux/actions'
+import { restartGameQuery } from 'api/chess games'
 import socket from 'socket'
-import API from 'api'
 
 const RestartButton = () => {
     const dispatch = useAppDispatch()
-    const { gameId, status } = useAppSelector((store) => store.chess)
-
+    const gameId = useAppSelector((store) => store.chess.gameId)
     const {
         opponentLeft,
         restartState: { ownerAgreed, opponentAgreed }
-    } = status
+    } = useAppSelector((store) => store.chess.status)
 
     const buttonBg = ownerAgreed ? 'bg-green-600' : 'bg-gray-600'
     const disabled = opponentLeft ? 'pointer-events-none opacity-70' : ''
@@ -19,7 +18,7 @@ const RestartButton = () => {
         if (!ownerAgreed && opponentAgreed) {
             const restartTime = Date.now()
             socket.emit('RESTART_GAME', gameId, restartTime)
-            API.restartGame(gameId as string, restartTime)
+            restartGameQuery(gameId as string, restartTime)
             dispatch(restartGame(restartTime))
         } else {
             socket.emit('UPDATE_READY_TO_RESTART', gameId, !ownerAgreed)

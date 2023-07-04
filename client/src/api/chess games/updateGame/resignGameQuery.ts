@@ -7,7 +7,7 @@ interface Payload {
     resignTime: number
 }
 
-const resignGame = async (gameId: string | null, payload: Payload) => {
+const resignGameQuery = async (gameId: string | null, payload: Payload) => {
     try {
         await axios.post(`${SERVER_URL}/chessGames/resignGame/${gameId}`, payload)
     } catch (error) {
@@ -15,4 +15,4 @@ const resignGame = async (gameId: string | null, payload: Payload) => {
     }
 }
 
-export default resignGame
+export default resignGameQuery

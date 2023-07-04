@@ -2,12 +2,8 @@ import { useAppSelector } from 'redux/store'
 import { QuitButton, RestartButton } from './components'
 
 const GameOver = () => {
-    const {
-        status: { cancelled },
-        chessBoard: { gameStatus }
-    } = useAppSelector((store) => store.chess)
-
-    const { winner, draw } = gameStatus
+    const { winner, draw } = useAppSelector((store) => store.chess.chessBoard.gameStatus)
+    const cancelled = useAppSelector((store) => store.chess.status.cancelled)
 
     if (!(winner || draw || cancelled)) return null
 

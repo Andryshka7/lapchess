@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
 import { ChessGame } from 'types'
+import { fetchGameQuery } from 'api/chess games'
 import socket from 'socket'
-import API from 'api'
 
 const fetchGame = createAsyncThunk<ChessGame | null, void, { state: RootState }>(
     'chess/fetchGame',
@@ -12,7 +12,7 @@ const fetchGame = createAsyncThunk<ChessGame | null, void, { state: RootState }>
         if (gameId) {
             socket.emit('JOIN_ROOM', gameId)
         }
-        const chessGame = await API.fetchGame(gameId)
+        const chessGame = await fetchGameQuery(gameId)
 
         return chessGame
     }

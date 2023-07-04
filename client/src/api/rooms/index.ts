@@ -1,3 +1,3 @@
-export { default as createRoom } from './createRoom'
-export { default as deleteRoom } from './deleteRoom'
-export { default as fetchRooms } from './fetchRooms'
+export { default as createRoomQuery } from './createRoomQuery'
+export { default as deleteRoomQuery } from './deleteRoomQuery'
+export { default as fetchRoomsQuery } from './fetchRoomsQuery'

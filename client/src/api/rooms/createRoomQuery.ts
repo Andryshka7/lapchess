@@ -3,7 +3,7 @@ import { Room } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const createRoom = async (
+const createRoomQuery = async (
     user: string | null,
     selectedColor: string,
     actualColor: string,
@@ -18,4 +18,4 @@ const createRoom = async (
     }
 }
 
-export default createRoom
+export default createRoomQuery

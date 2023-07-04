@@ -9,7 +9,8 @@ import { switchPosition } from 'pages/lobby/modules/chess/redux/actions'
 
 const PositionContols = () => {
     const dispatch = useAppDispatch()
-    const { position, positionHistory } = useAppSelector((store) => store.chess)
+    const position = useAppSelector((store) => store.chess.position)
+    const positionHistory = useAppSelector((store) => store.chess.positionHistory)
     return (
         <div className='flex'>
             <BsFillSkipBackwardFill

@@ -5,7 +5,7 @@ import Indexes from './components/Indexes'
 import useBindArrows from './hooks/useBindArrows'
 
 const ChessMoves = () => {
-    const { chessMoves } = useAppSelector((store) => store.chess.chessBoard)
+    const chessMoves = useAppSelector((store) => store.chess.chessBoard.chessMoves)
     const ref = useRef<HTMLDivElement | null>(null)
 
     useBindArrows()

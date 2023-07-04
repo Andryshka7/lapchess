@@ -4,13 +4,9 @@ import MoveAlert from './components/Move alert/MoveAlert'
 import PositionContols from './components/PositionContols'
 
 const Controls = () => {
-    const {
-        status: { cancelled },
-        chessBoard: {
-            chessMoves,
-            gameStatus: { winner, draw }
-        }
-    } = useAppSelector((store) => store.chess)
+    const { cancelled } = useAppSelector((store) => store.chess.status)
+    const { winner, draw } = useAppSelector((store) => store.chess.chessBoard.gameStatus)
+    const chessMoves = useAppSelector((store) => store.chess.chessBoard.chessMoves)
 
     const showAlert =
         !(winner || draw || cancelled) && (chessMoves.length === 0 || chessMoves.length === 1)

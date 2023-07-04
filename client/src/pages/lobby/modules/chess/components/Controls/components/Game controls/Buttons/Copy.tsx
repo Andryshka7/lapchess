@@ -1,13 +1,11 @@
-import { useAppDispatch, useAppSelector } from 'redux/store'
+import { useAppSelector } from 'redux/store'
 import { RiFileCopy2Fill } from 'react-icons/ri'
 import { convertToFEN } from 'helpers/tools/FEN'
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
+import useShowAlert from 'ui/components/Alert/hooks'
 
 const Copy = () => {
-    const dispatch = useAppDispatch()
-    const { chessBoard } = useAppSelector((store) => store.chess)
-
-    const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
+    const chessBoard = useAppSelector((store) => store.chess.chessBoard)
+    const alert = useShowAlert()
 
     const handleOnClick = async () => {
         const fen = convertToFEN(chessBoard)

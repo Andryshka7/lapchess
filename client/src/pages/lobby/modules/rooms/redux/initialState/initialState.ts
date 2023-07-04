@@ -1,9 +1,8 @@
-import { Rooms } from '../types/Rooms'
+import roomsAdapter from './roomsAdapter'
 
-const initialState: Rooms = {
-    loading: true,
-    error: false,
-    rooms: []
-}
+const initialState = roomsAdapter.getInitialState({
+    loading: false,
+    error: false
+})
 
 export default initialState

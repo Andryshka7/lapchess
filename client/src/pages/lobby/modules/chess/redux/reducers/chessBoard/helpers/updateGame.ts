@@ -1,5 +1,5 @@
-import API from 'api'
 import { Chess } from '../../../types/Chess'
+import { updateGameQuery } from 'api/chess games'
 
 const updateGame = (state: Chess) => {
     const { gameId, time, chessBoard } = state
@@ -15,7 +15,7 @@ const updateGame = (state: Chess) => {
         coverMoves
     }
 
-    API.updateGame(gameId as string, { time, gameData })
+    updateGameQuery(gameId as string, { time, gameData })
 }
 
 export default updateGame

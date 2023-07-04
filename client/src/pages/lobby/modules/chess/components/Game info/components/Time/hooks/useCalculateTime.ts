@@ -1,14 +1,17 @@
-import { useAppSelector } from 'redux/store'
+import { createSelector } from '@reduxjs/toolkit'
+import { RootState, useAppSelector } from 'redux/store'
+
+const gameStatusSelector = createSelector(
+    [(store: RootState) => store.chess.positionHistory],
+    (positionHistory) => positionHistory[positionHistory.length - 1].gameStatus
+)
 
 const useCalculateTime = (color: 'w' | 'b') => {
-    const {
-        time: { white, black, limit, addition, initTime },
-        positionHistory,
-        status: { cancelled },
-        chessBoard: { chessMoves }
-    } = useAppSelector((store) => store.chess)
+    const cancelled = useAppSelector((store) => store.chess.status.cancelled)
+    const chessMoves = useAppSelector((store) => store.chess.chessBoard.chessMoves)
 
-    const { winner, draw } = positionHistory[positionHistory.length - 1].gameStatus
+    const { white, black, limit, addition, initTime } = useAppSelector((store) => store.chess.time)
+    const { winner, draw } = useAppSelector(gameStatusSelector)
 
     const turn = chessMoves.length % 2 === 0 ? 'w' : 'b'
     const isActive = turn === color && !(winner || draw || cancelled) && chessMoves.length >= 2

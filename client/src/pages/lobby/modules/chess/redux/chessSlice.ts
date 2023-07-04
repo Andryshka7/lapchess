@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 import initialState from './initialState/initialState'
 import chessBoard from 'config/chessBoard/chessBoard'
 import reducers from './reducers'
 import fetchGame from './actions/fecthGame'
+import { RootState } from 'redux/store'
 
 const chessSlice = createSlice({
     name: 'chess',
@@ -40,5 +41,18 @@ const chessSlice = createSlice({
             })
     }
 })
+
+export const selectChessLoading = createSelector(
+    [(store: RootState) => store.chess.status.loading],
+    (loading) => loading
+)
+export const selectChessError = createSelector(
+    [(store: RootState) => store.chess.status.error],
+    (error) => error
+)
+export const selectChessIsActive = createSelector(
+    [(store: RootState) => store.chess.status.isActive],
+    (isActive) => isActive
+)
 
 export default chessSlice

@@ -1,14 +1,10 @@
 import { useAppSelector } from 'redux/store'
 
 const useCalculateAlertTime = () => {
-    const {
-        status: { cancelled },
-        chessBoard: {
-            chessMoves,
-            gameStatus: { winner, draw }
-        },
-        time: { initTime, lastMove }
-    } = useAppSelector((store) => store.chess)
+    const cancelled = useAppSelector((store) => store.chess.status.cancelled)
+    const chessMoves = useAppSelector((store) => store.chess.chessBoard.chessMoves)
+    const { winner, draw } = useAppSelector((store) => store.chess.chessBoard.gameStatus)
+    const { initTime, lastMove } = useAppSelector((store) => store.chess.time)
 
     return () => {
         const currentTime = Date.now()

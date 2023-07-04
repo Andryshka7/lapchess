@@ -2,7 +2,7 @@ import { left, top } from 'config/styles/piece'
 import { useAppSelector } from 'redux/store'
 
 const Notation = () => {
-    const { color } = useAppSelector((store) => store.chess)
+    const color = useAppSelector((store) => store.chess.color)
 
     const letters = color === 'b' ? 'hgfedcba' : 'abcdefgh'
     const digits = color === 'b' ? '12345678' : '87654321'

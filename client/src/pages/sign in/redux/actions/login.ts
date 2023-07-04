@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { LoginFormValues } from 'pages/sign in/types/FormValues'
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
+import { showAlert } from 'ui/components/Alert/redux/alertSlice'
 import { isAxiosError } from 'axios'
-import { updateGame, updateGameId } from 'pages/lobby/modules/chess/redux/actions'
+import { resetChess, updateGame, updateGameId } from 'pages/lobby/modules/chess/redux/actions'
 import { Player } from 'types'
-import API from 'api'
+import { loginQuery } from 'api/users'
 
 type ResponseType = {
     user: Player
@@ -18,12 +18,13 @@ const login = createAsyncThunk<ResponseType, LoginFormValues>(
         const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
         try {
-            const { user, token, chessGame } = await API.login(data)
+            const { user, token, chessGame } = await loginQuery(data)
 
             if (chessGame) {
                 const color = chessGame?.white?.username === user?.username ? 'w' : 'b'
                 const { white, black, gameId, time, positionHistory, cancelled } = chessGame
 
+                dispatch(resetChess())
                 dispatch(updateGameId(gameId))
                 dispatch(
                     updateGame({
@@ -36,7 +37,7 @@ const login = createAsyncThunk<ResponseType, LoginFormValues>(
                     })
                 )
             }
-
+            alert(`Authorized as ${user?.username}`, 'success')
             return { user, token }
         } catch (error) {
             if (isAxiosError(error)) {

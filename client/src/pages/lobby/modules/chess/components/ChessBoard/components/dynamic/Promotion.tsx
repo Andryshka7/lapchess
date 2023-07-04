@@ -12,10 +12,9 @@ const getChoices = ([x, y]: number[]) => {
 
 const Promotion = () => {
     const dispatch = useAppDispatch()
-    const {
-        color,
-        chessBoard: { turn, promoted }
-    } = useAppSelector((store) => store.chess)
+    const turn = useAppSelector((store) => store.chess.chessBoard.turn)
+    const color = useAppSelector((store) => store.chess.color)
+    const promoted = useAppSelector((store) => store.chess.chessBoard.promoted)
 
     if (!promoted) return null
 

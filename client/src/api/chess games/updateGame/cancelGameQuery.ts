@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const cancelGame = async (gameId: string | null) => {
+const cancelGameQuery = async (gameId: string | null) => {
     try {
         await axios.post(`${SERVER_URL}/chessGames/cancelGame/${gameId}`)
     } catch (error) {
@@ -10,4 +10,4 @@ const cancelGame = async (gameId: string | null) => {
     }
 }
 
-export default cancelGame
+export default cancelGameQuery

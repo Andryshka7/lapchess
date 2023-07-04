@@ -2,7 +2,7 @@ import { left, top } from 'config/styles/piece'
 import { useAppSelector } from 'redux/store'
 
 const CheckStatus = () => {
-    const { check } = useAppSelector((store) => store.mastery.chessBoard.gameStatus)
+    const check = useAppSelector((store) => store.mastery.chessBoard.gameStatus.check)
 
     if (!check) return null
 

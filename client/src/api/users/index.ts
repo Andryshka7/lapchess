@@ -1,2 +1,2 @@
-export { default as login } from './login'
-export { default as signUp } from './signUp'
+export { default as loginQuery } from './loginQuery'
+export { default as signUpQuery } from './signUpQuery'

@@ -1,25 +1,25 @@
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { addRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import { updateGameId } from 'pages/lobby/modules/chess/redux/actions'
-import API from 'api'
+import { createRoomQuery } from 'api/rooms'
+import useShowAlert from 'ui/components/Alert/hooks'
 import socket from 'socket'
 
-const useInitializeRoom = (hideModal: () => void) => {
+const useCreateRoom = (hideModal: () => void) => {
     const dispatch = useAppDispatch()
     const { user } = useAppSelector((store) => store.auth)
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
-    const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
+    const alert = useShowAlert()
 
-    const initializeRoom = async (selectedColor: string, actualColor: string, time: string) => {
+    const createRoom = async (selectedColor: string, actualColor: string, time: string) => {
         try {
             setLoading(true)
 
-            const room = await API.createRoom(user?._id || null, selectedColor, actualColor, time)
+            const room = await createRoomQuery(user?._id || null, selectedColor, actualColor, time)
 
             socket.emit('CREATE_ROOM', room)
             const gameId = room._id
@@ -35,7 +35,7 @@ const useInitializeRoom = (hideModal: () => void) => {
         }
     }
 
-    return { loading, error, initializeRoom }
+    return { loading, error, createRoom }
 }
 
-export default useInitializeRoom
+export default useCreateRoom

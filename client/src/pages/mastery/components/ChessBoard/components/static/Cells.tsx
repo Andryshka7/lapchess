@@ -12,7 +12,8 @@ for (let i = 0; i < 64; i++) {
 
 const Cells = () => {
     const dispatch = useAppDispatch()
-    const { selected, nextMoves } = useAppSelector((store) => store.mastery.chessBoard)
+    const selected = useAppSelector((store) => store.mastery.chessBoard.selected)
+    const nextMoves = useAppSelector((store) => store.mastery.chessBoard.nextMoves)
 
     return (
         <>

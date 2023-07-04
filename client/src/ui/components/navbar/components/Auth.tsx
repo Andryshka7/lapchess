@@ -4,12 +4,14 @@ import { TbLogout } from 'react-icons/tb'
 import { logout } from 'pages/sign in/redux/actions'
 import { resetChess } from 'pages/lobby/modules/chess/redux/actions'
 import socket from 'socket'
+import useShowAlert from 'ui/components/Alert/hooks'
 
 const Auth = () => {
     const dispatch = useAppDispatch()
+    const alert = useShowAlert()
 
     const { user } = useAppSelector((store) => store.auth)
-    const { gameId } = useAppSelector((store) => store.chess)
+    const gameId = useAppSelector((store) => store.chess.gameId)
 
     return user ? (
         <div className='flex items-center gap-3'>
@@ -21,6 +23,7 @@ const Auth = () => {
                 onClick={() => {
                     dispatch(logout())
                     dispatch(resetChess())
+                    alert('Successfully logged out', 'success')
                     socket.emit('LEAVE_ROOM', gameId)
                 }}
             />

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 
 const useBindArrows = () => {
     const dispatch = useAppDispatch()
-    const { position } = useAppSelector((store) => store.mastery)
+    const position = useAppSelector((store) => store.mastery.position)
 
     const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'ArrowRight') dispatch(switchPosition(position + 1))

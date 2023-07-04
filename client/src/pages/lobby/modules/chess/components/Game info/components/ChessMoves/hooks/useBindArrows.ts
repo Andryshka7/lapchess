@@ -4,7 +4,7 @@ import { switchPosition } from 'pages/lobby/modules/chess/redux/actions'
 
 const useBindArrows = () => {
     const dispatch = useAppDispatch()
-    const { position } = useAppSelector((store) => store.chess)
+    const position = useAppSelector((store) => store.chess.position)
 
     const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'ArrowRight') dispatch(switchPosition(position + 1))

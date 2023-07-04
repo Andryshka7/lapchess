@@ -3,10 +3,9 @@ import { left, top } from 'config/styles/piece'
 import { cellColor1, cellColor2, indicatorColor } from 'config/styles/chessBoard'
 
 const NextMoves = () => {
-    const {
-        color,
-        chessBoard: { nextMoves, gameField }
-    } = useAppSelector((store) => store.chess)
+    const color = useAppSelector((store) => store.chess.color)
+    const nextMoves = useAppSelector((store) => store.chess.chessBoard.nextMoves)
+    const gameField = useAppSelector((store) => store.chess.chessBoard.gameField)
 
     const style = (x: number, y: number) =>
         `absolute ${left(x)} ${top(y)} w-[12.5%] h-[12.5%] pointer-events-none`

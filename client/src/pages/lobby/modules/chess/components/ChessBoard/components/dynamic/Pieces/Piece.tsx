@@ -10,11 +10,14 @@ interface PieceProps {
 
 const Piece = ({ piece }: PieceProps) => {
     const dispatch = useAppDispatch()
-    const { color, chessBoard, position, positionHistory } = useAppSelector((store) => store.chess)
+    const {
+        color,
+        position,
+        positionHistory,
+        chessBoard: { turn, nextMoves, gameField, selected }
+    } = useAppSelector((store) => store.chess)
 
     const startDragging = useStartDragging()
-
-    const { turn, nextMoves, gameField, selected } = chessBoard
 
     const coordinates = findPiece(piece, gameField)
 

@@ -1,26 +1,25 @@
 import { useAppDispatch } from 'redux/store'
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import { removeRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import { updateGameId } from 'pages/lobby/modules/chess/redux/actions'
-import API from 'api'
+import { deleteRoomQuery } from 'api/rooms'
 import socket from 'socket'
+import useShowAlert from 'ui/components/Alert/hooks'
 
 const useRemoveRoom = () => {
     const dispatch = useAppDispatch()
-
-    const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
+    const alert = useShowAlert()
 
     return async (_id: string) => {
         try {
-            await API.deleteRoom(_id)
+            await deleteRoomQuery(_id)
             socket.emit('DELETE_ROOM', _id)
 
             dispatch(removeRoom(_id))
             dispatch(updateGameId(null))
 
-            alert('Successfully deleted this room', 'success')
+            alert('Successfully deleted room', 'success')
         } catch (error) {
-            alert('Error deleting this room', 'error')
+            alert('Error deleting room', 'error')
         }
     }
 }

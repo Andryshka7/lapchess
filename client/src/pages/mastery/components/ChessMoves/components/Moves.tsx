@@ -4,11 +4,12 @@ import { indicatorColor } from 'config/styles/chessBoard'
 
 const Moves = () => {
     const dispatch = useAppDispatch()
-    const { position, chessBoard } = useAppSelector((store) => store.mastery)
+    const position = useAppSelector((store) => store.mastery.position)
+    const chessMoves = useAppSelector((store) => store.mastery.chessBoard.chessMoves)
 
     return (
         <div className='w-[260px]'>
-            {chessBoard.chessMoves.map((move, index) => {
+            {chessMoves.map((move, index) => {
                 const bgOpacity =
                     position === index + 1
                         ? indicatorColor

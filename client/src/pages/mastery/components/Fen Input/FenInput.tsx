@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { convertToFEN, convertFromFEN } from 'helpers/tools/FEN'
 import { updateChessBoard } from 'pages/mastery/redux/actions'
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
 import Copy from './components/Copy'
 import Reset from './components/Reset'
+import useShowAlert from 'ui/components/Alert/hooks'
 
 const Input = () => {
     const dispatch = useAppDispatch()
     const { chessBoard } = useAppSelector((store) => store.mastery)
 
     const [fen, setFen] = useState<string>('')
-    const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
+    const alert = useShowAlert()
 
     useEffect(() => {
         setFen(convertToFEN(chessBoard))
@@ -29,7 +29,7 @@ const Input = () => {
                 }
             }}
         >
-            <div className='flex justify-between items-center mt-2 w-full rounded-lg bg-black bg-opacity-10 px-5 py-1'>
+            <div className='mt-2 flex w-full items-center justify-between rounded-lg bg-black bg-opacity-10 px-5 py-1'>
                 <input
                     type='text'
                     className='w-[830px] bg-transparent focus:outline-none'

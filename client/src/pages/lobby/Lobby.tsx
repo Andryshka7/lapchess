@@ -1,20 +1,21 @@
-import { useAppSelector } from 'redux/store'
-import { Rooms, Chess } from './modules/index'
+import { RootState, useAppSelector } from 'redux/store'
+import { createSelector } from '@reduxjs/toolkit'
+import { Rooms, Chess } from './modules'
+import { Error, Loader } from './components'
 
-import Error from './ui/Error'
-import Loader from './ui/Loader'
-
-
-
+const loadingSelector = createSelector(
+    [(store: RootState) => store.rooms.loading, (store: RootState) => store.chess.status.loading],
+    (chessLoading, roomsLoading) => chessLoading || roomsLoading
+)
+const errorSelector = createSelector(
+    [(store: RootState) => store.rooms.error, (store: RootState) => store.chess.status.error],
+    (chessError, roomsError) => chessError || roomsError
+)
 
 const Lobby = () => {
-    const { rooms, chess } = useAppSelector((store) => store)
-
-    console.log('rerender')
-
-    const loading = rooms.loading || chess.status.loading
-    const error = rooms.error || chess.status.error
-    const isActive = chess.status.isActive
+    const loading = useAppSelector(loadingSelector)
+    const error = useAppSelector(errorSelector)
+    const isActive = useAppSelector((store) => store.chess.status.isActive)
 
     if (loading) return <Loader />
     if (error) return <Error />

@@ -2,17 +2,15 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { SignUpFormValues } from '../../types/FormValues'
 import { passwordValidation, usernameValidation } from './validation'
-// import useHandleSignUp from '../../hooks/useHandleSignUp'
-import InputError from '../shared/InputError'
-import { Loader } from 'ui'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { signUp } from 'pages/sign in/redux/actions'
+import InputError from '../shared/InputError'
 
 const initialStyles =
-    'mb-7 block h-12 w-full border-b-2 border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
+    'mb-7 block h-12 w-full border-b-2 font-medium border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
 const errorStyles =
-    'mb-7 block h-12 w-full border-b-2 border-b-red-500 bg-transparent p-2 focus:outline-none transition duration-200'
+    'mb-7 block h-12 w-full border-b-2 font-medium border-b-red-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
 interface SignUpProps {
     showSignUp: boolean
@@ -46,11 +44,7 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     const password = watch('password')
     const confirmPassword = watch('confirmPassword')
 
-    return loading ? (
-        <div className='flex h-[700px] w-[500px] items-center'>
-            <Loader />
-        </div>
-    ) : (
+    return (
         <form
             className='relative flex h-[700px] w-[500px] items-center'
             onSubmit={handleSubmit(onSubmit)}
@@ -94,7 +88,7 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
                 <label
                     htmlFor='file-input'
                     className={`mt-10 block rounded-lg border-2 border-dashed text-center font-medium text-gray-400 transition duration-200 ${
-                        errors['avatar'] && !file ? 'border-red-500' : 'border-gray-400'
+                        errors['avatar'] && !file ? 'border-red-500' : file ? 'border-green-500': 'border-gray-400'
                     }`}
                 >
                     {file ? (
@@ -123,7 +117,11 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
                 <button
                     type='submit'
                     tabIndex={inputsTabIndex}
-                    className='mx-auto mt-10 block rounded-md bg-blue-500 px-8 py-1.5 text-xl font-semibold transition duration-200 hover:bg-opacity-80'
+                    className={`mx-auto mt-10 block h-10 w-32 rounded-md bg-blue-500 text-xl font-semibold transition duration-200 ${
+                        loading
+                            ? 'pointer-eventts-none opacity-60'
+                            : 'pointer-events-all hover:bg-opacity-80'
+                    }`}
                 >
                     Sign up
                 </button>

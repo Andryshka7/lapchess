@@ -3,10 +3,8 @@ import getAlertStyle from './helpers/getAlertStyle'
 import useAlertTimer from './hooks/useAlertTimer'
 
 const MoveAlert = () => {
-    const {
-        color,
-        chessBoard: { turn }
-    } = useAppSelector((store) => store.chess)
+    const color = useAppSelector((store) => store.chess.color)
+    const turn = useAppSelector((store) => store.chess.chessBoard.turn)
 
     const time = useAlertTimer()
 

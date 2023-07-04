@@ -5,8 +5,7 @@ import useBindArrows from './hooks/useBindArrows'
 import masteryIcon from 'assets/images/mastery.png'
 
 const ChessMoves = () => {
-    const { chessMoves } = useAppSelector((store) => store.mastery.chessBoard)
-
+    const chessMoves = useAppSelector((store) => store.mastery.chessBoard.chessMoves)
     const ref = useRef<HTMLDivElement | null>(null)
 
     useBindArrows()

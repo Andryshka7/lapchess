@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
-import { showAlert } from 'ui/components/alert/redux/alertSlice'
+import { showAlert } from 'ui/components/Alert/redux/alertSlice'
+import { resetChess } from 'pages/lobby/modules/chess/redux/actions'
+import { signUpQuery } from 'api/users'
 import { Player } from 'types'
-import API from 'api'
 
 interface ReturnType {
     user: Player
@@ -15,7 +16,10 @@ const signUp = createAsyncThunk<ReturnType, FormData>('auth/register', async (da
     const alert = (text: string, type: string) => dispatch(showAlert({ text, type }))
 
     try {
-        const { user, token } = await API.signUp(data)
+        const { user, token } = await signUpQuery(data)
+        dispatch(resetChess())
+        alert(`Authorized as ${user?.username}`, 'success')
+
         return { user, token }
     } catch (error) {
         if (isAxiosError(error)) {

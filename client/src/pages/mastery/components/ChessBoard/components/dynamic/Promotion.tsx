@@ -11,7 +11,8 @@ const getChoices = ([x, y]: number[]) => {
 }
 
 const Promotion = () => {
-    const { turn, promoted } = useAppSelector((store) => store.mastery.chessBoard)
+    const turn = useAppSelector((store) => store.mastery.chessBoard.turn)
+    const promoted = useAppSelector((store) => store.mastery.chessBoard.promoted)
     const dispatch = useAppDispatch()
 
     if (!promoted) return null

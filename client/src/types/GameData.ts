@@ -1,4 +1,4 @@
-import Coordinates from './Coordinates'
+import { Coordinates } from 'types/ChessBoard'
 
 interface GameStatus {
     check: null | number[]

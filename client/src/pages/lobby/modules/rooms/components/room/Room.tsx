@@ -4,7 +4,7 @@ import { Room as RoomType } from 'types'
 import GuestAvatar from 'assets/images/Guest.png'
 
 const Room = (room: RoomType) => {
-    const { gameId } = useAppSelector((store) => store.chess)
+    const gameId = useAppSelector((store) => store.chess.gameId)
 
     const { user, selectedColor, time, _id } = room
 
@@ -21,7 +21,7 @@ const Room = (room: RoomType) => {
                 <h2 className='ml-3 text-base font-semibold'>{username}</h2>
             </div>
 
-            <img src={`${selectedColor}.png`} className='h-[30px] w-[30px]' />
+            <img src={`roomColors/${selectedColor}.png`} className='h-[30px] w-[30px]' />
             <p className='text-base font-semibold'>{time}</p>
 
             {_id === gameId ? <DeleteIcon {...room} /> : <PlayIcon {...room} />}

@@ -1,22 +1,28 @@
-import { acceptDraw, setOpponentSent, setOwnerSent } from 'pages/lobby/modules/chess/redux/actions'
+import { RootState, useAppDispatch, useAppSelector } from 'redux/store'
+import { createSelector } from '@reduxjs/toolkit'
 import { MdHandshake } from 'react-icons/md'
 import { BiCheckCircle } from 'react-icons/bi'
-import { useAppDispatch, useAppSelector } from 'redux/store'
 import { IoMdCloseCircleOutline } from 'react-icons/io'
-import API from 'api'
+import { drawGameQuery } from 'api/chess games'
+import { acceptDraw, setOpponentSent, setOwnerSent } from 'pages/lobby/modules/chess/redux/actions'
 import socket from 'socket'
+
+const chessDataSelector = createSelector(
+    [
+        (store: RootState) => store.chess.gameId,
+        (store: RootState) => store.chess.position,
+        (store: RootState) => store.chess.positionHistory
+    ],
+    (gameId, position, positionHistory) => ({ gameId, position, positionHistory })
+)
 
 const Draw = () => {
     const dispatch = useAppDispatch()
-    const {
-        gameId,
-        position,
-        positionHistory,
-        chessBoard: { gameStatus },
-        status: {
-            drawState: { ownerSent, opponentSent }
-        }
-    } = useAppSelector((store) => store.chess)
+
+    const { gameId, position, positionHistory } = useAppSelector(chessDataSelector)
+
+    const { winner, draw } = useAppSelector((store) => store.chess.chessBoard.gameStatus)
+    const { ownerSent, opponentSent } = useAppSelector((store) => store.chess.status.drawState)
 
     const handleOnClick = () => {
         if (ownerSent) {
@@ -27,8 +33,6 @@ const Draw = () => {
             dispatch(setOwnerSent(true))
         }
     }
-
-    const { winner, draw } = gameStatus
 
     const styles = 'cursor-pointer transition duration-200 hover:scale-110'
 
@@ -57,7 +61,7 @@ const Draw = () => {
                     onClick={() => {
                         const drawTime = Date.now()
                         dispatch(acceptDraw(drawTime))
-                        API.drawGame(gameId, drawTime)
+                        drawGameQuery(gameId, drawTime)
                         socket.emit('ACCEPT_DRAW', gameId, drawTime)
                     }}
                     size={24}

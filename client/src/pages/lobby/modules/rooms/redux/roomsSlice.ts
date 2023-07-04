@@ -1,13 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
-import initialState from './initialState/initialState'
-import reducers from './reducers'
-
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import fetchRooms from './actions/fetchRooms'
+import { Room } from 'types'
+import { initialState, roomsAdapter } from './initialState'
+import { RootState } from 'redux/store'
 
 const roomsSlice = createSlice({
     name: 'rooms',
     initialState,
-    reducers,
+    reducers: {
+        addRoom: (state, action: PayloadAction<Room>) => {
+            roomsAdapter.addOne(state, action.payload)
+        },
+        removeRoom: (state, action: PayloadAction<string>) => {
+            roomsAdapter.removeOne(state, action.payload)
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchRooms.pending, (state) => {
@@ -16,7 +23,7 @@ const roomsSlice = createSlice({
             })
             .addCase(fetchRooms.fulfilled, (state, action) => {
                 state.loading = false
-                state.rooms = action.payload
+                roomsAdapter.setAll(state, action.payload)
             })
             .addCase(fetchRooms.rejected, (state) => {
                 state.loading = false
@@ -24,5 +31,9 @@ const roomsSlice = createSlice({
             })
     }
 })
+
+export const { selectAll: selectAllRooms } = roomsAdapter.getSelectors<RootState>(
+    (store) => store.rooms
+)
 
 export default roomsSlice

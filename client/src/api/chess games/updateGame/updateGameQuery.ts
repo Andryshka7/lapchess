@@ -3,7 +3,7 @@ import { GameData, Time } from 'types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
-const updateGame = async (
+const updateGameQuery = async (
     gameId: string,
     { gameData, time }: { gameData: GameData; time: Time }
 ) => {
@@ -14,4 +14,4 @@ const updateGame = async (
     }
 }
 
-export default updateGame
+export default updateGameQuery

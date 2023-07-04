@@ -12,7 +12,7 @@ interface ReponseType {
     token: string
 }
 
-const signUp = async (data: FormData) => {
+const signUpQuery = async (data: FormData) => {
     try {
         const response = await axios.post<ReponseType>(`${SERVER_URL}/users/register`, data, config)
         return response.data
@@ -21,4 +21,4 @@ const signUp = async (data: FormData) => {
     }
 }
 
-export default signUp
+export default signUpQuery

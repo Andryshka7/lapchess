@@ -4,7 +4,9 @@ import { opposite } from 'helpers'
 import Timer from './Time/Timer'
 
 const Guest = () => {
-    const { white, black, color } = useAppSelector((store) => store.chess)
+    const white = useAppSelector((store) => store.chess.white)
+    const black = useAppSelector((store) => store.chess.black)
+    const color = useAppSelector((store) => store.chess.color)
 
     const user = color === 'w' ? black : white
 
