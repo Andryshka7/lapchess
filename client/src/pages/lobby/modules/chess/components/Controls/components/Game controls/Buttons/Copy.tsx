@@ -1,7 +1,7 @@
 import { useAppSelector } from 'redux/store'
 import { RiFileCopy2Fill } from 'react-icons/ri'
 import { convertToFEN } from 'helpers/tools/FEN'
-import useShowAlert from 'ui/components/Alert/hooks'
+import { useShowAlert } from 'ui/components/Alert/hooks'
 
 const Copy = () => {
     const chessBoard = useAppSelector((store) => store.chess.chessBoard)

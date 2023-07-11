@@ -2,8 +2,8 @@ import { useAppDispatch } from 'redux/store'
 import { removeRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import { updateGameId } from 'pages/lobby/modules/chess/redux/actions'
 import { deleteRoomQuery } from 'api/rooms'
+import { useShowAlert } from 'ui/components/Alert/hooks'
 import socket from 'socket'
-import useShowAlert from 'ui/components/Alert/hooks'
 
 const useRemoveRoom = () => {
     const dispatch = useAppDispatch()

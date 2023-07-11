@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 import { addRoom } from 'pages/lobby/modules/rooms/redux/actions'
 import { updateGameId } from 'pages/lobby/modules/chess/redux/actions'
 import { createRoomQuery } from 'api/rooms'
-import useShowAlert from 'ui/components/Alert/hooks'
+import { useShowAlert } from 'ui/components/Alert/hooks'
 import socket from 'socket'
 
 const useCreateRoom = (hideModal: () => void) => {

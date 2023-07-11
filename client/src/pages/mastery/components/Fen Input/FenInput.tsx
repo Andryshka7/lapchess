@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { convertToFEN, convertFromFEN } from 'helpers/tools/FEN'
 import { updateChessBoard } from 'pages/mastery/redux/actions'
+import { useShowAlert } from 'ui/components/Alert/hooks'
 import Copy from './components/Copy'
 import Reset from './components/Reset'
-import useShowAlert from 'ui/components/Alert/hooks'
 
 const Input = () => {
     const dispatch = useAppDispatch()

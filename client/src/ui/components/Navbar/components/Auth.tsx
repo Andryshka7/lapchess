@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 import { TbLogout } from 'react-icons/tb'
 import { logout } from 'pages/sign in/redux/actions'
 import { resetChess } from 'pages/lobby/modules/chess/redux/actions'
+import { useShowAlert } from 'ui/components/Alert/hooks'
 import socket from 'socket'
-import useShowAlert from 'ui/components/Alert/hooks'
 
 const Auth = () => {
     const dispatch = useAppDispatch()
