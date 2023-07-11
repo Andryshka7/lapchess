@@ -42,9 +42,6 @@ mongoose.connect(MONGO_DB).then(() => {
 })
 
 server.listen(PORT, async () => {
-    await Rooms.deleteMany({})
-    await ChessGames.deleteMany({})
-    await Users.deleteMany({})
     console.log('Server is live...')
 })
 
