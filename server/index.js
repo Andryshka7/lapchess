@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import { usersRouter, roomsRouter, imagesRouter, chessGamesRouter } from './routes/index.js'
-import { ChessGames, Users, Rooms } from './models/index.js'
 import handleSocketEvents from './socket/eventHandlers.js'
 
 dotenv.config()
