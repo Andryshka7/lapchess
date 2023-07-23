@@ -4,8 +4,7 @@ import { BsInstagram, BsSteam } from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
 
 const gitHub = 'https://github.com/Andryshka16'
-const linkedIn =
-    'https://www.linkedin.com/in/%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B9-%D0%BB%D0%B0%D0%BF%D1%87%D0%B8%D0%BA-03b72326b'
+const linkedIn = 'https://www.linkedin.com/in/andrey-lapchik-03b72326b'
 const instagram = 'https://www.instagram.com/andryshka.16'
 const steam = 'https://steamcommunity.com/id/Bh0p4iK'
 
