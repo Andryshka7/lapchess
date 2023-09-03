@@ -1,9 +1,9 @@
 import { Loader } from 'ui'
 
-const RoomsLoader = () => (
-    <div className='mx-auto mt-4 flex h-[636px] w-[1000px] items-center justify-center rounded-lg bg-black bg-opacity-10 p-2.5'>
+const LobbyLoader = () => (
+    <div className='m-auto flex w-full items-center justify-center'>
         <Loader />
     </div>
 )
 
-export default RoomsLoader
+export default LobbyLoader

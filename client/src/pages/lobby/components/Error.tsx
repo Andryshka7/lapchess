@@ -6,9 +6,9 @@ import error from 'assets/images/error.png'
 const Error = () => {
     const dispatch = useAppDispatch()
     return (
-        <div className='mx-auto mt-4 flex h-[636px] w-[1000px] items-center justify-center rounded-lg bg-black bg-opacity-10 p-2.5'>
+        <div className='mx-auto mt-4 flex h-fit max-h-[636px] w-full items-center justify-center rounded-lg bg-black bg-opacity-10 p-2.5 lg:w-[1000px]'>
             <div>
-                <img src={error} className='mx-auto h-40 w-40'/>
+                <img src={error} className='mx-auto h-40 w-40' />
                 <h1 className='mx-auto mb-16 mt-10 w-fit text-center text-4xl font-semibold leading-normal'>
                     Error while fetching games <br /> Please try again later.
                 </h1>
