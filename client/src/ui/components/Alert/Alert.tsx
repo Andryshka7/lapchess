@@ -16,7 +16,7 @@ const Alert = () => {
 
     return (
         <div
-            className={`fixed bottom-14 right-16 overflow-hidden rounded-lg ${translation} transition duration-200 ease-in-out`}
+            className={`fixed bottom-14 right-4 overflow-hidden rounded-lg md:right-16 ${translation} transition duration-200 ease-in-out`}
         >
             {type === 'success' ? <SuccessAlert /> : <ErrorAlert />}
         </div>

@@ -29,7 +29,7 @@ const Input = () => {
                 }
             }}
         >
-            <div className='mt-2 flex w-full items-center justify-between rounded-lg bg-black bg-opacity-10 px-5 py-1'>
+            <div className='mt-2 flex w-full mx-auto items-center justify-between rounded-lg bg-black bg-opacity-10 px-5 py-1 sm:w-[620px] lg:w-full'>
                 <input
                     type='text'
                     className='w-[830px] bg-transparent focus:outline-none'

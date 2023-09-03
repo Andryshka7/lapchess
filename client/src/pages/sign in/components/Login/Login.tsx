@@ -34,12 +34,12 @@ const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
 
     return (
         <form
-            className='relative flex h-[700px] w-[500px] items-center'
+            className='relative flex h-full w-1/2 flex-col items-center justify-between px-10 py-20 sm:py-28'
             onSubmit={handleSubmit(onSubmit)}
             tabIndex={inputsTabIndex}
         >
-            <div className='w-full px-10'>
-                <h1 className='mb-10 text-center text-5xl font-semibold'>Log in</h1>
+            <div className='relative w-full mt-4 sm:mt-10'>
+                <h1 className='mb-10 text-center text-4xl font-semibold'>Log in</h1>
 
                 <input
                     type='text'
@@ -61,7 +61,7 @@ const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
 
                 <button
                     type='submit'
-                    className={`mx-auto mt-16 block h-10 w-28 rounded-md bg-blue-500 text-xl font-semibold transition duration-200 ${
+                    className={`mx-auto mt-16 block h-10 w-1/2 rounded-md bg-blue-500 text-xl font-semibold transition duration-200 ${
                         loading
                             ? 'pointer-eventts-none opacity-60'
                             : 'pointer-events-all hover:bg-opacity-80'
@@ -71,7 +71,7 @@ const Login = ({ showSignUp, setShowSighUp }: LoginProps) => {
                 </button>
             </div>
             <p
-                className='absolute bottom-0 mb-10 w-full cursor-pointer text-center text-lg font-medium text-gray-300'
+                className='w-full cursor-pointer text-center text-lg font-medium text-gray-300'
                 onClick={() => setShowSighUp(true)}
             >
                 Not a member? Sign in to become one.

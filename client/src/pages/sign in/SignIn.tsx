@@ -15,17 +15,20 @@ const SignIn = () => {
     if (user) return null
 
     return (
-        <div className='mx-auto my-16 flex justify-between overflow-hidden rounded-lg bg-[#2F3640]'>
-            <div className='h-[700px] w-[500px] overflow-hidden'>
-                <div
-                    className={`transtition flex h-[700px] w-[1000px] overflow-hidden 
-                    duration-200 ${showSignUp ? '-translate-x-1/2' : ''}`}
-                >
-                    <Login showSignUp={showSignUp} setShowSighUp={setShowSigUp} />
-                    <SignUp showSignUp={showSignUp} setShowSighUp={setShowSigUp} />
+        <div className='m-auto'>
+            <div className='my-3 flex justify-between overflow-hidden rounded-lg bg-[#2F3640] sm:my-16'>
+                <div className='h-[600px] w-full overflow-hidden sm:h-[700px] sm:w-[500px]'>
+                    <div
+                        className={`transtition flex h-full w-[200%] overflow-hidden duration-200 ${
+                            showSignUp ? '-translate-x-1/2' : ''
+                        }`}
+                    >
+                        <Login showSignUp={showSignUp} setShowSighUp={setShowSigUp} />
+                        <SignUp showSignUp={showSignUp} setShowSighUp={setShowSigUp} />
+                    </div>
                 </div>
+                <div className='with-fade hidden h-[700px] w-[600px] bg-cover xl:block' />
             </div>
-            <div className='with-fade h-[700px] w-[600px] bg-cover' />
         </div>
     )
 }

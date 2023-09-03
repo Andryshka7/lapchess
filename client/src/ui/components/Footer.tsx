@@ -18,7 +18,7 @@ const Footer = () => (
                 <AiOutlineLinkedin size={25} className='transition duration-200 hover:scale-110' />
             </NavLink>
         </div>
-        <p> © 2023 Lapchess All Rights Reserved </p>
+        <p className='hidden md:block'> © 2023 Lapchess All Rights Reserved </p>
         <div className='flex w-fit items-center gap-2 px-10'>
             <NavLink to={instagram} target='blank'>
                 <BsInstagram size={19} className='transition duration-200 hover:scale-110' />

@@ -1,3 +1,6 @@
 export { default as ChessBoard } from './ChessBoard/ChessBoard'
-export { default as Controls } from './Controls/Controls'
-export { default as GameInfo } from './Game info/GameInfo'
+export { default as ChessMoves } from './ChessMoves'
+export { default as MobileChessMoves } from './Mobile chess moves'
+export { default as Controls } from './Controls'
+export { default as Owner } from './Owner'
+export { default as Guest } from './Guest'

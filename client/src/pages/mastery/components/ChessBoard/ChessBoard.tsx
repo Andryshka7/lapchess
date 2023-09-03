@@ -1,7 +1,7 @@
 import { Cells, CheckStatus, NextMoves, Notation, Pieces, Promotion } from './components'
 
 const ChessBoard = () => (
-    <div className='relative m-auto h-[620px] w-[620px] overflow-hidden rounded-lg'>
+    <div className='relative m-auto aspect-square w-full overflow-hidden rounded-lg sm:w-[620px]'>
         <Cells />
         <Pieces />
         <NextMoves />

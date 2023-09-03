@@ -15,14 +15,14 @@ const ChessMoves = () => {
     }, [chessMoves])
 
     return (
-        <div className='ml-2 h-[620px] w-[300px] overflow-hidden rounded-lg bg-black bg-opacity-5'>
-            <div className='flex h-[40px] items-center'>
-                <img src={masteryIcon} className='ml-3 mr-2 h-6' alt='' />
+        <div className='mx-auto h-[620px] overflow-hidden rounded-lg bg-black bg-opacity-5 sm:w-[620px] lg:w-[300px]'>
+            <div className='hidden h-[40px] items-center lg:flex'>
+                <img src={masteryIcon} className='ml-3 mr-2 h-6' />
                 <h2 className='text text-lg font-semibold'>Practice</h2>
             </div>
 
             <div
-                className='scrollbar-thin flex h-[580px] overflow-hidden overflow-y-scroll'
+                className='scrollbar-thin mt-2 flex h-[580px] overflow-hidden overflow-y-scroll lg:m-0'
                 ref={ref}
             >
                 <Indexes />

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { timeControls, colorControls } from 'config/styles/chessBoard'
 import { ModalError, ModalLoader } from './components'
@@ -15,6 +15,11 @@ const Modal = ({ hideModal }: ModalProps) => {
     const [time, setTime] = useState('∞')
     const [selectedColor, setSelected] = useState('random')
 
+    useEffect(() => {
+        document.body.classList.add('overflow-hidden')
+        return () => document.body.classList.remove('overflow-hidden')
+    })
+
     if (loading) return <ModalLoader />
     if (error) return <ModalError hideModal={hideModal} />
 
@@ -24,22 +29,22 @@ const Modal = ({ hideModal }: ModalProps) => {
             onClick={hideModal}
         >
             <div
-                className='absolute left-1/2 top-1/2 h-[500px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-[#282828]'
+                className='xs:h-[470px] absolute left-1/2 top-1/2 h-[450px] w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-[#282828] md:w-[700px]'
                 onClick={(e) => e.stopPropagation()}
             >
                 <IoCloseOutline
                     color={'red'}
                     size={30}
-                    className='absolute right-5 top-5 cursor-pointer'
+                    className='absolute right-3 top-3 cursor-pointer'
                     onClick={hideModal}
                 />
 
-                <h1 className='mx-auto mt-7 w-fit text-5xl font-bold'>Create game</h1>
+                <h1 className='mx-auto mt-7 w-fit text-4xl font-bold'>Create game</h1>
 
-                <div className='mx-auto mt-5 h-[120px] w-[480px]'>
+                <div className='xs:w-[440px] mx-auto mt-5 grid w-[340px] grid-cols-4'>
                     {timeControls.map((item) => (
                         <div
-                            className={`float-left mx-2 mt-3 flex h-[50px] w-[100px] cursor-pointer items-center justify-center rounded-md text-2xl font-medium transition duration-200 hover:bg-[#474747] ${
+                            className={`xs:h-12 xs:w-24 float-left mx-2 mt-3 flex h-10 cursor-pointer items-center justify-center rounded-md text-xl font-medium transition duration-200 hover:bg-[#474747] ${
                                 time === item ? 'bg-[#474747]' : 'bg-black bg-opacity-20'
                             }`}
                             onClick={() => setTime(item)}
@@ -50,16 +55,15 @@ const Modal = ({ hideModal }: ModalProps) => {
                     ))}
                 </div>
 
-                <div className='mx-auto mt-8 flex h-[120px] w-[380px] items-center justify-between rounded-2xl bg-black bg-opacity-20 px-10'>
+                <div className='mx-auto mt-8 flex h-[100px] w-[320px] items-center justify-between rounded-2xl bg-black bg-opacity-20 px-10'>
                     {colorControls.map((item) => (
                         <img
                             src={`roomColors/${item}.png`}
-                            className={`h-[85px] w-[85px] cursor-pointer transition duration-200 hover:scale-105 ${
+                            className={`h-[60px] w-[60px] cursor-pointer transition duration-200 hover:scale-105 ${
                                 selectedColor !== item ? 'opacity-60' : 'opacity-100'
                             }`}
                             onClick={() => setSelected(item)}
                             key={item}
-                            alt=''
                         />
                     ))}
                 </div>

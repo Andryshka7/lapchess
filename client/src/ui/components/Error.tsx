@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const Error = () => (
     <div className='mx-auto mt-4 flex h-[636px] w-[1000px] items-center justify-center rounded-lg bg-black bg-opacity-10 p-2.5'>
         <div>
-            <img src={notFound} className='mx-auto -mt-8 h-[250px] w-[250px]' alt='' />
+            <img src={notFound} className='mx-auto -mt-8 h-[250px] w-[250px]' />
             <div className='mx-auto mb-12 mt-10 h-fit w-fit text-center text-4xl font-bold leading-normal'>
                 Page not found :(
             </div>

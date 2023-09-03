@@ -24,28 +24,5 @@ const topValue: Helper = {
     7: 'top-[87.5%]'
 }
 
-const scaling: Helper = {
-    P: 'scale-[0.6]',
-    B: 'scale-[0.8]',
-    Q: 'scale-[0.85]',
-    K: 'scale-[0.8]'
-}
-const hoverScaling: Helper = {
-    P: 'hover:scale-[0.66]',
-    B: 'hover:scale-[0.88]',
-    Q: 'hover:scale-[0.935]',
-    K: 'hover:scale-[0.88]'
-}
-
-const margins: Helper = {
-    P: 'mt-[-8px]',
-    Q: 'mt-[3px]',
-    R: 'mt-[-3px]',
-    N: 'mt-[-3px]'
-}
-
 export const left = (x: number) => leftValue[x]
 export const top = (y: number) => topValue[y]
-export const scale = (piece: string) => scaling[piece] || 'scale-[0.7]'
-export const margin = (piece: string) => margins[piece] || 'mt-0'
-export const hoverEffect = (piece: string) => (scaling[piece] ? hoverScaling[piece] : 'hover:scale-[0.77]')

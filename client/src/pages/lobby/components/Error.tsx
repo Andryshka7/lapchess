@@ -8,7 +8,7 @@ const Error = () => {
     return (
         <div className='mx-auto mt-4 flex h-[636px] w-[1000px] items-center justify-center rounded-lg bg-black bg-opacity-10 p-2.5'>
             <div>
-                <img src={error} className='mx-auto h-40 w-40' alt='' />
+                <img src={error} className='mx-auto h-40 w-40'/>
                 <h1 className='mx-auto mb-16 mt-10 w-fit text-center text-4xl font-semibold leading-normal'>
                     Error while fetching games <br /> Please try again later.
                 </h1>

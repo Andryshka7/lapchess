@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 import { handleMove } from 'pages/lobby/modules/chess/redux/actions'
 import useStartDragging from './hooks/useStartDragging'
 import { findPiece } from 'helpers'
-import { hoverEffect, left, margin, scale, top } from 'config/styles/piece'
+import { left, top } from 'config/styles/piece'
 
 interface PieceProps {
     piece: string
@@ -49,14 +49,11 @@ const Piece = ({ piece }: PieceProps) => {
     }
 
     const piecePos = `${left(color === 'b' ? 7 - x : x)} ${top(color === 'b' ? 7 - y : y)}`
-    const pieceScale = scale(name[1])
-    const pieceMargin = margin(name[1])
-    const pieceHover = hoverEffect(name[1])
 
     return (
         <img
             src={`pieces/${name}.png`}
-            className={`absolute z-[1] w-[12.5%] transition-all duration-200 ${piecePos} ${pieceScale} ${pieceMargin} ${pointerEvents} ${pieceHover}`}
+            className={`absolute z-[1] h-[12.5%] w-[12.5%] scale-[0.8] hover:scale-[0.85] object-contain transition-all duration-200 ${piecePos} ${pointerEvents}`}
             onMouseDown={(e) => e.button === 0 && handleMouseClick(e)}
         />
     )

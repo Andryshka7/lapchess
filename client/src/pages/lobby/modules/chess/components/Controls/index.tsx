@@ -12,7 +12,7 @@ const Controls = () => {
         !(winner || draw || cancelled) && (chessMoves.length === 0 || chessMoves.length === 1)
 
     return (
-        <div className='mt-2 grid h-12 w-full grid-flow-col items-center justify-between rounded-lg bg-black bg-opacity-5 px-8'>
+        <div className='lg:mt-2 grid h-12 w-full grid-flow-col items-center justify-between rounded-lg bg-black bg-opacity-5 px-5'>
             <GameControls />
             {showAlert && <MoveAlert />}
             <PositionContols />

@@ -15,7 +15,7 @@ const Auth = () => {
 
     return user ? (
         <div className='flex items-center gap-3'>
-            <img src={user.avatar} className='h-8 w-8 rounded-full object-cover' alt='' />
+            <img src={user.avatar} className='h-8 w-8 rounded-full object-cover' />
             <h2 className='text-lg font-semibold'>{user.username}</h2>
             <TbLogout
                 size={25}
@@ -29,7 +29,10 @@ const Auth = () => {
             />
         </div>
     ) : (
-        <NavLink to='sign-in' className='text-lg font-semibold'>
+        <NavLink
+            to='sign-in'
+            className='hidden rounded-md border-2 border-white px-3 py-px text-lg font-semibold md:flex'
+        >
             Sign In
         </NavLink>
     )

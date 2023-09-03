@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { cancelPromotion, transformPawn } from 'pages/lobby/modules/chess/redux/actions'
-import { hoverEffect, left, margin, scale, top } from 'config/styles/piece'
+import { left, top } from 'config/styles/piece'
 
 const getChoices = ([x, y]: number[]) => {
     if (y === 0) {
@@ -33,14 +33,11 @@ const Promotion = () => {
         >
             {promotionPieces?.map((piece, index) => {
                 const piecePos = `${left(x + (index % 2))} ${top(y + Math.floor(index / 2))}`
-                const pieceScale = scale(piece)
-                const pieceMargin = margin(piece)
-                const pieceHover = hoverEffect(piece)
 
                 return (
                     <img
                         src={`pieces/${turn + piece}.png`}
-                        className={`absolute z-[3] w-[12.5%] transition-all duration-200 ${piecePos} ${pieceScale} ${pieceMargin} ${pieceHover}`}
+                        className={`absolute z-[3] h-[12.5%] w-[12.5%] scale-[0.8] object-contain transition-all duration-200 hover:scale-[0.85] ${piecePos}`}
                         key={`promotion${index}`}
                         onClick={(e) => {
                             e.stopPropagation()

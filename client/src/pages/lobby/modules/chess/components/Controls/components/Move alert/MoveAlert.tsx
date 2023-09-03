@@ -10,7 +10,7 @@ const MoveAlert = () => {
 
     return (
         <div
-            className='flex h-7 w-[420px] items-center justify-center rounded-lg px-8 font-semibold transition duration-1000'
+            className='hidden lg:flex h-7 w-[420px] items-center justify-center rounded-lg px-8 font-semibold transition duration-1000'
             style={getAlertStyle(time as number)}
         >
             {color === turn

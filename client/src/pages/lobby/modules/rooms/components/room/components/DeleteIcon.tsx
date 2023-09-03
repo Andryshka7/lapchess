@@ -7,7 +7,7 @@ const DeleteIcon = ({ _id }: Room) => {
 
     return (
         <AiOutlineDelete
-            className='absolute right-10 transition duration-200 hover:scale-110'
+            className='transition duration-200 hover:scale-110'
             onClick={() => removeRoom(_id)}
             color='red'
             size={21}

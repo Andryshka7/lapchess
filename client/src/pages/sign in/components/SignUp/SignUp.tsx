@@ -7,10 +7,10 @@ import { signUp } from 'pages/sign in/redux/actions'
 import InputError from '../shared/InputError'
 
 const initialStyles =
-    'mb-7 block h-12 w-full border-b-2 font-medium border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
+    'mb-3 block h-12 w-full border-b-2 font-medium border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
 const errorStyles =
-    'mb-7 block h-12 w-full border-b-2 font-medium border-b-red-500 bg-transparent p-2 focus:outline-none transition duration-200'
+    'mb-3 block h-12 w-full border-b-2 font-medium border-b-red-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
 interface SignUpProps {
     showSignUp: boolean
@@ -45,12 +45,9 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     const confirmPassword = watch('confirmPassword')
 
     return (
-        <form
-            className='relative flex h-[700px] w-[500px] items-center'
-            onSubmit={handleSubmit(onSubmit)}
-        >
-            <div className='relative w-full px-10'>
-                <h1 className='mb-10 text-center text-5xl font-semibold'>Create account</h1>
+        <form className='relative flex flex-col justify-between px-10 py-10 sm:py-24 h-full w-1/2 items-center' onSubmit={handleSubmit(onSubmit)}>
+            <div className='relative w-full'>
+                <h1 className='mb-8 text-center text-4xl font-semibold'>Create account</h1>
 
                 <input
                     type='text'
@@ -88,7 +85,11 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
                 <label
                     htmlFor='file-input'
                     className={`mt-10 block rounded-lg border-2 border-dashed text-center font-medium text-gray-400 transition duration-200 ${
-                        errors['avatar'] && !file ? 'border-red-500' : file ? 'border-green-500': 'border-gray-400'
+                        errors['avatar'] && !file
+                            ? 'border-red-500'
+                            : file
+                            ? 'border-green-500'
+                            : 'border-gray-400'
                     }`}
                 >
                     {file ? (
@@ -100,7 +101,7 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
                             <h1 className='line-clamp-1 text-lg'>{file.name}</h1>
                         </div>
                     ) : (
-                        <p className='p-5 text-lg'>Drop your avatar here or click to select</p>
+                        <p className='p-3 sm:p-5 text-lg'>Drop your avatar here or click to select</p>
                     )}
 
                     <input
@@ -117,7 +118,7 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
                 <button
                     type='submit'
                     tabIndex={inputsTabIndex}
-                    className={`mx-auto mt-10 block h-10 w-32 rounded-md bg-blue-500 text-xl font-semibold transition duration-200 ${
+                    className={`mx-auto mt-10 block h-10 w-1/2 rounded-md bg-blue-500 text-xl font-semibold transition duration-200 ${
                         loading
                             ? 'pointer-eventts-none opacity-60'
                             : 'pointer-events-all hover:bg-opacity-80'
@@ -128,7 +129,7 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
             </div>
 
             <p
-                className='absolute bottom-0 mb-10 w-full cursor-pointer text-center text-lg font-medium text-gray-300'
+                className='w-full cursor-pointer text-center text-lg font-medium text-gray-300'
                 onClick={() => setShowSighUp(false)}
             >
                 Have you signed up before? Login here.

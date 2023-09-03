@@ -8,7 +8,7 @@ const Moves = () => {
     const chessMoves = useAppSelector((store) => store.mastery.chessBoard.chessMoves)
 
     return (
-        <div className='w-[260px]'>
+        <div className='w-11/12'>
             {chessMoves.map((move, index) => {
                 const bgOpacity =
                     position === index + 1
