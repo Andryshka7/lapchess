@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useAppSelector } from 'redux/store'
-import { SignUp, Login } from './components'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from 'redux/store'
+
+import { Login, SignUp } from './components'
 
 const SignIn = () => {
     const { user } = useAppSelector((store) => store.auth)
@@ -16,7 +17,7 @@ const SignIn = () => {
 
     return (
         <div className='m-auto'>
-            <div className='my-3 flex justify-between overflow-hidden rounded-lg bg-[#2F3640] sm:my-16'>
+            <div className='my-3 flex justify-between overflow-hidden rounded-lg bg-[#2F3640] sm:my-14'>
                 <div className='h-[600px] w-full overflow-hidden sm:h-[700px] sm:w-[500px]'>
                     <div
                         className={`transtition flex h-full w-[200%] overflow-hidden duration-200 ${

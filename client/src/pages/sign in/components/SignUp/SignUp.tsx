@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 import { signUp } from 'pages/sign in/redux/actions'
 import InputError from '../shared/InputError'
 
+import { writeFile } from 'fs/promises'
+
 const initialStyles =
     'mb-3 block h-12 w-full border-b-2 font-medium border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
 
@@ -45,7 +47,10 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
     const confirmPassword = watch('confirmPassword')
 
     return (
-        <form className='relative flex flex-col justify-between px-10 py-10 sm:py-24 h-full w-1/2 items-center' onSubmit={handleSubmit(onSubmit)}>
+        <form
+            className='relative flex h-full w-1/2 flex-col items-center justify-between px-10 py-10 sm:py-24'
+            onSubmit={handleSubmit(onSubmit)}
+        >
             <div className='relative w-full'>
                 <h1 className='mb-8 text-center text-4xl font-semibold'>Create account</h1>
 
@@ -101,7 +106,9 @@ const SignUp = ({ showSignUp, setShowSighUp }: SignUpProps) => {
                             <h1 className='line-clamp-1 text-lg'>{file.name}</h1>
                         </div>
                     ) : (
-                        <p className='p-3 sm:p-5 text-lg'>Drop your avatar here or click to select</p>
+                        <p className='p-3 text-lg sm:p-5'>
+                            Drop your avatar here or click to select
+                        </p>
                     )}
 
                     <input

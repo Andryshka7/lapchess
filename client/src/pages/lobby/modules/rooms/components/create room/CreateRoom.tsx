@@ -1,8 +1,9 @@
-import Portal from 'ui/Portal'
-import Modal from './modal/Modal'
 import { useState } from 'react'
-import { useAppSelector } from 'redux/store'
 import { BiMessageSquareAdd } from 'react-icons/bi'
+import { useAppSelector } from 'redux/store'
+
+import Modal from './modal/Modal'
+import Portal from 'ui/Portal'
 
 const CreateRoom = () => {
     const gameId = useAppSelector((store) => store.chess.gameId)
@@ -20,7 +21,7 @@ const CreateRoom = () => {
                 </Portal>
             )}
             <div
-                className={`mx-auto my-3 flex h-[65px] w-[260px] cursor-pointer items-center justify-between rounded-lg bg-black bg-opacity-10 px-[30px] transition duration-200 hover:scale-105 ${
+                className={`mx-auto mb-0.5 mt-3 flex h-[65px] w-[260px] cursor-pointer items-center justify-between rounded-lg bg-black bg-opacity-10 px-[30px] transition duration-200 hover:scale-105 ${
                     gameId ? 'pointer-events-none opacity-70' : ''
                 }`}
                 onClick={openModal}
