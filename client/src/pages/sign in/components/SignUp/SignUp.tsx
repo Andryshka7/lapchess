@@ -6,8 +6,6 @@ import { useAppDispatch, useAppSelector } from 'redux/store'
 import { signUp } from 'pages/sign in/redux/actions'
 import InputError from '../shared/InputError'
 
-import { writeFile } from 'fs/promises'
-
 const initialStyles =
     'mb-3 block h-12 w-full border-b-2 font-medium border-b-gray-500 bg-transparent p-2 focus:outline-none transition duration-200'
 

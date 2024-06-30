@@ -1,7 +1,7 @@
 import { Router } from 'express'
+import { upload } from '../../helpers/index.js'
 import registrationHandler from './handlers/register.js'
 import loginHandler from './handlers/login.js'
-import { upload } from '../../helpers/index.js'
 
 const usersRouter = Router()
 
