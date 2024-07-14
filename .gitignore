@@ -4,9 +4,6 @@ node_modules
 dist
 
 .env
-.prettierrc
-
-.gcloudignore
 
 server/images/*.jpg
 server/images/*.jpeg
