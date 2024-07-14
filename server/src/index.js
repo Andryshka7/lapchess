@@ -1,13 +1,19 @@
 import express, { json } from 'express'
+import { createServer } from 'http'
+import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import { createServer } from 'http'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 import { Server } from 'socket.io'
-import { usersRouter, roomsRouter, imagesRouter, chessGamesRouter } from './routes/index.js'
+
+import { usersRouter, roomsRouter, chessGamesRouter } from './routes/index.js'
 import handleSocketEvents from './socket/eventHandlers.js'
 
 dotenv.config()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const PORT = process.env.PORT || 4000
 const CLIENT_URL = process.env.CLIENT_URL
@@ -20,10 +26,10 @@ app.use(json())
 
 app.use('/rooms', roomsRouter)
 app.use('/users', usersRouter)
-app.use('/images', imagesRouter)
 app.use('/chessGames', chessGamesRouter)
+app.use('/images', express.static(path.join(__dirname, '..', 'images')))
 
-app.get('/', (_, res) => res.send('<h1>Hello, world!</h1>'))
+app.get('/', (_, res) => res.send('<h1>Lapchess server is working fine!</h1>'))
 
 const server = createServer(app)
 
@@ -41,7 +47,7 @@ mongoose.connect(MONGO_DB).then(() => {
 })
 
 server.listen(PORT, async () => {
-    console.log('Server is live...')
+    console.log('Server is working')
 })
 
 export default socket

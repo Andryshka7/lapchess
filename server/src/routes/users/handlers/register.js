@@ -1,9 +1,11 @@
 import { hash } from 'bcrypt'
 import { Users } from '../../../models/index.js'
-import { createToken, imageKit } from '../../../helpers/index.js'
+import { createToken } from '../../../helpers/index.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
+
+const SERVER_URL = process.env.SERVER_URL
 
 const registrationHandler = async (req, res) => {
     try {
@@ -14,8 +16,7 @@ const registrationHandler = async (req, res) => {
             return res.status(400).json('Username already exists.')
         }
 
-        const fileName = req.file.originalname
-        const { url: avatar } = await imageKit.upload({ file: req.file.buffer, fileName })
+        const avatar = `${SERVER_URL}/images/${req.file.filename}`
 
         const document = await new Users({
             username,
