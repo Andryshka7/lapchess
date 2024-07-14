@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import fetchRooms from './handlers/fetchRooms.js'
 import createRoom from './handlers/createRoom.js'
 import deleteRoom from './handlers/deleteRoom.js'
+import fetchRooms from './handlers/fetchRooms.js'
 
 const roomsRouter = Router()
 

@@ -1,15 +1,15 @@
-import selectPiece from './mutators/selectPiece'
+import cancelPromotion from './mutators/cancelPromotion'
 import clearField from './mutators/clearField'
 import handleMove from './mutators/handleMove'
-import transformPawn from './mutators/transformPawn'
+import selectPiece from './mutators/selectPiece'
 import switchPosition from './mutators/switchPosition'
-import cancelPromotion from './mutators/cancelPromotion'
+import transformPawn from './mutators/transformPawn'
 
 export default {
-    selectPiece,
-    clearField,
-    handleMove,
-    cancelPromotion,
-    transformPawn,
-    switchPosition,
+	selectPiece,
+	clearField,
+	handleMove,
+	cancelPromotion,
+	transformPawn,
+	switchPosition
 }

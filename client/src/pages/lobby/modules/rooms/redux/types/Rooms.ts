@@ -1,7 +1,7 @@
 import { Room } from 'types'
 
 export interface Rooms {
-    loading: boolean
-    error: boolean
-    rooms: Room[]
+	loading: boolean
+	error: boolean
+	rooms: Room[]
 }

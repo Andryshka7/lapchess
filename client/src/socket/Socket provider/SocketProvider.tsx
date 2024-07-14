@@ -1,16 +1,17 @@
 import { ReactNode } from 'react'
+
 import useGameHandlers from './handlers/game handlers'
 import useRoomHandlers from './handlers/roomHandlers'
 
 interface SocketProviderProps {
-    children: ReactNode
+	children: ReactNode
 }
 
 const SocketProvider = ({ children }: SocketProviderProps) => {
-    useGameHandlers()
-    useRoomHandlers()
+	useGameHandlers()
+	useRoomHandlers()
 
-    return <>{children}</>
+	return <>{children}</>
 }
 
 export default SocketProvider

@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import drawGame from './handlers/drawGame.js'
-import restartGame from './handlers/restartGame.js'
-import resignGame from './handlers/resignGame.js'
-import updateGame from './handlers/updateGame.js'
 import cancelGame from './handlers/cancelGame.js'
+import drawGame from './handlers/drawGame.js'
+import resignGame from './handlers/resignGame.js'
+import restartGame from './handlers/restartGame.js'
+import updateGame from './handlers/updateGame.js'
 
 const updateRouter = Router()
 

@@ -1,14 +1,14 @@
 import { Cells, CheckStatus, GameOver, NextMoves, Pieces, Promotion } from './components'
 
 const ChessBoard = () => (
-    <div className='relative m-auto aspect-square w-full overflow-hidden rounded-lg sm:w-[620px]'>
-        <Cells />
-        <Pieces />
-        <NextMoves />
-        <CheckStatus />
-        <Promotion />
-        <GameOver />
-    </div>
+	<div className="relative m-auto aspect-square w-full overflow-hidden rounded-lg sm:w-[620px]">
+		<Cells />
+		<Pieces />
+		<NextMoves />
+		<CheckStatus />
+		<Promotion />
+		<GameOver />
+	</div>
 )
 
 export default ChessBoard

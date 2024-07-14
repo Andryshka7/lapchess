@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import fetchGame from './handlers/fetchGame.js'
+
 import createGame from './handlers/createGame.js'
 import deleteGame from './handlers/deleteGame.js'
-
+import fetchGame from './handlers/fetchGame.js'
 import updateRouter from './handlers/updateGame/index.js'
 
 const chessGamesRouter = Router()
