@@ -6,11 +6,5 @@
 	"bracketSpacing": true,
 	"trailingComma": "none",
 	"printWidth": 100,
-	"useTabs": true,
-
-	"importOrder": ["^components/(.*)$", "^[./]"],
-	"importOrderSeparation": true,
-	"importOrderSortSpecifiers": true,
-
-	"plugins": ["prettier-plugin-tailwindcss", "@trivago/prettier-plugin-sort-imports"]
+	"useTabs": true
 }
