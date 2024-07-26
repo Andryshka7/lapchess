@@ -4,7 +4,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
 	plugins: [react(), tsconfigPaths()],
-	optimizeDeps: {
-		include: ['config.json']
+	server: {
+		host: true,
+		strictPort: true,
+		port: 3000
 	}
 })
